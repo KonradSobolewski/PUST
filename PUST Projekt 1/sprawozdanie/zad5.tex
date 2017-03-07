@@ -1,0 +1,408 @@
+\chapter{Zadanie 5: Strojenie regulatorów}
+Nastêpnym zadaniem by³o wyznaczenie optymalnych parametrów algorytmów PID i DMC odpowiednio za pomoc¹ metody in¿ynierskiej(PID) i eksperymentalnej(DMC). Jakoœæ regulacji oceniana by³a wizualnie - na podstawie wykresów - oraz obliczeniowo na podstawie wskaŸnika jakoœci regulacji. Wzór na ten wskaŸnik znajduje siê poni¿ej.
+\begin{equation}
+E=\sum_{k=1}^{k_{konc}}(Y^{zad}(k)-Y(k))^2
+\end{equation}
+\section{PID}
+\label{sec:pidanddmc}
+
+Do wyznaczenia nastaw regulatora $PID$ korzystamy z metody in¿ynierskiej. Na pocz¹tku w³¹czamy wy³¹cznie cz³on $P$ i szukamy wzmocnienia $K$ dla którego obiekt w wyniku skoku sterowania wpada w niegasn¹ce oscylacje. Wynikiem eksperymentu jest wartoœæ $K_{osc}=1,55$ $rys.$\ref{fig:oscylacje}. Zgodnie z za³o¿eniem metody in¿ynierskiej w dalszych poszukiwaniach wykorzystywaæ bêdziemy $K=0,5K_{osc} = 0,775$ jako wzmocnienie.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/pidu_1.5500_Inf_0.0000.txt};
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/pidy_1.5500_Inf_0.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/pidyzad_5.2000.txt};
+\legend{$Y$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Obiekt wprowadzony w oscylacje przy K=1,55}
+\label{fig:oscylacje}
+\end{figure}
+%\FloatBarrier
+
+Kolejnym krokiem by³o eksperymentalne dobranie parametru $T_i$ cz³onu ca³kuj¹cego I.
+Dla przetestowanych $T_i$ wartoœci wskaŸnika jakoœci regulacji wynosz¹ odpowiednio:
+\begin{itemize}
+	\item $T_i = 8 - E = 1,1173$
+	\item $T_i = 10 - E = 0,9558$
+	\item $T_i = 12 - E = 0,9579$
+	\item $T_i = 15 - E = 1,0308$
+\end{itemize}
+Dla $T_i=8$ wystêpuj¹ znaczne oscylacje obiektu oraz najgorsza wartoœæ wskaŸnika jakoœci. Dla $T_i=15$ wskaŸnik jest ju¿ mniejszy, jednak¿e wykres zaczyna przyjmowaæ niepo¿¹dany kszta³t (oscylacje poni¿ej poziomu wartoœci zadanej). Dla dwóch pozosta³ych testów wskaŸnik jakoœci jest bardzo podobny. Dla $T_i=12$ wykres wyjœcia obiektu jest jednak lepszy ni¿ dla $T_i=10$ ze wzglêdu na mniejsze oscylacje oraz przeregulowanie i szybszy czas regulacji. Dlatego w³aœnie wartoœæ $T_i=12$ przyjmujemy jako koñcow¹. Wyniki poszczególnych prób przedstawiono na wykresie $rys.$\ref{fig:calka}.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/pidu_0.7750_8.0000_0.0000.txt};
+\addplot[green,semithick] file {wykresy/pidu_0.7750_10.0000_0.0000.txt};
+\addplot[orange,semithick] file {wykresy/pidu_0.7750_12.0000_0.0000.txt};
+\addplot[cyan,semithick] file {wykresy/pidu_0.7750_15.0000_0.0000.txt};
+\legend{$T_i=8$,$T_i=10$,$T_i=12$,$T_i=15$}
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/pidy_0.7750_8.0000_0.0000.txt};
+\addplot[green,semithick] file {wykresy/pidy_0.7750_10.0000_0.0000.txt};
+\addplot[orange,semithick] file {wykresy/pidy_0.7750_12.0000_0.0000.txt};
+\addplot[cyan,semithick] file {wykresy/pidy_0.7750_15.0000_0.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/pidyzad_5.2000.txt};
+\legend{$T_i=8$,$T_i=10$,$T_i=12$,$T_i=15$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie PID dla ró¿nych wartoœci $T_i$}
+\label{fig:calka}
+\end{figure}
+\FloatBarrier
+Na koniec eksperymentalne dobraliœmy parametr $T_d$ $rys.$\ref{fig:pochodna}. Dla przetestowanych $T_d$ wartoœci wskaŸnika jakoœci regulacji wynosz¹ odpowiednio:
+\begin{itemize}
+	\item $T_d = 8 - E = 1,3685$
+	\item $T_d = 5 - E = 1,3025$
+	\item $T_d = 3 - E = 1,2627$
+	\item $T_d = 1 - E = 1,2324$
+\end{itemize}
+Dla $T_d=8$ wystêpuj¹ oscylacje oraz najwiêksze przeregulowanie,a tak¿e najgorsza wartoœæ wskaŸnika jakoœci. Dla $T_d=1$ wskaŸnik jest najmniejszy, jednak¿e wykres zaczyna przyjmowaæ niepo¿¹dany kszta³t, mimo braku przeregulowania wystêpuj¹ oscylacje. Dla dwóch pozosta³ych testów wykresy s¹ bardzo podobne. Dla $T_d=3$ wskaŸnik jakoœci jest lepszy ni¿ dla $T_d=5$, czas uregulowania jest krótszy i nie ma przeregulowania, a sterowanie ma naj³adniejszy przebieg z wszystkich testów dlatego t¹ wartoœæ przyjmujemy jako koñcow¹.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/pidu_0.7750_12.0000_8.0000.txt};
+\addplot[green,semithick] file {wykresy/pidu_0.7750_12.0000_5.0000.txt};
+\addplot[orange,semithick] file {wykresy/pidu_0.7750_12.0000_3.0000.txt};
+\addplot[cyan,semithick] file {wykresy/pidu_0.7750_12.0000_1.0000.txt};
+\legend{$T_d=8$,$T_d=5$,$T_d=3$,$T_d=1$,$Y^{zad}$}
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/pidy_0.7750_12.0000_8.0000.txt};
+\addplot[green,semithick] file {wykresy/pidy_0.7750_12.0000_5.0000.txt};
+\addplot[orange,semithick] file {wykresy/pidy_0.7750_12.0000_3.0000.txt};
+\addplot[cyan,semithick] file {wykresy/pidy_0.7750_12.0000_1.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/pidyzad_5.2000.txt};
+\legend{$T_d=8$,$T_d=5$,$T_d=3$,$T_d=1$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie PID dla ró¿nych wartoœci $T_d$}
+\label{fig:pochodna}
+\end{figure}
+\FloatBarrier
+Zgodnie z wykresami z wykorzystaniem dobranych nastaw uzyskujemy regulator o zadowalaj¹cym dzia³aniu i parametrach $K = 0,775, T_i=12, T_d=3$ $rys.$\ref{fig:pid}.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/pidu_0.7750_12.0000_3.0000.txt};
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/pidy_0.7750_12.0000_3.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/pidyzad_5.2000.txt};
+\legend{$Y$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Wykres dzia³ania algorytmu PID przy koñcowych nastawach $K$=0,775, $T_i$=12, $T_d$=3}
+\label{fig:pid}
+\end{figure}
+\FloatBarrier
+
+
+
+
+
+
+\section{DMC}
+Parametry algorytmu $DMC$ dobraliœmy ca³kowicie eksperymentalnie poczynaj¹c od wartoœci $N=100, N_u=100, \lambda=10$ (przebieg dla pocz¹tkowych nastaw znajduje siê na wykresie rys.\ref{fig:DMC1}). Nastêpnie naszym celem by³o zmniejszenie parametrów regulatora przy jednoczesnym zachowaniu lub polepszeniu jakoœci sterowania.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/dmcu_100_100_10.0000.txt};
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcy_100_100_10.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_5.2000.txt};
+\legend{$Y$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie algorytmu DMC przy pocz¹tkowych nastawach}
+\label{fig:DMC1}
+\end{figure}
+\FloatBarrier
+Zaczêliœmy od parametru $N$. Dla przetestowanych wartoœci otrzymaliœmy podane wartoœci wskaŸnika jakoœci:
+\begin{itemize}
+	\item $N = 100 - E = 0,7499$
+	\item $N = 50 - E = 0,7499$
+	\item $N = 30 - E = 0,7505$
+	\item $N = 25 - E = 0,7518$
+\end{itemize}
+Nie ulega on znacznym zmianom, wiêc nie bêdzie mia³ na tym etapie kluczowej roli. Jak widaæ dla wartoœci 100, 50 i 30 kszta³t wykresu jest niemal¿e identyczny. Przy dalszym zmniejszaniu wartoœci $N$ przebieg zaczyna³ siê ju¿ pogarszaæ np dla $N=25$. Ostatecznie zdecydowaliœmy siê na pozostanie przy $N=30$. Zmniejszy³o to znacznie iloœæ obliczeñ algorytmu, a praktycznie nie mia³o wp³ywu na jakoœæ regulacji. Przebiegi dla ró¿nych wartoœci N znajduj¹ siê na wykresie rys.\ref{fig:DMCn}. 
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcu_100_100_10.0000.txt};
+\addplot[green,semithick] file {wykresy/dmcu_50_100_10.0000.txt};
+\addplot[orange,semithick] file {wykresy/dmcu_30_100_10.0000.txt};
+\addplot[cyan,semithick] file {wykresy/dmcu_25_100_10.0000.txt};
+\legend{$N=100$,$N=50$,$N=30$,$N=25$}
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcy_100_100_10.0000.txt};
+\addplot[green,semithick] file {wykresy/dmcy_50_100_10.0000.txt};
+\addplot[orange,semithick] file {wykresy/dmcy_30_100_10.0000.txt};
+\addplot[cyan,semithick] file {wykresy/dmcy_25_100_10.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_5.2000.txt};
+\legend{$N=100$,$N=50$,$N=30$,$N=25$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie algorytmu DMC dla ró¿nych wartoœci N}
+\label{fig:DMCn}
+\end{figure}
+\FloatBarrier
+
+Kolejnym krokiem by³o dobranie horyzontu $N_u$. Z w³aœciwoœci algorytmu $DMC$ na pierwszy rzut oka wynika, ¿e wartoœæ $N_u>N$ jest bez sensu. Z tego powodu zaczêliœmy dobieranie od wartoœci $N_u=N=30$. Dla wybranych punktów otrzymaliœmy wartoœci wskaŸnika jakoœci równe odpowiednio:
+\begin{itemize}
+	\item $N_u = 30 - E = 0,7505$
+	\item $N_u = 10 - E = 0,7509$
+	\item $N_u = 5 - E = 0,7528$
+	\item $N_u = 1 - E = 0,7535$
+\end{itemize}
+Zmniejszaj¹c wartoœæ $N_u$ wskaŸnik jakoœci doœwiadczy³ nieznacznego pogorszenia, jednak¿e polepszeniu uleg³ czas regulacji a przeregulowania widocznie siê zmniejszy³y. Poprawie uleg³o tak¿e wygenerowane sterowanie. Z tych powodów uznaliœmy, ¿e najlepiej bêdzie ustawiæ wartoœæ $N_u$ na najni¿sz¹ z przetestowanych wartoœci i w kolejnych symulacjach u¿ywaliœmy ju¿ $N_u=1$. Wyniki testów dla ró¿nych wartoœci parametru odnaleŸæ mo¿na na wykresie rys.\ref{fig:DMCnu}.
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcu_30_30_10.0000.txt};
+\addplot[green,semithick] file {wykresy/dmcu_30_10_10.0000.txt};
+\addplot[orange,semithick] file {wykresy/dmcu_30_5_10.0000.txt};
+\addplot[cyan,semithick] file {wykresy/dmcu_30_1_10.0000.txt};
+\legend{$N_u=30$,$N_u=10$,$N_u=5$,$N_u=1$}
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcy_30_30_10.0000.txt};
+\addplot[green,semithick] file {wykresy/dmcy_30_10_10.0000.txt};
+\addplot[orange,semithick] file {wykresy/dmcy_30_5_10.0000.txt};
+\addplot[cyan,semithick] file {wykresy/dmcy_30_1_10.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_5.2000.txt};
+\legend{$N_u=30$,$N_u=10$,$N_u=5$,$N_u=1$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie algorytmu DMC dla ró¿nych wartoœci Nu}
+\label{fig:DMCnu}
+\end{figure}
+\FloatBarrier
+
+Ostatnim parametrem wymagaj¹cym regulacji w algorytmie DMC by³a $\lambda$ .
+Ku naszemu zdziwieniu zarówno zwiêkszanie jak i zmniejszanie $\lambda$ nie przynios³o poprawy wyników regulacji. WskaŸnik jakoœci dla przetestowanych wartoœci wynosi³ odpowiednio:
+\begin{itemize}
+	\item $\lambda = 10 - E = 0,7535$
+	\item $\lambda = 5 - E = 0,7652$
+	\item $\lambda = 15 - E = 0,7544$
+\end{itemize}
+Dla mniejszych wartoœci pogorszeniu ulega³a jakoœæ regulacji. Zwiêkszanie z drugiej strony nie wp³ywa³o znacz¹co na przebieg wyjœcia obiektu ale, niewielkim kosztem wskaŸnika jakoœci, polepsza³o nieco wygl¹d sterowania, którego wykres stawa³ siê bardziej zaokr¹glony. Sk³oni³o nas to do zmiany wartoœci parametru $\lambda$ na 15. Przebiegi dla tego kroku znajduj¹ siê na wykresie \ref{fig:DMClambda}.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcu_30_1_10.0000.txt};
+\addplot[green,semithick] file {wykresy/dmcu_30_1_5.0000.txt};
+\addplot[orange,semithick] file {wykresy/dmcu_30_1_15.0000.txt};
+\legend{$\lambda=10$,$\lambda=5$,$\lambda=15$}
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcy_30_1_10.0000.txt};
+\addplot[green,semithick] file {wykresy/dmcy_30_1_5.0000.txt};
+\addplot[orange,semithick] file {wykresy/dmcy_30_1_15.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_5.2000.txt};
+\legend{$\lambda=10$,$\lambda=5$,$\lambda=15$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie algorytmu DMC dla ró¿nych wartoœci $\lambda$}
+\label{fig:DMClambda}
+\end{figure}
+\FloatBarrier
+
+W œwietle otrzymanych wyników stwierdzamy, ¿e najlepsze znalezione przez nas nastawy wynosz¹ $N=30, N_u=1, \lambda=15$. Przebieg dla tych nastaw przedstawiliœmy na wykresie rys.\ref{fig:DMCbest}.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/dmcu_30_1_15.0000.txt};
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcy_30_1_15.0000.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_5.2000.txt};
+\legend{$Y$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie algorytmu DMC przy najlepszych nastawach $N=30, N_u=1, \lambda=15$}
+\label{fig:DMCbest}
+\end{figure}

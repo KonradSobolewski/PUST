@@ -1,0 +1,79 @@
+\chapter{Zadanie 2: Badanie zachowania obiektu}
+\section{OdpowiedŸ skokowa}
+\label{sec:zad2}
+W tej czêœci projektu badane by³o zachowanie odpowiedzi skokowej dla ró¿nych wartoœci skoku sygna³u steruj¹cego. Eksperyment zak³ada³, i¿ na pocz¹tku obiekt bêdzie w punkcie pracy ($Y = 5,0$, $U = 0,8$), a nastêpnie, w chwili $k = 15$ wykonany zostanie skok do zaplanowanej wczeœniej wartoœci sterowania. Wartoœæ sterowania po skoku dla zamieszczonych wyników mieœci³a siê w zakresie ograniczeñ. Wyniki eksperymentu zosta³y zobrazowane na wykresie \ref{fig:z2_y}.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0,xmax=250,ymin=4.5,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y(k)$},
+xtick={0,50,100,150,200,250},
+ytick={4.5,4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/z2_y1.txt};
+\addplot[brown,semithick] file {wykresy/z2_y2.txt};
+\addplot[cyan,semithick] file {wykresy/z2_y3.txt};
+\addplot[green,semithick] file {wykresy/z2_y4.txt};
+\addplot[lime,semithick] file {wykresy/z2_y6.txt};
+\addplot[magenta,semithick] file {wykresy/z2_y7.txt};
+\addplot[orange,semithick] file {wykresy/z2_y8.txt};
+\addplot[pink,semithick] file {wykresy/z2_y9.txt};
+\legend{$dU=-\num{0,2}$,$dU=-\num{0,15}$,$dU=-\num{0,1}$,$dU=-\num{0,05}$,$dU=\num{0,05}$,$dU=\num{0,1}$,$dU=\num{0,15}$,$dU=\num{0,2}$}
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres Y(k) dla ró¿nych skoków sterowania z Upp=\num{0.8} o dU}
+\label{fig:z2_y}
+\end{figure}
+
+\section{Charakterystyka statyczna}
+Nastêpnie wyznaczona zosta³a charakterystyka statyczna obiektu. Znaleziona
+zosta³a poprzez sprawdzenie przy jakiej wartoœci wyjœcia obiekt stabilizuje
+siê dla danej wartoœci sterowania. Na podstawie tego sporz¹dzony zosta³ wykres.
+Wyniki zosta³y zamieszczone na wykresie \ref{fig:z2_stat}. Liniowoœæ charakterystyki statycznej mo¿na by³o tak¿e stwierdziæ na podstawie wykresu \ref{fig:z2_y}, gdy¿ wyraŸnie widaæ na nim ¿e odleg³oœci miêdzy koñcow¹ wartoœci¹ Y(k) dla kolejnych skoków s¹ (na tyle na ile mo¿na to oceniæ wizualnie) identyczne.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0.6,xmax=1,ymin=4.5,ymax=5.5,
+xlabel={$U$},
+ylabel={$Y$},
+xtick={0.6,0.7,0.8,0.9,1},
+ytick={4.5,4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/z2_stat.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres charakterystyki statycznej obiektu Y(U)}
+\label{fig:z2_stat}
+\end{figure}
+Otrzymana charakterystyka jest liniowa. Wzmocnienie statyczne jest równe wartoœci koñcowej znormalizowanej odpowiedzi skokowej i ma wartoœæ $1,9936$.
+
+\section{W³aœciwoœci dynamiczne}
+Charakterystyka dynamiczna zosta³a wyznaczona zale¿nie od wielkoœci skoku sterowania. Skoki sterowania wykonywane by³y z punktu pracy w obrêbie
+ograniczeñ. Zmierzone zosta³o po ilu krokach od momentu skoku ró¿nica wartoœci wyjœcia obiektu i $Ypp$ wynosi³a powy¿ej $90\%$
+ca³kowitego skoku wartoœci Y(k) wyjœcia obiektu. Z otrzymanych danych wynika, ¿e charakterystyka dynamiczna jest liniowa, dla ka¿dego skoku sterowania otrzymana iloœæ kroków by³a identyczna i równa 53.
+Wyniki zosta³y zamieszczone na wykresie \ref{fig:z2_dyn}. 
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0.05,xmax=0.2,ymin=20,ymax=100,
+xlabel={$dU$},
+ylabel={$k$},
+xtick={0.05,0.1,0.15,0.2},
+ytick={20,40,60,80,100},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/z2_dyn.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres iloœci kroków od momentu skoku sterowania po ilu ró¿nica aktualnej i pocz¹tkowej wartoœci Y(k) staje siê wiêksza ni¿ 90\% ró¿nicy koñcowej i pocz¹tkowej wartoœci Y(k)}
+\label{fig:z2_dyn}
+\end{figure}

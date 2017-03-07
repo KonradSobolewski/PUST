@@ -1,0 +1,26 @@
+\chapter{Zadanie 3: Znormalizowana odpowiedŸ skokowa}
+\label{sec:zad3}
+Normalizacja odpowiedzi skokowej polega na przesuniêciu ka¿dej wartoœci wyjœcia obiektu o wartoœæ w punkcie pracy, a nastêpnie
+podzielenie jej przez d³ugoœæ skoku sterowania.
+\begin{equation}
+S=(Y-Ypp)/dU;
+\end{equation}
+ W ten sposób otrzymujemy wartoœæ odpowiedzi skokowej w formie w jakiej otrzymalibyœmy j¹ robi¹c skok jednostkowy. Taka odpowiedŸ skokowa jest gotowa do u¿ytku w regulatorze $DMC$. Wyniki zosta³y przedstawione na wykresie \ref{fig:z3}.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0,xmax=235,ymin=0,ymax=2,
+xlabel={$k$},
+ylabel={$s$},
+xtick={0,50,100,150,200,250,300},
+ytick={0,0.5,1,1.5,2},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/z3.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres znormalizowanej odpowiedzi skokowej}
+\label{fig:z3}
+\end{figure}

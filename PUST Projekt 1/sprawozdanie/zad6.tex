@@ -1,0 +1,81 @@
+\chapter{Zadanie 6: Optymalizacja}
+W celu dobrania optymalnych nastaw regulatorów $PID$ i $DMC$ zosta³a u¿yta funkcja  $fmincon$. Zadaniem by³a minimalizacja wskaŸnika jakoœci $E$ zdefiniowanego w poprzednim podpunkcie. Funckja $fmincon$ ten jako argumenty wejœciowe pobiera funkcjê, której wynik ma byæ minimalizowany, pocz¹tkowe argumenty tej funkcji (punkt pocz¹tkowy) i oraz ich ograniczenia, natomiast zwraca optymalny wynik minimalizowanej funkcji wraz z argumentami jej wywo³ania, dla których ten wynik zosta³ osi¹gniêty. Istotn¹ kwesti¹ jest odpowiedni dobór punktu pocz¹tkowego, poniewa¿ w niektórych przypadkach algorytm nie bêdzie zbie¿ny (nie da poprawnego wyniku).
+\section{PID}
+Kieruj¹c siê przeczuciem oraz zdrowym rozs¹dkiem stwierdziliœmy, ¿e optymalne nastawy powinny byæ w pobli¿u tych uzyskanych metod¹ in¿yniersk¹. Dlatego to w³aœnie one zosta³y u¿yte jako punkt pocz¹tkowy:
+\begin{equation}
+ x_0 = [0,775, 12, 3]
+\end{equation}
+Uzyskaliœmy w ten sposób przebieg zilustrowany na wykresie \ref{fig:pid6} o nastawach $K=2.7686 T_i=4.2803$ i $T_d=4.0264$ oraz wartoœci wskaŸnika jakoœci regulacji E=0,8235. Mimo minimalnego wskaŸnika jakoœci otrzymany regulator nie jest idealny, cechuje go przeregulowanie oraz oscylacje sterowania, które opiera siê o górne ograniczenie.
+
+\section {DMC}
+Aby u¿yæ funkcji $fmincon$ wprowadziliœmy do naszej funkcji wykonuj¹cej regulacjê DMC ma³¹, ale niezbêdn¹ modyfikacjê – na pocz¹tku zaokr¹glamy otrzymane od $fmincon$ parametry $N$, $N_u$ (które funkcja oblicza jako rzeczywiste) do najbli¿szych liczb ca³kowitych. W tym wypadku tak¿e zaczynamy od punktu pocz¹tkowego równego wyznaczonym przez nas wczeœniej eksperymentalnie wartoœciom algorytmu $DMC:$ 
+\begin{equation}
+ x_0 = [30, 1, 15]
+\end{equation} 
+Uzyskaliœmy w ten sposób rezultat przedstawiony na rysunku \ref{fig:dmc6}. Otrzymany regulator ma parametry $N=30, N_u=8$ i $\lambda=8,5191$ oraz E=0,7481. Jest on dobry jakoœciowo i podobny wygl¹dem przebiegu do tego wyznaczonego eksperymentalnie.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/pidu_2.7686_4.2803_4.0264.txt};
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/pidy_2.7686_4.2803_4.0264.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/pidyzad_5.2000.txt};
+\legend{$Y$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie algorytmu PID dla nastaw wygenerowanych programowo}
+\label{fig:pid6}
+\end{figure}
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=0.7,ymax=1,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250},
+ytick={0.7,0.8,0.9,1},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/dmcu_30_8_8.5191.txt};
+\nextgroupplot
+[
+xmin=0,xmax=250,ymin=4.75,ymax=5.5,
+xlabel={$k$},
+ylabel={$Y$},
+xtick={0,50,100,150,200,250},
+ytick={4.75,5,5.25,5.5},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/dmcy_30_8_8.5191.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_5.2000.txt};
+\legend{$Y$,$Y^{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie algorytmu DMC dla nastaw wygenerowanych programowo}
+\label{fig:dmc6}
+\end{figure}

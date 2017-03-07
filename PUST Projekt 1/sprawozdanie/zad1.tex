@@ -1,0 +1,24 @@
+\chapter{Zadanie 1: Punkt pracy}
+Pierwszym poleceniem by³o zweryfikowanie poprawnoœci punktu pracy obiektu. Uda³o siê to osi¹gn¹æ za pomoc¹ prostego sprawdzenia dla jakiej
+wartoœci wyjœcia stabilizuje siê obiekt przy sta³ym sterowaniu równym sterowaniu w punkcie pracy.Eksperyment potwierdzi³ wczeœniej opisane wartoœci, a jego przebieg
+obrazuje wykres \ref{fig:z1}.
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0,xmax=200,ymin=0,ymax=5,
+xlabel={$k$},
+ylabel={$Y(k)$},
+xtick={0,50,100,150,200},
+ytick={0,1,2,3,4,5},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/z1.txt};
+\legend{$Y(k)$}
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres Y(k) d¹¿¹cy do Ypp=5 dla dla sta³ego sterowanie równego Upp=\num{0.8}}
+\label{fig:z1}
+\end{figure}

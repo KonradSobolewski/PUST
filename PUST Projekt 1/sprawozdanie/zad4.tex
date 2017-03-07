@@ -1,0 +1,182 @@
+\chapter{Zadanie 4: Algorytmy PID i DMC}
+W projektowanych regulatorach $PID$ i $DMC$ zosta³y zastosowane nastêpuj¹ce ograniczenia:
+\begin{equation}
+\triangle U^{\mathrm{max}} = 0,05
+\label{dUmax}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\textrm{jezeli  }
+\triangle U(k) >
+\triangle U^{\mathrm{max}}
+\textrm{   to   }
+\triangle U(k) = 
+\triangle U^{\mathrm{max}} \\
+\textrm{jezeli  }
+\triangle U(k) < -
+\triangle U^{\mathrm{max}}
+\textrm{   to   }
+\triangle U(k) = -
+\triangle U^{\mathrm{max}}
+\label{ogr1}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\textrm{jezeli  }
+U(k) > U^{\mathrm{max}}
+\textrm{   to   }
+U(k) =  U^{\mathrm{max}} \\
+\textrm{jezeli  }
+ U(k) < U^{\mathrm{min}}
+\textrm{   to   }
+U(k) =  U^{\mathrm{min}}
+\label{ogr2}
+\end{split}
+\end{equation}
+
+
+\section{Cyfrowy algorytm PID}
+
+W projekcie zosta³ wykorzystany regulator cyfrowy $PID$, którego parametry s¹ opisane poni¿szymi wzorami, gdzie 
+$K$ - wzmocnienie cz³onu P , $T_p$ - czas próbkowania, $T_i$ - czas zdwojenia cz³onu ca³kuj¹cego $I$, $T_d$ - czas wyprzedzenia cz³onu ró¿niczkuj¹cego $D$. 
+\begin{equation}
+r_0=K*(1+T_p/(2*T_i)+T_d/T_p) 
+\label{r0}
+\end{equation}
+
+\begin{equation}
+r_1=K*(T_p/(2*T_i)-2*T_d/T_p-1)
+\label{r1}
+\end{equation}
+
+\begin{equation}
+r_2=K*T_d/T_p
+\label{r2}
+\end{equation}
+W ka¿dej iteracji pêtli sterowania jest obliczany uchyb wyjœcia obiektu od wartoœæ zadanej jego wyjœcia.
+\begin{equation}
+e(k) = Y^{\mathrm{zad}}(k) - Y(k);
+\label{uchyb}
+\end{equation}
+Sterowanie regulatora zostaje wyliczone na bie¿¹c¹ chwile przy u¿yciu wzoru:
+\begin{equation}
+U(k) = r_2*e(k-2) + r_1*e(k-1) + r_0*e(k) + U(k-1);
+\label{Uk}
+\end{equation}
+
+\section{Analityczny algorytm DMC}
+Do obliczeñ wykorzystujemy nastêpuj¹ce wzory:
+\begin{equation}
+\boldsymbol{Y}^{\mathrm{zad}}(k)=\left[
+\begin{array}{c}
+Y^{\mathrm{zad}}(k)\\
+\vdots\\
+Y^{\mathrm{zad}}(k)
+\end{array}
+\right]_{\mathrm{Nx1}}
+\label{yzadm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{Y}(k)=\left[
+\begin{array}{c}
+y(k)\\
+\vdots\\
+y(k)
+\end{array}
+\right]_{\mathrm{Nx1}}
+\label{ym}
+\end{equation}
+
+\begin{equation}
+\triangle\boldsymbol{U}(k)=\left[
+\begin{array}{c}
+\triangle u(k|k)\\
+\vdots\\
+\triangle u(k+N_u -1 |k)
+\end{array}
+\right]_{\mathrm{N_ux1}}
+\label{dUm}
+\end{equation}
+
+\begin{equation}
+\triangle\boldsymbol{U^P}(k)=\left[
+\begin{array}{c}
+\triangle u(k-1)\\
+\vdots\\
+\triangle u(k-(D-1))
+\end{array}
+\right]_{\mathrm{(D-1)x1}}
+\label{dUPm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{M}=\left[
+\begin{array}
+{cccc}
+s_{1} & 0 & \ldots & 0\\
+s_{2} & s_{1} & \ldots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+s_{N} & s_{N-1} & \ldots &  s_{N-N_{\mathrm{u}}+1}
+\end{array}
+\right]_{\mathrm{NxN_u}}
+\label{Mm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{M^P}=\left[
+\begin{array}
+{cccc}
+s_{2}-s_{1} & s_{3}-s_{2} & \ldots & s_{D}-s_{D-1}\\
+s_{3}-s_{1} & s_{4}-s_{2} & \ldots & s_{D+1}-s_{D-1}\\
+\vdots & \vdots & \ddots & \vdots\\
+s_{N+1}-s_{1} & s_{N+2}-s_{2} & \ldots &  s_{N+D-1}-S_{D-1}
+\end{array}
+\right]_{\mathrm{NxD-1}}
+\label{MPm}
+\end{equation}
+
+\begin{equation}
+Y^0(k)=Y(k)+M^P
+\triangle U^P(k)
+\label{Y0}
+\end{equation}
+
+\begin{equation}
+K=(M^TM+\lambda*I)^{-1}M^T
+\label{K}
+\end{equation}
+
+\begin{equation}
+\triangle U(k)=K(Y^{zad}(k)-Y^0(k))
+\label{dU1}
+\end{equation}
+
+W naszej regulacji potrzebujemy wyznaczyæ tylko pierwszy element macierzy $\triangle U(k)$ czyli $\triangle u(k|k)$. W tym celu rozwijamy wzór do postaci:
+
+\begin{equation}
+\triangle u(k|k)=k_ee(k)-k_u\triangle\boldsymbol U^P
+\label{dukk}
+\end{equation}
+
+gdzie:
+
+\begin{equation}
+e(k)=Y^{zad}(k)-Y(k)
+\label{e}
+\end{equation}
+
+\begin{equation}
+k_e=\sum_{i=1}^N K(1,i)
+\label{ke}
+\end{equation}
+
+\begin{equation}
+k_u=kM^P
+\label{ku}
+\end{equation}
+
+k to oznaczenie pierwszego wiersza macierzy K. Aktualne sterowanie otrzymujemy poprzez zsumowanie poprzedniego sterowania i aktualnie wyliczonego $\triangle u(k|k)$. 
