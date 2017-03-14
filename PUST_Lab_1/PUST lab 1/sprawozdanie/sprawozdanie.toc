@@ -1,0 +1,8 @@
+\contentsline {chapter}{\numberline {1\relax .\kern .5em }Zadanie 1: Punkt pracy}{2}
+\contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 2: Odpowied\'z skokowa}{3}
+\contentsline {chapter}{\numberline {3\relax .\kern .5em }Zadanie 3: Znormalizowana odpowied\'z skokowa}{4}
+\contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 4: Algorytmy DMC}{5}
+\contentsline {section}{\numberline {4.1\relax .\kern .5em }Analityczny algorytm DMC}{5}
+\contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 5: Zak\IeC {\l }\'ocenia}{7}
+\contentsline {chapter}{\numberline {6\relax .\kern .5em }Zadanie 6: Zak\IeC {\l }\'ocenie zmienne sinusoidalnie}{8}
+\contentsline {chapter}{\numberline {7\relax .\kern .5em }Zadanie 7: Odporno\'s\'c algorytmu }{9}
