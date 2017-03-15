@@ -1,0 +1,16 @@
+\contentsline {chapter}{\numberline {1\relax .\kern .5em }Opis obiektu}{2}
+\contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 1: Punkt pracy}{3}
+\contentsline {chapter}{\numberline {3\relax .\kern .5em }Zadanie 2: Badanie zachowania obiektu}{4}
+\contentsline {section}{\numberline {3.1\relax .\kern .5em }Odpowied\'z skokowa}{4}
+\contentsline {section}{\numberline {3.2\relax .\kern .5em }Charakterystyka statyczna}{5}
+\contentsline {section}{\numberline {3.3\relax .\kern .5em }W\IeC {\l }a\'sciwo\'sci dynamiczne}{6}
+\contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 3: Znormalizowana odpowied\'z skokowa}{7}
+\contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 4: Algorytmy PID i DMC}{8}
+\contentsline {section}{\numberline {5.1\relax .\kern .5em }Cyfrowy algorytm PID}{8}
+\contentsline {section}{\numberline {5.2\relax .\kern .5em }Analityczny algorytm DMC}{8}
+\contentsline {chapter}{\numberline {6\relax .\kern .5em }Zadanie 5: StrojenieWTF regulator\'ow}{10}
+\contentsline {section}{\numberline {6.1\relax .\kern .5em }PID}{10}
+\contentsline {section}{\numberline {6.2\relax .\kern .5em }DMC}{15}
+\contentsline {chapter}{\numberline {7\relax .\kern .5em }Zadanie 6: Optymalizacja}{20}
+\contentsline {section}{\numberline {7.1\relax .\kern .5em }PID}{20}
+\contentsline {section}{\numberline {7.2\relax .\kern .5em }DMC}{20}

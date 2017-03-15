@@ -1,0 +1,38 @@
+
+
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=0,ymax=100,
+xlabel={$k$},
+ylabel={$U$},
+xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_300_300_1.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=36,ymax=41,
+xlabel={$k$},
+ylabel={$Y(k)$},
+xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+ytick={36,37,38,39,40,41},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_300_300_1.0000.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_38.0000.txt};
+	\legend{$Y$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu DMC przy pocz¹tkowych nastawach}
+	\label{fig:DMC1}
+\end{figure}
+\FloatBarrier
