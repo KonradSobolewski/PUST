@@ -1,5 +1,5 @@
-function [ E ] = zad4DMC(N,Nu,lambda,draw,latex)
-%-------------------------------------------------------------
+function [ E ] = zad5DMC(N,Nu,lambda,draw,latex)
+%---------------------------z----------------------------------
 %Odp Skokowa
 
 dU=0.2;
@@ -129,8 +129,8 @@ if(draw)
     hold on;
 end
 if(latex)
-    toPlotForLatex(sprintf('dmcu_%d_%d_%3.4f',N,Nu,lambda),1:kk,U)
-    toPlotForLatex(sprintf('dmcy_%d_%d_%3.4f',N,Nu,lambda),1:kk,Y)
-    toPlotForLatex(sprintf('dmcyzad_%3.4f',Yzad(kk)),1:kk,Yzad)
+ %   toPlotForLatex(sprintf('dmcu_%d_%d_%3.4f',N,Nu,lambda),1:kk,U)
+ %   toPlotForLatex(sprintf('dmcy_%d_%d_%3.4f',N,Nu,lambda),1:kk,Y)
+ %   toPlotForLatex(sprintf('dmcyzad_%3.4f',Yzad(kk)),1:kk,Yzad)
 end
 end

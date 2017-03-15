@@ -7,3 +7,4 @@
 \contentsline {section}{\numberline {5.2\relax .\kern .5em }DMC}{7}
 \contentsline {chapter}{\numberline {6\relax .\kern .5em }Zadanie 5: Strojenie regulator\'ow}{8}
 \contentsline {section}{\numberline {6.1\relax .\kern .5em }PID}{8}
+\contentsline {section}{\numberline {6.2\relax .\kern .5em }DMC}{13}

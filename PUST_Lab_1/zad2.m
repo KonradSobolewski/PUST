@@ -1,3 +1,4 @@
+
 load('skokY_5.txt')
 skok=(skokY_5(11:350,2)-36.5)/5;
 for K=1:length(skok)

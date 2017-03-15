@@ -215,3 +215,242 @@ Ostatnim dobranym parametrem jest $T_d$ \ref{doborTd}. Po zmianie z zera na wiêk
 ³atwo zauwa¿yæ, ¿e $T_d = 3$ jest najlepsz¹ wartoœci¹.
 
 Najlepsze przebiegi dla naszego obiektu uzyskaliœmy stosuj¹c nastêpuj¹ce nastawy $K_p = 4 , T_i = 80 , T_d = 3$ , gdzie wskaŸnik jakoœci $E = 254.5283$.
+\section{DMC}
+
+Nastawy regulatora $DMC$ zosta³y dobrane eksperymentalnie, u¿ywaj¹c nie rzeczywistego obiektu, lecz jego modelu otrzymanego podczas laboratorium (w postaci odpowiedzi skokowej) - rozwi¹zanie to zosta³o na nas wymuszone przez brak czasu podczas æwiczenia. Poniewa¿ jednak otrzymana funkcja aproksymuj¹ca odpowiedŸ skokow¹ jest bliska jej rzeczywistemu przebiegowi, mo¿na przypuszczaæ, ¿e zamodelowany obiekt nie odbiega w znacz¹cym stopniu od stanowiska grzewczego.
+Regulator $DMC$ korzysta z odpowiedzi skokowej $s$ uzyskanej w punkcie 3, oraz modelu obiektu identycznym jak ten w powy¿szym podpunkcie dotycz¹cym regulatora $PID$.
+
+Obserwuj¹c obiekt bezpiecznie za³o¿yliœmy, ¿e jego horyzont dynamiki jest równy $D = 300$. Tak¹ równie¿ przyjêliœmy wartoœæ pocz¹tkow¹ $N$ oraz $N_u$, natomast pierwotn¹ wartoœci¹ $\lambda$ by³o $1$, tj: $N = 300, N_u = 300, \lambda = 1$.
+
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_300_300_1.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=36,ymax=41,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,37,38,39,40,41},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_300_300_1.0000.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_38.0000.txt};
+	\legend{$Y$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu DMC przy pocz¹tkowych nastawach}
+	\label{fig:DMC1}
+\end{figure}
+\FloatBarrier
+
+B³¹d $E$ wyniós³ = $292.3572$.
+\
+Nastêpnie próbowaliœmy zmniejszyæ parametr N: jednak, jak siê okaza³o, jego wp³yw dla wartoœci powy¿ej $50$  jest znikomy: dla kolejnych wielkoœci tego parametru, wynosz¹cych $200$, $100$, $50$, tylko dla tej ostatniej odnotowaliœmy nieznaczn¹ zmianê. Natomiast dla $N = 30$, spadek jakoœci sterowania by³ ju¿ znacz¹cy. Widaæ to na poni¿szym rysunku:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_300_300_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcu_100_300_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcu_50_300_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcu_30_300_1.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=36,ymax=43,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,37,38,39,40,41,42,43},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_300_300_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcy_100_300_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcy_50_300_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcy_30_300_1.0000.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_38.0000.txt};
+	\legend{$N=300$,$N=100$,$N=50$,$N=30$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $N$}
+	\label{doborN}
+\end{figure}
+\FloatBarrier
+\
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $N = 300$: $E = 292.3572$ 
+	\item $N = 100$: $E = 292.5283$ 
+	\item $N = 50$:  $E = 294.9268$ 
+	\item $N = 30$:  $E = 542.1646$ 		 
+\end{itemize}\
+
+
+Zdecydowaliœmy wiêc ustawiæ $N$ na $50$ - b³¹d jest tylko odrobinê gorszy od wy¿szych wartoœci, a z³o¿onoœæ obliczeniowa znacznie mniejsza. Nastêpnym parametrem, na którego minimalizacji nam zale¿y jest $N_u$:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_50_300_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcu_50_50_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcu_50_3_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcu_50_1_1.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=36,ymax=41.2,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,37,38,39,40,41},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_50_300_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcy_50_50_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcy_50_3_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcy_50_1_1.0000.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_38.0000.txt};
+	\legend{$Nu=300$,$Nu=100$,$Nu=3$,$Nu=1$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $N_u$}
+	\label{doborNu}
+\end{figure}
+\FloatBarrier
+B³¹d $E$ dla kolejnych wartoœci horyzontu sterowania:\\
+\begin{itemize}
+	\item $N_u = 300$: $E = 294.9268$ 
+	\item $N_u = 50$:  $E = 294.9268$ 
+	\item $N_u = 3$:   $E = 243.9022$ 
+	\item $N_u = 1$:   $E = 225.8319$ 		 
+\end{itemize}\
+
+Jak widaæ, dla $N_u = 1$ wyjœcie najszybciej zbiega do wartoœci zadanej, a sterowanie jest tylko odrobinê ostrzejsze.
+Jak siê mo¿na by³o spodziewaæ, zarówno $N$ jak i $Nu$ mia³y du¿o s³abszy wp³yw na jakoœæ regulacji ni¿  $\lambda$:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_50_1_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcu_50_1_0.5000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcu_50_1_0.1000.txt};
+	\addplot[red,semithick] file {wykresy/dmcu_50_1_0.0300.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=36,ymax=40.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,37,38,39,40},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_50_1_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcy_50_1_0.5000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcy_50_1_0.1000.txt};
+	\addplot[red,semithick] file {wykresy/dmcy_50_1_0.0300.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_38.0000.txt};
+	\legend{$\lambda=1$,$\lambda=0.5$,$\lambda=0.1$,$\lambda=0.03$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $\lambda$}
+	\label{dobor\lambda}
+\end{figure}
+\FloatBarrier
+wskaŸnika regulacji $E$ :\\
+\begin{itemize}
+	\item $\lambda = 1$:      $E = 225.8319$ 
+	\item $\lambda = 0.5$:    $E = 203.3607$ 
+	\item $\lambda = 0.1$:    $E = 185.6464$ 
+	\item $\lambda = 0.03$:   $E = 182.5979$ 		 
+\end{itemize}\
+
+Zmniejszaj¹c $\lambda$, uzyskujemy drastyczn¹ poprawê jakoœci regulacji, jednak¿e kosztem sterowania. Chocia¿ aproksymowany obiekt, stanowisko grzewcze, nie ma podatnych na uszkodzenia elementów wykonawczych, to bardzo ostre skoki sterowania z pewnoœci¹ nie wp³ywaj¹ korzystnie na ¿ywotnoœæ obiektu.
+Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e poni¿ej wartoœci $\lambda = 0.1$ zysk w jakoœci sterowania jest znikomy, postanowiliœmy zatrzymaæ tê wielkoœæ $\lambda$.
+
+Poni¿ej prezentowane jest dzia³anie finalnego algorytmu $DMC$:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_50_1_0.0300.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=615,ymin=36,ymax=41,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,37,38,39,40,41},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_50_1_0.0300.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmcyzad_38.0000.txt};
+	\legend{$Y$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Finalny regulator DMC}
+	\label{fig:DMCfin}
+\end{figure}
+\FloatBarrier
+
