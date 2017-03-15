@@ -22,7 +22,7 @@ for k=Td+3:length(y)
 end
 
 if(draw)
-    toPlotForLatex('aprskok',Td+3:length(y),y(Td+3:length(y))');
+    toPlotForLatex('aprskok',1:length(y)-Td-2,y(Td+3:length(y))');
     stairs(s);
     title({'Aproksymacja odpowiedzi skokowej ';['T1 = ', num2str(T1), ', T2 = ', num2str(T2),', K = ',num2str(K),', Td = ',num2str(Td)];['e = ',num2str(e)]; ' '});
     xlabel('k')
