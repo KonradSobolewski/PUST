@@ -1,10 +1,10 @@
 \chapter{Zadanie 4: Algorytmy PID i DMC}
 \section{PID}
 Kod programu zawieraj?cy model obiektu stanowiska oraz ograniczenia $$0 <= U <= 100$$ zosta?y zawarty w folderze sprawozdania. 
-Do wymodelowania obiektu pos?u?yli?my si? funkcj? $fmincon$ , która zwróci?a nam parametry obiektu $$T1 = 91.607279510963700$$ $$T2 = 6.971579071504170$$ 
-$$K_p = 0.997200696364098$$ $$TD = 2$$ oraz aproksymuj?cym równaniem ró?nicowym 
-$$Y(k) = b1*U(k-Td-1) + b2*U(k-Td-2) - a1*Y(k-1) - a2*Y(k-2)$$
+Do wymodelowania obiektu pos?u?yli?my si? funkcj? $fmincon$ , która zwróci?a nam parametry obiektu $$T1 = 91,607279510963700$$ $$T2 = 6,971579071504170$$ 
+$$K_p = 0,997200696364098$$ $$TD = 2$$ oraz aproksymuj?cym równaniem ró?nicowym 
+$$Y(k) = b_1U(k-TD-1) + b_2U(k-TD-2) - a_1Y(k-1) - a_2Y(k-2)$$
 
-Powy?sze parametry wyznaczone dla znormalizowanego skoku jednostkowego udokomuntowane w poprzednim punkcie, powodowa?y gorszy przebieg wyj?cia oraz sterowania obiektu, dlatego nowe parametry zosta?y wyznaczone dla skoku jednostkowego z punktu pracy, aby zachowa? ich zbli?on? do rzeczywisto?ci trajektorie.
+Powy?sze parametry wyznaczone dla znormalizowanego skoku jednostkowego udokumentowane w poprzednim punkcie, powodowa?y gorszy przebieg wyj?cia oraz sterowania obiektu, dlatego nowe parametry zosta?y wyznaczone dla skoku jednostkowego z punktu pracy, aby zachowa? ich zbli?one do rzeczywisto?ci trajektorie.
 
 \section{DMC}
