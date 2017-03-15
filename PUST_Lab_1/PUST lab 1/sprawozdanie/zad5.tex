@@ -1,8 +1,8 @@
 \chapter{Zadanie 5: Strojenie regulatorów}
 \section{PID}
-W tej cz??ci projektu laboratoryjnego dobierali?my parametry regulatora PID metod? eksperymentaln?. Poni?ej zosta? zamieszczony wykres wyj?cia obiektu dla dwóch skoków warto?ci zadanej z $36,5$ do $40$ oraz z $40$ do $38$. \
+W tej czêœci projektu laboratoryjnego dobieraliœmy parametry regulatora PID metod¹ eksperymentaln¹. Poni¿ej zosta³ zamieszczony wykres wyjœcia obiektu dla dwóch skoków wartoœci zadanej z $36,5$ do $40$ oraz z $40$ do $38$. \
 
-Pierwsze wykresy \ref{fig:lab05y} , \ref{fig:lab05u} oraz \ref{lab2eps} zosta?y wykonane w trakcie trwania laboratorium. Dla  \ref{fig:lab05y} , \ref{fig:lab05u} widzimy, ?e nastawy regulatora by?y nieodpowiednie. Regulator nie by? wstanie wysterowa? obiektu co odzwierciedla si? powolnym d??eniem do warto?ci zadanej oraz licznymi zawirowaniami przebiegów sterowania i wyj?cia. Wykres \ref{lab2eps} jest ostatnim pomiarem jaki uda?o si? nam zebra? w trakcie trwania laboratorium. Z powodu braku czasu podczas laboratorium jest on w formacie $.eps$. Widzimy , ?e dla nowych nastaw uk?ad regulacji dzia?a? znacznie lepiej , charakteryzowa? si? ma?ym przeregulowaniem oraz wi?ksz? szybko?ci? zmian. Próbka oko?o 370 jest ostatni? jak? uda?o si? nam zebra? i na podstawie poprzednich próbek prognozujemy wyregulowanie obiektu. \\
+Pierwsze wykresy \ref{fig:lab05y} , \ref{fig:lab05u} oraz \ref{lab2eps} zosta³y wykonane w trakcie trwania laboratorium. Dla  \ref{fig:lab05y} , \ref{fig:lab05u} widzimy, ¿e nastawy regulatora by³y nieodpowiednie. Regulator nie by³ w stanie wysterowaæ obiektu co odzwierciedla siê powolnym d¹¿eniem do wartoœci zadanej oraz licznymi zawirowaniami przebiegów sterowania i wyjœcia. Wykres \ref{lab2eps} jest ostatnim pomiarem jaki uda³o siê nam zebraæ w trakcie trwania laboratorium. Z powodu braku czasu podczas laboratorium jest on w formacie $.eps$. Widzimy , ¿e dla nowych nastaw uk³ad regulacji dzia³a³ znacznie lepiej, charakteryzowa³ siê ma³ym przeregulowaniem oraz wiêksz¹ szybkoœci¹ zmian. Próbki oko³o 370 s¹ ostatnimi jakie uda³o siê nam zebraæ. Na podstawie poprzednich próbek prognozujemy wyregulowanie obiektu w kolejnych nieudokumentowanych ju¿ krokach. \\
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -52,9 +52,9 @@ Pierwsze wykresy \ref{fig:lab05y} , \ref{fig:lab05u} oraz \ref{lab2eps} zosta?y 
 	\label{lab2eps}
 \end{figure}
 
-Dalsza cz??? projektu zosta?a wykonana na modelu obiektu w ?rodowisku domowym. \
-Pierwsz? czynno?ci? jest zasymulowanie stanowiska dla ostatnich nastaw z laboratorium, aby sprawdzi? czy z grubsza pokrywaj? si? przebiegi \ref{domporownanie}.
-Porównuj?c wykres \ref{lab2eps} wraz ze wspomnianym , zauwa?amy podobny z?b przy skoku warto?ci zadanej oraz podobne warto?ci przeregulowania. Sugurej?c si? tymi aspektami mo?na stwierdzi?, ?e model obiektu jest podobny do obiektu rzeczywistego, co ?wiadczy o poprawno?ci naszych przekszta?ce?. \\
+Dalsza czêœæ projektu zosta³a wykonana na modelu obiektu w œrodowisku domowym. \
+Pierwsz¹ czynnoœci¹ jest zasymulowanie stanowiska dla ostatnich nastaw z laboratorium, aby sprawdziæ czy z grubsza pokrywaj¹ siê przebiegi \ref{domporownanie}.
+Porównuj¹c wykres \ref{lab2eps} wraz ze wspomnianym , zauwa¿amy podobny z¹b przy skoku wartoœci zadanej oraz podobne wartoœci przeregulowania. Sugeruj¹c siê tymi aspektami mo¿na stwierdziæ, ¿e model obiektu jest podobny do obiektu rzeczywistego, co œwiadczy o poprawnoœci naszych przekszta³ceñ. \\
 
 \begin{figure}[tb]
 	\centering
@@ -79,7 +79,7 @@ Porównuj?c wykres \ref{lab2eps} wraz ze wspomnianym , zauwa?amy podobny z?b przy
 \end{figure}
 
 
-Na nast?pnych wykresach przedstawili?my wyniki symulacji dla ró?nych nastaw regulatora. Korzystamy z metody eksperymentalnej. Dobór lepszych nastaw rozpoczynamy od dobrania parametru $K$. \\
+Na nastêpnych wykresach przedstawiliœmy wyniki symulacji dla ró¿nych nastaw regulatora. Korzystamy z metody eksperymentalnej. Dobór lepszych nastaw rozpoczynamy od dobrania parametru $K$. \\
 
 
 \begin{figure}[tb]
@@ -122,7 +122,7 @@ Na nast?pnych wykresach przedstawili?my wyniki symulacji dla ró?nych nastaw regu
 	\label{doborK}
 \end{figure}
 
-Zgodnie z rysunkiem \ref{doborK} mo?na zauwa?y?, ?e dla $K>3$ zaczyna wyst?powa? przeregulowanie oraz szybko?? regulacji jest coraz mniejsza. W dalszych rozwa?aniach potraktowali?my jako warto?? prawid?ow? $K=4$ , gdy? zmiany s? nik?e , a wi?kszy cz?on proporcjonalny pozwoli nam zwi?kszy? "agresywno??" regulatora. \
+Zgodnie z rysunkiem \ref{doborK} mo¿na zauwa¿yæ, ¿e dla $K>3$ zaczyna wystêpowaæ przeregulowanie oraz szybkoœæ regulacji jest coraz mniejsza. W dalszych rozwa¿aniach potraktowaliœmy jako wartoœæ prawid³ow¹ $K=4$ , gdy¿ zmiany s¹ nik³e , a wiêkszy cz³on proporcjonalny pozwoli nam zwiêkszyæ "agresywnoœæ" regulatora. \
 
 \begin{figure}[tb]
 	\centering
@@ -162,7 +162,7 @@ Zgodnie z rysunkiem \ref{doborK} mo?na zauwa?y?, ?e dla $K>3$ zaczyna wyst?powa?
 	\label{doborTi}
 \end{figure}
 
-Nast?pnym dobranym parametrem jest $T_i$ \ref{doborTi}. Na podstawie utworzonych wykresów jednoznacznie mo?na stwierdzi?, ?e najlepszy przebieg jest osi?gany dla warto?ci $T_i = 80 $. Dla warto?ci $T_i = 90$ uk?ad mimo i? znajduje si? blisko warto?ci zadanej osi?ga j? bardzo wolno, a dla $T_i = 70$ wyst?puje znaczne przeregulowanie. \
+Nastêpnym dobranym parametrem jest $T_i$ \ref{doborTi}. Na podstawie utworzonych wykresów jednoznacznie mo¿na stwierdziæ, ¿e najlepszy przebieg jest osi¹gany dla wartoœci $T_i = 80 $. Dla wartoœci $T_i = 90$ uk³ad mimo i¿ znajduje siê blisko wartoœci zadanej osi¹ga j¹ bardzo wolno, a dla $T_i = 70$ wystêpuje znaczne przeregulowanie. \
 
 \begin{figure}[tb]
 	\centering
@@ -204,7 +204,7 @@ Nast?pnym dobranym parametrem jest $T_i$ \ref{doborTi}. Na podstawie utworzonych
 	\label{doborTd}
 \end{figure}
 
-Ostatnim dobranym parametrem jest $T_d$ \ref{doborTd}. Po zmianie z zera na wi?ksze warto?ci okazuje si?, ?e mimo mniejszego przeregulowania obiekt potrzebuje wi?cej czasu na osi?gni?cie dok?adnej warto?ci zadanej, jednak?e po przeanalizowaniu wskanika regulacji $E$ :\\
+Ostatnim dobranym parametrem jest $T_d$ \ref{doborTd}. Po zmianie z zera na wiêksze wartoœci okazuje siê, ¿e mimo mniejszego przeregulowania obiekt potrzebuje wiêcej czasu na osi¹gniêcie dok³adnej wartoœci zadanej, jednak¿e po przeanalizowaniu wskaŸnika regulacji $E$ :\\
 \begin{itemize}
 	\item $T_d = 0$ - $E = 282.5235$ 
 	\item $T_d = 0$ - $E = 267.5491$ 
@@ -212,6 +212,6 @@ Ostatnim dobranym parametrem jest $T_d$ \ref{doborTd}. Po zmianie z zera na wi?k
 	\item $T_d = 0$ - $E = 402.4649$ 		 
 \end{itemize}\
 
-?atwo zauwa?y?, ?e $T_d = 3$ jest najlepsz? warto?ci?.
+³atwo zauwa¿yæ, ¿e $T_d = 3$ jest najlepsz¹ wartoœci¹.
 
-Najlepsze przebiegi dla naszego obiektu uzyskali?my stosuj?c nast?puj?ce nastawy $K_p = 4 , T_i = 80 , T_d = 3$ , gdzie wskaznik jako?ci $E = 254.5283 $.
+Najlepsze przebiegi dla naszego obiektu uzyskaliœmy stosuj¹c nastêpuj¹ce nastawy $K_p = 4 , T_i = 80 , T_d = 3$ , gdzie wskaŸnik jakoœci $E = 254.5283$.

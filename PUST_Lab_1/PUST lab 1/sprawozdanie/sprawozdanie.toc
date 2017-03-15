@@ -1,8 +1,9 @@
-\contentsline {chapter}{\numberline {1\relax .\kern .5em }Zadanie 1: Punkt pracy}{2}
-\contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 2: Odpowied\'z skokowa}{3}
-\contentsline {chapter}{\numberline {3\relax .\kern .5em }Zadanie 3: Znormalizowana odpowied\'L\c s skokowa}{4}
-\contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 4: Algorytmy PID i DMC}{5}
-\contentsline {section}{\numberline {4.1\relax .\kern .5em }PID}{5}
-\contentsline {section}{\numberline {4.2\relax .\kern .5em }DMC}{5}
-\contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 5: Strojenie regulator\'ow}{6}
-\contentsline {section}{\numberline {5.1\relax .\kern .5em }PID}{6}
+\contentsline {chapter}{\numberline {1\relax .\kern .5em }Opis obiektu}{2}
+\contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 1: Punkt pracy}{3}
+\contentsline {chapter}{\numberline {3\relax .\kern .5em }Zadanie 2: Odpowied\'z skokowa}{4}
+\contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 3: Znormalizowana odpowied\'z skokowa}{5}
+\contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 4: Algorytmy PID i DMC}{7}
+\contentsline {section}{\numberline {5.1\relax .\kern .5em }PID}{7}
+\contentsline {section}{\numberline {5.2\relax .\kern .5em }DMC}{7}
+\contentsline {chapter}{\numberline {6\relax .\kern .5em }Zadanie 5: Strojenie regulator\'ow}{8}
+\contentsline {section}{\numberline {6.1\relax .\kern .5em }PID}{8}
