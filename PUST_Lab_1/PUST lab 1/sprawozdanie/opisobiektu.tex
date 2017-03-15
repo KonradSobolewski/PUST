@@ -1,9 +1,10 @@
 \chapter{Opis obiektu}
 \label{sec:opis}
-Obiekt u¿ywany w projekcie opisany jest dan¹ przez prowadz¹cego funkcj¹ wywo³ywan¹ poleceniem:
-\begin{equation}
-  Y(k) = symulacja\_obiektu7y(U(k - 4), U(k - 5), Z(k-1),Z(K-2),Y(k - 1), Y(k - 2))
-\end{equation}
-gdzie $k$ jest aktualn¹ chwil¹ symulacji sygna³u próbkowanego.
-Wartoœæ sygna³ów w punkcie pracy ( w stanie ustalonym ) maj¹ wartoœæ $u=y=z=0$. Okres próbkowania
-obiektu wynosi $T_p=0,5s$. 
+Obiektem u¿ywanym na laboratorium by³o stanowisko grzej¹co-ch³odz¹ce przedstawione schematycznie na poni¿szym rysunku \ref{stanowisko}. Stanowisko sk³ada siê z 4 wentylatorów (W), 2 grza³ek (G), 5 czujników temperatury (T), pomiaru pr¹du (P1) oraz napiêcia (P2). Nie korzystaliœmy jednak ze wszystkiego naraz. Wy³¹czyliœmy wszystkie wentylatory oprócz W1, który ustawiliœmy na sta³e na $50\%$, co pozwoli na szybszy spadek temperatury obiektu. Sterowaniem naszego obiektu by³a grza³ka G1 (grza³ka G2 na sta³e wy³¹czona). Jako wyjœcie przyjêliœmy czujnik temperatury T1. Nie odczytywaliœmy wartoœci z pozosta³ych czujników, nie by³y one wa¿ne dla naszego eksperymentu. Ze wzglêdu na to, ¿e mierzonym medium by³a temperatura, obiekt by³ nara¿ony na ró¿nego rodzaju szumy i zak³ócenia. Jego po³o¿enie tak¿e nie sprzyja³o dok³adnym pomiarom (otwarte drzwi oraz wentylacja w pobli¿u). Z tych powodów pomiary z niego otrzymane mog³y zawieraæ (a dok³adniej mówi¹c na pewno zawiera³y) odchylenia od wartoœci w³aœciwej, co zosta³o uwzglêdnione w trakcie analizy wyników.
+
+\begin{figure}[tb]
+\centering
+\includegraphics{wykresy/stanowisko.png}
+\caption{Schemat stanowiska grzej¹co-ch³odz¹cego}
+\label{stanowisko}
+\end{figure}

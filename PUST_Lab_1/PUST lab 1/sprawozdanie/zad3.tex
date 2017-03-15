@@ -1,1 +1,48 @@
-\chapter{Zadanie 3: Znormalizowana odpowiedÅº skokowa}
+\chapter{Zadanie 3: Znormalizowana odpowiedŸ skokowa}
+Kolejnym poleceniem by³o wyznaczyæ znormalizowan¹ odpowiedŸ skokow¹ (tak¹ jaka wymagana jest do algorytmu DMC) i zaproksymowaæ j¹, u¿ywaj¹c w tym celu cz³onu inercyjnego drugiego rzêdu z opóŸnieniem. Cz³on posiada 4 parametry: $T_1$, $T_2$, $K$ (dalej oznaczane jako $K_p$) i $T_d$ (w dalszej czêœci sprawozdania oznaczane jako $TD$). Nazwy zosta³y zmienione, by nie myliæ ich z parametrami algorytmu PID. Cz³on jest opisany wzorami powsta³ymi po przekszta³ceniu jego transmitancji:
+\begin{equation}
+\alpha_1=e^{-\frac{1}{T_1}}
+\end{equation}
+\begin{equation}
+\alpha_2=e^{-\frac{1}{T_2}}
+\end{equation}
+\begin{equation}
+a_1=-\alpha_1-\alpha_2
+\end{equation}
+\begin{equation}
+a_1=\alpha_1\alpha_2
+\end{equation}
+\begin{equation}
+b_1=\frac{K_p}{T_1-T_2}[T_1(1-\alpha_1)-T_2(1-\alpha_2)]
+\end{equation}
+\begin{equation}
+b_1=\frac{K_p}{T_1-T_2}[\alpha_1T_2(1-\alpha_2)-\alpha_2T_1(1-\alpha_1)]
+\end{equation}
+\begin{equation}
+y(k)=b_1u(k-TD-1)+b_2u(k-TD-2)-a_1y(k-1)-a_2y(k-2)
+\end{equation}
+\
+W celu doboru parametrów cz³onu wykorzystano funkcjê fmincon. Jako pocz¹tkowe wartoœci dobieranych parametrów wybraliœmy $[11,10,1,10]$, 11 i 10 dla $T_1$ i $T_2$ ¿eby nie by³y takie same, 1 dla $K_p$, bo przy dotychczas zebranych przebiegach nie spodziewaliœmy siê du¿ego wzmocnienia dla tego obiektu i 10 dla $TD$, bo przez tyle czasu przy skoku o 15 wartoœci odpowiedzi skokowej nie wzrastaj¹ powy¿ej 0. Od do³u ograniczyliœmy wszystkie parametry zerami. Od góry ograniczyliœmy je wartoœciami $[1000,1000,10,30]$, tak by ka¿dy parametr mia³ przedzia³ dostosowany do swoich potrzeb (du¿e zmiany dla $T_1$ i $T_2$, ma³e zmiany dla $K_p$, $TD$ s¹dz¹c po wykresach nie powinno przekroczyæ 30). Jako odpowiedŸ do znormalizowania wybraliœmy t¹ dla skoku o 15. W wyniku normalizacji przekszta³ciliœmy j¹ do odpowiedzi jak¹ mielibyœmy po skoku jednostkowym. Nastêpnie po wykonaniu aproksymacji otrzymaliœmy parametry cz³onu równe $T_1$=89,0864, $T_2$=0,00031814, $K_p$=0,39431 i $Td$=14 przy b³êdzie optymalizacji $e$=0,040621. Znormalizowan¹ odpowiedŸ i jej aproksymacjê przedstawiliœmy wykresie \ref{norm_skok}.
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0,xmax=350,ymin=0,ymax=0.4,
+xlabel={$k$},
+ylabel={$S(k)$},
+xtick={0,50,100,150,200,250,300,350},
+ytick={0,0.1,0.2,0.3,0.4},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/skok15.txt};
+\addplot[orange,semithick] file {wykresy/aprskok15.txt};
+
+\legend{odpowiedŸ skokowa,aproksymacja}
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres znormalizowanej odpowiedzi skokowej i jej aproksymacji}
+\label{norm_skok}
+\end{figure}
