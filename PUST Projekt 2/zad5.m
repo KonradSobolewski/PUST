@@ -50,11 +50,15 @@ u(1:kk)=0;
 y(1:kk)=0;
 z(1:kk)=0;
 startz=50;
+
 if zad=='6'
     z(startz:kk)= 0.5*sin(20*linspace(0,1,kk-startz+1));
 elseif zad=='5'
     z(startz:kk)= 1;
+elseif zad=='7'
+    z(startz:kk)= rand(1,kk-startz+1)*0.2+0.9;  
 end
+
 e=zeros(1,kk);
 yzad(1:startk)=0; 
 yzad(startk:kk)=1;
