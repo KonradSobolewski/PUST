@@ -1,7 +1,7 @@
 clear all;
 
 Tp=0.5;
-Upp=1;
+Upp=0;
 U = zeros(200,1);
 Y = zeros(200,1);
 Z = zeros(200,1);
