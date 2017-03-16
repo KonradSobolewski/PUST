@@ -1,4 +1,4 @@
-function zad5(DZ,N,Nu,lambda,s,sz,draw,latex)
+function zad5(DZ,N,Nu,lambda,s,sz,draw,latex,zad)
 
 D=100;
 N=round(N);
@@ -49,19 +49,22 @@ ke=sum(K(1,:));
 u(1:kk)=0;
 y(1:kk)=0;
 z(1:kk)=0;
+startz=50;
+if zad=='6'
+    z(startz:kk)= 0.5*sin(20*linspace(0,1,kk-startz+1));
+elseif zad=='5'
+    z(startz:kk)= 1;
+end
 e=zeros(1,kk);
 yzad(1:startk)=0; 
 yzad(startk:kk)=1;
-startz=50;
+
 
 deltaup=zeros(1,D-1);
 deltazp=zeros(1,DZ-1);
 
 for k=startk:kk
    %symulacja obiektu
-   if k==startz
-       z(startz:kk)=1;
-   end
    y(k)= symulacja_obiektu7y(u(k-4),u(k-5),z(k-1),z(k-2),y(k-1),y(k-2));
    %uchyb regulacji
    e(k)=yzad(k) - y(k);

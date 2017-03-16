@@ -35,11 +35,11 @@ end
 SZ=Y;
 figure(2)
 plot(SZ(startk+1:kk));
-sz=S(startk+1:kk);
+sz=SZ(startk+1:kk);
 title('Znormalizowana odp. skokowa Y(z)')
 xlabel('sz')
 ylabel('k')
 if(Latex)
-    toPlotForLatex('z3sz',1:kk-startk,S(startk+1:kk))
+    toPlotForLatex('z3sz',1:kk-startk,SZ(startk+1:kk))
 end
 end
