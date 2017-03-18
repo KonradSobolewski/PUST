@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 19:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 21:00
 entering extended mode
 **./sprawozdanie.tex
 (sprawozdanie.tex
@@ -1122,7 +1122,11 @@ Package: placeins 2005/04/18  v 2.2
 LaTeX Warning: Unused global option(s):
     [twosides].
 
-(sprawozdanie.aux)
+(sprawozdanie.aux
+
+LaTeX Warning: Label `ku' multiply defined.
+
+)
 \openout1 = `sprawozdanie.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
@@ -1411,33 +1415,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 271--273
 
  []
 
-) [17] (sprawozdanie.aux) ) 
+) (zad5.tex [17]
+Rozdzia\PlPrIeC {\l } 6.
+PGFPlots: reading {wykresy/5dmcu_8_1_0.3000_40_1.txt}
+PGFPlots: reading {wykresy/5dmcu_8_1_0.3000_30_1.txt}
+PGFPlots: reading {wykresy/5dmcu_8_1_0.3000_15_1.txt}
+PGFPlots: reading {wykresy/5dmcy_8_1_0.3000_40_1.txt}
+PGFPlots: reading {wykresy/5dmcy_8_1_0.3000_30_1.txt}
+PGFPlots: reading {wykresy/5dmcy_8_1_0.3000_15_1.txt}
+PGFPlots: reading {wykresy/dmcyzad_1.0000.txt}
+PGFPlots: reading {wykresy/5z.txt}
+[18
+
+] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 100--102
+
+ []
+
+) [20
+
+] (sprawozdanie.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 36703 strings out of 493333
- 881039 string characters out of 3139195
- 1120196 words of memory out of 3000000
- 39609 multiletter control sequences out of 15000+200000
+ 36726 strings out of 493333
+ 881395 string characters out of 3139195
+ 1124278 words of memory out of 3000000
+ 39622 multiletter control sequences out of 15000+200000
  25776 words of font info for 77 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,23n,100p,10395b,2367s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plme
-.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Program Files
-/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/
-dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plit.enc}<C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/pl/plex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi
-10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi7.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/pl/plmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/pl/plr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr6.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/pl/plsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plti10.pfb>
-Output written on sprawozdanie.pdf (18 pages, 168693 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Program Files/Mi
+KTeX 2.9/fonts/enc/dvips/pl/plme.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
+ps/pl/plrm.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Pro
+gram Files/MiKTeX 2.9/fonts/enc/dvips/pl/plit.enc}<C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/pl/plbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plex10.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/pl/plmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/pl/plmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plm
+i8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmib10.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/pl/plr10.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/pl/plr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy10.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy6.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/pl/plti10.pfb>
+Output written on sprawozdanie.pdf (21 pages, 184217 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
+ 138 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

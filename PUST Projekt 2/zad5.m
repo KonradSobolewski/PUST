@@ -1,5 +1,6 @@
 function [E]=zad5(DZ,N,Nu,lambda,s,sz,draw,latex,zad,zak)
 
+%inicjalizacja sta³ych
 D=100;
 N=round(N);
 Nu=round(Nu);
@@ -27,11 +28,12 @@ for i=1:N
    end;
 end;
 
-MZP=zeros(N,DZ-1);
+MZP=zeros(N,DZ);
 for i=1:N
-   for j=1:DZ-1
-      if i+j<=DZ
-         MZP(i,j)=sz(i+j)-sz(j);
+    MZP(i,1) = sz(i);
+   for j=2:DZ
+      if i+j-1<=DZ
+         MZP(i,j)=sz(i+j-1)-sz(j);
       else
          MZP(i,j)=sz(DZ)-sz(j);
       end;      
@@ -51,6 +53,9 @@ y(1:kk)=0;
 z(1:kk)=0;
 startz=50;
 
+% inny rodzaj przebiegu zak³ócnia w zale¿noœci od wywo³anego wariantu
+% (numeru zadania) funckji
+
 if zad=='6'
     z(startz:kk)= 0.5*sin(20*linspace(0,1,kk-startz+1));
 elseif zad=='5'
@@ -67,13 +72,15 @@ yzad(startk:kk)=1;
 deltaup=zeros(1,D-1);
 deltazp=zeros(1,DZ-1);
 
+
 for k=startk:kk
    %symulacja obiektu
    y(k)= symulacja_obiektu7y(u(k-4),u(k-5),z(k-1),z(k-2),y(k-1),y(k-2));
    %uchyb regulacji
    e(k)=yzad(k) - y(k);
    
-   for n=DZ-1:-1:2;
+   %uwzglêdnianie zak³ócenia
+   for n=DZ:-1:2;
        deltazp(n)=deltazp(n-1);
    end
    deltazp(1)=z(k)-z(k-1);
@@ -97,6 +104,7 @@ for k=1:kk
     E=E+((yzad(k)-y(k))^2);
 end 
 
+%rysowanie wykresów
 if(draw)
     subplot(311)
     plot(u);
@@ -119,10 +127,16 @@ if(draw)
     ylabel('z(k)')
     hold on;
 end
+
+%zapis do pliku
 if(latex)
-    toPlotForLatex([zad sprintf('dmcu_%d_%d_%3.4f_%d_',N,Nu,lambda,Dz) zak],1:kk,u)
-    toPlotForLatex([zad sprintf('dmcy_%d_%d_%3.4f_%d_',N,Nu,lambda,Dz) zak],1:kk,y)
+    zakint=0;
+    if(zak)
+       zakint = 1; 
+    end
+    toPlotForLatex([zad sprintf('dmcu_%d_%d_%3.4f_%d_%d',N,Nu,lambda,DZ,zakint) ],1:kk,u)
+    toPlotForLatex([zad sprintf('dmcy_%d_%d_%3.4f_%d_%d',N,Nu,lambda,DZ,zakint) ],1:kk,y)
     toPlotForLatex([zad 'z'],1:kk,z)
-    toPlotForLatex(sprintf('dmcyzad_%3.4f',Yzad(kk)),1:kk,yzad)
+    toPlotForLatex(sprintf('dmcyzad_%3.4f',yzad(kk)),1:kk,yzad)
 end
 end

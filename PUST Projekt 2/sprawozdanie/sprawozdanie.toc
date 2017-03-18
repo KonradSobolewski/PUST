@@ -11,3 +11,6 @@
 \contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 4: Algorytmy DMC}{12}
 \contentsline {section}{\numberline {5.1\relax .\kern .5em }Analityczny algorytm DMC}{12}
 \contentsline {section}{\numberline {5.2\relax .\kern .5em }Dobieranie nastaw regulatora DMC}{13}
+\contentsline {chapter}{\numberline {6\relax .\kern .5em }Zadanie 5: Zak\IeC {\l }\'ocenia}{18}
+\contentsline {section}{\numberline {6.1\relax .\kern .5em }Zmiany w stosunku do podstawowej wersji regulatora analitycznego}{18}
+\contentsline {section}{\numberline {6.2\relax .\kern .5em }Dob\'or parametru Dz}{18}
