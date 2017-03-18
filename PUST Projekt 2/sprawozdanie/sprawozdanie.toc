@@ -1,0 +1,2 @@
+\contentsline {chapter}{\numberline {1\relax .\kern .5em }Opis obiektu}{2}
+\contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 1: Punkt pracy}{3}
