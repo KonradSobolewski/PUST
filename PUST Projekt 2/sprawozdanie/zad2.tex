@@ -1,28 +1,158 @@
-\chapter{Zadanie 2: OdpowiedŸ skokowa}
+\chapter{Zadanie 2: Odpowiedzi skokowe}
 
-
+\section{Tor U}
+\label{sec:zad2toru}
+W tej czêœci projektu badane by³o zachowanie odpowiedzi skokowej dla ró¿nych wartoœci skoku sygna³u steruj¹cego. Eksperyment zak³ada³, i¿ na pocz¹tku obiekt bêdzie w punkcie pracy ($Y = 0,0$, $U = 0,0$, $Z = 0,0$), a nastêpnie, w chwili $k = 15$, wykonany zostanie skok do zaplanowanej wczeœniej wartoœci sterowania. Wartoœæ sterowania po skoku dla zamieszczonych wyników mieœci³a siê w zakresie ograniczeñ. Zak³ócenie w czasie trwania eksperymentu dla tego toru mia³o sta³¹ wartoœæ $Z = 0$. Wyniki eksperymentu zosta³y zobrazowane na wykresie \ref{fig:z2_yu}.
 \begin{figure}[tb]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-width=0.9\textwidth,
-xmin=0,xmax=350,ymin=36,ymax=44,
-xlabel={$k$},
-ylabel={$S(k)$},
-xtick={0,50,100,150,200,250,300,350},
-ytick={36,36.5,38,38.5,40,40.5,42,42.5,44},
-y tick label style={/pgf/number format/1000 sep=},
-]
-\addplot[blue,semithick] file {wykresy/skokY_5.txt};
-\addplot[green,semithick] file {wykresy/skokY_10.txt};
-\addplot[magenta,semithick] file {wykresy/skokY_15.txt};
-\addplot[orange,semithick] file {wykresy/skokY_0.txt};
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=0,xmax=200,ymin=-0.6,ymax=0.6,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200},
+	ytick={-0.6,-0.3,0,0.3,0.6},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2_yu1.txt};
+	\addplot[brown,semithick] file {wykresy/z2_yu2.txt};
+	\addplot[cyan,semithick] file {wykresy/z2_yu3.txt};
+	\addplot[green,semithick] file {wykresy/z2_yu4.txt};
+	\addplot[lime,semithick] file {wykresy/z2_yu6.txt};
+	\addplot[magenta,semithick] file {wykresy/z2_yu7.txt};
+	\addplot[orange,semithick] file {wykresy/z2_yu8.txt};
+	\addplot[pink,semithick] file {wykresy/z2_yu9.txt};
+	\legend{$dU=-\num{0,2}$,$dU=-\num{0,15}$,$dU=-\num{0,1}$,$dU=-\num{0,05}$,$dU=\num{0,05}$,$dU=\num{0,1}$,$dU=\num{0,15}$,$dU=\num{0,2}$}
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Wykres $Y(k)$ dla ró¿nych skoków sterowania z $Upp = 0$ o $dU$}
+	\label{fig:z2_yu}
+\end{figure}
 
-\legend{$dU=\num{5}$,$dU=\num{10}$,$dU=\num{15}$,$Y_{pp}=\num{36.5}$}
-\end{axis}
-\end{tikzpicture}
-\caption{Wykres S(k) dla ró¿nych skoków sterowania z Upp=\num{36} o dU}
-\label{skok}
+\section{Charakterystyka statyczna toru U}
+Nastêpnie wyznaczona zosta³a charakterystyka statyczna toru U obiektu. Znaleziona
+zosta³a poprzez sprawdzenie, przy jakiej wartoœci wyjœcia obiekt stabilizuje
+siê dla danej wartoœci sterowania. Na podstawie tego sporz¹dzony zosta³ wykres.
+Wyniki zosta³y zamieszczone na wykresie \ref{fig:z2_statu}. Liniowoœæ charakterystyki statycznej mo¿na by³o tak¿e stwierdziæ na podstawie wykresu \ref{fig:z2_yu}, gdy¿ wyraŸnie widaæ na nim, ¿e odleg³oœci miêdzy koñcow¹ wartoœci¹ $Y(k)$ dla kolejnych skoków s¹ (na tyle na ile mo¿na to oceniæ wizualnie) identyczne.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=-0.2,xmax=0.2,ymin=-0.5,ymax=0.5,
+	xlabel={$U$},
+	ylabel={$Y(U)$},
+	xtick={-0.2,-0.1,0,0.1,0.2},
+	ytick={-0.5,-0.25,0,0.25,0.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2_statU.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Charakterystyka statyczna $Y(U)$}
+	\label{fig:z2_statu}
+\end{figure}
+Otrzymana charakterystyka jest liniowa. Wzmocnienie statyczne jest równe wartoœci koñcowej znormalizowanej odpowiedzi skokowej i ma wartoœæ $2,4892$.
+
+\section{W³aœciwoœci dynamiczne toru U}
+Charakterystyka dynamiczna toru U obieltu zosta³a wyznaczona zale¿nie od wielkoœci skoku sterowania. Skoki sterowania wykonywane by³y z punktu pracy w obrêbie
+ograniczeñ. Zmierzone zosta³o, po ilu krokach od momentu skoku ró¿nica wartoœci wyjœcia obiektu i $Ypp$ wynosi³a powy¿ej $90\%$ ca³kowitego skoku wartoœci $Y(k)$ wyjœcia obiektu. Z otrzymanych danych wynika, ¿e charakterystyka dynamiczna jest liniowa, dla ka¿dego skoku sterowania otrzymana iloœæ kroków by³a identyczna i równa $45$.
+Wyniki zosta³y zamieszczone na wykresie \ref{fig:z2_dynu}. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=0.05,xmax=0.2,ymin=44,ymax=46,
+	xlabel={$dU$},
+	ylabel={$k$},
+	xtick={0.05,0.1,0.15,0.2},
+	ytick={44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2_dynU.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Wykres iloœci kroków od momentu skoku sterowania po ilu ró¿nica aktualnej i pocz¹tkowej wartoœci $Y(k)$ staje siê wiêksza ni¿ 90\% ró¿nicy koñcowej i pocz¹tkowej wartoœci $Y(k)$}
+	\label{fig:z2_dynu}
 \end{figure}
 
 
+\section{Tor Z}
+\label{sec:zad2torz}
+W tej czêœci projektu badane by³o zachowanie odpowiedzi skokowej dla ró¿nych wartoœci skoku sygna³u zak³óceñ. Eksperyment zak³ada³, i¿ na pocz¹tku obiekt bêdzie w punkcie pracy ($Y = 0,0$, $U = 0,0$, $Z = 0,0$), a nastêpnie, w chwili $k = 15$ wykonany zostanie skok do zaplanowanej wczeœniej wartoœci zak³ócenia. Wartoœæ zak³ócenia po skoku dla zamieszczonych wyników mieœci³a siê w zakresie ograniczeñ. Sterowanie w czasie trwania eksperymentu mia³o sta³¹ wartoœæ $U = 0$. Wyniki eksperymentu zosta³y zobrazowane na wykresie \ref{fig:z2_yz}.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=0,xmax=200,ymin=-0.5,ymax=0.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200},
+	ytick={-0.5,-0.25,0,0.25,0.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2_yz1.txt};
+	\addplot[brown,semithick] file {wykresy/z2_yz2.txt};
+	\addplot[cyan,semithick] file {wykresy/z2_yz3.txt};
+	\addplot[green,semithick] file {wykresy/z2_yz4.txt};
+	\addplot[lime,semithick] file {wykresy/z2_yz6.txt};
+	\addplot[magenta,semithick] file {wykresy/z2_yz7.txt};
+	\addplot[orange,semithick] file {wykresy/z2_yz8.txt};
+	\addplot[pink,semithick] file {wykresy/z2_yz9.txt};
+	\legend{$dZ=-\num{0,2}$,$dZ=-\num{0,15}$,$dZ=-\num{0,1}$,$dZ=-\num{0,05}$,$dZ=\num{0,05}$,$dZ=\num{0,1}$,$dZ=\num{0,15}$,$dZ=\num{0,2}$}
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Wykres $Y(k)$ dla ró¿nych skoków sterowania z $Zpp = 0$ o $dZ$}
+	\label{fig:z2_yz}
+\end{figure}
+
+\section{Charakterystyka statyczna toru Z}
+Nastêpnie wyznaczona zosta³a charakterystyka statyczna toru Z obiektu. Znaleziona
+zosta³a poprzez sprawdzenie przy jakiej wartoœci wyjœcia obiekt stabilizuje
+siê dla danej wartoœci zak³ócenia. Na podstawie tego sporz¹dzony zosta³ wykres.
+Wyniki zosta³y zamieszczone na wykresie \ref{fig:z2_statz}. Liniowoœæ charakterystyki statycznej mo¿na by³o tak¿e stwierdziæ na podstawie wykresu \ref{fig:z2_yz}, gdy¿ wyraŸnie widaæ na nim, ¿e odleg³oœci miêdzy koñcow¹ wartoœci¹ $Y(k)$ dla kolejnych skoków s¹ (na tyle na ile mo¿na to oceniæ wizualnie) identyczne.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=-0.2,xmax=0.2,ymin=-0.4,ymax=0.4,
+	xlabel={$Z$},
+	ylabel={$Y(Z)$},
+	xtick={-0.2,0,0.2},
+	ytick={-0.4,-0.2,0,0.2,0.4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2_statZ.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Charakterystyka statyczna Y(Z)}
+	\label{fig:z2_statz}
+\end{figure}
+Otrzymana charakterystyka jest liniowa. Wzmocnienie statyczne jest równe wartoœci koñcowej znormalizowanej odpowiedzi skokowej i ma wartoœæ $1,8933$.
+
+\section{W³aœciwoœci dynamiczne toru Z}
+Charakterystyka dynamiczna toru Z obiektu zosta³a wyznaczona zale¿nie od wielkoœci skoku sterowania. Skoki sterowania wykonywane by³y z punktu pracy w obrêbie
+ograniczeñ. Zmierzone zosta³o, po ilu krokach od momentu skoku ró¿nica wartoœci wyjœcia obiektu i $Ypp$ wynosi³a powy¿ej $90\%$ ca³kowitego skoku wartoœci $Y(k)$ wyjœcia obiektu. Z otrzymanych danych wynika, ¿e charakterystyka dynamiczna jest liniowa, dla ka¿dego skoku sterowania otrzymana iloœæ kroków by³a identyczna i równa $20$.
+Wyniki zosta³y zamieszczone na wykresie \ref{fig:z2_dynz}. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=0.05,xmax=0.2,ymin=19,ymax=21,
+	xlabel={$dZ$},
+	ylabel={$k$},
+	xtick={0.05,0.1,0.15,0.2},
+	ytick={19,20,21},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2_dynZ.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Wykres iloœci kroków od momentu skoku zak³ócenia, po ilu ró¿nica aktualnej i pocz¹tkowej wartoœci $Y(k)$ staje siê wiêksza ni¿ 90\% ró¿nicy koñcowej i pocz¹tkowej wartoœci $Y(k)$}
+	\label{fig:z2_dynz}
+\end{figure}

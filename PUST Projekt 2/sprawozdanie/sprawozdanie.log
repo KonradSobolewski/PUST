@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 16:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 17:42
 entering extended mode
 **./sprawozdanie.tex
 (sprawozdanie.tex
@@ -1325,29 +1325,61 @@ Rozdzia\PlPrIeC {\l } 2.
 PGFPlots: reading {wykresy/z1u.txt}
 PGFPlots: reading {wykresy/z1z.txt}
 PGFPlots: reading {wykresy/z1y.txt}
-) [3
+) (zad2.tex [3
 
-] (sprawozdanie.aux) ) 
+]
+Rozdzia\PlPrIeC {\l } 3.
+PGFPlots: reading {wykresy/z2_yu1.txt}
+PGFPlots: reading {wykresy/z2_yu2.txt}
+PGFPlots: reading {wykresy/z2_yu3.txt}
+PGFPlots: reading {wykresy/z2_yu4.txt}
+PGFPlots: reading {wykresy/z2_yu6.txt}
+PGFPlots: reading {wykresy/z2_yu7.txt}
+PGFPlots: reading {wykresy/z2_yu8.txt}
+PGFPlots: reading {wykresy/z2_yu9.txt}
+[4
+
+]
+PGFPlots: reading {wykresy/z2_statU.txt}
+ [5]
+PGFPlots: reading {wykresy/z2_dynU.txt}
+ [6]
+PGFPlots: reading {wykresy/z2_yz1.txt}
+PGFPlots: reading {wykresy/z2_yz2.txt}
+PGFPlots: reading {wykresy/z2_yz3.txt}
+PGFPlots: reading {wykresy/z2_yz4.txt}
+PGFPlots: reading {wykresy/z2_yz6.txt}
+PGFPlots: reading {wykresy/z2_yz7.txt}
+PGFPlots: reading {wykresy/z2_yz8.txt}
+PGFPlots: reading {wykresy/z2_yz9.txt}
+ [7]
+PGFPlots: reading {wykresy/z2_statZ.txt}
+ [8]
+PGFPlots: reading {wykresy/z2_dynZ.txt}
+) [9] (sprawozdanie.aux) ) 
 Here is how much of TeX's memory you used:
- 36496 strings out of 493333
- 878099 string characters out of 3139195
- 1010123 words of memory out of 3000000
- 39463 multiletter control sequences out of 15000+200000
- 21572 words of font info for 65 fonts, out of 3000000 for 9000
+ 36606 strings out of 493333
+ 879743 string characters out of 3139195
+ 1118985 words of memory out of 3000000
+ 39549 multiletter control sequences out of 15000+200000
+ 22108 words of font info for 66 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,100p,10395b,2140s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Program Files/MiKT
-eX 2.9/fonts/enc/dvips/pl/plmi.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/pl/plbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx12.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/pl/plr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/p
-lr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy10.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.pfb>
-Output written on sprawozdanie.pdf (4 pages, 60739 bytes).
+ 62i,23n,100p,10395b,2173s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.
+enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/
+MiKTeX 2.9/fonts/enc/dvips/pl/plit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/d
+vips/pl/plmi.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/p
+lr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr6.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/pl/plsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plti10.pfb>
+Output written on sprawozdanie.pdf (10 pages, 111291 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
+ 86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,2 +1,9 @@
 \contentsline {chapter}{\numberline {1\relax .\kern .5em }Opis obiektu}{2}
 \contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 1: Punkt pracy}{3}
+\contentsline {chapter}{\numberline {3\relax .\kern .5em }Zadanie 2: Odpowiedzi skokowe}{4}
+\contentsline {section}{\numberline {3.1\relax .\kern .5em }Tor U}{4}
+\contentsline {section}{\numberline {3.2\relax .\kern .5em }Charakterystyka statyczna toru U}{5}
+\contentsline {section}{\numberline {3.3\relax .\kern .5em }W\IeC {\l }a\'sciwo\'sci dynamiczne toru U}{6}
+\contentsline {section}{\numberline {3.4\relax .\kern .5em }Tor Z}{7}
+\contentsline {section}{\numberline {3.5\relax .\kern .5em }Charakterystyka statyczna toru Z}{8}
+\contentsline {section}{\numberline {3.6\relax .\kern .5em }W\IeC {\l }a\'sciwo\'sci dynamiczne toru Z}{9}

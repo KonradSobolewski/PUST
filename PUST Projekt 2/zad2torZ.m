@@ -1,5 +1,6 @@
 clear all
 
+%inicjalizacja sta³ych i wektorów
 kk=200;
 startk=15;
 dZ=-0.2:0.05:0.2;
@@ -10,6 +11,7 @@ Z = zeros(L,kk);
 Yz=zeros(1,L);
 Yd=zeros(1,floor(L/2));
 
+%symulacja obiektu dla kolejnych skoków zak³ócenia
 for i=1:L
     Z(i,startk:kk)=dZ(i);
     for k=startk:kk
@@ -25,6 +27,8 @@ for i=1:L
         end
     end
 end
+
+%wykres odpowiedzi obiektu na zmiany w torze Z
 figure(1)
 for i=1:L
     subplot(211)
@@ -39,20 +43,27 @@ for i=1:L
     xlabel('Kolejne kroki')
     ylabel('Y')
     hold on
-    %toPlotForLatex(sprintf('z2_z%d',i),1:kk,Z(i,:))
-    %toPlotForLatex(sprintf('z2_yz%d',i),1:kk,Y(i,:))
+    toPlotForLatex(sprintf('z2_z%d',i),1:kk,Z(i,:))
+    toPlotForLatex(sprintf('z2_yz%d',i),1:kk,Y(i,:))
 end
+
+%wykres charakterystyki statycznej Y(Z)
 figure (2)
 plot(dZ,Yz,'*-')
 title('Charakterystyka statyczna Y(Z)')
 xlabel('Z')
 ylabel('Y(Z)')
-%toPlotForLatex('z2_statZ',dZ,Yz);
+toPlotForLatex('z2_statZ',dZ,Yz);
+
+
+%wykres charakterystyki dynamicznej Y(Z)
 figure(3)
 plot(dZ(ceil(L/2)+1:L),Yd,'*-')
 title('Charakterystyka dynamiczna Y')
 xlabel('Wartoœæ skoku z punktu pracy')
 ylabel('Iloœæ kroków po których Y(k)>= 90%*Ykoncowe')
 axis tight
-%toPlotForLatex('z2_dynZ',dZ(ceil(L/2)+1:L),Yd)
+toPlotForLatex('z2_dynZ',dZ(ceil(L/2)+1:L),Yd)
+
+%wzmocnienie statyczne Y(Z)
 Kstat=(Yz(1))/dZ(1)
