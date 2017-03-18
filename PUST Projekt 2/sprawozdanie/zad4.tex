@@ -87,7 +87,7 @@ K=(M^TM+\lambda*I)^{-1}M^T
 \label{dU1}
 \end{equation}
 
-W naszej regulacji potrzebujemy wyznaczyæ tylko pierwszy element macierzy $\triangle U(k)$ czyli $\triangle u(k|k)$. W tym celu rozwijamy wzór do postaci:
+W naszej regulacji potrzebujemy wyznaczy? tylko pierwszy element macierzy $\triangle U(k)$ czyli $\triangle u(k|k)$. W tym celu rozwijamy wzór do postaci:
 
 \begin{equation}
 \triangle u(k|k)=k_ee(k)-k_u\triangle\boldsymbol U^P
@@ -112,3 +112,174 @@ k_u=kM^P
 \end{equation}
 
 k to oznaczenie pierwszego wiersza macierzy K. Aktualne sterowanie otrzymujemy poprzez zsumowanie poprzedniego sterowania i aktualnie wyliczonego $\triangle u(k|k)$. 
+
+\section{Dobieranie nastaw regulatora DMC}
+
+
+Nastawy regulatora $DMC$ zosta³y dobrane eksperymentalnie.
+Regulator $DMC$ korzysta z odpowiedzi skokowej $s$ uzyskanej w punkcie 3.
+
+Obserwuj¹c obiekt bezpiecznie za³o¿yliœmy, ¿e jego horyzont dynamiki jest równy $D = 100$. Tak¹ równie¿ przyjêliœmy wartoœæ pocz¹tkow¹ $N$ oraz $N_u$, natomast pierwotn¹ wartoœci¹ $\lambda$ by³o $1$, tj: $N = 100, N_u = 100, \lambda = 1$.
+
+
+Nastêpnie próbowaliœmy, w celu zmniejszenia z³o¿onoœci obliczeniowej obni¿yæ parametr N: jak siê okaza³o, jego wp³yw dla wartoœci powy¿ej $20$ jest znikomy. Efekty eksperymentu dla ró¿nych wartoœci zosta³y przedstawione na poni¿szym wykresie:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,25,50,75,100},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_100_100_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcu_20_100_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcu_8_100_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcu_5_100_1.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,25,50,75,100},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_100_100_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcy_20_100_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcy_8_100_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcy_5_100_1.0000.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
+	\legend{$N=100$,$N=20$,$N=8$,$N=5$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $N$}
+	\label{doborN}
+\end{figure}
+\FloatBarrier
+\
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $N = 100$: $E = 5.9347$ 
+	\item $N = 20$: $E = 5.9345$ 
+	\item $N = 8$:  $E = 5.8538$ 
+	\item $N = 5$:  $E = 7.9887$ 		 
+\end{itemize}\
+
+
+Zdecydowaliœmy wiêc ustawiæ $N$ na $8$ - b³¹d jest najmniejszy, a sterowanie tylko nieznacznie gorsze. Nastêpnym parametrem, na którego minimalizacji nam zale¿y jest $N_u$:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,25,50,75,100},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_8_8_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcu_8_3_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcu_8_2_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcu_8_1_1.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,25,50,75,100},
+	ytick={0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_8_8_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcy_8_3_1.0000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcy_8_2_1.0000.txt};
+	\addplot[red,semithick] file {wykresy/dmcy_8_1_1.0000.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
+	\legend{$Nu=8$,$Nu=3$,$Nu=2$,$Nu=1$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $Nu$}
+	\label{doborNu}
+\end{figure}
+\FloatBarrier
+\
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $N_u = 8$: $E = 5.8538$ 
+	\item $N_u = 3$: $E = 5.8427$ 
+	\item $N_u = 2$:  $E = 5.7853$ 
+	\item $N_u = 1$:  $E = 5.5844$ 		 
+\end{itemize}\
+
+Jak widaæ, dla $N_u = 1$ wyjœcie najszybciej zbiega do wartoœci zadanej, a sterowanie jest tylko odrobinê ostrzejsze.
+Nastêpnym parametrem do dobrania jest  $\lambda$:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,25,50,75,100},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmcu_8_1_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcu_8_1_0.5000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcu_8_1_0.3000.txt};
+	\addplot[red,semithick] file {wykresy/dmcu_8_1_0.1000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,25,50,75,100},
+	ytick={0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmcy_8_1_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/dmcy_8_1_0.5000.txt};
+	\addplot[purple,semithick] file {wykresy/dmcy_8_1_0.3000.txt};
+	\addplot[red,semithick] file {wykresy/dmcy_8_1_0.1000.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
+	\legend{$\lambda=1$,$\lambda=0.5$,$\lambda=0.3$,$\lambda=0.1$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $\lambda$}
+	\label{doborlambda}
+\end{figure}
+\FloatBarrier
+\
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $\lambda = 1$: 	$E =  5.5844$ 
+	\item $\lambda = 0.5$:  $E = 5.2800$ 
+	\item $\lambda = 0.3$:  $E = 5.1543$ 
+	\item $\lambda = 0.1$:  $E = 5.0267$ 		 
+\end{itemize}\
+
+Jak siê mo¿na by³o spodziewaæ, zarówno $N$ jak i $Nu$ mia³y du¿o s³abszy wp³yw na jakoœæ regulacji ni¿  $\lambda$.
+Zmniejszaj¹c $\lambda$, uzyskujemy drastyczn¹ poprawê wskaŸnika jakoœci regulacji, jednak¿e kosztem sterowania. Zbyt gwa³towne sterowanie nie jest po¿¹dane - mo¿e wp³ywaæ niekorzystnie na elementy wykonawcze uk³adu sterowania.
+Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e poni¿ej wartoœci $\lambda = 0.3$ zysk w jakoœci sterowania jest nniewielki, a skok sterowania du¿o ostrzejszy, postanowiliœmy zatrzymaæ tê wielkoœæ $\lambda = 0.3$.
+
+
+Koñcowe wartoœci dobranego regulatora DMC:  $N = 8, N_u = 2, \lambda = 0.3$.

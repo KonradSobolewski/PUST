@@ -8,3 +8,6 @@
 \contentsline {section}{\numberline {3.5\relax .\kern .5em }Charakterystyka statyczna toru Z}{8}
 \contentsline {section}{\numberline {3.6\relax .\kern .5em }W\IeC {\l }a\'sciwo\'sci dynamiczne toru Z}{9}
 \contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 3: Znormalizowane odpowiedzi skokowe}{10}
+\contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 4: Algorytmy DMC}{12}
+\contentsline {section}{\numberline {5.1\relax .\kern .5em }Analityczny algorytm DMC}{12}
+\contentsline {section}{\numberline {5.2\relax .\kern .5em }Dobieranie nastaw regulatora DMC}{13}

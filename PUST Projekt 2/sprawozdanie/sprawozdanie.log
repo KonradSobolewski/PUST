@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 18:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 19:33
 entering extended mode
 **./sprawozdanie.tex
 (sprawozdanie.tex
@@ -1360,33 +1360,84 @@ PGFPlots: reading {wykresy/z2_dynZ.txt}
 Rozdzia\PlPrIeC {\l } 4.
 PGFPlots: reading {wykresy/z3s.txt}
 PGFPlots: reading {wykresy/z3sz.txt}
-) [10
+) (zad4.tex [10
 
-] [11] (sprawozdanie.aux) ) 
+] [11]
+Rozdzia\PlPrIeC {\l } 5.
+[12
+
+]
+PGFPlots: reading {wykresy/dmcu_100_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcu_20_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcu_8_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcu_5_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_100_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_20_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_8_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_5_100_1.0000.txt}
+PGFPlots: reading {wykresy/dmcyzad_1.0000.txt}
+ [13] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 167--169
+
+ []
+
+PGFPlots: reading {wykresy/dmcu_8_8_1.0000.txt}
+PGFPlots: reading {wykresy/dmcu_8_3_1.0000.txt}
+PGFPlots: reading {wykresy/dmcu_8_2_1.0000.txt}
+PGFPlots: reading {wykresy/dmcu_8_1_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_8_8_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_8_3_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_8_2_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_8_1_1.0000.txt}
+PGFPlots: reading {wykresy/dmcyzad_1.0000.txt}
+[15
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 219--221
+
+ []
+
+PGFPlots: reading {wykresy/dmcu_8_1_1.0000.txt}
+PGFPlots: reading {wykresy/dmcu_8_1_0.5000.txt}
+PGFPlots: reading {wykresy/dmcu_8_1_0.3000.txt}
+PGFPlots: reading {wykresy/dmcu_8_1_0.1000.txt}
+PGFPlots: reading {wykresy/dmcy_8_1_1.0000.txt}
+PGFPlots: reading {wykresy/dmcy_8_1_0.5000.txt}
+PGFPlots: reading {wykresy/dmcy_8_1_0.3000.txt}
+PGFPlots: reading {wykresy/dmcy_8_1_0.1000.txt}
+PGFPlots: reading {wykresy/dmcyzad_1.0000.txt}
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
+
+ []
+
+) [17] (sprawozdanie.aux) ) 
 Here is how much of TeX's memory you used:
- 36626 strings out of 493333
- 880021 string characters out of 3139195
- 1119016 words of memory out of 3000000
- 39564 multiletter control sequences out of 15000+200000
- 22108 words of font info for 66 fonts, out of 3000000 for 9000
+ 36703 strings out of 493333
+ 881039 string characters out of 3139195
+ 1120196 words of memory out of 3000000
+ 39609 multiletter control sequences out of 15000+200000
+ 25776 words of font info for 77 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,23n,100p,10395b,2173s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi
-.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Program Files
-/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/
-dvips/pl/plit.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program File
-s/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/pl/plmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/
-plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr10.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/pl/plr6.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy6.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/pl/plti10.pfb>
-Output written on sprawozdanie.pdf (12 pages, 123102 bytes).
+ 62i,23n,100p,10395b,2367s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plme
+.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Program Files
+/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/
+dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plit.enc}<C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/pl/plex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi
+10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi7.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/pl/plmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/pl/plr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr6.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/pl/plsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plti10.pfb>
+Output written on sprawozdanie.pdf (18 pages, 168693 bytes).
 PDF statistics:
- 96 PDF objects out of 1000 (max. 8388607)
+ 124 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

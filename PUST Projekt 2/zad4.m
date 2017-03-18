@@ -1,5 +1,6 @@
 function [ E ] = zad4(N,Nu,lambda,s,draw,latex)
 
+%Inichjalizacja danych
 D=100;  
 N=round(N);
 Nu=round(Nu);
@@ -59,11 +60,13 @@ for k=startk:kk
    
 end
 
+%Obliczanie wskaünika jakoúci regulacji
 E=0;
 for k=1:kk
     E=E+((yzad(k)-y(k))^2);
 end 
 
+%Rysowanie
 if(draw)
     subplot(211)
     plot(u);
@@ -81,9 +84,11 @@ if(draw)
     legend('Y(k)','Y_z_a_d(k)','location','best');
     hold on;
 end
+
+%Zapis do pliku
 if(latex)
     toPlotForLatex(sprintf('dmcu_%d_%d_%3.4f',N,Nu,lambda),1:kk,u)
     toPlotForLatex(sprintf('dmcy_%d_%d_%3.4f',N,Nu,lambda),1:kk,y)
-    toPlotForLatex(sprintf('dmcyzad_%3.4f',Yzad(kk)),1:kk,yzad)
+    toPlotForLatex(sprintf('dmcyzad_%3.4f',yzad(kk)),1:kk,yzad)
 end
 end

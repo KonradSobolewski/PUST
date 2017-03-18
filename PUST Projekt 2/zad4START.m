@@ -1,5 +1,10 @@
-N=30;
-Nu=5;
-lambda=0.5;
+%Nastawy, z którymi zostanie uruchomiony algorytm DMC
+N=8;
+Nu=1;
+lambda=0.1;
+
+%Uzyskanie odpowiedzi skokowych
 [s,sz]=zad3(false,false);
-E=zad4(N,Nu,lambda,s,true,false)
+
+%Symulacja sterowania z regulatorem DMC o danych nastawach
+E=zad4(N,Nu,lambda,s,true,true)
