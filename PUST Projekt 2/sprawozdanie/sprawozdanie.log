@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 17:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 18:28
 entering extended mode
 **./sprawozdanie.tex
 (sprawozdanie.tex
@@ -1356,30 +1356,37 @@ PGFPlots: reading {wykresy/z2_yz9.txt}
 PGFPlots: reading {wykresy/z2_statZ.txt}
  [8]
 PGFPlots: reading {wykresy/z2_dynZ.txt}
-) [9] (sprawozdanie.aux) ) 
+) (zad3.tex [9]
+Rozdzia\PlPrIeC {\l } 4.
+PGFPlots: reading {wykresy/z3s.txt}
+PGFPlots: reading {wykresy/z3sz.txt}
+) [10
+
+] [11] (sprawozdanie.aux) ) 
 Here is how much of TeX's memory you used:
- 36606 strings out of 493333
- 879743 string characters out of 3139195
- 1118985 words of memory out of 3000000
- 39549 multiletter control sequences out of 15000+200000
+ 36626 strings out of 493333
+ 880021 string characters out of 3139195
+ 1119016 words of memory out of 3000000
+ 39564 multiletter control sequences out of 15000+200000
  22108 words of font info for 66 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,23n,100p,10395b,2173s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.
-enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/
-MiKTeX 2.9/fonts/enc/dvips/pl/plit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/d
-vips/pl/plmi.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/p
-lr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr6.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/pl/plsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plti10.pfb>
-Output written on sprawozdanie.pdf (10 pages, 111291 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi
+.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Program Files
+/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/
+dvips/pl/plit.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/pl/plmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/
+plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr10.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/pl/plr6.pfb><C:/Program Files/MiKTeX 2.
+9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy6.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/pl/plti10.pfb>
+Output written on sprawozdanie.pdf (12 pages, 123102 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 96 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

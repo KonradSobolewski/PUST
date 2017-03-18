@@ -7,3 +7,4 @@
 \contentsline {section}{\numberline {3.4\relax .\kern .5em }Tor Z}{7}
 \contentsline {section}{\numberline {3.5\relax .\kern .5em }Charakterystyka statyczna toru Z}{8}
 \contentsline {section}{\numberline {3.6\relax .\kern .5em }W\IeC {\l }a\'sciwo\'sci dynamiczne toru Z}{9}
+\contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 3: Znormalizowane odpowiedzi skokowe}{10}
