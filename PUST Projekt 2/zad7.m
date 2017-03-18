@@ -1,4 +1,4 @@
-function [E]=zad5(DZ,N,Nu,lambda,s,sz,draw,latex,zad,zak)
+function [E]=zad7(DZ,N,Nu,lambda,s,sz,draw,latex,Z)
 
 D=100;
 N=round(N);
@@ -51,13 +51,7 @@ y(1:kk)=0;
 z(1:kk)=0;
 startz=50;
 
-if zad=='6'
-    z(startz:kk)= 0.5*sin(20*linspace(0,1,kk-startz+1));
-elseif zad=='5'
-    z(startz:kk)= 1;
-elseif zad=='7'
-    z(startz:kk)= rand(1,kk-startz+1)*0.2-0.1;  
-end
+z(startz:kk)= rand(1,kk-startz+1)*2*Z-Z;
 
 e=zeros(1,kk);
 yzad(1:startk)=0; 
@@ -80,9 +74,7 @@ for k=startk:kk
    
    % Prawo regulacji
    deltauk=ke*e(k)-ku*deltaup';
-   if(zak)
-       deltauk=deltauk-kz*deltazp';
-   end;
+   deltauk=deltauk-kz*deltazp';
    
    for n=D-1:-1:2
       deltaup(n)=deltaup(n-1);
@@ -120,9 +112,9 @@ if(draw)
     hold on;
 end
 if(latex)
-    toPlotForLatex([zad sprintf('dmcu_%d_%d_%3.4f_%d_',N,Nu,lambda,Dz) zak],1:kk,u)
-    toPlotForLatex([zad sprintf('dmcy_%d_%d_%3.4f_%d_',N,Nu,lambda,Dz) zak],1:kk,y)
-    toPlotForLatex([zad 'z'],1:kk,z)
+    toPlotForLatex(['7' sprintf('dmcu_%d_%d_%3.4f_%d_%3.4f',N,Nu,lambda,Dz,Z)],1:kk,u)
+    toPlotForLatex(['7' sprintf('dmcy_%d_%d_%3.4f_%d_%3.4f',N,Nu,lambda,Dz,Z)],1:kk,y)
+    toPlotForLatex(['7z' sprintf('%3.4f',Z)],1:kk,z)
     toPlotForLatex(sprintf('dmcyzad_%3.4f',Yzad(kk)),1:kk,yzad)
 end
 end
