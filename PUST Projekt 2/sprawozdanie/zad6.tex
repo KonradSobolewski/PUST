@@ -1,1 +1,63 @@
-\chapter{Zadanie 6: Zak³ócenie zmienne sinusoidalnie}
+\chapter{Zadanie 6: Algorytm przy zak³óceniu zmiennym sinusoidalne}
+
+W tym zadaniu zak³ócenia maj¹ charakter sygna³u sinusoidalnie zmiennego.
+Poni¿szy wykres przedstawia przebiegi wejœcia i wyjœcia obiektu sterowanego przy pomocy regulatgora DMC w wersji z kolejno nieuwzglêdnieniem ($U(k), Y(k)$) i uwzglêdnieniem ($Uz(k), Yz(k)$) mierzonych zak³óceñ.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=-0.5,ymax=2,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,25,50,75,100,125,150},
+	ytick={-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[green,semithick] file {wykresy/6dmcu_8_1_0.3000_40_0.txt};
+	\addplot[blue,semithick] file {wykresy/6dmcu_8_1_0.3000_40_1.txt};
+		\legend{$U(k)$,$Uz(k)$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,25,50,75,100,125,150},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6dmcy_8_1_0.3000_40_0.txt};
+	\addplot[blue,semithick] file {wykresy/6dmcy_8_1_0.3000_40_1.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
+	\legend{$Y(k)$,$Yz(k)$,$Y^{zad}(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=-0.6,ymax=0.6,
+	xlabel={$k$},
+	ylabel={$Z$},
+	xtick={0,50,100,150},
+	ytick={-0.5,0,0.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[red,semithick] file {wykresy/6z.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie regulacji z i bez uwzglêdniania zak³óceñ w algorytmie sterowania}
+	\label{porbezZiZ}
+\end{figure}
+\FloatBarrier
+
+WskaŸnik regulacji, gdy zak³ócenia nie s¹ brane pod uwagê: $E = 18.3737$
+\
+
+WskaŸnik regulacji, gdy zak³ócenia s¹ brane pod uwagê: $E = 8.4010$
+\\
+
+Jak widaæ, mimo ¿e sinusoidalne zak³ócenia w obu przypadkach uniemo¿liwiaj¹ akceptowaln¹ jakoœæ regulacji, to uwzglêdnienie tych zak³óceñ pozwala na znacz¹ce zmieniejszenie b³êdu.
+
+

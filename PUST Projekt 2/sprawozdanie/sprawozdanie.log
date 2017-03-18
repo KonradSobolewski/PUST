@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 21:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  18 MAR 2017 22:24
 entering extended mode
 **./sprawozdanie.tex
 (sprawozdanie.tex
@@ -1432,21 +1432,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--102
 
  []
 
-) [20
+PGFPlots: reading {wykresy/5dmcu_8_1_0.3000_40_0.txt}
+PGFPlots: reading {wykresy/5dmcu_8_1_0.3000_40_1.txt}
+PGFPlots: reading {wykresy/5dmcy_8_1_0.3000_40_0.txt}
+PGFPlots: reading {wykresy/5dmcy_8_1_0.3000_40_1.txt}
+PGFPlots: reading {wykresy/dmcyzad_1.0000.txt}
+PGFPlots: reading {wykresy/5z.txt}
+[20
 
-] (sprawozdanie.aux)
+]
+Overfull \hbox (21.98051pt too wide) in paragraph at lines 164--165
+\OT4/cmr/m/n/10.95 re-gu-lat-go-ra DMC w wer-sji z ko-lej-no nie-uwzgl¦d-nie-ni
+em ($\OML/plm/m/it/10.95 U\OT4/cmr/m/n/10.95 (\OML/plm/m/it/10.95 k\OT4/cmr/m/n
+/10.95 )\OML/plm/m/it/10.95 ; Y\OT4/cmr/m/n/10.95 (\OML/plm/m/it/10.95 k\OT4/cm
+r/m/n/10.95 )$) i uwzgl¦d-nie-niem ($\OML/plm/m/it/10.95 Uz\OT4/cmr/m/n/10.95 (
+\OML/plm/m/it/10.95 k\OT4/cmr/m/n/10.95 )\OML/plm/m/it/10.95 ; Yz\OT4/cmr/m/n/1
+0.95 (\OML/plm/m/it/10.95 k\OT4/cmr/m/n/10.95 )$)
+ []
+
+) (zad6.tex [21]
+Rozdzia\PlPrIeC {\l } 7.
+PGFPlots: reading {wykresy/6dmcu_8_1_0.3000_40_0.txt}
+PGFPlots: reading {wykresy/6dmcu_8_1_0.3000_40_1.txt}
+PGFPlots: reading {wykresy/6dmcy_8_1_0.3000_40_0.txt}
+PGFPlots: reading {wykresy/6dmcy_8_1_0.3000_40_1.txt}
+PGFPlots: reading {wykresy/dmcyzad_1.0000.txt}
+PGFPlots: reading {wykresy/6z.txt}
+[22
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 58--60
+
+ []
+
+) [23] (sprawozdanie.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 36726 strings out of 493333
- 881395 string characters out of 3139195
- 1124278 words of memory out of 3000000
- 39622 multiletter control sequences out of 15000+200000
+ 36762 strings out of 493333
+ 882015 string characters out of 3139195
+ 1124300 words of memory out of 3000000
+ 39648 multiletter control sequences out of 15000+200000
  25776 words of font info for 77 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,23n,100p,10395b,2367s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,23n,100p,10395b,2369s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Program Files/Mi
 KTeX 2.9/fonts/enc/dvips/pl/plme.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
 ps/pl/plrm.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Pro
@@ -1463,9 +1494,9 @@ c/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy10.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy6.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/pl/plti10.pfb>
-Output written on sprawozdanie.pdf (21 pages, 184217 bytes).
+Output written on sprawozdanie.pdf (24 pages, 204468 bytes).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
+ 147 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

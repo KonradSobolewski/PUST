@@ -14,3 +14,5 @@
 \contentsline {chapter}{\numberline {6\relax .\kern .5em }Zadanie 5: Zak\IeC {\l }\'ocenia}{18}
 \contentsline {section}{\numberline {6.1\relax .\kern .5em }Zmiany w stosunku do podstawowej wersji regulatora analitycznego}{18}
 \contentsline {section}{\numberline {6.2\relax .\kern .5em }Dob\'or parametru Dz}{18}
+\contentsline {section}{\numberline {6.3\relax .\kern .5em }Por\'ownanie jako\'sci regulacji z i bez uwzgl\k ednienia zak\IeC {\l }\'oce\'n}{20}
+\contentsline {chapter}{\numberline {7\relax .\kern .5em }Zadanie 6: Algorytm przy zak\IeC {\l }\'oceniu zmiennym sinusoidalne}{22}

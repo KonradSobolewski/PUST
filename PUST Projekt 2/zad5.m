@@ -60,8 +60,6 @@ if zad=='6'
     z(startz:kk)= 0.5*sin(20*linspace(0,1,kk-startz+1));
 elseif zad=='5'
     z(startz:kk)= 1;
-elseif zad=='7'
-    z(startz:kk)= rand(1,kk-startz+1)*0.2-0.1;  
 end
 
 e=zeros(1,kk);
@@ -137,6 +135,6 @@ if(latex)
     toPlotForLatex([zad sprintf('dmcu_%d_%d_%3.4f_%d_%d',N,Nu,lambda,DZ,zakint) ],1:kk,u)
     toPlotForLatex([zad sprintf('dmcy_%d_%d_%3.4f_%d_%d',N,Nu,lambda,DZ,zakint) ],1:kk,y)
     toPlotForLatex([zad 'z'],1:kk,z)
-    toPlotForLatex(sprintf('dmcyzad_%3.4f',yzad(kk)),1:kk,yzad)
+    toPlotForLatex(sprintf('dmcyzadloooool_%3.4f',yzad(kk)),1:kk,yzad)
 end
 end
