@@ -1,4 +1,6 @@
 function [ s,sz ] = zad3(Latex,plot_arg)
+%Latex - boolean, okreœla czy zapisywaæ zmienne do txt dla latexa
+%plot_arg - boolean, okreœla czy rysowaæ wykresy
 % wyznacza odpowiedzi skokowe i normalizuje 
 kk=200;
 Tp=0.5;

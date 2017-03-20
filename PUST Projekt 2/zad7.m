@@ -1,5 +1,13 @@
 function [E]=zad7(DZ,N,Nu,lambda,s,sz,draw,latex,Z)
-
+%DZ - horyzont dynamiki zak³óceñ
+%N - horyzont predykcji
+%Nu - horyzont sterowania
+%lambda - lambda
+%s - znormalizowana odpowiedŸ skokowa toru sterowania
+%sz - znormalizowana odpowiedŸ skokowa toru zak³óceñ
+%draw - boolean, okreœla czy rysowaæ wykresy
+%latex - boolean, okreœla czy zapisywaæ zmienne do txt dla latexa
+%Z - najwiêkszy mo¿liwy szum pomiaru zak³ócenia 
 D=100;
 N=round(N);
 Nu=round(Nu);
@@ -46,12 +54,14 @@ ku=K(1,:)*MP;
 kz=K(1,:)*MZP;
 ke=sum(K(1,:));
 
+%inicjalizacja wektorów
 u(1:kk)=0;
 y(1:kk)=0;
 z(1:kk)=0;
 startz=50;
 
-z(startz:kk)= rand(1,kk-startz+1)*2*Z-Z;
+z(startz:kk)= 1;
+zz(1:kk)= z+rand(1,kk)*2*Z-Z;
 
 e=zeros(1,kk);
 yzad(1:startk)=0; 
@@ -70,7 +80,7 @@ for k=startk:kk
    for n=DZ-1:-1:2;
        deltazp(n)=deltazp(n-1);
    end
-   deltazp(1)=z(k)-z(k-1);
+   deltazp(1)=zz(k)-zz(k-1);
    
    % Prawo regulacji
    deltauk=ke*e(k)-ku*deltaup';
@@ -83,12 +93,12 @@ for k=startk:kk
    u(k)=u(k-1)+deltaup(1);
    
 end
-
+%obliczanie b³êdu
 E=0;
 for k=1:kk
     E=E+((yzad(k)-y(k))^2);
 end 
-
+%rysowanie wykresów
 if(draw)
     subplot(311)
     plot(u);
@@ -107,14 +117,19 @@ if(draw)
     hold on;
     subplot(313)
     stairs(z)
+    hold on
+    plot(zz)
+    legend('z(k)','zz(k)')
     xlabel('k')
     ylabel('z(k)')
     hold on;
 end
+%zapis wykresów dla latexa
 if(latex)
-    toPlotForLatex(['7' sprintf('dmcu_%d_%d_%3.4f_%d_%3.4f',N,Nu,lambda,Dz,Z)],1:kk,u)
-    toPlotForLatex(['7' sprintf('dmcy_%d_%d_%3.4f_%d_%3.4f',N,Nu,lambda,Dz,Z)],1:kk,y)
-    toPlotForLatex(['7z' sprintf('%3.4f',Z)],1:kk,z)
-    toPlotForLatex(sprintf('dmcyzad_%3.4f',Yzad(kk)),1:kk,yzad)
+    toPlotForLatex(['7' sprintf('dmcu_%d_%d_%3.4f_%d_%3.4f',N,Nu,lambda,DZ,Z)],1:kk,u)
+    toPlotForLatex(['7' sprintf('dmcy_%d_%d_%3.4f_%d_%3.4f',N,Nu,lambda,DZ,Z)],1:kk,y)
+    toPlotForLatex(['7z' sprintf('%3.4f',z(kk))],1:kk,z)
+    toPlotForLatex(['7zz' sprintf('%3.4f',Z)],1:kk,zz)
+    toPlotForLatex(sprintf('dmcyzad_%3.4f',yzad(kk)),1:kk,yzad)
 end
 end

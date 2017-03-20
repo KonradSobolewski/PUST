@@ -1,6 +1,11 @@
 function [ E ] = zad4(N,Nu,lambda,s,draw,latex)
-
-%Inichjalizacja danych
+%N - horyzont predykcji
+%Nu - horyzont sterowania
+%lambda - lambda
+%s - znormalizowana odpowiedŸ skokowa toru sterowania
+%draw - boolean, okreœla czy rysowaæ wykresy
+%latex - boolean, okreœla czy zapisywaæ zmienne do txt dla latexa
+%Inicjalizacja danych
 D=100;  
 N=round(N);
 Nu=round(Nu);

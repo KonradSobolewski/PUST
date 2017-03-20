@@ -1,5 +1,14 @@
 function [E]=zad5(DZ,N,Nu,lambda,s,sz,draw,latex,zad,zak)
-
+%DZ - horyzont dynamiki zak³óceñ
+%N - horyzont predykcji
+%Nu - horyzont sterowania
+%lambda - lambda
+%s - znormalizowana odpowiedŸ skokowa toru sterowania
+%sz - znormalizowana odpowiedŸ skokowa toru zak³óceñ
+%draw - boolean, okreœla czy rysowaæ wykresy
+%latex - boolean, okreœla czy zapisywaæ zmienne do txt dla latexa
+%zad - okreœla numer zadania, '5' lub '6'
+%zak - boolean, okreœla czy wystêpuje pomiar zak³ócenia czy nie
 %inicjalizacja sta³ych
 D=100;
 N=round(N);
