@@ -87,7 +87,7 @@ K=(M^TM+\lambda*I)^{-1}M^T
 \label{dU1}
 \end{equation}
 
-W naszej regulacji potrzebujemy wyznaczy? tylko pierwszy element macierzy $\triangle U(k)$ czyli $\triangle u(k|k)$. W tym celu rozwijamy wzór do postaci:
+W naszej regulacji potrzebujemy wyznaczyæ tylko pierwszy element macierzy $\triangle U(k)$ czyli $\triangle u(k|k)$. W tym celu rozwijamy wzór do postaci:
 
 \begin{equation}
 \triangle u(k|k)=k_ee(k)-k_u\triangle\boldsymbol U^P
@@ -167,10 +167,10 @@ Nastêpnie próbowaliœmy, w celu zmniejszenia z³o¿onoœci obliczeniowej obni¿yæ par
 \
 WskaŸnik regulacji $E$ dla tych nastaw :\\
 \begin{itemize}
-	\item $N = 100$: $E = 5.9347$ 
-	\item $N = 20$: $E = 5.9345$ 
-	\item $N = 8$:  $E = 5.8538$ 
-	\item $N = 5$:  $E = 7.9887$ 		 
+	\item $N = 100$: $E = 5,9347$ 
+	\item $N = 20$: $E = 5,9345$ 
+	\item $N = 8$:  $E = 5,8538$ 
+	\item $N = 5$:  $E = 7,9887$ 		 
 \end{itemize}\
 
 
@@ -219,10 +219,10 @@ Zdecydowaliœmy wiêc ustawiæ $N$ na $8$ - b³¹d jest najmniejszy, a sterowanie tyl
 \
 WskaŸnik regulacji $E$ dla tych nastaw :\\
 \begin{itemize}
-	\item $N_u = 8$: $E = 5.8538$ 
-	\item $N_u = 3$: $E = 5.8427$ 
-	\item $N_u = 2$:  $E = 5.7853$ 
-	\item $N_u = 1$:  $E = 5.5844$ 		 
+	\item $N_u = 8$: $E = 5,8538$ 
+	\item $N_u = 3$: $E = 5,8427$ 
+	\item $N_u = 2$:  $E = 5,7853$ 
+	\item $N_u = 1$:  $E = 5,5844$ 		 
 \end{itemize}\
 
 Jak widaæ, dla $N_u = 1$ wyjœcie najszybciej zbiega do wartoœci zadanej, a sterowanie jest tylko odrobinê ostrzejsze.
@@ -271,15 +271,15 @@ Nastêpnym parametrem do dobrania jest  $\lambda$:
 \
 WskaŸnik regulacji $E$ dla tych nastaw :\\
 \begin{itemize}
-	\item $\lambda = 1$: 	$E =  5.5844$ 
-	\item $\lambda = 0.5$:  $E = 5.2800$ 
-	\item $\lambda = 0.3$:  $E = 5.1543$ 
-	\item $\lambda = 0.1$:  $E = 5.0267$ 		 
+	\item $\lambda = 1$: 	$E =  5,5844$ 
+	\item $\lambda = 0,5$:  $E = 5,2800$ 
+	\item $\lambda = 0,3$:  $E = 5,1543$ 
+	\item $\lambda = 0,1$:  $E = 5,0267$ 		 
 \end{itemize}\
 
 Jak siê mo¿na by³o spodziewaæ, zarówno $N$ jak i $Nu$ mia³y du¿o s³abszy wp³yw na jakoœæ regulacji ni¿  $\lambda$.
 Zmniejszaj¹c $\lambda$, uzyskujemy drastyczn¹ poprawê wskaŸnika jakoœci regulacji, jednak¿e kosztem sterowania. Zbyt gwa³towne sterowanie nie jest po¿¹dane - mo¿e wp³ywaæ niekorzystnie na elementy wykonawcze uk³adu sterowania.
-Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e poni¿ej wartoœci $\lambda = 0.3$ zysk w jakoœci sterowania jest nniewielki, a skok sterowania du¿o ostrzejszy, postanowiliœmy zatrzymaæ tê wielkoœæ $\lambda = 0.3$.
+Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e poni¿ej wartoœci $\lambda = 0,3$ zysk w jakoœci sterowania jest nniewielki, a skok sterowania du¿o ostrzejszy, postanowiliœmy zatrzymaæ tê wielkoœæ $\lambda = 0,3$.
 
 
-Koñcowe wartoœci dobranego regulatora DMC:  $N = 8, N_u = 2, \lambda = 0.3$.
+Koñcowe wartoœci dobranego regulatora DMC:  $N = 8, N_u = 2, \lambda = 0,3$.

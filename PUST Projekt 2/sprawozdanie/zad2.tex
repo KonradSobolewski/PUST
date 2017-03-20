@@ -156,3 +156,27 @@ Wyniki zosta³y zamieszczone na wykresie \ref{fig:z2_dynz}.
 	\caption{Wykres iloœci kroków od momentu skoku zak³ócenia, po ilu ró¿nica aktualnej i pocz¹tkowej wartoœci $Y(k)$ staje siê wiêksza ni¿ 90\% ró¿nicy koñcowej i pocz¹tkowej wartoœci $Y(k)$}
 	\label{fig:z2_dynz}
 \end{figure}
+
+\section{Charakterystyka statyczna procesu $y(u,z)$}
+Ostatecznie pozosta³o wygenerowaæ charakterystykê statyczn¹ $y(u,z)$. Zosta³a ona przedstawiona na rysunku poni¿ej \ref{fig:yuz}. Jak widaæ wykres przyj¹³ wygl¹d p³aszczyzny, co implikuje liniowoœæ charakterystyki statycznej obiektu. Dane do wykresu zosta³y pozyskane podczas wielokrotnych symulacji, w których w chwili $k = 15$ nastêpowa³y skoki sterowania i zak³ócenia, a wartoœæ y dla charakterystyki pobierana by³a w chwili $k = 200$.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	%xmin=0.05,xmax=0.2,ymin=19,ymax=21,
+	xlabel={$U$},
+	ylabel={$Z$},
+	zlabel={$Y$},
+	xtick={-1,-0.5,0,0.5,1},
+	ytick={-1,-0.5,0,0.5,1},
+	ztick={-5,0,5},
+	%ytick={19,20,21},
+	%y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot3[mesh, mesh/cols=21] file {wykresy/YUZ.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{$y(u,z)$}
+	\label{fig:yuz}
+\end{figure}
