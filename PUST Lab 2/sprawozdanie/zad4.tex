@@ -1,10 +1,230 @@
-\chapter{Zadanie 4: Algorytmy PID i DMC}
-\section{PID}
-Kod programu zawieraj¹cy model obiektu stanowiska oraz ograniczenia $$0 <= U <= 100$$ zosta³ zawarty w folderze sprawozdania. 
-Do wymodelowania obiektu pos³u¿yliœmy siê funkcj¹ $fmincon$ , która zwróci³a nam parametry obiektu $$T1 = 91,607279510963700$$ $$T2 = 6,971579071504170$$ 
-$$K_p = 0,997200696364098$$ $$TD = 2$$ oraz aproksymuj¹cym równaniem ró¿nicowym 
-$$Y(k) = b_1U(k-TD-1) + b_2U(k-TD-2) - a_1Y(k-1) - a_2Y(k-2)$$
+\chapter{Zadanie 4: Algorytm DMC}
+\section{Analityczny algorytm DMC}
+Do obliczeñ wykorzystujemy nastêpuj¹ce wzory:
+\begin{equation}
+\boldsymbol{Y}^{\mathrm{zad}}(k)=\left[
+\begin{array}{c}
+Y^{\mathrm{zad}}(k)\\
+\vdots\\
+Y^{\mathrm{zad}}(k)
+\end{array}
+\right]_{\mathrm{Nx1}}
+\label{yzadm}
+\end{equation}
 
-Powy¿sze parametry wyznaczone dla znormalizowanego skoku jednostkowego udokumentowane w poprzednim punkcie, powodowa³y gorszy przebieg wyjœcia oraz sterowania obiektu, dlatego nowe parametry zosta³y wyznaczone dla skoku jednostkowego z punktu pracy, aby zachowaæ ich zbli¿one do rzeczywistoœci trajektorie.
+\begin{equation}
+\boldsymbol{Y}(k)=\left[
+\begin{array}{c}
+y(k)\\
+\vdots\\
+y(k)
+\end{array}
+\right]_{\mathrm{Nx1}}
+\label{ym}
+\end{equation}
 
-\section{DMC}
+\begin{equation}
+\triangle\boldsymbol{U}(k)=\left[
+\begin{array}{c}
+\triangle u(k|k)\\
+\vdots\\
+\triangle u(k+N_u -1 |k)
+\end{array}
+\right]_{\mathrm{N_ux1}}
+\label{dUm}
+\end{equation}
+
+\begin{equation}
+\triangle\boldsymbol{U^P}(k)=\left[
+\begin{array}{c}
+\triangle u(k-1)\\
+\vdots\\
+\triangle u(k-(D-1))
+\end{array}
+\right]_{\mathrm{(D-1)x1}}
+\label{dUPm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{M}=\left[
+\begin{array}
+{cccc}
+s_{1} & 0 & \ldots & 0\\
+s_{2} & s_{1} & \ldots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+s_{N} & s_{N-1} & \ldots &  s_{N-N_{\mathrm{u}}+1}
+\end{array}
+\right]_{\mathrm{NxN_u}}
+\label{Mm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{M^P}=\left[
+\begin{array}
+{cccc}
+s_{2}-s_{1} & s_{3}-s_{2} & \ldots & s_{D}-s_{D-1}\\
+s_{3}-s_{1} & s_{4}-s_{2} & \ldots & s_{D+1}-s_{D-1}\\
+\vdots & \vdots & \ddots & \vdots\\
+s_{N+1}-s_{1} & s_{N+2}-s_{2} & \ldots &  s_{N+D-1}-S_{D-1}
+\end{array}
+\right]_{\mathrm{NxD-1}}
+\label{MPm}
+\end{equation}
+
+\begin{equation}
+Y^0(k)=Y(k)+M^P
+\triangle U^P(k)
+\label{Y0}
+\end{equation}
+
+\begin{equation}
+K=(M^TM+\lambda*I)^{-1}M^T
+\label{K}
+\end{equation}
+
+\begin{equation}
+\triangle U(k)=K(Y^{zad}(k)-Y^0(k))
+\label{dU1}
+\end{equation}
+
+W naszej regulacji potrzebujemy wyznaczyæ tylko pierwszy element macierzy $\triangle U(k)$ czyli $\triangle u(k|k)$. W tym celu rozwijamy wzór do postaci:
+
+\begin{equation}
+\triangle u(k|k)=k_ee(k)-k_u\triangle\boldsymbol U^P
+\label{dukk}
+\end{equation}
+
+gdzie:
+
+\begin{equation}
+e(k)=Y^{zad}(k)-Y(k)
+\label{e}
+\end{equation}
+
+\begin{equation}
+k_e=\sum_{i=1}^N K(1,i)
+\label{ke}
+\end{equation}
+
+\begin{equation}
+k_u=kM^P
+\label{ku}
+\end{equation}
+
+$k$ to oznaczenie pierwszego wiersza macierzy K. Aktualne sterowanie otrzymujemy poprzez zsumowanie poprzedniego sterowania i aktualnie wyliczonego $\triangle u(k|k)$. 
+
+\section{Dobieranie nastaw analitycznego regulatora DMC}
+Regulator $DMC$ korzysta z odpowiedzi skokowej $s$ uzyskanej w punkcie 3.
+Nastawy regulatora $DMC$ zosta³y dobrane eksperymentalnie. Poni¿ej przedstawiamy nasz tok rozumowania podczas doboru ka¿dego parametru.
+
+Obserwuj¹c obiekt doszliœmy do wniosku, ¿e jego horyzont dynamiki jest równy $D = 300$. Tak¹ równie¿ przyjêliœmy wartoœæ pocz¹tkow¹ $N$, $N_u$ zainicjowaliœmy pierwotn¹ wartoœci¹ $N_u = 100$, natomiast $\lambda$ na pocz¹tku jest równe $\lambda = 1$.
+
+\subsection{Horyzont predykcji N}
+
+Sugeruj¹c siê ograniczonym czasem trwania laboratorium, oraz wiedz¹ teoretyczn¹ jak i doœwiadczeniami z uk³adem sterowania (obiektem grzewczym) w laboratorium, z których wynika, ¿e zmniejszanie parametru $N$ skutkuje minimalnymi ró¿nicamu w jakoœci regulacji, postanowiliœmy nie zmieniaæ wartoœci horyzontu predykcji. Jego wielkoœæ wp³ywa znacz¹co na z³o¿onoœæ obliczeniow¹, a ta, w obiekcie tak powolnym jak stanowisko grzewcze z okresem $Tp = 1s$, nie ma krytycznego znaczenia.
+
+Tak wiêc $N = 300$.
+
+\subsection{Horyzont sterowania $N_u$}
+
+Nastêpnie dobraliœmy parametr $N_u$: po wykonaniu szeregu testów, wskaŸnik jakoœci regulacji by³ najkorzystniejszy dla wartoœci $20$, natomiast sterowanie, na tle pozosta³ych pomiarów, niewiele ostrzejsze.
+\
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $N_u = 50$: $E = 207,7379$ 
+	\item $N_u = 20$: $E = 190,5666$ 
+	\item $N_u = 10$: $E = 256,8455$ 		 
+\end{itemize}\
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=310,ymin=36,ymax=57,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,57,58,59,60},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmc4_u300_50_1.txt};
+	\addplot[green,semithick] file {wykresy/dmc4_u300_20_1.txt};
+	\addplot[purple,semithick] file  {wykresy/dmc4_u300_10_1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=310,ymin=36,ymax=41.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,36.5,37,37.5,38,38.5,39,39.5,40,40.5,41,41.5,42,42.5,43},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc4_y300_50_1.txt};
+	\addplot[green,semithick] file {wykresy/dmc4_y300_20_1.txt};
+	\addplot[purple,semithick] file  {wykresy/dmc4_y300_10_1.txt};
+	\addplot[orange,semithick] file {wykresy/dmc4_yzad.txt};
+	\legend{$N_u=50$,$N_u=20$,$N_u=10$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $N_u$}
+	\label{doborN}
+\end{figure}
+\FloatBarrier
+\
+
+\subsection{Parametr $\lambda$}
+
+Zmniejszaj¹c $\lambda$, uzyskujemy drastyczn¹ poprawê jakoœci regulacji, jednak¿e kosztem sterowania. Chocia¿ aproksymowany obiekt, stanowisko grzewcze, nie ma podatnych na uszkodzenia elementów wykonawczych, to bardzo ostre skoki sterowania z pewnoœci¹ nie wp³ywaj¹ korzystnie na ¿ywotnoœæ obiektu.
+Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e dla wartoœci $\lambda = 0,2$ obiekt wpada w oscylacje i jakoœæ regulacji siê pogarsza, postanowiliœmy przyj¹æ wartoœæ $\lambda = 0,5$.
+\
+
+WskaŸnik jakoœci regulacji $E$ :\\
+\begin{itemize}
+	\item $\lambda = 1$:      $E = 190,5666$ 
+	\item $\lambda = 0,5$:    $E = 164,4191$ 
+	\item $\lambda = 0,2$:    $E = 220,9310$  
+\end{itemize}\
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=310,ymin=36,ymax=65,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+ytick={36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmc4_u300_20_1.txt};
+	\addplot[green,semithick] file {wykresy/dmc4_u300_20_05.txt};
+	\addplot[purple,semithick] file  {wykresy/dmc4_u300_20_02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=310,ymin=36,ymax=41.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600},
+	ytick={36,36.5,37,37.5,38,38.5,39,39.5,40,40.5,41,41.5,42,42.5,43},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc4_y300_20_1.txt};
+	\addplot[green,semithick] file{wykresy/dmc4_y300_20_05.txt};
+	\addplot[purple,semithick] file{wykresy/dmc4_y300_20_02.txt};
+	\addplot[orange,semithick] file {wykresy/dmc4_yzad.txt};
+	\legend{$\lambda=1$,$\lambda=0.5$,$\lambda=0.2$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru $\lambda$}
+	\label{dobor\lambda}
+	\end{figure}
+	\FloatBarrier

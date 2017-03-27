@@ -1,0 +1,10 @@
+\contentsline {chapter}{\numberline {1\relax .\kern .5em }Zadanie 4: Algorytm DMC}{2}
+\contentsline {section}{\numberline {1.1\relax .\kern .5em }Analityczny algorytm DMC}{2}
+\contentsline {section}{\numberline {1.2\relax .\kern .5em }Dobieranie nastaw analitycznego regulatora DMC}{3}
+\contentsline {subsection}{\numberline {1.2.1\relax .\kern .5em }Horyzont predykcji N}{3}
+\contentsline {subsection}{\numberline {1.2.2\relax .\kern .5em }Horyzont sterowania $N_u$}{3}
+\contentsline {subsection}{\numberline {1.2.3\relax .\kern .5em }Parametr $\lambda $}{5}
+\contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 5: Regulacja obiektu z uwzgl\k edniem wp\IeC {\l }ywu zak\IeC {\l }\'oce\'n}{7}
+\contentsline {section}{\numberline {2.1\relax .\kern .5em }Zmiany w stosunku do podstawowej wersji regulatora analitycznego}{7}
+\contentsline {section}{\numberline {2.2\relax .\kern .5em }Dob\'or parametru Dz}{7}
+\contentsline {section}{\numberline {2.3\relax .\kern .5em }Por\'ownanie jako\'sci regulacji z i bez uwzgl\k ednienia zak\IeC {\l }\'oce\'n}{9}
