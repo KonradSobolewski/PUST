@@ -1,9 +1,9 @@
 function[Y,U] = zad1 ()
  addpath ('F:\SerialCommunication'); % add a path
- initSerialControl COM14 % initialise com port
+ initSerialControl COM13 % initialise com port
 
 Upp=36;
-Ypp=36.5;
+Ypp=36.75;
 dU=0;
 kk=500;
 U = Upp*ones(kk,1);

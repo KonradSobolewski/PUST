@@ -1,0 +1,25 @@
+\chapter{Zadanie 2: OdpowiedŸ skokowa}
+Kolejnym zadaniem by³o zmierzenie kilku odpowiedzi skokowych obiektu dla skoków rozpoczynaj¹cych siê z punktu pracy. Wyniki tego eksperymentu, razem z lini¹ pokazuj¹c¹ po³o¿enie punktu pracy, znajduj¹ siê na rysunku \ref{skok}. Dla przedstawionych odpowiedzi skok sterowania nastêpowa³ w chwili k=10, co oznacza, ¿e dopiero od k=11 wykresy przedstawiaj¹ w³aœciwe odpowiedzi skokowe. Trudnoœci sprawi³o nam okreœlenie czy w³aœciwoœci statyczne posiadanego obiektu s¹ liniowe. Bior¹c dos³ownie koñcowe wartoœci wyjœcia dla ró¿nych odpowiedzi skokowych nale¿a³oby stwierdziæ, ¿e nie s¹. Pamiêtaj¹c jednak, ¿e w okolicy obiektu wystêpowa³y nieuchronne zak³ócenia, mo¿na zauwa¿yæ pewne prawid³owoœci. Przy skoku sterowania o $5\%$ temperatura podnios³a siê o oko³o $2$ stopnie, a przy skoku o $15\%$ o oko³o $6$ stopni. Jak mo¿na zauwa¿yæ, wyjœcie wzros³o o 3 razy wiêksz¹ wartoœæ przy 3 razy wiêkszym skoku, wiêc zachowa³o siê liniowo. Gdyby za³o¿yæ, ¿e przy skoku o $10\%$ nast¹pi³y wiêksze zak³ócenia ni¿ przy innych i zamiast w $40$ wyjœcie osi¹gnê³oby wartoœæ oko³o $40,5$, to mo¿na by stwierdziæ, ¿e charakterystyka statyczna obiektu jest w przybli¿eniu liniowa, a jej wzmocnienie statyczne wynosi oko³o $2/5=0,4$.
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0,xmax=350,ymin=36,ymax=44,
+xlabel={$k$},
+ylabel={$S(k)$},
+xtick={0,50,100,150,200,250,300,350},
+ytick={36,36.5,38,38.5,40,40.5,42,42.5,44},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/skokY_5.txt};
+\addplot[green,semithick] file {wykresy/skokY_10.txt};
+\addplot[magenta,semithick] file {wykresy/skokY_15.txt};
+\addplot[orange,semithick] file {wykresy/skokY_0.txt};
+
+\legend{$dU=\num{5}$,$dU=\num{10}$,$dU=\num{15}$,$Y_{pp}=\num{36.5}$}
+\end{axis}
+\end{tikzpicture}
+\caption{Wykres S(k) dla ró¿nych skoków sterowania z Upp=\num{36} o dU}
+\label{skok}
+\end{figure}

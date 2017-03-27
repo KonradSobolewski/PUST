@@ -1,16 +1,16 @@
 addpath ('F:\SerialCommunication'); % add a path
-initSerialControl COM14 % initialise com port
+initSerialControl COM13 % initialise com port
 
-Upp=123;
-Ypp=123;
+Upp=36;
+Ypp=37.75;
 kk=310;
 startk=10;
 U(1:kk)=Upp;
 Y(1:kk)=Ypp;
 Z(1:startk)=0;
-Z(startk:kk)=10;
+Z(startk:kk)=30;
 
-for i=1:kk
+for k=1:kk
     
     Y(k)= readMeasurements(1);
     
@@ -20,5 +20,5 @@ for i=1:kk
     plot(Y)
     drawnow
     
-    toPlotForLatex('skokZ_10',1:kk,Y);
+    toPlotForLatex('skokZ_30',1:kk,Y);
 end

@@ -1,16 +1,17 @@
 addpath ('F:\SerialCommunication'); % add a path
-initSerialControl COM14 % initialise com port
-
-D=100;
-DZ=D;
+initSerialControl COM13 % initialise com port
+load('aprskok15.txt')
+load('aprskok.txt')
+D=300;
+DZ=250;
 N=D;
-Nu=D;
-lambda=D;
-s=D;
-sz=D;
-zak=1;
-Upp=0.8;
-Ypp=5;
+Nu=20;
+lambda=0.5;
+s=aprskok15(:,2);
+sz=aprskok(:,2);
+zak=0;
+Upp=36;
+Ypp=37.68;
 Umin=0;
 Umax=100;
 
@@ -64,12 +65,12 @@ ke=sum(K(1,:));
 U(1:kk)=Upp;
 Y(1:kk)=Ypp;
 Z(1:kk)=0;
-Z(startz:startz2)= 1;
-Z(startz2:kk)=2;
+Z(startz:startz2)= 30;
+Z(startz2:kk)=20;
 
 e=zeros(1,kk);
 Yzad(1:startk)=Ypp; 
-Yzad(startk:kk)=Ypp+1;
+Yzad(startk:kk)=Ypp+3;
 
 u=U-Upp;
 y=U-Ypp;
@@ -81,7 +82,7 @@ deltaup=zeros(1,D-1);
 deltazp=zeros(1,DZ-1);
 
 
-for k=startk:kk
+for k=2:kk
    %symulacja obiektu
    Y(k)= readMeasurements(1);
    y(k) = Y(k) - Ypp;
@@ -119,10 +120,10 @@ for k=startk:kk
     plot(Y)
     drawnow
     
-    toPlotForLatex('dmc_y',1:kk,Y);
-    toPlotForLatex('dmc_u',1:kk,Z);
-    toPlotForLatex('dmc_yzad',1:kk,Yzad);
-    toPlotForLatex('dmc_z',1:kk,Z);
+    toPlotForLatex('dmc5_y0',1:kk,Y);
+    toPlotForLatex('dmc5_u0',1:kk,U);
+    toPlotForLatex('dmc5_yzad',1:kk,Yzad);
+    toPlotForLatex('dmc5_z',1:kk,Z);
 end
 
 E=0;
