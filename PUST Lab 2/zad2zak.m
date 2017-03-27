@@ -1,6 +1,9 @@
+%zbieranie odpowiedzi skokowej toru zak³ócenie-wyjœcie
+
 addpath ('F:\SerialCommunication'); % add a path
 initSerialControl COM13 % initialise com port
 
+%punkt pracy
 Upp=36;
 Ypp=37.75;
 kk=310;
@@ -19,6 +22,6 @@ for k=1:kk
     waitForNewIteration (); % wait for new iteration
     plot(Y)
     drawnow
-    
+    %zapis do pliku
     toPlotForLatex('skokZ_30',1:kk,Y);
 end

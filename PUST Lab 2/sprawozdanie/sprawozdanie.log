@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  27 MAR 2017 22:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  27 MAR 2017 22:58
 entering extended mode
 **./sprawozdanie.tex
 (sprawozdanie.tex
@@ -1126,8 +1126,8 @@ LaTeX Warning: Unused global option(s):
 ! Missing \endcsname inserted.
 <to be read again> 
                    \lambda 
-l.26 \newlabel{dobor\lambda }{{1.2}{5}}
-                                       
+l.51 \newlabel{dobor\lambda }{{5.2}{15}}
+                                        
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
 
@@ -1137,8 +1137,8 @@ LaTeX Warning: Label `dobor\lambda ' multiply defined.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \lambda 
-l.26 \newlabel{dobor\lambda }{{1.2}{5}}
-                                       
+l.51 \newlabel{dobor\lambda }{{5.2}{15}}
+                                        
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
 
@@ -1336,11 +1336,51 @@ LaTeX Font Info:    External font `plex10' loaded for size
 \tf@toc=\write4
 \openout4 = `sprawozdanie.toc'.
 
- (zad4.tex [1
+ (opisobiektu.tex
+[1
 
 ]
 Rozdzia\PlPrIeC {\l } 1.
-[2
+<wykresy/stanowisko.png, id=16, 436.63126pt x 328.97906pt>
+File: wykresy/stanowisko.png Graphic file (type png)
+
+<use wykresy/stanowisko.png>
+Package pdftex.def Info: wykresy/stanowisko.png used on input line 7.
+(pdftex.def)             Requested size: 436.63019pt x 328.97826pt.
+) (zad1.tex [2
+
+ <./wykresy/stanowisko.png>]
+Rozdzia\PlPrIeC {\l } 2.
+) (zad2.tex [3
+
+]
+Rozdzia\PlPrIeC {\l } 3.
+PGFPlots: reading {wykresy/skokY_5.txt}
+PGFPlots: reading {wykresy/skokY_10.txt}
+PGFPlots: reading {wykresy/skokY_15.txt}
+PGFPlots: reading {wykresy/skokY_0.txt}
+[4
+
+] [5]
+PGFPlots: reading {wykresy/skokZ_10.txt}
+PGFPlots: reading {wykresy/skokZ_20.txt}
+PGFPlots: reading {wykresy/skokZ_30.txt}
+PGFPlots: reading {wykresy/shiftskokZ10.txt}
+PGFPlots: reading {wykresy/shiftskokZ20.txt}
+PGFPlots: reading {wykresy/shiftskokZ30.txt}
+) (zad3.tex [6
+
+] [7]
+Rozdzia\PlPrIeC {\l } 4.
+PGFPlots: reading {wykresy/skok15.txt}
+PGFPlots: reading {wykresy/aprskok15.txt}
+PGFPlots: reading {wykresy/skokZ.txt}
+PGFPlots: reading {wykresy/aprskok.txt}
+) (zad4.tex [8
+
+] [9] [10]
+Rozdzia\PlPrIeC {\l } 5.
+[11
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 130--133
@@ -1354,7 +1394,7 @@ PGFPlots: reading {wykresy/dmc4_y300_50_1.txt}
 PGFPlots: reading {wykresy/dmc4_y300_20_1.txt}
 PGFPlots: reading {wykresy/dmc4_y300_10_1.txt}
 PGFPlots: reading {wykresy/dmc4_yzad.txt}
-[3] [4]
+[12] [13]
 Underfull \hbox (badness 10000) in paragraph at lines 185--186
 
  []
@@ -1366,15 +1406,15 @@ PGFPlots: reading {wykresy/dmc4_y300_20_1.txt}
 PGFPlots: reading {wykresy/dmc4_y300_20_05.txt}
 PGFPlots: reading {wykresy/dmc4_y300_20_02.txt}
 PGFPlots: reading {wykresy/dmc4_yzad.txt}
-[5
+[14
 
-] [6]) (zad5.tex
-Rozdzia\PlPrIeC {\l } 2.
+] [15]) (zad5.tex
+Rozdzia\PlPrIeC {\l } 6.
 PGFPlots: reading {wykresy/aprskok.txt}
-[7
+[16
 
 
-] [8]
+] [17]
 PGFPlots: reading {wykresy/dmc5_u0.txt}
 PGFPlots: reading {wykresy/dmc5_u1.txt}
 PGFPlots: reading {wykresy/dmc5_y0.txt}
@@ -1385,14 +1425,14 @@ PGFPlots: reading {wykresy/dmc5_z.txt}
 
 LaTeX Warning: Float too large for page by 16.20825pt on input line 122.
 
-) [9
+) [18
 
-] [10] (sprawozdanie.aux
+] [19] (sprawozdanie.aux
 ! Missing \endcsname inserted.
 <to be read again> 
                    \lambda 
-l.26 \newlabel{dobor\lambda }{{1.2}{6}}
-                                       
+l.51 \newlabel{dobor\lambda }{{5.2}{15}}
+                                        
 The control sequence marked <to be read again> should
 not appear between \csname and \endcsname.
 
@@ -1402,17 +1442,17 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 36604 strings out of 493333
- 879597 string characters out of 3139195
- 1362099 words of memory out of 3000000
- 39549 multiletter control sequences out of 15000+200000
+ 36702 strings out of 493333
+ 881127 string characters out of 3139195
+ 1364899 words of memory out of 3000000
+ 39620 multiletter control sequences out of 15000+200000
  25776 words of font info for 77 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,20n,100p,10395b,2373s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/Mi
+ 62i,22n,100p,10395b,2373s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plme.enc}{C:/Program Files/Mi
 KTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
-ps/pl/plit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Pro
-gram Files/MiKTeX 2.9/fonts/enc/dvips/pl/plme.enc}<C:/Program Files/MiKTeX 2.9/
+ps/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Pro
+gram Files/MiKTeX 2.9/fonts/enc/dvips/pl/plit.enc}<C:/Program Files/MiKTeX 2.9/
 fonts/type1/public/pl/plbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
 c/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plex10.pfb><
 C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program Files/
@@ -1425,9 +1465,9 @@ c/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy10.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy6.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/pl/plti10.pfb>
-Output written on sprawozdanie.pdf (11 pages, 187728 bytes).
+Output written on sprawozdanie.pdf (20 pages, 247726 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
+ 136 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

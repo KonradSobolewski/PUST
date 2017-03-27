@@ -22,7 +22,7 @@ b_1=\frac{K_p}{T_1-T_2}[\alpha_1T_2(1-\alpha_2)-\alpha_2T_1(1-\alpha_1)]
 y(k)=b_1u(k-TD-1)+b_2u(k-TD-2)-a_1y(k-1)-a_2y(k-2)
 \end{equation}
 \\
-W celu doboru parametrów cz³onu wykorzystano funkcjê $fmincon$. Jako pocz¹tkowe wartoœci dobieranych parametrów wybraliœmy $[11,10,1,10]$, 11 i 10 dla $T_1$ i $T_2$ ¿eby nie by³y takie same, 1 dla $K_p$, bo przy dotychczas zebranych przebiegach nie spodziewaliœmy siê du¿ego wzmocnienia dla tego obiektu i 10 dla $TD$, bo przez tyle czasu przy skoku o 15 wartoœci odpowiedzi skokowej nie wzrastaj¹ powy¿ej 0. Od do³u ograniczyliœmy wszystkie parametry zerami. Od góry ograniczyliœmy je wartoœciami $[1000,1000,20,30]$, tak by ka¿dy parametr mia³ przedzia³ dostosowany do swoich potrzeb (du¿e zmiany dla $T_1$ i $T_2$, ma³e zmiany dla $K_p$, $TD$ s¹dz¹c po wykresach nie powinno przekroczyæ 30). Jako odpowiedŸ toru sterowanie-wyjœcie do znormalizowania wybraliœmy t¹ dla skoku o 15,a dla toru zak³ócenie-wyjœcie t¹ dla skoku o 30. W wyniku normalizacji przekszta³ciliœmy je do odpowiedzi jakie mielibyœmy po skoku jednostkowym. Nastêpnie po wykonaniu aproksymacji otrzymaliœmy parametry cz³onu równe $T_1$=89,0864, $T_2$=0,00031814, $K_p$=0,39431 i $Td$=14 przy b³êdzie optymalizacji $e$=0,040621 dla toru sterowanie-wyjœcie oraz $T_1$=40.0697, $T_2$=30.9178, $K_p$=0.1266 i $Td$=14 przy b³êdzie optymalizacji $e$=0,012445 dla toru zak³ócenie-wyjœcie. Znormalizowan¹ odpowiedzi i ich aproksymacjê przedstawiliœmy na wykresach \ref{norm_skoku} i \ref{norm_skokz}.
+W celu doboru parametrów cz³onu wykorzystano funkcjê $fmincon$. Jako pocz¹tkowe wartoœci dobieranych parametrów wybraliœmy $[11,10,1,10]$, 11 i 10 dla $T_1$ i $T_2$, ¿eby nie by³y takie same, 1 dla $K_p$, bo przy dotychczas zebranych przebiegach nie spodziewaliœmy siê du¿ego wzmocnienia dla tego obiektu i 10 dla $TD$, bo przez tyle czasu przy skoku o 15 wartoœci odpowiedzi skokowej nie wzrastaj¹ powy¿ej 0. Od do³u ograniczyliœmy wszystkie parametry zerami. Od góry ograniczyliœmy je wartoœciami $[1000,1000,20,30]$, tak, by ka¿dy parametr mia³ przedzia³ dostosowany do swoich potrzeb (du¿e zmiany dla $T_1$ i $T_2$, ma³e zmiany dla $K_p$, $TD$ s¹dz¹c po wykresach nie powinno przekroczyæ 30). Jako odpowiedŸ toru sterowanie-wyjœcie do znormalizowania wybraliœmy tê dla skoku o 15, a dla toru zak³ócenie-wyjœcie tê dla skoku o 30. W wyniku normalizacji przekszta³ciliœmy je do odpowiedzi, jakie otrzymalibyœmy po skoku jednostkowym. Nastêpnie, po wykonaniu aproksymacji, uzyskaliœmy parametry cz³onu równe $T_1=89,0864$, $T_2=0,00031814$, $K_p=0,39431$ i $Td=14$, przy b³êdzie optymalizacji $e$=0,040621 dla toru sterowanie-wyjœcie oraz $T_1=40,0697$, $T_2=30,9178$, $K_p=0,1266$ i $Td=14$ przy b³êdzie optymalizacji $e=0,012445$ dla toru zak³ócenie-wyjœcie. Znormalizowane odpowiedzi i ich aproksymacjê przedstawiliœmy na wykresach \ref{norm_skoku} i \ref{norm_skokz}.
 
 \begin{figure}[tb]
 \centering
@@ -54,7 +54,7 @@ legend pos=south east,
 	width=0.9\textwidth,
 	xmin=0,xmax=300,ymin=0,ymax=0.14,
 	xlabel={$k$},
-	ylabel={$S(k)$},
+	ylabel={$SZ(k)$},
 	xtick={0,50,100,150,200,250,300},
 	ytick={0,0.02,0.04,0.06,0.08,0.1,0.12,0.14},
 	y tick label style={/pgf/number format/1000 sep=},

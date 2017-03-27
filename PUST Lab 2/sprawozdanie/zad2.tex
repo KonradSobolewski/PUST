@@ -1,5 +1,5 @@
 \chapter{Zadanie 2: Odpowiedzi skokowe}
-Kolejnym zadaniem by³o zmierzenie kilku odpowiedzi skokowych obiektu dla skoków rozpoczynaj¹cych siê z punktu pracy. Odpowiedz skokowa dla toru sterowanie-wyjœcie znajduj¹ siê na rysunku \ref{skoku}. Jest ona wynikiem naszej pracy w trakcie trwania laboratorium nr. 1. Pierwszym aspektem wartym zauwa¿enia jest inny punkt pracy, bêd¹cy wynikiem innych warunków pogodowych na poprzednich zajêciach. Dla przedstawionych odpowiedzi skok sterowania nastêpowa³ w chwili $k=10$, co oznacza, ¿e dopiero od $k=11$ wykresy przedstawiaj¹ w³aœciwe odpowiedzi skokowe. Trudnoœci sprawi³o nam okreœlenie czy w³aœciwoœci statyczne posiadanego obiektu s¹ liniowe. Bior¹c dos³ownie koñcowe wartoœci wyjœcia dla ró¿nych odpowiedzi skokowych nale¿a³oby stwierdziæ, ¿e nie s¹. Pamiêtaj¹c jednak, ¿e w okolicy obiektu wystêpowa³y nieuchronne zak³ócenia, mo¿na zauwa¿yæ pewne prawid³owoœci. Przy skoku sterowania o $5\%$ temperatura podnios³a siê o oko³o 2 stopnie, a przy skoku o $15\%$ o oko³o 6 stopni. Jak mo¿na zauwa¿yæ, wyjœcie wzros³o o 3 razy wiêksz¹ wartoœæ przy 3 razy wiêkszym skoku, wiêc zachowa³o siê liniowo. Gdyby za³o¿yæ, ¿e przy skoku o $10\%$ nast¹pi³y wiêksze zak³ócenia ni¿ przy innych i zamiast w $40$ wyjœcie osi¹gnê³oby wartoœæ oko³o $40,5$, to mo¿na by stwierdziæ, ¿e charakterystyka statyczna obiektu jest w przybli¿eniu liniowa, a jej wzmocnienie statyczne wynosi oko³o $2/5 = 0,4$.
+Kolejnym zadaniem by³o zmierzenie kilku odpowiedzi skokowych obiektu dla skoków rozpoczynaj¹cych siê z punktu pracy. OdpowiedŸ skokowa dla toru sterowanie-wyjœcie znajduj¹ siê na rysunku \ref{skoku}. Jest ona wynikiem naszej pracy w trakcie trwania laboratorium nr 1. Pierwszym aspektem wartym zauwa¿enia jest inny punkt pracy, bêd¹cy wynikiem innej temperatury w laboratorium podczas poprzednich zajêæ. Dla przedstawionych odpowiedzi skok sterowania nastêpowa³ w chwili $k=10$, co oznacza, ¿e dopiero od $k=11$ wykresy przedstawiaj¹ w³aœciwe odpowiedzi skokowe. Trudnoœci sprawi³o nam okreœlenie, czy w³aœciwoœci statyczne posiadanego obiektu s¹ liniowe. Bior¹c dos³ownie koñcowe wartoœci wyjœcia dla ró¿nych odpowiedzi skokowych nale¿a³oby stwierdziæ, ¿e nie s¹. Pamiêtaj¹c jednak, ¿e w okolicy obiektu wystêpowa³y nieuchronne zak³ócenia, mo¿na zauwa¿yæ pewne prawid³owoœci. Przy skoku sterowania o $5\%$ temperatura podnios³a siê o oko³o 2 stopnie, a przy skoku o $15\%$ o oko³o 6 stopni. Jak mo¿na zauwa¿yæ, wyjœcie wzros³o trzykrotnie przy trzykrotnie wiêkszym skoku, wiêc zachowa³o siê liniowo. Gdyby za³o¿yæ, ¿e przy skoku o $10\%$ nast¹pi³y wiêksze zak³ócenia ni¿ przy innych i zamiast $40$ stopni wyjœcie osi¹gnê³oby wartoœæ oko³o $40,5$ stopni, to mo¿na by stwierdziæ, ¿e charakterystyka statyczna obiektu jest w przybli¿eniu liniowa, a jej wzmocnienie statyczne wynosi oko³o $2/5 = 0,4$.
 
 
 
@@ -28,7 +28,7 @@ y tick label style={/pgf/number format/1000 sep=},
 \end{figure}
 \FloatBarrier
 
-Nastêpnie zebraliœmy odpowiedz skokow¹ dla toru zak³ócenia-wyjœcie \ref{skokz}. Jak widaæ na rysunku, punktu pracy by³ ruchomy, z tego powodu zebrany odpowiedzi skokowe posiadaj¹ ró¿ny pocz¹tek. Naj³adniejszy przebieg - dla $37.68$ -  wykorzystaliœmy do $DMC$. Na wykresie \ref{skokzshift} zosta³ przedstawiony przebieg tych samych prostych przesuniêty o w³asny punkt pracy do 0. Zak³adaj¹c wyst¹pienie znacznych zak³óceñ w trakcie zbierania odpowiedzi dla $dZ = 20$ od chwili $230$ stwierdzamy, ¿e w³aœciwoœci s¹ statyczne. Widaæ, ¿e pomijaj¹c zak³ócenia ró¿nica pomiêdzy wartoœciami koñcowymi przebiegów wynosi³aby oko³o $1.25$. Wzmocnienie statyczne wynosi zatem $0,125$.
+Nastêpnie zebraliœmy odpowiedŸ skokow¹ dla toru zak³ócenia-wyjœcie (wykres \ref{skokz}). Jak widaæ na rysunku, punktu pracy zmienia³ siê trakcie trwania laboratorium - z tego powodu zebrane odpowiedzi skokowe posiadaj¹ ró¿ny pocz¹tek. Naj³adniejszy przebieg - dla $37,68$ -  wykorzystaliœmy do $DMC$. Na wykresie \ref{skokzshift} zosta³ przedstawiony przebieg tych samych prostych przesuniêty o w³asny punkt pracy do 0. Na podstawie posiadanych przebiegów, nie mo¿na stwierdziæ liniowoœci charakterystyki statycznej - ró¿nice wartoœci koñcowych miêdzy kolejnymi skokami nie s¹ sobie równe. Jendak, zak³adaj¹c wyst¹pienie znacznych zak³óceñ w trakcie zbierania odpowiedzi dla $dZ = 20$ od chwili $260$ (dla tej chwili widoczny jest na wykresie gwa³towny wzrost wartoœci odpowiedzi), stwierdzamy, ¿e w³aœciwoœci mog¹ byæ statyczne. Pomijaj¹c zak³ócenia, ró¿nica pomiêdzy wartoœciami koñcowych przebiegów mog³aby wynosiæ oko³o $1,25$. Wzmocnienie statyczne wynosi³oby zatem $0,125$.
 
 \begin{figure}[tb]
 	\centering
@@ -37,7 +37,7 @@ Nastêpnie zebraliœmy odpowiedz skokow¹ dla toru zak³ócenia-wyjœcie \ref{skokz}. 
 	width=0.9\textwidth,
 	xmin=0,xmax=310,ymin=35,ymax=44,
 	xlabel={$k$},
-	ylabel={$S(k)$},
+	ylabel={$SZ(k)$},
 	xtick={0,50,100,150,200,250,300},
 	ytick={35.62,36.75,37.68,38,40,42,44},
 	y tick label style={/pgf/number format/1000 sep=},
@@ -49,7 +49,7 @@ Nastêpnie zebraliœmy odpowiedz skokow¹ dla toru zak³ócenia-wyjœcie \ref{skokz}. 
 	\legend{$dZ=\num{10}$,$dZ=\num{20}$,$dZ=\num{30}$}
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Wykres S(k) dla ró¿nych skoków zak³ócenia o dZ}
+	\caption{Wykresy SZ(k) dla ró¿nych skoków zak³ócenia dZ}
 	\label{skokz}
 \end{figure}
 
@@ -60,7 +60,7 @@ Nastêpnie zebraliœmy odpowiedz skokow¹ dla toru zak³ócenia-wyjœcie \ref{skokz}. 
 	width=0.9\textwidth,
 	xmin=0,xmax=310,ymin=0,ymax=5,
 	xlabel={$k$},
-	ylabel={$S(k)$},
+	ylabel={$SZ(k)$},
 	xtick={0,50,100,150,200,250,300},
 	ytick={0,1,1.25,2,2.5,3,3.75,4},
 	y tick label style={/pgf/number format/1000 sep=},
@@ -72,6 +72,6 @@ Nastêpnie zebraliœmy odpowiedz skokow¹ dla toru zak³ócenia-wyjœcie \ref{skokz}. 
 	\legend{$dZ=\num{10}$,$dZ=\num{20}$,$dZ=\num{30}$}
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Wykres S(k) dla ró¿nych skoków zak³ócenia o dZ}
+	\caption{Przesuniête wykresy SZ(k) do wspólnego punktu startowego, dla ró¿nych skoków zak³ócenia dZ }
 	\label{skokzshift}
 \end{figure}

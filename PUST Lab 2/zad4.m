@@ -1,3 +1,4 @@
+%algorytm DMC z opcjonalnym uwzglêdnieniem parametrów
 addpath ('F:\SerialCommunication'); % add a path
 initSerialControl COM13 % initialise com port
 load('aprskok15.txt')
@@ -117,13 +118,14 @@ for k=2:kk
     waitForNewIteration (); % wait for new iteration
     plot(Y)
     drawnow
-    
+    %zapis do pliku
     toPlotForLatex('dmc4_y300_20_02',1:kk,Y);
     toPlotForLatex('dmc4_u300_20_02',1:kk,U);
     toPlotForLatex('dmc4_yzad',1:kk,Yzad);
     toPlotForLatex('dmc4_z',1:kk,Z);
 end
 
+%obliczenie b³êdu
 E=0;
 for k=1:kk
     E=E+((Yzad(k)-Y(k))^2);

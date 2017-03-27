@@ -1,3 +1,5 @@
+%badanie wp³ywu zak³óceñ
+
 addpath ('F:\SerialCommunication'); % add a path
 initSerialControl COM13 % initialise com port
 load('aprskok15.txt')
@@ -119,13 +121,14 @@ for k=2:kk
     waitForNewIteration (); % wait for new iteration
     plot(Y)
     drawnow
-    
+        %zapis do pliku
     toPlotForLatex('dmc5_y0',1:kk,Y);
     toPlotForLatex('dmc5_u0',1:kk,U);
     toPlotForLatex('dmc5_yzad',1:kk,Yzad);
     toPlotForLatex('dmc5_z',1:kk,Z);
 end
 
+%obliczenie b³êdu
 E=0;
 for k=1:kk
     E=E+((Yzad(k)-Y(k))^2);
