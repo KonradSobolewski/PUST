@@ -1,5 +1,5 @@
 Ypp=37.68;
-load('skokZ_30.txt')
+load('sprawozdanie/wykresy/skokZ_30.txt')
 skok=(skokZ_30(11:310,2)-Ypp)/30;
 for K=1:length(skok)
     if skok(K)<0
