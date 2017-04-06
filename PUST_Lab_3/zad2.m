@@ -2,16 +2,16 @@ function[] = zad2 ()
 %Badanie punktu pracy
 
  addpath ('F:\SerialCommunication'); % add a path
- initSerialControl COM13 % initialise com port
+ initSerialControl COM3 % initialise com port
 
 Upp=[36 41];
-Ypp=[ ];
+Ypp=[39 41.31];
 kk=310;
 U=diag(Upp)*ones(2,kk);
 Y = diag(Ypp)*ones(2,kk);
-dU=[41;41];
-% dU=[46 41];
-% dU=[51 41];
+%dU=[41;41];  % 39 , 41.31
+%dU=[46 41];  % 39.25 , 41.56
+ dU=[51 41];  % 39.62 . 42.06
 % dU=[36 46];
 % dU=[36 51];
 % dU=[36 56];

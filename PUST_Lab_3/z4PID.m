@@ -1,13 +1,17 @@
 function [ E1,E2,E ] = z4PID( K1,Ti1,Td1,K2,Ti2,Td2,latex )
  addpath ('F:\SerialCommunication'); % add a path
- initSerialControl COM13 % initialise com port
+ initSerialControl COM3 % initialise com port
 Tp=1;
-kk=910;
+% kk=910;
+kk=1810;
 startk1=10;
 startk2=310;
 startk3=610;
+startk4=910;
+startk5=1210;
+startk6=1510;
 Upp=[36 41];
-Ypp=[ ];
+Ypp=[ 39.62  42.06 ];
 Umin=[0 0];
 Umax=[100 100];
 
@@ -21,13 +25,19 @@ Yzad=Y;
 Yzad(1,startk1:kk)=Ypp(1)+3;
 Yzad(2,startk2:kk)=Ypp(2)+3;
 Yzad(1,startk3:kk)=Ypp(1)+1;
+Yzad(2,startk4:kk)=Ypp(2)+1;
+Yzad(1,startk5:kk)=Ypp(1)+2;
+Yzad(2,startk6:kk)=Ypp(2)+2;
+
+% Yzad(1,startk2:kk)=Ypp(1)+1;
+% Yzad(1,startk3:kk)=Ypp(1)+2;
 
 u=zeros(2,kk);
 y=zeros(2,kk);
 umin=Umin-Upp;
 umax=Umax-Upp;
 yzad=Yzad-diag(Ypp)*ones(2,kk);
-for k=startk:kk; %glówna petla symulacyjna
+for k=startk1:kk; %glówna petla symulacyjna
     %symulacja obiektu
     Y(:,k) = readMeasurements ([1,3]) ; % read measurements
     %uchyb regulacji
@@ -51,34 +61,36 @@ for k=startk:kk; %glówna petla symulacyjna
     
     subplot(221)
     plot(U(1,:));
-    title({'Algorytm PID ';['K = ', num2str(K1), ', Ti = ', num2str(Ti1),', Td = ',num2str(Td1)];['E = ',num2str(E1)]; ' '});
+    title({'Algorytm PID ';['K = ', num2str(K1), ', Ti = ', num2str(Ti1),', Td = ',num2str(Td1)]; ' '});
     xlabel('k')
     ylabel('U1(k)')
-    hold on;
     subplot(222)
     plot(U(2,:));
-    title({'Algorytm PID ';['K = ', num2str(K2), ', Ti = ', num2str(Ti2),', Td = ',num2str(Td2)];['E = ',num2str(E2)]; ' '});
+    title({'Algorytm PID ';['K = ', num2str(K2), ', Ti = ', num2str(Ti2),', Td = ',num2str(Td2)]; ' '});
     xlabel('k')
     ylabel('U2(k)')
-    hold on;
     subplot(223)
     plot(Y(1,:));
-    hold on;
-    stairs(Yzad(1,:),'--')
-    legend('Y1(k)','Y_z_a_d_1(k)','location','best');
+%     hold on;
+%     stairs(Yzad(1,:),'--')
+%     legend('Y1(k)','Y_z_a_d_1(k)','location','best');
     xlabel('k')
     ylabel('Y1(k)')
-    hold on;
     subplot(224)
     plot(Y(2,:));
-    hold on;
-    stairs(Yzad(2,:),'--')
-    legend('Y2(k)','Y_z_a_d_2(k)','location','best');
+%     hold on;
+%     stairs(Yzad(2,:),'--')
+%     legend('Y2(k)','Y_z_a_d_2(k)','location','best');
     xlabel('k')
     ylabel('Y2(k)')
-    hold on;
     drawnow
     
+    toPlotForLatex(sprintf('z4pidu1_%3.4f_%3.4f_%3.4f',K1,Ti1,Td1),1:kk,U(1,:))
+    toPlotForLatex(sprintf('z4pidu2_%3.4f_%3.4f_%3.4f',K2,Ti2,Td2),1:kk,U(2,:))
+    toPlotForLatex(sprintf('z4pidy1_%3.4f_%3.4f_%3.4f',K1,Ti1,Td1),1:kk,Y(1,:))
+    toPlotForLatex(sprintf('z4pidy2_%3.4f_%3.4f_%3.4f',K2,Ti2,Td2),1:kk,Y(2,:))
+    toPlotForLatex(sprintf('z4pidyzad1_%3.4f',Yzad(1,kk)),1:kk,Yzad(1,:))
+    toPlotForLatex(sprintf('z4pidyzad2_%3.4f',Yzad(2,kk)),1:kk,Yzad(2,:))
     waitForNewIteration (); % wait for new iteration
 end;
 E1=0;

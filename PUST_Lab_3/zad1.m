@@ -2,7 +2,7 @@ function[] = zad1 ()
 %Badanie punktu pracy
 
  addpath ('F:\SerialCommunication'); % add a path
- initSerialControl COM13 % initialise com port
+ initSerialControl COM3 % initialise com port
 
 Upp=[36;41];
 kk=500;
