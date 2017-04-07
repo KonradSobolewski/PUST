@@ -1,0 +1,53 @@
+\chapter{Zadanie 3: Znormalizowane odpowiedzi skokowe}
+Przedstawione odpowiedzi skokowe na rys. \ref{normal} zosta³y wykonane przez wykonanie skoków jednostkowych na wszystkich torach oraz obciêcie pierwszych $10$ próbek, gdy¿ zmiana sterowania odbywa³a siê we wspomnianym kroku. Z tego wynika, i¿ wykresy startuj¹ od chwili $k=11$.  
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1(U_1)$},
+	xtick={0,250},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z3Y1U1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1(U_2)$},
+	xtick={0,250},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z3Y1U2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2(U_1)$},
+	xtick={0,250},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z3Y2U1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2(U_2)$},
+	xtick={0,250},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[green,semithick] file {wykresy/z3Y2U2.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Znormalizowane odpowiedzi skokowe}
+	\label{normal}
+\end{figure}

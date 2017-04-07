@@ -1,0 +1,172 @@
+\chapter{Zadanie 5: Zak³ócenia}
+
+\section{Zmiany w stosunku do podstawowej wersji regulatora analitycznego}
+Uwzglêdnie zak³óceñ w regualtorze $DMC$ wymaga wprowadzenia kilku zmian w jego algorytmie.
+
+Konieczne bêdzie oblicznie macierzy $M^{zP}$, danej wzorem:
+
+
+\begin{equation}
+\boldsymbol{M^{zP}}=\left[
+\begin{array}
+{ccccc}
+sz_{1} & sz_{2}-sz_{1} & sz_{3}-sz_{2} & \ldots & sz_{D_z}-sz_{D_z-1}\\
+sz_{2} & sz_{3}-sz_{1} & sz_{4}-sz_{2} & \ldots & sz_{D_z+1}-sz_{D_z-1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+sz_{N} & sz_{N+1}-sz_{1} & sz_{N+2}-sz_{2} & \ldots &  sz_{N+D_z-1}-sz_{D_z-1}
+\end{array}
+\right]_{\mathrm{NxDz}}
+\label{MPzm}
+\end{equation}
+
+Macierz ta pos³u¿y nam do wyznaczenia wektora $k_z$:
+
+\begin{equation}
+k_z=kM^{zP}
+\label{ku}
+\end{equation}
+
+Uwzglêdnienie zak³óceñ w algorytmie zmienia sposób obliczania $\triangle u(k|k)$ - we wzorze zawarta jest teraz obliczon¹ powy¿ej wartoœæ $k_z$:
+
+\begin{equation}
+\triangle u(k|k)=k_ee(k)-k_u\triangle\boldsymbol U^P-k_z\triangle\boldsymbol Z^P
+\label{dukkz}
+\end{equation}
+
+Powy¿sza zmiana wynika bezpoœrednio ze zmiany w obliczaniu $Y^0$:
+
+\begin{equation}
+Y^0(k)=Y(k)+M^P\triangle U^P(k)+M^{zP}\triangle  Z^P(k)
+\label{Y0z}
+\end{equation}
+
+\section{Dobór parametru Dz}
+
+Parametr $Dz$ regulatora $DMC$ zosta³ dobrany eksperymentalnie.
+Regulator $DMC$ korzysta z odpowiedzi skokowych $s$ i $sz$ uzyskanych w punkcie 3.
+
+Pocz¹tkow¹ wartoœci¹ Dz bêdzie wartoœæ horyzontu dynamiki $D = 100$.
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=-2,ymax=2,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,25,50,75,100,125,150},
+	ytick={-2,-1.5,-1,-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/5dmcu_8_1_0.3000_40_1.txt};
+	\addplot[green,semithick] file {wykresy/5dmcu_8_1_0.3000_30_1.txt};
+	\addplot[red,semithick] file  {wykresy/5dmcu_8_1_0.3000_15_1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,25,50,75,100,125,150},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east
+	]
+	\addplot[blue,semithick] file {wykresy/5dmcy_8_1_0.3000_40_1.txt};
+	\addplot[green,semithick] file {wykresy/5dmcy_8_1_0.3000_30_1.txt};
+	\addplot[red,semithick] file  {wykresy/5dmcy_8_1_0.3000_15_1.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
+	\legend{$Dz=40$,$Dz=30$,$Dz=15$,$Y^{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Z$},
+	xtick={0,50,100,150},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[red,semithick] file {wykresy/5z.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór parametru Dz}
+	\label{doborDz}
+\end{figure}
+\FloatBarrier
+\
+WskaŸnik regulacji $E$ dla kolejnych wartoœci parametru $Dz$:\\
+\begin{itemize}
+	\item $Dz = 100$: 	$E =   6.5466$ 
+	\item $Dz = 40$:  $E =  6.5472$ 		 
+	\item $Dz = 30$:  $E =   6.5536$ 
+	\item $Dz = 15$:  $E = 6.8089$ 
+\end{itemize}\
+
+Zdecydowaliœmy zatrzymaæ wartoœæ $Dz = 40$. Dla ni¿szych wielkoœci tego parametru, widaæ znacz¹ce pogorszenie przebiegu wyjœciowego sygna³u, jak i wielkoœci wskaŸnika jakoœci regulacji, natomiast dla wiêkszych wartoœci, przebiegi nak³adaj¹ siê na siebie, nie daj¹æ ¿adnych wymiernych korzyœci z dodatkowych koniecznych obliczeñ zwi¹zanych w wiêkszym rozmiarem macierzy $M^{zP}$.
+
+
+\section{Porównanie jakoœci regulacji z i bez uwzglêdnienia zak³óceñ}
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=-2,ymax=2,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,25,50,75,100,125,150},
+	ytick={-2,-1.5,-1,-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[green,semithick] file {wykresy/5dmcu_8_1_0.3000_40_0.txt};
+	\addplot[blue,semithick] file {wykresy/5dmcu_8_1_0.3000_40_1.txt};
+	\legend{$U(k)$,$Uz(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,25,50,75,100,125,150},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east
+	]
+	\addplot[green,semithick] file {wykresy/5dmcy_8_1_0.3000_40_0.txt};
+	\addplot[blue,semithick] file {wykresy/5dmcy_8_1_0.3000_40_1.txt};
+	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
+	\legend{$Y(k)$,$Yz(k)$,$Y^{zad}(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=150,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Z$},
+	xtick={0,50,100,150},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[red,semithick] file {wykresy/5z.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie regulacji z i bez uwzglêdniania zak³óceñ w algorytmie sterowania}
+	\label{por}
+\end{figure}
+\FloatBarrier
+
+Powy¿szy wykres przedstawia przebiegi wejœcia i wyjœcia obiektu sterowanego przy pomocy regulatgora DMC w wersji z kolejno nieuwzglêdnieniem ($U(k), Y(k)$) i uwzglêdnieniem ($Uz(k), Yz(k)$) mierzonych zak³óceñ.
+
+Widaæ znacz¹c¹ poprawê sterowania, gdy zak³ócenia s¹ uwzglêdniane w algorytmie $DMC$.
+Potwierdzaj¹ to poni¿sze wartoœci b³êdów:
+
+WskaŸnik regulacji, gdy zak³ócenia nie s¹ brane pod uwagê: $E =11.6296$
+\
+
+WskaŸnik regulacji, gdy zak³ócenia s¹ brane pod uwagê: $E =  6.5472$

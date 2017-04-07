@@ -1,0 +1,170 @@
+\chapter{Zadanie 2: Odpowiedzi skokowe}
+\section{Odpowiedzi skokowe}
+
+W tej czêœci projektu nale¿a³o wyznaczyæ symulacyjnie odpowiedzi skokowe dla wszystkich czterech torów rys. \ref{odpskok}. Eksperyment zak³ada³, i¿ obiekt bêdzie na pocz¹tku w punkcie pracy, a nastêpnie w chwili $k=10$ zostanie wykonany skok jednostkowy. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1(U_1)$},
+	xtick={0,250},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2Y1U1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_1(U_2)$},
+	xtick={0,250},
+	ytick={0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z2Y1U2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=1,
+	xlabel={$k$},
+	ylabel={$Y_2(U_1)$},
+	xtick={0,250},
+	ytick={0,0.5,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2Y2U1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=250,ymin=0,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2(U_2)$},
+	xtick={0,250},
+	ytick={0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[green,semithick] file {wykresy/z2Y2U2.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Odpowiedzi skokowe}
+	\label{odpskok}
+\end{figure}
+
+\section{Charakterystyka statyczna}
+Poni¿ej zosta³a zaprezentowana charakterystyka statyczna dla procesu $y_1(u_1,u_2)$ rys. \ref{y1u1u2} oraz $y_2(u_1,u_2)$ rys. \ref{y2u1u2}.
+Na podstawie zawartych wykresów mo¿na wywnioskowaæ, i¿ w³aœciwoœci statyczne procesu s¹ liniowe. Wzmocnienia statyczne s¹ równe wartoœciom koñcowych odpowiedzi skokowych i wynosz¹ :
+\begin{itemize}
+	\item Tor $Y_1(U_1)$ =  $1,8857$
+	\item Tor $Y_1(U_2)$ =  $0,4258$
+	\item Tor $Y_2(U_1)$ =  $1,0905$
+	\item Tor $Y_2(U_2)$ =  $1,2076$
+\end{itemize}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	%xmin=0.05,xmax=0.2,ymin=19,ymax=21,
+	xlabel={$U_1$},
+	ylabel={$U_2$},
+	zlabel={$Y_1$},
+	xtick={-1,-0.5,0,0.5,1},
+	ytick={-1,-0.5,0,0.5,1},
+	ztick={-3,0,3},
+	%ytick={19,20,21},
+	%y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot3[mesh, mesh/cols=21] file {wykresy/z2Y1U1U2.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{$y_1(u_1,u_2)$}
+	\label{y1u1u2}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	%xmin=0.05,xmax=0.2,ymin=19,ymax=21,
+	xlabel={$U_1$},
+	ylabel={$U_2$},
+	zlabel={$Y_2$},
+	xtick={-1,-0.5,0,0.5,1},
+	ytick={-1,-0.5,0,0.5,1},
+	ztick={-2,0,2},
+	%ytick={19,20,21},
+	%y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot3[mesh, mesh/cols=21] file {wykresy/z2Y2U1U2.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{$y_2(u_1,u_2)$}
+	\label{y2u1u2}
+\end{figure}
+
+\section{Charakterystyka dynamiczna}
+Charakterystyka dynamiczna zosta³a wyznaczona zale¿nie od wielkoœci skoku sterowania. Zmierzone zosta³o po ilu krokach od momentu skoku ró¿nica wartoœci wyjœæ obiektu i $Y_{pp}$ wynosi³a powy¿ej $90\%$ ca³kowitego skoku wartoœci $Y(k)$ wyjœæ obiektu. Z otrzymanych danych wynika rys. \ref{dynamiczna}, i¿ charakterystyka dynamiczna jest liniowa, gdzie iloœæ kroków by³a nastêpuj¹ca : 
+\begin{itemize}
+	\item Tor $Y_1(U_1)$ =  $65$ kroków,
+	\item Tor $Y_1(U_2)$ =  $27$ kroków,
+	\item Tor $Y_2(U_1)$ =  $34$ kroków,
+	\item Tor $Y_2(U_2)$ =  $55$ kroków.
+\end{itemize}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0.1,xmax=1,ymin=64,ymax=66,
+	xlabel={$k$},
+	ylabel={$Y_1(U_1)$},
+	xtick={0.1,0.55,1},
+	ytick={64,64.5,65,65.5,66},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2dY1U1.txt};
+	\nextgroupplot
+	[
+	xmin=0.1,xmax=1,ymin=26,ymax=28,
+	xlabel={$k$},
+	ylabel={$Y_1(U_2)$},
+	xtick={0.1,0.55,1},
+	ytick={26,26.5,27,27.5,28},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z2dY1U2.txt};
+	\nextgroupplot
+	[
+	xmin=0.1,xmax=1,ymin=33,ymax=35,
+	xlabel={$k$},
+	ylabel={$Y_2(U_1)$},
+	xtick={0.1,0.55,1},
+	ytick={33,33.5,34,34.5,35},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2dY2U1.txt};
+	\nextgroupplot
+	[
+	xmin=0.1,xmax=1,ymin=54,ymax=56,
+	xlabel={$k$},
+	ylabel={$Y_2(U_2)$},
+	xtick={0.1,0.55,1},
+	ytick={54,54.5,55,55.5,56},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[green,semithick] file {wykresy/z2dY2U2.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Charakterystyka dynamiczna}
+	\label{dynamiczna}
+\end{figure}
