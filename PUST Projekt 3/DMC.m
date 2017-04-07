@@ -38,19 +38,21 @@ for i=1:N
       if i+j<=D
          MP(i,j)={[s11(i+j)-s11(j) s12(i+j)-s12(j); s21(i+j)-s21(j) s22(i+j)-s22(j)]};
       else
-         MP(i,j)={[s11(D)-s11(j), s12(D)-s12(j); s21(D)-s21(j), s22(D)-s22(j)]};
+         MP(i,j)={[s11(D)-s11(j) s12(D)-s12(j); s21(D)-s21(j) s22(D)-s22(j)]};
       end;      
    end;
 end;
 K=(cell2mat(M)'*cell2mat(M)-diag(ones(1,Nu*nu)*lambda))^(-1)*cell2mat(M)';
-ku=K(nu,:)*cell2mat(MP);
-ke1=sum(K(1,1:2:N*ny));
-ke2=sum(K(1,2:2:N*ny));
-ke3=sum(K(2,1:2:N*ny));
-ke4=sum(K(2,2:2:N*ny));
+ku=K(1:nu,:)*cell2mat(MP);
+ke1=sum(K(1,1:2:(N*ny)));
+ke2=sum(K(1,2:2:(N*ny)));
+ke3=sum(K(2,1:2:(N*ny)));
+ke4=sum(K(2,2:2:(N*ny)));
 for k=10:kk
     y(1,k)=symulacja_obiektu3y1(u(1,k-5),u(1,k-6),u(2,k-2),u(2,k-3),y(1,k-1),y(1,k-2));
     y(2,k)=symulacja_obiektu3y2(u(1,k-6),u(1,k-7),u(2,k-4),u(2,k-5),y(2,k-1),y(2,k-2));
+    Yzad(1:N)={yzad(:,k)};
+    Y(1:N)={y(:,k)};
     du(:,k)=[ke1 ke2;ke3 ke4]*(yzad(:,k)-y(:,k))-ku*cell2mat(dUP);
     for n=D-1:-1:2
       dUP(n)=dUP(n-1);
