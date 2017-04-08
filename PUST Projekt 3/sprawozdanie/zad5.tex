@@ -1,172 +1,344 @@
-\chapter{Zadanie 5: Zak³ócenia}
+\chapter{Zadanie 5: Strojenie regulatora PID i DMC}
 
-\section{Zmiany w stosunku do podstawowej wersji regulatora analitycznego}
-Uwzglêdnie zak³óceñ w regualtorze $DMC$ wymaga wprowadzenia kilku zmian w jego algorytmie.
-
-Konieczne bêdzie oblicznie macierzy $M^{zP}$, danej wzorem:
-
-
-\begin{equation}
-\boldsymbol{M^{zP}}=\left[
-\begin{array}
-{ccccc}
-sz_{1} & sz_{2}-sz_{1} & sz_{3}-sz_{2} & \ldots & sz_{D_z}-sz_{D_z-1}\\
-sz_{2} & sz_{3}-sz_{1} & sz_{4}-sz_{2} & \ldots & sz_{D_z+1}-sz_{D_z-1}\\
-\vdots & \vdots & \vdots & \ddots & \vdots\\
-sz_{N} & sz_{N+1}-sz_{1} & sz_{N+2}-sz_{2} & \ldots &  sz_{N+D_z-1}-sz_{D_z-1}
-\end{array}
-\right]_{\mathrm{NxDz}}
-\label{MPzm}
-\end{equation}
-
-Macierz ta pos³u¿y nam do wyznaczenia wektora $k_z$:
-
-\begin{equation}
-k_z=kM^{zP}
-\label{ku}
-\end{equation}
-
-Uwzglêdnienie zak³óceñ w algorytmie zmienia sposób obliczania $\triangle u(k|k)$ - we wzorze zawarta jest teraz obliczon¹ powy¿ej wartoœæ $k_z$:
-
-\begin{equation}
-\triangle u(k|k)=k_ee(k)-k_u\triangle\boldsymbol U^P-k_z\triangle\boldsymbol Z^P
-\label{dukkz}
-\end{equation}
-
-Powy¿sza zmiana wynika bezpoœrednio ze zmiany w obliczaniu $Y^0$:
-
-\begin{equation}
-Y^0(k)=Y(k)+M^P\triangle U^P(k)+M^{zP}\triangle  Z^P(k)
-\label{Y0z}
-\end{equation}
-
-\section{Dobór parametru Dz}
-
-Parametr $Dz$ regulatora $DMC$ zosta³ dobrany eksperymentalnie.
-Regulator $DMC$ korzysta z odpowiedzi skokowych $s$ i $sz$ uzyskanych w punkcie 3.
-
-Pocz¹tkow¹ wartoœci¹ Dz bêdzie wartoœæ horyzontu dynamiki $D = 100$.
+\section{Regulator PID}
+\subsection{Wariant pierwszy}
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.45\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-5,ymax=6,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-5,-4,-3,-2,-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu1_1_4.3500_Inf_0.0000_232.5771_487.8818.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z4pidy1_1_4.3500_Inf_0.0000_487.8818.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Regulator $P_1$ ze sta³ymi oscylacjami}
+	\label{oscylacje}
+\end{figure}
 
 
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
-	\begin{groupplot}[group style={group size=1 by 3,vertical sep={2 cm}},
-	width=0.9\textwidth,height=0.3\textwidth]
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.45\textwidth]
 	\nextgroupplot
 	[
-	xmin=0,xmax=150,ymin=-2,ymax=2,
+	xmin=0,xmax=100,ymin=-0.5,ymax=3,
 	xlabel={$k$},
-	ylabel={$U$},
-	xtick={0,25,50,75,100,125,150},
-	ytick={-2,-1.5,-1,-0.5,0,0.5,1,1.5,2},
+	ylabel={$U_1$},
+	xtick={0,50,100},
+	ytick={0,1,2,3},
 	y tick label style={/pgf/number format/1000 sep=},
 	]
-	\addplot[blue,semithick] file {wykresy/5dmcu_8_1_0.3000_40_1.txt};
-	\addplot[green,semithick] file {wykresy/5dmcu_8_1_0.3000_30_1.txt};
-	\addplot[red,semithick] file  {wykresy/5dmcu_8_1_0.3000_15_1.txt};
+	\addplot[blue,semithick] file {wykresy/z4pidu1_1_2.1750_10.0000_0.0000_7.1811_168.8823.txt};
+	\addplot[green,semithick] file {wykresy/z4pidu1_1_2.1750_12.0000_0.0000_6.9647_168.4141.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidu1_1_2.1750_15.0000_0.0000_6.8284_167.9822.txt};
 	\nextgroupplot
 	[
-	xmin=0,xmax=150,ymin=0,ymax=2,
+	xmin=0,xmax=100,ymin=0,ymax=1.5,
 	xlabel={$k$},
-	ylabel={$Y$},
-	xtick={0,25,50,75,100,125,150},
-	ytick={0,0.5,1,1.5,2},
-	y tick label style={/pgf/number format/1000 sep=},
-	legend pos=south east
-	]
-	\addplot[blue,semithick] file {wykresy/5dmcy_8_1_0.3000_40_1.txt};
-	\addplot[green,semithick] file {wykresy/5dmcy_8_1_0.3000_30_1.txt};
-	\addplot[red,semithick] file  {wykresy/5dmcy_8_1_0.3000_15_1.txt};
-	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
-	\legend{$Dz=40$,$Dz=30$,$Dz=15$,$Y^{zad}$}
-	\nextgroupplot
-	[
-	xmin=0,xmax=150,ymin=-0.5,ymax=1.5,
-	xlabel={$k$},
-	ylabel={$Z$},
-	xtick={0,50,100,150},
-	ytick={-0.5,0,0.5,1,1.5},
+	ylabel={$Y_1$},
+	xtick={0,50,100},
+	ytick={0,0.5,1,1.5},
 	y tick label style={/pgf/number format/1000 sep=},
 	legend pos=south east,
 	]
-	\addplot[red,semithick] file {wykresy/5z.txt};
+	\addplot[blue,semithick] file {wykresy/z4pidy1_1_2.1750_10.0000_0.0000_168.8823.txt};
+	\addplot[green,semithick] file {wykresy/z4pidy1_1_2.1750_12.0000_0.0000_168.4141.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidy1_1_2.1750_15.0000_0.0000_167.9822.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad1_1.0000.txt};
+	\legend{$T_i = 10$,$T_i=12$,$T_i=15$,$Y_{1_{zad}}$}
 	\end{groupplot}
 	\end{tikzpicture}
-	\caption{Dobór parametru Dz}
-	\label{doborDz}
+	\caption{Strojenie regulatora $PI_1$}
+	\label{strojeniePI}
 \end{figure}
-\FloatBarrier
-\
-WskaŸnik regulacji $E$ dla kolejnych wartoœci parametru $Dz$:\\
-\begin{itemize}
-	\item $Dz = 100$: 	$E =   6.5466$ 
-	\item $Dz = 40$:  $E =  6.5472$ 		 
-	\item $Dz = 30$:  $E =   6.5536$ 
-	\item $Dz = 15$:  $E = 6.8089$ 
-\end{itemize}\
 
-Zdecydowaliœmy zatrzymaæ wartoœæ $Dz = 40$. Dla ni¿szych wielkoœci tego parametru, widaæ znacz¹ce pogorszenie przebiegu wyjœciowego sygna³u, jak i wielkoœci wskaŸnika jakoœci regulacji, natomiast dla wiêkszych wartoœci, przebiegi nak³adaj¹ siê na siebie, nie daj¹æ ¿adnych wymiernych korzyœci z dodatkowych koniecznych obliczeñ zwi¹zanych w wiêkszym rozmiarem macierzy $M^{zP}$.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.45\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=-0.5,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,50,100},
+	ytick={0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu1_1_2.1750_12.0000_0.2000_6.3903_167.6768.txt};
+	\addplot[green,semithick] file {wykresy/z4pidu1_1_2.1750_12.0000_0.5000_5.8197_166.9615.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidu1_1_2.1750_12.0000_1.0000_5.4349_166.5360.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,50,100},
+	ytick={0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidy1_1_2.1750_12.0000_0.2000_167.6768.txt};
+	\addplot[green,semithick] file {wykresy/z4pidy1_1_2.1750_12.0000_0.5000_166.9615.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidy1_1_2.1750_12.0000_1.0000_166.5360.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad1_1.0000.txt};
+	\legend{$T_d = 0.2$,$T_d=0.5$,$T_d=1$,$Y_{1_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Strojenie regulatora $PID_1$}
+	\label{strojeniePID}
+\end{figure}
 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.45\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-7,ymax=8,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu2_1_7.2000_Inf_0.0000_132.0216_1054.7859.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidy2_1_7.2000_Inf_0.0000_1054.7859.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Regulator $P_2$ ze sta³ymi oscylacjami}
+	\label{oscylacje2}
+\end{figure}
 
-\section{Porównanie jakoœci regulacji z i bez uwzglêdnienia zak³óceñ}
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.45\textwidth]
+	\nextgroupplot
+	[
+	xmin=250,xmax=400,ymin=-1,ymax=5,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={250,300,350,400},
+	ytick={0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu2_1_3.6000_5.0000_0.0000_6.6356_278.0402.txt};
+	\addplot[green,semithick] file {wykresy/z4pidu2_1_3.6000_9.0000_0.0000_5.5030_269.4109.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidu2_1_3.6000_13.0000_0.0000_5.3206_267.2076.txt};
+	\nextgroupplot
+	[
+	xmin=250,xmax=400,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={250,300,350,400},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidy2_1_3.6000_5.0000_0.0000_278.0402.txt};
+	\addplot[green,semithick] file {wykresy/z4pidy2_1_3.6000_9.0000_0.0000_269.4109.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidy2_1_3.6000_13.0000_0.0000_267.2076.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad2_1.0000.txt};
+	\legend{$T_i = 5$,$T_i=9$,$T_i=13$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Strojenie regulatora $PI_2$}
+	\label{strojeniePI2}
+\end{figure}
 
 
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
-	\begin{groupplot}[group style={group size=1 by 3,vertical sep={2 cm}},
-	width=0.9\textwidth,height=0.3\textwidth]
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.45\textwidth]
 	\nextgroupplot
 	[
-	xmin=0,xmax=150,ymin=-2,ymax=2,
+	xmin=250,xmax=350,ymin=-1,ymax=10,
 	xlabel={$k$},
-	ylabel={$U$},
-	xtick={0,25,50,75,100,125,150},
-	ytick={-2,-1.5,-1,-0.5,0,0.5,1,1.5,2},
+	ylabel={$U_2$},
+	xtick={250,300,350},
+	ytick={0,1,2,3,4,5,6,7,8,9,10},
 	y tick label style={/pgf/number format/1000 sep=},
 	]
-	\addplot[green,semithick] file {wykresy/5dmcu_8_1_0.3000_40_0.txt};
-	\addplot[blue,semithick] file {wykresy/5dmcu_8_1_0.3000_40_1.txt};
-	\legend{$U(k)$,$Uz(k)$}
+	\addplot[blue,semithick] file {wykresy/z4pidu2_1_3.6000_9.0000_0.2000_4.9524_266.6974.txt};
+	\addplot[green,semithick] file {wykresy/z4pidu2_1_3.6000_9.0000_0.5000_4.4838_264.6678.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidu2_1_3.6000_9.0000_0.8000_4.3516_264.6085.txt};
 	\nextgroupplot
 	[
-	xmin=0,xmax=150,ymin=0,ymax=2,
+	xmin=250,xmax=350,ymin=0,ymax=1.5,
 	xlabel={$k$},
-	ylabel={$Y$},
-	xtick={0,25,50,75,100,125,150},
-	ytick={0,0.5,1,1.5,2},
-	y tick label style={/pgf/number format/1000 sep=},
-	legend pos=south east
-	]
-	\addplot[green,semithick] file {wykresy/5dmcy_8_1_0.3000_40_0.txt};
-	\addplot[blue,semithick] file {wykresy/5dmcy_8_1_0.3000_40_1.txt};
-	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
-	\legend{$Y(k)$,$Yz(k)$,$Y^{zad}(k)$}
-	\nextgroupplot
-	[
-	xmin=0,xmax=150,ymin=-0.5,ymax=1.5,
-	xlabel={$k$},
-	ylabel={$Z$},
-	xtick={0,50,100,150},
-	ytick={-0.5,0,0.5,1,1.5},
+	ylabel={$Y_2$},
+	xtick={250,300,350},
+	ytick={0,0.5,1,1.5},
 	y tick label style={/pgf/number format/1000 sep=},
 	legend pos=south east,
 	]
-	\addplot[red,semithick] file {wykresy/5z.txt};
+	\addplot[blue,semithick] file {wykresy/z4pidy2_1_3.6000_9.0000_0.2000_266.6974.txt};
+	\addplot[green,semithick] file {wykresy/z4pidy2_1_3.6000_9.0000_0.5000_264.6678.txt};
+	\addplot[orange,semithick] file {wykresy/z4pidy2_1_3.6000_9.0000_0.8000_264.6085.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad1_1.0000.txt};
+	\legend{$T_d = 0.2$,$T_d=0.5$,$T_d=0.8$,$Y_{2_{zad}}$}
 	\end{groupplot}
 	\end{tikzpicture}
-	\caption{Porównanie regulacji z i bez uwzglêdniania zak³óceñ w algorytmie sterowania}
-	\label{por}
+	\caption{Strojenie regulatora $PID_2$}
+	\label{strojeniePID2}
 \end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-5,ymax=6,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-5,-4,-3,-2,-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu1_1_2.1750_12.0000_0.5000_134.3668_172.5572.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z4pidy1_1_2.1750_12.0000_0.5000_172.5572.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-5,ymax=6,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-5,-4,-3,-2,-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu2_1_3.6000_9.0000_0.5000_38.1905_172.5572.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z4pidy2_1_3.6000_9.0000_0.5000_172.5572.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory PID}
+	\label{oscylacje12}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu1_1_1.0875_12.0000_0.5000_25.5732_34.0364.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z4pidy1_1_1.0875_12.0000_0.5000_34.0364.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu2_1_1.8000_9.0000_0.5000_8.4632_34.0364.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.2,ymax=1.2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.2,0,0.5,1,1.2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/z4pidy2_1_1.8000_9.0000_0.5000_34.0364.txt};
+	\addplot[red,semithick] file {wykresy/z4pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory PID dostrojone}
+	\label{dobry1}
+\end{figure}
+
 \FloatBarrier
+\subsection{Wariant drugi}
 
-Powy¿szy wykres przedstawia przebiegi wejœcia i wyjœcia obiektu sterowanego przy pomocy regulatgora DMC w wersji z kolejno nieuwzglêdnieniem ($U(k), Y(k)$) i uwzglêdnieniem ($Uz(k), Yz(k)$) mierzonych zak³óceñ.
-
-Widaæ znacz¹c¹ poprawê sterowania, gdy zak³ócenia s¹ uwzglêdniane w algorytmie $DMC$.
-Potwierdzaj¹ to poni¿sze wartoœci b³êdów:
-
-WskaŸnik regulacji, gdy zak³ócenia nie s¹ brane pod uwagê: $E =11.6296$
-\
-
-WskaŸnik regulacji, gdy zak³ócenia s¹ brane pod uwagê: $E =  6.5472$
+\section{Regulator DMC}
