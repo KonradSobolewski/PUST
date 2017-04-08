@@ -49,10 +49,11 @@ ke1=sum(K(1,1:2:(N*ny)));
 ke2=sum(K(1,2:2:(N*ny)));
 ke3=sum(K(2,1:2:(N*ny)));
 ke4=sum(K(2,2:2:(N*ny)));
+yzak=(2*rand(2,kk)-1)*n;
 for k=10:kk
     y(1,k)=symulacja_obiektu3y1(u(1,k-5),u(1,k-6),u(2,k-2),u(2,k-3),y(1,k-1),y(1,k-2));
     y(2,k)=symulacja_obiektu3y2(u(1,k-6),u(1,k-7),u(2,k-4),u(2,k-5),y(2,k-1),y(2,k-2));
-    du(:,k)=[ke1 ke2;ke3 ke4]*(yzad(:,k)-y(:,k))-ku*cell2mat(dUP);
+    du(:,k)=[ke1 ke2;ke3 ke4]*(yzad(:,k)-y(:,k)-yzak(:,k))-ku*cell2mat(dUP);
     for i=D-1:-1:2
       dUP(i)=dUP(i-1);
     end
@@ -69,17 +70,17 @@ end
 E=E1+E2;
 
 if(draw)
-    subplot(2,2,1)
+    subplot(3,2,1)
     plot(u(1,:));
     title({'Algorytm DMC ';['D = ', num2str(D), ', N = ', num2str(N),', Nu = ',num2str(Nu), ', lambda = ',num2str(lambda)];['E = ',num2str(E1)]; ' '});
     xlabel('k')
     ylabel('sterowanie u1')
-    subplot(2,2,2)
+    subplot(3,2,2)
     plot(u(2,:));
     title({'Algorytm DMC ';['D = ', num2str(D), ', N = ', num2str(N),', Nu = ',num2str(Nu), ', lambda = ',num2str(lambda)];['E = ',num2str(E2)]; ' '});
     xlabel('k')
     ylabel('sterowanie u2')
-    subplot(2,2,3)
+    subplot(3,2,3)
     plot(y(1,:));
     title({'E= ',num2str(E)})
     hold on;
@@ -87,7 +88,7 @@ if(draw)
     xlabel('k')
     ylabel('wyjœcie y1')
     legend('Y1(k)','Y1_z_a_d(k)','location','best');
-    subplot(2,2,4)
+    subplot(3,2,4)
     plot(y(2,:));
     title({'E= ',num2str(E)})
     hold on;
@@ -95,13 +96,19 @@ if(draw)
     xlabel('k')
     ylabel('wyjœcie y2')
     legend('Y2(k)','Y2_z_a_d(k)','location','best');
+    subplot(325)
+    plot(yzak(1,:))
+    subplot(326)
+    plot(yzak(2,:))
 end
 if(latex)
-    toPlotForLatex(sprintf('z4dmcu1_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E1),1:kk,u(1,:))
-    toPlotForLatex(sprintf('z4dmcu2_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E2),1:kk,u(2,:))
-    toPlotForLatex(sprintf('z4dmcy1_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E),1:kk,y(1,:))
-    toPlotForLatex(sprintf('z4dmcy2_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E),1:kk,y(2,:))
-    toPlotForLatex(sprintf('z4dmcyzad1_%3.4f',yzad(1,kk)),1:kk,yzad(1,:))
-    toPlotForLatex(sprintf('z4dmcyzad2_%3.4f',yzad(2,kk)),1:kk,yzad(2,:))
+    toPlotForLatex(sprintf('z6dmcu1_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E1),1:kk,u(1,:))
+    toPlotForLatex(sprintf('z6dmcu2_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E2),1:kk,u(2,:))
+    toPlotForLatex(sprintf('z6dmcy1_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E),1:kk,y(1,:))
+    toPlotForLatex(sprintf('z6dmcy2_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E),1:kk,y(2,:))
+    toPlotForLatex(sprintf('z6dmcyzak1_%d_%d_%3.4f_%3.4f_%d',N,Nu,lambda,E,n),1:kk,yzak(1,:))
+    toPlotForLatex(sprintf('z6dmcyzak2_%d_%d_%3.4f_%3.4f_%d',N,Nu,lambda,E,n),1:kk,yzak(2,:))
+    toPlotForLatex(sprintf('z6dmcyzad1_%3.4f',yzad(1,kk)),1:kk,yzad(1,:))
+    toPlotForLatex(sprintf('z6dmcyzad2_%3.4f',yzad(2,kk)),1:kk,yzad(2,:))
 end
 end
