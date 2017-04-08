@@ -2,31 +2,31 @@
 \section{Cyfrowy algorytm PID}
 
 W projekcie zosta³ wykorzystany regulator cyfrowy $PID$, którego parametry s¹ opisane poni¿szymi wzorami, gdzie 
-$K$ - wzmocnienie cz³onu P , $T_p$ - czas próbkowania, $T_i$ - czas zdwojenia cz³onu ca³kuj¹cego $I$, $T_d$ - czas wyprzedzenia cz³onu ró¿niczkuj¹cego $D$ , $j$ - numer toru. 
+$K$ - wzmocnienie cz³onu P , $T_p$ - czas próbkowania, $T_i$ - czas zdwojenia cz³onu ca³kuj¹cego $I$, $T_d$ - czas wyprzedzenia cz³onu ró¿niczkuj¹cego $D$ , $n_u$ - iloœæ sterowañ , $n_y$ - iloœæ wyjœæ. 
 
 \begin{equation}
-{r_0}^j=K^j*(1+T_p/(2*{T_i}^j)+{T_d}^j/T_p) 
+{r_0}^j=K^j*(1+T_p/(2*{T_i}^j)+{T_d}^j/T_p) \quad \forall j \in <1,n_u>
 \label{r0}
 \end{equation}
 
 
 \begin{equation}
-{r_1}^j=K^j*(T_p/(2*{T_i}^j)-2*{T_d}^j/T_p-1)
+{r_1}^j=K^j*(T_p/(2*{T_i}^j)-2*{T_d}^j/T_p-1) \quad \forall j \in <1,n_u> 
 \label{r1}
 \end{equation}
 
 \begin{equation}
-{r_2}^j=K*{T_d}^j/T_p
+{r_2}^j=K*{T_d}^j/T_p \quad \forall j \in <1,n_u>
 \label{r2}
 \end{equation}
-W ka¿dej iteracji pêtli sterowania jest obliczany uchyb wyjœcia obiektu od wartoœæ zadanej jego wyjœcia.
+W ka¿dej iteracji pêtli sterowania s¹ obliczane uchyby wyjœæ obiektu.
 \begin{equation}
-e(k)^j = Y^{\mathrm{zad}}(k)^j - Y(k)^j;
+e(k)^j = Y^{\mathrm{zad}}(k)^j - Y(k)^j \quad \forall j \in <1,n_y>
 \label{uchyb}
 \end{equation}
-Sterowanie regulatora zostaje wyliczone na bie¿¹c¹ chwile przy u¿yciu wzoru:
+Sterowania regulatora zostaj¹ wyliczone na bie¿¹c¹ chwile przy u¿yciu wzoru:
 \begin{equation}
-U(k)^j = {r_2}^j*e(k-2)^j + {r_1}^j*e(k-1)^j + {r_0}^j*e(k)^j + U(k-1)^j;
+U(k)^j = {r_2}^j*e(k-2)^i + {r_1}^j*e(k-1)^i + {r_0}^j*e(k)^i + U(k-1)^j \quad gdzie \quad j \in <1,n_u>, \quad i \in <1,n_y>
 \label{Uk}
 \end{equation}
 
@@ -83,7 +83,7 @@ y^{\mathrm{zad}}(k|k)\\
 \vdots\\
 y^{\mathrm{zad}}(k|k)
 \end{array}
-\right]_{\mathrm{Nxn_y}}
+\right]_{\mathrm{N*n_yx1}}
 \label{yzad}
 \end{equation}
 
@@ -94,7 +94,7 @@ y^{\mathrm{zad}}(k|k)
 \vdots\\
 \triangle u_{n_u}(k+N_u-1|k)
 \end{array}
-\right]_{\mathrm{Nxn_y}}
+\right]_{\mathrm{N*n_yx1}}
 \label{dUms}
 \end{equation}
 
@@ -105,7 +105,7 @@ y^{\mathrm{zad}}(k|k)
 \vdots\\
 \triangle u(k-(D-1))
 \end{array}
-\right]_{\mathrm{(D-1)xn_u}}
+\right]_{\mathrm{(D-1)*n_ux1}}
 \label{dUPm}
 \end{equation}
 
@@ -132,7 +132,7 @@ S_{2} & S_{1} & \ldots & 0\\
 \vdots & \vdots & \ddots & \vdots\\
 S_{N} & S_{N-1} & \ldots &  S_{N-N_{\mathrm{u}}+1}
 \end{array}
-\right]_{\mathrm{(Nxn_y)x(N_uXn_u)}}
+\right]_{\mathrm{(N*n_y)x(N_u*n_u)}}
 \label{Mm}
 \end{equation}
 
@@ -145,7 +145,7 @@ S_{3}-S_{1} & S_{4}-S_{2} & \ldots & S_{D+1}-S_{D-1}\\
 \vdots & \vdots & \ddots & \vdots\\
 S_{N+1}-S_{1} & S_{N+2}-S_{2} & \ldots &  S_{N+D-1}-S_{D-1}
 \end{array}
-\right]_{\mathrm{(Nxn_y)x((D-1)Xn_u)}}
+\right]_{\mathrm{(N*n_y)x((D-1)*n_u)}}
 \label{MPm}
 \end{equation}
 
@@ -175,14 +175,11 @@ W naszej regulacji potrzebujemy wyznaczyæ tylko pierwszy element macierzy $\tria
 gdzie:
 
 \begin{equation}
-e(k)=Y^{zad}(k)-Y(k)
+e(k)=y^{zad}(k)-y(k)
 \label{e}
 \end{equation}
 
-\begin{equation}
-k_e^j=\sum_{i=n_u}^{N*n_y} K(1:n_u,i)
-\label{kej}
-\end{equation}
+Poniewa¿ nasze $n_u=2$ i $n_y=2$ to:
 
 \begin{equation}
 \boldsymbol{k_e}=\left[
@@ -194,9 +191,11 @@ k_e^3 & k_e^4 \\
 \label{ke}
 \end{equation}
 
+Dla nieparzystych j $k_e^j$ to suma nieparzystych elementów (j+1)/2-tego wiersza macierzy K. Dla parzystych j $k_e^j$ to suma parzystych elementów j/2-tego wiersza macierzy K.
+
 \begin{equation}
 k_u=kM^P
 \label{ku}
 \end{equation}
 
-k to oznaczenie pierwszego wiersza macierzy K. Aktualne sterowanie otrzymujemy poprzez zsumowanie poprzedniego sterowania i aktualnie wyliczonego $\triangle u(k|k)$. 
+k to oznaczenie macierzy bêd¹cej $n_u$ pocz¹tkowymi wierszami macierzy K (u nas 2 pierwsze wiersze). Aktualne sterowanie otrzymujemy poprzez zsumowanie poprzedniego sterowania i aktualnie wyliczonego $\triangle u(k|k)$. 

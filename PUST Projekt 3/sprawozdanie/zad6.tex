@@ -1,63 +1,173 @@
-\chapter{Zadanie 6: Algorytm przy zak³óceniu zmiennym sinusoidalne}
+\chapter{Zadanie 6: Algorytmy przy zaszumionym pomiarze wyjœæ}
 
-W tym zadaniu zak³ócenia maj¹ charakter sygna³u sinusoidalnie zmiennego.
-Poni¿szy wykres przedstawia przebiegi wejœcia i wyjœcia obiektu sterowanego przy pomocy regulatgora DMC w wersji z kolejno nieuwzglêdnieniem ($U(k), Y(k)$) i uwzglêdnieniem ($Uz(k), Yz(k)$) mierzonych zak³óceñ.
+\section{PID}
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu1_1_1.0875_12.0000_0.5000_26.0560_34.6689_1.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_34.6689_1.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu2_1_1.8000_9.0000_0.5000_8.6129_34.6689_1.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy2_1_1.8000_9.0000_0.5000_34.6689_1.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,1$}
+	\label{szum01}
+\end{figure}
 
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
-	\begin{groupplot}[group style={group size=1 by 3,vertical sep={2 cm}},
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
 	width=0.9\textwidth,height=0.3\textwidth]
 	\nextgroupplot
 	[
-	xmin=0,xmax=150,ymin=-0.5,ymax=2,
+	xmin=0,xmax=510,ymin=-1.5,ymax=3.5,
 	xlabel={$k$},
-	ylabel={$U$},
-	xtick={0,25,50,75,100,125,150},
-	ytick={-0.5,0,0.5,1,1.5,2},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3},
 	y tick label style={/pgf/number format/1000 sep=},
 	]
-	\addplot[green,semithick] file {wykresy/6dmcu_8_1_0.3000_40_0.txt};
-	\addplot[blue,semithick] file {wykresy/6dmcu_8_1_0.3000_40_1.txt};
-		\legend{$U(k)$,$Uz(k)$,}
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu1_1_1.0875_12.0000_0.5000_30.1289_39.2142_2.000000e-01.txt};
 	\nextgroupplot
 	[
-	xmin=0,xmax=150,ymin=0,ymax=2,
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
 	xlabel={$k$},
-	ylabel={$Y$},
-	xtick={0,25,50,75,100,125,150},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
 	ytick={0,0.5,1,1.5,2},
 	y tick label style={/pgf/number format/1000 sep=},
 	legend pos=south east,
 	]
-	\addplot[green,semithick] file {wykresy/6dmcy_8_1_0.3000_40_0.txt};
-	\addplot[blue,semithick] file {wykresy/6dmcy_8_1_0.3000_40_1.txt};
-	\addplot[orange,semithick] file {wykresy/dmcyzad_1.0000.txt};
-	\legend{$Y(k)$,$Yz(k)$,$Y^{zad}(k)$}
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_39.2142_2.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
 	\nextgroupplot
 	[
-	xmin=0,xmax=150,ymin=-0.6,ymax=0.6,
+	xmin=0,xmax=510,ymin=-1.5,ymax=4,
 	xlabel={$k$},
-	ylabel={$Z$},
-	xtick={0,50,100,150},
-	ytick={-0.5,0,0.5},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu2_1_1.8000_9.0000_0.5000_9.0854_39.2142_2.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
 	y tick label style={/pgf/number format/1000 sep=},
 	legend pos=south east,
 	]
-	\addplot[red,semithick] file {wykresy/6z.txt};
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy2_1_1.8000_9.0000_0.5000_39.2142_2.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
 	\end{groupplot}
 	\end{tikzpicture}
-	\caption{Porównanie regulacji z i bez uwzglêdniania zak³óceñ w algorytmie sterowania}
-	\label{porbezZiZ}
+	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,2$}
+	\label{szum02}
 \end{figure}
-\FloatBarrier
 
-WskaŸnik regulacji, gdy zak³ócenia nie s¹ brane pod uwagê: $E = 18.3737$
-\
-
-WskaŸnik regulacji, gdy zak³ócenia s¹ brane pod uwagê: $E = 8.4010$
-\\
-
-Jak widaæ, mimo ¿e sinusoidalne zak³ócenia w obu przypadkach uniemo¿liwiaj¹ akceptowaln¹ jakoœæ regulacji, to uwzglêdnienie tych zak³óceñ pozwala na znacz¹ce zmieniejszenie b³êdu.
-
-
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-2,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu1_1_1.0875_12.0000_0.5000_49.8202_64.4973_5.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_64.4973_5.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu2_1_1.8000_9.0000_0.5000_14.6770_64.4973_5.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy2_1_1.8000_9.0000_0.5000_64.4973_5.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,5$}
+	\label{szum05}
+\end{figure}
