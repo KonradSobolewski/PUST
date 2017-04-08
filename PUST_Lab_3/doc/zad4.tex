@@ -1,0 +1,208 @@
+\chapter{Zadanie 4: Algorytmy PID i DMC}
+\section{Cyfrowy algorytm PID}
+
+W projekcie zosta³ wykorzystany regulator cyfrowy $PID$, którego parametry s¹ opisane poni¿szymi wzorami, gdzie 
+$K$ - wzmocnienie cz³onu $P$, $T_p$ - czas próbkowania, $T_i$ - czas zdwojenia cz³onu ca³kuj¹cego $I$, $T_d$ - czas wyprzedzenia cz³onu ró¿niczkuj¹cego $D$, $j$ - numer toru. 
+
+\begin{equation}
+{r_0}^j=K^j*(1+T_p/(2*{T_i}^j)+{T_d}^j/T_p) 
+\label{r0}
+\end{equation}
+
+
+\begin{equation}
+{r_1}^j=K^j*(T_p/(2*{T_i}^j)-2*{T_d}^j/T_p-1)
+\label{r1}
+\end{equation}
+
+\begin{equation}
+{r_2}^j=K*{T_d}^j/T_p
+\label{r2}
+\end{equation}
+W ka¿dej iteracji pêtli sterowania jest obliczany uchyb danego wyjœcia obiektu i wartoœci zadanej tego wyjœcia.
+\begin{equation}
+e(k)^j = Y^{\mathrm{zad}}(k)^j - Y(k)^j
+\label{uchyb}
+\end{equation}
+Sterowanie regulatora zostaje wyliczone na bie¿¹c¹ chwile przy u¿yciu wzoru:
+\begin{equation}
+U(k)^j = {r_2}^j*e(k-2)^j + {r_1}^j*e(k-1)^j + {r_0}^j*e(k)^j + U(k-1)^j
+\label{Uk}
+\end{equation}
+Na koñcu zotaj¹ na³o¿one na to sterowanie ograniczenia:
+\begin{eqnarray}
+0 \leq G1(k) \leq 100 \\
+0 \leq G2(k) \leq 100
+\label{ogr}
+\end{eqnarray}
+
+\section{Analityczny algorytm DMC}
+Do obliczeñ wykorzystujemy nastêpuj¹ce wzory:
+\begin{equation}
+\boldsymbol{y}^{\mathrm{zad}}(k)=\left[
+\begin{array}{c}
+y^{\mathrm{zad}}_1(k)\\
+\vdots\\
+y^{\mathrm{zad}}_{ny}(k)
+\end{array}
+\right]_{\mathrm{n_yx1}}
+\label{yzadm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{y}(k)=\left[
+\begin{array}{c}
+y_1(k)\\
+\vdots\\
+y_{ny}(k)
+\end{array}
+\right]_{\mathrm{n_yx1}}
+\label{ym}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{u}(k)=\left[
+\begin{array}{c}
+ u_1(k)\\
+\vdots\\
+u_{n_u}(k)
+\end{array}
+\right]_{\mathrm{n_ux1}}
+\label{Um}
+\end{equation}
+
+\begin{equation}
+\triangle\boldsymbol{u}(k)=\left[
+\begin{array}{c}
+\triangle u_1(k)\\
+\vdots\\
+\triangle u_{n_u}(k)
+\end{array}
+\right]_{\mathrm{n_ux1}}
+\label{dUm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{Y}^{\mathrm{zad}}(k)=\left[
+\begin{array}{c}
+y^{\mathrm{zad}}(k|k)\\
+\vdots\\
+y^{\mathrm{zad}}(k|k)
+\end{array}
+\right]_{\mathrm{Nxn_y}}
+\label{yzad}
+\end{equation}
+
+\begin{equation}
+\triangle\boldsymbol{U}(k)=\left[
+\begin{array}{c}
+\triangle u_1(k|k)\\
+\vdots\\
+\triangle u_{n_u}(k+N_u-1|k)
+\end{array}
+\right]_{\mathrm{Nxn_y}}
+\label{dUms}
+\end{equation}
+
+\begin{equation}
+\triangle\boldsymbol{U^P}(k)=\left[
+\begin{array}{c}
+\triangle u(k-1)\\
+\vdots\\
+\triangle u(k-(D-1))
+\end{array}
+\right]_{\mathrm{(D-1)xn_u}}
+\label{dUPm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{S_l}=\left[
+\begin{array}
+{cccc}
+s^{11}_l & s^{12}_l & \ldots & s^{1n_u}_l\\
+s^{21}_l & s^{22}_l & \ldots & s^{2n_u}_l\\
+\vdots & \vdots & \ddots & \vdots\\
+s^{n_y1}_l& s^{n_y2}_l & \ldots &  s^{n_yn_u}_l
+\end{array}
+\right]_{\mathrm{n_yxn_u}}
+\label{S}
+, l=1,...,D.
+\end{equation}
+
+\begin{equation}
+\boldsymbol{M}=\left[
+\begin{array}
+{cccc}
+S_{1} & 0 & \ldots & 0\\
+S_{2} & S_{1} & \ldots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+S_{N} & S_{N-1} & \ldots &  S_{N-N_{\mathrm{u}}+1}
+\end{array}
+\right]_{\mathrm{(Nxn_y)x(N_uXn_u)}}
+\label{Mm}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{M^P}=\left[
+\begin{array}
+{cccc}
+S_{2}-S_{1} & S_{3}-S_{2} & \ldots & S_{D}-S_{D-1}\\
+S_{3}-S_{1} & S_{4}-S_{2} & \ldots & S_{D+1}-S_{D-1}\\
+\vdots & \vdots & \ddots & \vdots\\
+S_{N+1}-S_{1} & S_{N+2}-S_{2} & \ldots &  S_{N+D-1}-S_{D-1}
+\end{array}
+\right]_{\mathrm{(Nxn_y)x((D-1)Xn_u)}}
+\label{MPm}
+\end{equation}
+
+\begin{equation}
+Y^0(k)=Y(k)+M^P
+\triangle U^P(k)
+\label{Y0}
+\end{equation}
+
+\begin{equation}
+K=(M^TM+\lambda*I)^{-1}M^T
+\label{K}
+\end{equation}
+
+\begin{equation}
+\triangle U(k)=K(Y^{zad}(k)-Y^0(k))
+\label{dU1}
+\end{equation}
+
+W naszej regulacji potrzebujemy wyznaczyæ tylko pierwszy element macierzy $\triangle U(k)$ czyli $\triangle u(k|k)$. W tym celu rozwijamy wzór do postaci:
+
+\begin{equation}
+\triangle u(k|k)=k_ee(k)-k_u\triangle\boldsymbol U^P
+\label{dukk}
+\end{equation}
+
+gdzie:
+
+\begin{equation}
+e(k)=Y^{zad}(k)-Y(k)
+\label{e}
+\end{equation}
+
+\begin{equation}
+k_e^j=\sum_{i=n_u}^{N*n_y} K(1:n_u,i)
+\label{kej}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{k_e}=\left[
+\begin{array}
+{cccc}
+k_e^1 & k_e^2 \\
+k_e^3 & k_e^4 \\
+\end{array}\right]
+\label{ke}
+\end{equation}
+
+\begin{equation}
+k_u=kM^P
+\label{ku}
+\end{equation}
+
+k to oznaczenie pierwszego wiersza macierzy K. Aktualne sterowanie otrzymujemy poprzez zsumowanie poprzedniego sterowania i aktualnie wyliczonego $\triangle u(k|k)$. 

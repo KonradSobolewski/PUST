@@ -1,0 +1,137 @@
+\chapter{Zadanie 5: Strojenie regulatora PID i DMC}
+Strojenie regulataora odby³o siê na podstawie oceny regulacji dla zaproponowaej trajektorii zmian sygna³ów zadanych sk³adaj¹cej siê z trzech skoków.
+Podczas strojenia, jeden z regulatorów jest zawsze wy³¹czony - ma wzmocnienie $K_p = 0$. Dobieramy dla niego odpowiednie nastawy, kieruj¹c siê zarówno ocen¹ jakoœciow¹ (charakter przebiegów sterowania i wyjœcia) jak i iloœciow¹ - wielkoœci¹ b³êdu $e$.
+Po dostrojeniu pierwszego regulatora, powinnien nast¹piæ proces doboru nastaw dla drugiego, jednak dla stanowiska grzewczego w laboratorium, sterowalne obiekty s¹ identyczne - ich regulatoary wiêc równie¿ powinny byæ takie same, nie wystêpuje zatem potrzeba ponownego strojenia. Gdy zostan¹ znalezione nastawy pierwszego regulatora, nale¿y uruchomiæ drugi z takimi samymi, i wtedy, jeœli zajdzie taka koniecznoœæ, ponownie skorygowaæ nastawy obu.
+
+\section{Regulator PID}
+
+\subsection{Pocz¹tkowe nastawy}
+Nastawy regulatora PID zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkowe przyjêliœmy nastawy otrzymane na poprzednich laboratoriach na stanowisku grzewczym, tj: $K_p = 4, T_i = 80, T_d = 3$. Drugi refgulator, jak wspomnine zosta³o we wstêpie, zosta³ wy³¹czony. Na rys \ref{PID1} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Jak widaæ, nie s¹ to nastawy optymalne; regulator jest bardzo powolny oraz wystêpuje uchyb ustalony. B³¹d wyjœcia $Y_1$ wyniós³: $E = 582.3934$.
+
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu1_4.0000_80.0000_3.0000.txt};
+	\addplot[green,semithick] file {wykresy/z4pidu2_0.0000_Inf_0.0000_6_60_1.txt};
+	\legend{$U_1$,$U_2$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=39.5,ymax=44,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900},
+	ytick={36,37,38,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidy1_4.0000_80.0000_3.0000.txt};
+	\addplot[red,semithick,densely dashed] file{wykresy/z4pidyzad1_41.6200_4_80_3.txt}; 
+	\addplot[green,semithick] file {wykresy/z4pidy2_0.0000_Inf_0.0000_4_80_3.txt};
+	\legend{$Y_1$,$Y_1^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu PID przy pocz¹tkowych nastawach  $K_p = 4, T_i = 80, T_d = 3$ steruj¹cego wejœciem $U_1$} 
+	\label{PID1}
+\end{figure}
+\FloatBarrier
+
+\subsection{Korygowanie  nastaw}
+Aby wyeliminowaæ uchyb ustalony, zwiêkszyliœmy $K_p$ o $2$. Aby uk³ad szybciej osi¹ga³ wartoœæ zadan¹, zwiêkszyliœmy równie¿ wp³yw cz³onu ca³kuj¹cego, zmniejszaj¹c parametr $T_i$ o $20$. Równie¿ postanowiliœmy zmniejszyæ wp³yw cz³onu ró¿niczkuj¹cego $T_d$ - wyhamowanie narastania wartoœci wayjœciowej w okolicach $k = 150$ mog³o wynikaæ ze zbyt du¿ej wartoœci tego parametru. Tak wiêc nowe nastawy to: $K_p = 6, T_i = 60, T_d = 1$. Dla takich nastaw osi¹gnêliœmy przebiegi jak na \ref{PID2}. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu1_6.0000_60.0000_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/z4pidu2_0.0000_Inf_0.0000_6_60_1.txt};
+	\legend{$U_1$,$U_2$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=39.5,ymax=44,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900},
+	ytick={36,37,38,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidy1_6.0000_60.0000_1.0000.txt};
+	\addplot[red,semithick,densely dashed] file{wykresy/z4pidyzad1_41.6200_6_60_1.txt}; 
+	\addplot[green,semithick] file {wykresy/z4pidy2_0.0000_Inf_0.0000_6_60_1.txt};
+	\legend{$Y_1$,$Y_1^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu PID przy skorygowanych nastawach  $K_p = 6, T_i = 60, T_d = 1$ steruj¹cego wejœciem $U_1$}
+	\label{PID2}
+\end{figure}
+\FloatBarrier
+
+Otrzymany regulator zapewnia znacznie lepsz¹ jakoœæ regulacji - nie doœæ, ze regulator jest szybszy, to osi¹ga wartoœæ zadan¹ w zadawalaj¹cym czasie a sterowanie siê poprawi³o. Wartoœæ b³êdu równie¿ uleg³a znacznemu pomniejszeniu: b³¹d wyjœcia $Y_1$ wyniós³: $E = 426.5754$.
+
+\subsection{Finalne nastawy}
+Z powodu presji czasu na laboratorium, nie byliœmy w stanie przeprowadziæ kolejnych eksperymentów, aby poprawiæ jakoœæ regulacji. Postanowiliœmy uruchomiæ oba regulatory z tymi nastawami, koryguj¹c delikatnie parametr $T_i$ w górê - odnieœlimy wra¿enie, ¿e przebiegi zaczynaj¹ mieæ oscylacyjny charakter spowodowany zbyt mocnym ca³kowaniem. Nowa wartoœæ: $T_i = 65$.
+Na poni¿szych wykresach mo¿na zaobserwowaæ dzia³anie gotowego dwuwymiarowego regulatora PID, z nastawami regulatorów pod³¹czonych do obu wejœæ równymi: $K_p = 6, T_i = 65, T_d = 1$.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidu1_6.0000_65.0000_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/z4pidu2_6.0000_65.0000_1.0000.txt};
+	\legend{$U_1$,$U_2$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=39,ymax=45.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={36,37,38,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44,44.5,45,45.5,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/z4pidy1_6.0000_65.0000_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/z4pidy2_6.0000_65.0000_1.0000.txt};
+	\addplot[red,semithick,densely dashed] file{wykresy/z4pidyzad1_41.6200.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/z4pidyzad2_44.0600.txt};
+	\legend{$Y_1$,$Y_2$,$Y_1^{zad}$,$Y_2^{zad}$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie dwuwymiarowego regulatora PID o nastawach  $K_p = 6, T_i = 65, T_d = 1$}
+	\label{PID_final}
+\end{figure}
+\FloatBarrier
+
+Jakoœæ regulacji jest zadowalaj¹ca. Oba wyjœcia stosunkowo szybko osi¹gaj¹ wartoœæ zadan¹, a b³¹d nie jest du¿y - $e = $. Podczas pierwszego, najwiêkszego skoku wartoœci zadanej $Y_1^{zad}$ ($dY_2^{zad}= 3$ ) wyjœcie $Y_2$ zdaje siê wpadaæ w oscylacje. Trudno nam okreœliæ, czy nie s¹ to chwilowe zewnêtrzne zak³ócenia, gdy¿ dla nastêpnych skoków wartoœci zadanej taka sytuacja nie wystêpuje. Nale¿a³oby przeprowadziæ wiêcej eksperymentów i ewentualnie zmniejszyæ jeszcze wp³yw ca³kowania. B³êdy osi¹gnê³y wartoœci: b³¹d wyjœcia $Y_1$ wyniós³: $E_1 = 464.1920$, natomiast b³¹d wyjœcia $Y_2$ wyniós³: $E_2 = 446.9870$. B³¹d sumaryczny: $E = 911.1790$. Mimo, ¿e wartoœæ b³êdu na wyjœciu $Y_1$ zwiêkszy³a siê, nale¿y pamiêtaæ, ¿e wiêc zjawisko to jest oczekiwane, gdy¿ teraz dzia³aj¹ oba regulatory, które sobie wzajemnie przeszkadzaj¹. 

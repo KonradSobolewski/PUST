@@ -1,0 +1,129 @@
+\chapter{Zadanie 2: Odpowiedzi skokowe}
+\section{Skroœnie odpowiedzi skokowe}
+Kolejnym zadaniem by³o wyznaczenie trzech skroœnych odpowiedzi skokowych obiektu. Wykonaliœmy skoki na grza³ce G1 i zmierzyliœmy wyjœcie obiektu na czuniku T3 rozpoczynaj¹cych siê z punktu pracy. Wyniki tego eksperymentu, razem z lini¹ pokazuj¹c¹ po³o¿enie punktu pracy, znajduj¹ siê na rysunku \ref{skoky2u1}. Dla przedstawionych odpowiedzi skok sterowania nastêpowa³ w chwili $k = 10$, co oznacza, ¿e dopiero od $k = 11$ wykresy przedstawiaj¹ w³aœciwe odpowiedzi skokowe. 
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=0.9\textwidth,
+xmin=0,xmax=310,ymin=41,ymax=44,
+xlabel={$k$},
+ylabel={$S(k)$},
+xtick={0,50,100,150,200,250,300,350},
+ytick={36,36.5,38,38.5,40,41,42,43,44},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/z2Y241.000041.0000.txt};
+\addplot[green,semithick] file {wykresy/z2Y246.000041.0000.txt};
+\addplot[magenta,semithick] file {wykresy/z2Y251.000041.0000.txt};
+
+\legend{$dU_1=\num{5}$,$dU_1=\num{10}$,$dU_1=\num{15}$,$Y_{pp}=\num{41.3}$}
+\end{axis}
+\end{tikzpicture}
+\caption{Wykresy $S_2(k)$ dla ró¿nych skoków sterowania z $U_{1pp} = 36$ o dU}
+\label{skoky2u1}
+\end{figure}
+
+\section{W³aœciwoœci statyczne obiektu}
+Trudnoœci sprawi³o nam okreœlenie, czy w³aœciwoœci statyczne posiadanego obiektu s¹ liniowe. Bior¹c dos³ownie koñcowe wartoœci wyjœcia skrioœnych odpowiedzi skokowych nale¿a³oby stwierdziæ, ¿e nie s¹. Nale¿y jednak pamiêtaæ o nastêpuj¹cych faktach:
+
+
+\begin{enumerate}
+	\item W okolicy obiektu wystêpowa³y nieuchronne zak³ócenia, które w znacz¹cy sposób wp³ynê³y na odczyty;
+	\item Analizowane s¹ odpowiedzi skroœne, które maj¹ stosunkowo ma³e wzmocnienie i szum bêdzie na nie z tego powodu mocniej wp³ywa³;
+	\item W trakcie trwania laboratorium punkt pracy przesuwa³ siê w górê, co rówie¿ utrudnia poprawn¹ interpretacjê wyniku;
+	\item Doœwiadczenia z poprzednich laboratoriów na tym obiekcie wskazuj¹, ¿e jest to obiekt liniowy.
+\end{enumerate}
+
+Maj¹c na uwadze powy¿sze fakty, mo¿na zauwa¿yæ w przebiegach pewne prawid³owoœci. Przesuwaj¹c wykresy, tak, aby mia³y punkt pracy na tym samym poziomie, widzimy, ¿e: przy skoku sterowania o $5\%$ temperatura podnios³a siê o oko³o $0,4$ stopnia, a przy skoku o $15\%$ o oko³o $1,2$ stopnia. Jak mo¿na zauwa¿yæ, wyjœcie wzros³o o oko³o 3 razy wiêksz¹ wartoœæ przy 3 razy wiêkszym skoku, wiêc zachowa³o siê liniowo. Gdyby za³o¿yæ, ¿e przy skoku o $10\%$ nast¹pi³y wiêksze zak³ócenia ni¿ przy innych i odczyt jest zbyt du¿y, to mo¿na by stwierdziæ, ¿e charakterystyka statyczna obiektu jest w przybli¿eniu liniowa, a jej wzmocnienie statyczne toru $y_2(u_1)$ wynosi oko³o $0,4/5 = 0,08$.
+
+Potwierdzaj¹ to wykresy odpowiesdzi skokowej nieskroœnej - na \ref{skoky1u1} zosta³y przedstawione charakterystyki $y_1(u_1)$ przesuniête do wspólnego punktu pracy:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=0,xmax=310,ymin=38,ymax=44.5,
+	xlabel={$k$},
+	ylabel={$S(k)$},
+	xtick={0,50,100,150,200,250,300,350},
+	ytick={36,36.5,38,39,40,41,42,43,44},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2presY141.000041.0000.txt};
+	\addplot[green,semithick] file {wykresy/z2presY146.000041.0000.txt};
+	\addplot[magenta,semithick] file {wykresy/z2presY151.000041.0000.txt};
+	
+	\legend{$dU_1=\num{5}$,$dU_1=\num{10}$,$dU_1=\num{15}$,$Y_{pp}=\num{41.3}$}
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Przesuniête do wspólnego punktu pracy wykresy $S_1(k)$ dla ró¿nych skoków sterowania z $U_{1pp} = 36$ o dU}
+	\label{skoky1u1}
+\end{figure}
+
+
+Widaæ na nich statytyczny charakter przebiegów - odleg³oœci miêdzy wartoœciami koñcowymi poszczególnych skoków s¹ bliskie tej samej wartoœci. Odczytujemy z niej wzmocnienie statyczne toru $y_1(u_1)$, które wynosi oko³o $2,85/10 = 0,285$. Jak mo¿na wnioskowaæ z tych wartoœci, wyjœcie $y_1$ na zmianê $u_1$ powinno reagowaæ w przybli¿eniu 2.5x mocniej, ni¿ wyjœcie $y_2$.
+
+Poniewa¿ obiekt jest idealnie symetryczny a obie grza³ki maj¹ takie same w³aœciwoœci, tory  $y_1(u_2)$ i $y_2(u_2)$ bêd¹ lustrzanym odbiciem torów dla wejœcia nr 1. Tak wiêc: wzmocnienie statyczne toru $y_1(u_2) = 0,08$, a wzmocnienie statyczne toru $y_2(u_2) = 0,285$.
+
+
+
+\section{W³aœciwoœci statyczne procesu $T1(G1,G2)$, $T3(G1,G2)$}
+
+Z powodu ograniczonego czasu na laboratorium, nie byliœmy w stanie zebraæ odpowiedzi dla ró¿nych wielu kombinacji obu wejœæ.
+Posiadaj¹c jednak wartoœci opisane w poprzednim podpunkcie, mo¿emy bez problemu utworzyæ trójwymiarowe wykresy obrazuj¹ce wyjœcie obu wyjœæ w zale¿noœci od obu wejœæ. Tworzymy je w oparciu o dwa fakty: stanowisko jest symetryczne - w³aœciwoœci odpowiednich torów ($y_1(u_1)$ i $y_2(u_2)$ oraz $y_1(u_2)$ i $y_2(u_1)$) s¹ identyczne  oraz zachowane s¹ w³aœciwoœci liniowe, mo¿emy wiêc skorzystaæ z zasady superpozycji: przyk³adowo, wyjœcie w stanie ustalonym $y_1$ dla $du_1 = 10$ i $du_2 = 15$ bêdzie wynikiem sumy: wartoœci $y_1$ w punkcie pracy, ró¿nicy miêdzy wartoœci¹ koñcow¹ i pocz¹tkow¹ odpowiedzi skokowej $y_1(u_1)$ dla skoku $du_1 = 10$ oraz ró¿nicy miêdzy wartoœci¹ koñcow¹ i pocz¹tkow¹ odpowiedzi skokowej $y_2(u_1)$ dla skoku $du_1 = 15$.
+
+Kompletne charakterystyki przedstawiaj¹ poni¿sze wykresy \ref{y1u1u2} i \ref{y2u1u2}.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.7\textwidth,
+	zmin=0,zmax=6,
+	xlabel={$dU_1$},
+	ylabel={$dU_2$},
+	zlabel={$dY_1$},
+	xtick={0,5,10,15},
+	ytick={0,5,10,15},
+	ztick={0,2,4,6,8},
+	%ytick={19,20,21},
+	%y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot3[mesh, mesh/cols=4] file {wykresy/z2Y1U1U2.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{$y_1(u_1,u_2)$}
+	\label{y1u1u2}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.7\textwidth,
+	zmin=0,zmax=6,
+	xlabel={$dU_1$},
+	ylabel={$dU_2$},
+	zlabel={$dY_2$},
+	xtick={0,5,10,15},
+	ytick={0,5,10,15},
+	ztick={0,2,4,6,8},
+	%ytick={19,20,21},
+	%y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot3[mesh, mesh/cols=4] file {wykresy/z2Y2U1U2.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{$y_2(u_1,u_2)$}
+	\label{y2u1u2}
+\end{figure}
+\FloatBarrier
+
+Nale¿y zaznaczyæ, ¿e nie tworz¹ one idealnych p³aszczyzn - wynika to z istoty rzeczywistego obiektu, jakim jest stanowisko grzewcze oraz zak³óceñ otoczenia, których obecnoœæ powoduje obarczenie odczytów nieuchronnym b³êdem.
+
+
+
