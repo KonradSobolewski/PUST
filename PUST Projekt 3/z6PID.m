@@ -1,4 +1,4 @@
-function [ E ] = z4PID( K1,Ti1,Td1,K2,Ti2,Td2,var,draw,latex )
+function [ E ] = z6PID( K1,Ti1,Td1,K2,Ti2,Td2,var,n,draw,latex )
 
 Tp=0.5;
 kk=510;
@@ -15,12 +15,13 @@ e=zeros(2,kk);
 yzad=y;
 yzad(1,startk:kk)=1;
 yzad(2,260:kk)=1;
+yzak=(2*rand(2,kk)-1)*n;
 for k=startk:kk; %glówna petla symulacyjna
     %symulacja obiektu
     y(1,k)=symulacja_obiektu3y1(u(1,k-5),u(1,k-6),u(2,k-2),u(2,k-3),y(1,k-1),y(1,k-2));
     y(2,k)=symulacja_obiektu3y2(u(1,k-6),u(1,k-7),u(2,k-4),u(2,k-5),y(2,k-1),y(2,k-2));
     %uchyb regulacji
-    e(:,k)=yzad(:,k)-y(:,k);
+    e(:,k)=yzad(:,k)-y(:,k)-yzak(:,k);
     %sygnaá steruj¹cy regulatora PID
     if var==1
         u(1,k)=r2(1)*e(1,k-2)+r1(1)*e(1,k-1)+r0(1)*e(1,k)+u(1,k-1);
@@ -39,19 +40,19 @@ end
 E=E1+E2;
 if(draw)
     
-    subplot(221)
+    subplot(321)
     plot(u(1,:));
     title({'Algorytm PID ';['K = ', num2str(K1), ', Ti = ', num2str(Ti1),', Td = ',num2str(Td1)];['E = ',num2str(E1)]; ' '});
     xlabel('k')
     ylabel('U1(k)')
     hold on;
-    subplot(222)
+    subplot(322)
     plot(u(2,:));
     title({'Algorytm PID ';['K = ', num2str(K2), ', Ti = ', num2str(Ti2),', Td = ',num2str(Td2)];['E = ',num2str(E2)]; ' '});
     xlabel('k')
     ylabel('U2(k)')
     hold on;
-    subplot(223)
+    subplot(323)
     plot(y(1,:));
     title({'E= ',num2str(E)})
     hold on;
@@ -60,7 +61,7 @@ if(draw)
     xlabel('k')
     ylabel('Y1(k)')
     hold on;
-    subplot(224)
+    subplot(324)
     plot(y(2,:));
     title({'E= ',num2str(E)})
     hold on;
@@ -69,16 +70,22 @@ if(draw)
     xlabel('k')
     ylabel('Y2(k)')
     hold on;
+    subplot(325)
+    plot(yzak(1,:))
+    subplot(326)
+    plot(yzak(2,:))
     
 end
 
 if(latex)
-    toPlotForLatex(sprintf('z4pidu1_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f',var,K1,Ti1,Td1,E1,E),1:kk,u(1,:))
-    toPlotForLatex(sprintf('z4pidu2_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f',var,K2,Ti2,Td2,E2,E),1:kk,u(2,:))
-    toPlotForLatex(sprintf('z4pidy1_%d_%3.4f_%3.4f_%3.4f_%3.4f',var,K1,Ti1,Td1,E),1:kk,y(1,:))
-    toPlotForLatex(sprintf('z4pidy2_%d_%3.4f_%3.4f_%3.4f_%3.4f',var,K2,Ti2,Td2,E),1:kk,y(2,:))
-    toPlotForLatex(sprintf('z4pidyzad1_%3.4f',yzad(1,kk)),1:kk,yzad(1,:))
-    toPlotForLatex(sprintf('z4pidyzad2_%3.4f',yzad(2,kk)),1:kk,yzad(2,:))
+    toPlotForLatex(sprintf('z6pidu1_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f',var,K1,Ti1,Td1,E1,E),1:kk,u(1,:))
+    toPlotForLatex(sprintf('z6pidu2_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f',var,K2,Ti2,Td2,E2,E),1:kk,u(2,:))
+    toPlotForLatex(sprintf('z6pidy1_%d_%3.4f_%3.4f_%3.4f_%3.4f',var,K1,Ti1,Td1,E),1:kk,y(1,:))
+    toPlotForLatex(sprintf('z6pidy2_%d_%3.4f_%3.4f_%3.4f_%3.4f',var,K2,Ti2,Td2,E),1:kk,y(2,:))
+    toPlotForLatex(sprintf('z6pidyzak1_%d_%3.4f_%3.4f_%3.4f_%3.4f_%d',var,K1,Ti1,Td1,E,n),1:kk,yzak(1,:))
+    toPlotForLatex(sprintf('z6pidyzak2_%d_%3.4f_%3.4f_%3.4f_%3.4f_%d',var,K2,Ti2,Td2,E,n),1:kk,yzak(2,:))
+    toPlotForLatex(sprintf('z6pidyzad1_%3.4f',yzad(1,kk)),1:kk,yzad(1,:))
+    toPlotForLatex(sprintf('z6pidyzad2_%3.4f',yzad(2,kk)),1:kk,yzad(2,:))
 end
 
 end
