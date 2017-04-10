@@ -1,4 +1,4 @@
-function [ E ] = z6DMC(N,Nu,lambda,n,draw,latex)
+function [ E ] = z4DMC(N,Nu,lambda,draw,latex)
 N=round(N);
 Nu=round(Nu);
 load('z3Y1U1.txt');
