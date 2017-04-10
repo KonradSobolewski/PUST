@@ -43,7 +43,7 @@ for i=1:N
       end;      
    end;
 end;
-K=(cell2mat(M)'*cell2mat(M)-diag(ones(1,Nu*nu)*lambda))^(-1)*cell2mat(M)';
+K=(cell2mat(M)'*cell2mat(M)+diag(ones(1,Nu*nu)*lambda))^(-1)*cell2mat(M)';
 ku=K(1:nu,:)*cell2mat(MP);
 ke1=sum(K(1,1:2:(N*ny)));
 ke2=sum(K(1,2:2:(N*ny)));
