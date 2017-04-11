@@ -1,6 +1,6 @@
 function [ E1,E2,E ] = z4DMC(N,Nu,lambda)%,latex)
 addpath ('F:\SerialCommunication'); % add a path
-initSerialControl COM3 % initialise com port
+initSerialControl COM5 % initialise com port
 N=round(N);
 Nu=round(Nu);
 load('aprskoky1u1.txt');
@@ -25,7 +25,7 @@ ny=2;
 nu=2;
 u=diag(Upp)*ones(nu,kk);
 y=diag(Ypp)*ones(ny,kk);
-yzad=Ypp*ones(ny,kk);
+yzad=y;
 yzad(1,startk1:kk)=Ypp(1)+3;
 yzad(2,startk2:kk)=Ypp(2)+3;
 yzad(1,startk3:kk)=Ypp(1)+1;
@@ -81,6 +81,11 @@ for k=10:kk
     elseif u0(2,k)>umax0(2)
         u0(2,k)=umax0(2);
     end
+    if u0(1,k)<umin0(1)
+        u0(1,k)=umin0(1);
+    elseif u0(1,k)>umax0(1)
+        u0(1,k)=umax0(1);
+    end
     u(:,k)=u0(:,k)+Upp';
     sendControls([1,2,5,6],[50,50,u(1,k),u(2,k)]);
     
@@ -96,12 +101,12 @@ for k=10:kk
     ylabel('sterowanie u2')
     subplot(2,2,3)
     plot(y(1,:));
-    title(y1)
+    title('y1')
     xlabel('k')
     ylabel('wyjœcie y1')
     subplot(2,2,4)
     plot(y(2,:));
-    title(y2)
+    title('y2')
     xlabel('k')
     ylabel('wyjœcie y2')
     drawnow
