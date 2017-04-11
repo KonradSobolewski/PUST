@@ -1,6 +1,10 @@
 \chapter{Zadanie 6: Algorytmy przy zaszumionym pomiarze wyjœæ}
 
 \section{PID}
+
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,1}
+
+Jak widaæ na wykresie \ref{szum01}, dla amplitudy szumu o wartoœci $0,1$ jakoœæ sterowania jest wci¹¿ dosyæ dobra. B³¹d wyniós³ $E = 34.6689$.
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -28,7 +32,7 @@
 	]
 	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_34.6689_1.000000e-01.txt};
 	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
-	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\legend{$Y_1$,$Y_{1_{zad}}$}]
 	\nextgroupplot
 	[
 	xmin=0,xmax=510,ymin=-1,ymax=4,
@@ -57,6 +61,10 @@
 	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,1$}
 	\label{szum01}
 \end{figure}
+\FloatBarrier
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,2}
+
+Efekt zaszumienia pomiaru wyjœcia obiektu szumem o rozk³adzie jednostajnym i amplitudzie 0,2 zosta³ zaprezentowany na wykresie \ref{szum02}, Jakoœæ regulacji jest akcpetowalna, chocia¿ przebiegi s¹ dalekie od g³adkich. B³¹d niewiele wiêkszy ni¿ ten w poprzednim podpunckie, wyniós³ $E = 39.2142$.
 
 \begin{figure}[tb]
 	\centering
@@ -85,7 +93,7 @@
 	]
 	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_39.2142_2.000000e-01.txt};
 	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
-	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\legend{$Y_1$,$Y_{1_{zad}}$}]
 	\nextgroupplot
 	[
 	xmin=0,xmax=510,ymin=-1.5,ymax=4,
@@ -114,7 +122,9 @@
 	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,2$}
 	\label{szum02}
 \end{figure}
-
+\FloatBarrier
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,5}
+Gdy b³êdu pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$, algorytm staje siê nieskuteczny. B³¹d wynosi a¿ $E = 57.8277$, a oscylacje sygna³u wyjœciowego przyjmuj¹ wartoœci a¿ +/- 0,4. Sygna³ steruj¹cy zmienia siê z tak¹ szybkoœci¹ i ma tak du¿¹ amplitudê, ¿e z trudnoœci¹ mo¿na dostrzec chwile $k$ zmiany wartoœci zadanych. Wykres \ref{szum05}. 
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -142,7 +152,7 @@
 	]
 	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_64.4973_5.000000e-01.txt};
 	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
-	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\legend{$Y_1$,$Y_{1_{zad}}$}]
 	\nextgroupplot
 	[
 	xmin=0,xmax=510,ymin=-3,ymax=4,
@@ -171,3 +181,6 @@
 	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,5$}
 	\label{szum05}
 \end{figure}
+\FloatBarrier
+\subsection{Wnioski}
+Regulatory wykazuj¹ siê zadowalaj¹c¹ odpornoœci¹ na szumy pomiarowe w sygnale wyjœciowym. Zarówno dla amplitudy $0,1$ jak i $0,2$ sygna³ wyjœciowy jak i steruj¹cy maj¹ zadowalaj¹ce przebiegi. Dla amplitudy $0,5$ regulatory nie pracuj¹ prawid³owo. Oprócz tego warto zauwa¿yæ, ¿e regulator nr 1 jest wra¿liwszy na szumy - amplitudy s¹ wiêksze na jego przebiegach.  
