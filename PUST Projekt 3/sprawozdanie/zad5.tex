@@ -790,3 +790,305 @@ Dla naszego obiektu wariant drugi jest nieskuteczny.
 	\label{chujowy2}
 \end{figure}
 \section{Regulator DMC}
+
+Nastawy regulatora $DMC$ zosta³y dobrane eksperymentalnie.
+Regulator $DMC$ korzysta z odpowiedzi skokowej $s$ uzyskanej w punkcie 3.
+
+Obserwuj¹c obiekt bezpiecznie za³o¿yliœmy, ¿e jego horyzont dynamiki jest równy $D = 200$. Tak¹ równie¿ przyjêliœmy wartoœæ pocz¹tkow¹ $N$ oraz $N_u$, natomast pierwotn¹ wartoœci¹ $\lambda$ by³o $1$, tj: $N = 200, N_u = 200, \lambda = 1$ rys. \ref{dmc1}.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.27\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu1_200_200_1.0000_8.8166.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy1_200_200_1.0000_25.1526.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu2_200_200_1.0000_16.3360.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy2_200_200_1.0000_25.1526.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Regulator DMC}
+	\label{dmc1}
+\end{figure}
+\FloatBarrier
+
+Nastêpnie próbowaliœmy, w celu zmniejszenia z³o¿onoœci obliczeniowej obni¿yæ parametr N: jak siê okaza³o, jego wp³yw dla wartoœci powy¿ej $70$ jest znikomy. Efekty eksperymentu dla ró¿nych wartoœci zosta³y przedstawione na poni¿szym wykresie:
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.27\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu1_70_200_1.0000_8.8166.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcu1_40_200_1.0000_8.8174.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcu1_20_200_1.0000_9.9884.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcy1_70_200_1.0000_25.1526.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcy1_40_200_1.0000_25.1585.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy1_20_200_1.0000_28.3286.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad1_1.0000.txt};
+	\legend{$N = 70$,$N = 40$,$N = 20$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu2_70_200_1.0000_16.3360.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcu2_40_200_1.0000_16.3411.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcu2_20_200_1.0000_18.3402.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcy2_70_200_1.0000_25.1526.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcy2_40_200_1.0000_25.1585.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy2_20_200_1.0000_28.3286.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad2_1.0000.txt};
+	\legend{$N = 70$,$N = 40$,$N = 20$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Regulator DMC strojenie $N$}
+	\label{dmc2}
+\end{figure}
+\FloatBarrier
+
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $N = 70$: $E = 25,1526$ 
+	\item $N = 40$: $E = 25,1585$ 
+	\item $N = 20$: $E = 28,3286$ 
+\end{itemize}\
+
+
+Zdecydowaliœmy wiêc ustawiæ $N$ na $70$ - b³¹d jest najmniejszy,przeregulowanie mniejsze. Eksperyment wykaza³, ¿e zmniejszanie $N$ prowadzi do pogorszenia przebiegu. Nastêpnym parametrem, na którego minimalizacji nam zale¿y jest $N_u$:
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.27\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcu1_70_2_1.0000_11.2280.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcu1_70_6_1.0000_9.4875.txt};
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu1_70_10_1.0000_9.2754.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcy1_70_10_1.0000_25.0205.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcy1_70_6_1.0000_24.9633.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy1_70_2_1.0000_28.5941.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad1_1.0000.txt};
+	\legend{$N_u = 10$,$N_u = 6$,$N_u = 2$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu2_70_10_1.0000_15.7451.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcu2_70_6_1.0000_15.4758.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcu2_70_2_1.0000_17.3661.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcy2_70_10_1.0000_25.0205.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcy2_70_6_1.0000_24.9633.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy2_70_2_1.0000_28.5941.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad2_1.0000.txt};
+	\legend{$N_u = 10$,$N_u = 6$,$N_u = 2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Regulator DMC strojenie $N_u$}
+	\label{dmc3}
+\end{figure}
+\FloatBarrier
+
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $N_u = 10$: $E = 25,0205$ 
+	\item $N_u = 6$: $E = 24,9633$ 
+	\item $N_u = 2$:  $E = 28,5941$ 		 
+\end{itemize}\
+
+Jak widaæ, dla $N_u = 6$ wyjœcie najszybciej zbiega do wartoœci zadanej,  sterowanie jest tylko odrobinê ostrzejsze od $N_u = 2$ , a b³¹d jest najmniejszy.
+Nastêpnym parametrem do dobrania jest  $\lambda$:
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.27\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu1_70_6_0.5000_9.3605.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcu1_70_6_0.3000_9.0269.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcu1_70_6_0.1000_7.7271.txt};
+	\addplot[purple,semithick] file {wykresy/4dmc/z4dmcu1_70_6_0.0100_5.9808.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcy1_70_6_0.5000_23.7389.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcy1_70_6_0.3000_22.9920.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy1_70_6_0.1000_21.5220.txt};
+	\addplot[purple,semithick] file {wykresy/4dmc/z4dmcy1_70_6_0.0100_19.4842.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad1_1.0000.txt};
+	\legend{$\lambda = 0.5$,$\lambda = 0.3$,$\lambda = 0.1$,$\lambda = 0.01$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcu2_70_6_0.5000_14.3784.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcu2_70_6_0.3000_13.9650.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcu2_70_6_0.1000_13.7949.txt};
+	\addplot[purple,semithick] file {wykresy/4dmc/z4dmcu2_70_6_0.0100_13.5033.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/4dmc/z4dmcy2_70_6_0.5000_23.7389.txt};
+	\addplot[orange,semithick] file {wykresy/4dmc/z4dmcy2_70_6_0.3000_22.9920.txt};
+	\addplot[green,semithick] file {wykresy/4dmc/z4dmcy2_70_6_0.1000_21.5220.txt};
+	\addplot[purple,semithick] file {wykresy/4dmc/z4dmcy2_70_6_0.0100_19.4842.txt};
+	\addplot[red,semithick] file {wykresy/4dmc/z4dmcyzad2_1.0000.txt};
+	\legend{$\lambda = 0.5$,$\lambda = 0.3$,$\lambda = 0.1$,$\lambda = 0.01$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Regulator DMC strojenie $\lambda$}
+	\label{dmc4}
+\end{figure}
+\FloatBarrier
+
+WskaŸnik regulacji $E$ dla tych nastaw :\\
+\begin{itemize}
+	\item $\lambda = 0,5$: 	$E = 23,7389$ 
+	\item $\lambda = 0,3$:  $E = 22,9920$ 
+	\item $\lambda = 0,1$:  $E = 21,5220$ 
+	\item $\lambda = 0,01$:  $E = 19,4842$ 		 
+\end{itemize}\
+
+
+Zmniejszaj¹c $\lambda$, uzyskujemy drastyczn¹ poprawê wskaŸnika jakoœci regulacji, jednak¿e kosztem sterowania. Zbyt gwa³towne sterowanie nie jest po¿¹dane - mo¿e wp³ywaæ niekorzystnie na elementy wykonawcze uk³adu sterowania.
+Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e poni¿ej wartoœci $\lambda = 0,3$ zysk w jakoœci sterowania jest niewielki, a skok sterowania du¿o ostrzejszy,dodatkowo zbli¿aj¹c siê do 0 zauwa¿amy niepo¿¹dane zachwiania torów wyjœciowych co zaburza p³ynnoœæ przebiegów, postanowiliœmy zatrzymaæ tê wielkoœæ $\lambda = 0,3$.
+
+
+Koñcowe wartoœci dobranego regulatora DMC:  $N = 70, N_u = 6, \lambda = 0,3$.
