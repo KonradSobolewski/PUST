@@ -3,18 +3,22 @@ function [ E ] = z7PID( K1,Ti1,Td1,K2,Ti2,Td2,var,n,draw,latex )
 Tp=0.5;
 kk=860;
 startk=10;
+%wybór wariantu
 if var~=1 && var~=2
     error('Wybierz wariant 1 lub 2.')
 end
+%obliczanie parametrów regulatora
 r0=[K1*(1+Tp/(2*Ti1)+Td1/Tp);K2*(1+Tp/(2*Ti2)+Td2/Tp)];
 r1=[K1*(Tp/(2*Ti1)-2*Td1/Tp-1);K2*(Tp/(2*Ti2)-2*Td2/Tp-1)];
 r2=[K1*Td1/Tp;K2*Td2/Tp];
+%inicjalizacja wektorów
 u=zeros(2,kk);
 y=zeros(2,kk);
 e=zeros(2,kk);
 yzad=y;
 yzad(1,startk:kk)=1;
 yzad(2,startk:kk)=1;
+%zak³ócenia
 yzak=y;
 yzak(1,260:kk)=n;
 yzak(2,410:kk)=n;
@@ -26,7 +30,7 @@ for k=startk:kk; %glówna petla symulacyjna
     y(2,k)=symulacja_obiektu3y2(u(1,k-6),u(1,k-7),u(2,k-4),u(2,k-5),y(2,k-1),y(2,k-2))+yzak(2,k);
     %uchyb regulacji
     e(:,k)=yzad(:,k)-y(:,k);
-    %sygnaá steruj¹cy regulatora PID
+    %sygna³ steruj¹cy regulatora PID
     if var==1
         u(1,k)=r2(1)*e(1,k-2)+r1(1)*e(1,k-1)+r0(1)*e(1,k)+u(1,k-1);
         u(2,k)=r2(2)*e(2,k-2)+r1(2)*e(2,k-1)+r0(2)*e(2,k)+u(2,k-1);
@@ -35,6 +39,7 @@ for k=startk:kk; %glówna petla symulacyjna
         u(2,k)=r2(2)*e(1,k-2)+r1(2)*e(1,k-1)+r0(2)*e(1,k)+u(2,k-1);
     end;
 end;
+%obliczanie b³êdów
 E1=0;
 E2=0;
 for k=1:kk
@@ -42,6 +47,7 @@ for k=1:kk
     E2=E2+((yzad(2,k)-y(2,k))^2);
 end
 E=E1+E2;
+%rysowanie wykresów
 if(draw)
     
     subplot(321)
@@ -80,7 +86,7 @@ if(draw)
     plot(yzak(2,:))
     
 end
-
+%eksport dla latexa
 if(latex)
     toPlotForLatex(sprintf('z7pidu1_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f_%d',var,K1,Ti1,Td1,E1,E,n),1:kk,u(1,:))
     toPlotForLatex(sprintf('z7pidu2_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f_%d',var,K2,Ti2,Td2,E2,E,n),1:kk,u(2,:))
