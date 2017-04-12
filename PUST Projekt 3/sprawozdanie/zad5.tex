@@ -3,10 +3,10 @@
 \section{Regulator PID}
 \subsection{Wariant pierwszy}
 
-Pierwszy wariant obejmuje oddzia³ywanie uchybu pierwszego wyjœcia na pierwszy sygna³ steruj¹cy, drugiego wyjœcia na na drugi sygna³ steruj¹cy. \\
-Pierwszym krokiem strojenia regulatora jest wy³¹czenie drugiego wyjœcia obiektu, a nastêpnie dobranie parametrów regulatora wy³¹cznie dla pierwszego wyjœcia. Po uzyskaniu zadawalaj¹cych wyników analogicznie postêpuje z wyjœciem drugim. Po dostrojeniu obu torów uruchamiamy ca³y regulator i dokonujemy ewentualnych poprawek nastaw dla poprawy przebiegów. W trakcie strojenia obu wyjœæ zosta³a wykorzystana metoda in¿ynierska.\\
+Pierwszy wariant obejmuje oddzia³ywanie uchybu pierwszego wyjœcia na pierwszy sygna³ steruj¹cy oraz drugiego wyjœcia na drugi sygna³ steruj¹cy. \\
+Pierwszym krokiem strojenia regulatora jest wy³¹czenie jednego z regulatorów i  nastêpnie dobranie parametrów drugiego regulatora. Po uzyskaniu zadawalaj¹cych wyników analogicznie postêpuje z drugim regulatorem. Po oddzielnym dostrojeniu obu regulatorów mo¿emu uruchomiæ je jednoczeœnie i dokonaæ ewentualnych poprawek nastaw w celu poprawy przebiegów. W trakcie strojenia obu regulatorów zosta³a wykorzystana metoda in¿ynierska.\\
 \\
-Rozpoczêcie strojenia toru pierwszego wyjœcia rozpoczêliœmy od wprowadzenia regulatora $P_1$ w nieskoñczone oscylacje rys. \ref{oscylacje}. Efekt ten zosta³ uzyskany dla wzmocnienia o wartoœci $K_{k_1} = 4,35$.
+Rozpoczêcie strojenia pierwszego regulatora $P_1$ rozpoczêliœmy od wprowadzenia go w niegasn¹ce oscylacje (rys. \ref{oscylacje}). Efekt ten zosta³ uzyskany dla wzmocnienia o wartoœci $K_{k_1} = 4,35$.
 
 \begin{figure}[tb]
 	\centering
@@ -38,17 +38,17 @@ Rozpoczêcie strojenia toru pierwszego wyjœcia rozpoczêliœmy od wprowadzenia regu
 	\legend{$Y_1$,$Y_{1_{zad}}$}
 	\end{groupplot}
 	\end{tikzpicture}
-	\caption{Regulator $P_1$ ze sta³ymi oscylacjami}
+	\caption{Regulator $P_1$ z niegasn¹cymi oscylacjami}
 	\label{oscylacje}
 \end{figure}
 \FloatBarrier
-W nastêpnym kroku przeprowadziliœmy dobranie parametrów regulatora $PI_1$ rys. \ref{strojeniePI}. Przy wzmocnieniu $K_1 = 0,5K_{k_1}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych wartoœci wybraliœmy $T_{i_1} = 12$ jako najlepszy wynik. Mo¿na zauwa¿yæ, i¿ przebieg wyjœcia dla wspomnianego parametru charakteryzuje siê najlepszym czasem regulacji przy stosunkowo niskim przeregulowaniu. Bior¹c pod uwagê wartoœæ b³êdów :
+Nastêpny krok polega³ na doborze parametru $PI_1$ (rys. \ref{strojeniePI}). Przy wzmocnieniu $K_1 = 0,5K_{k_1}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych poni¿ej wartoœci wybraliœmy $T_{i_1} = 12$ jako najlepszy wynik. Mo¿na zauwa¿yæ, ¿e przebieg wyjœcia dla wspomnianego parametru charakteryzuje siê najlepszym czasem regulacji przy stosunkowo niskim przeregulowaniu. Bior¹c pod uwagê wartoœæ b³êdów :
 \begin{itemize}
 	\item $T_i = 10$ = $168,88$,
 	\item $T_i = 12$ = $168,41$,
 	\item $T_i = 15$ = $167,98$,
 \end{itemize}
-zauwa¿amy, ¿e ró¿nice miêdzy nimi s¹ bardzo ma³e. Z tego powodu g³ównym aspektem wyboru by³a ocena jakoœciowa przebiegu. 
+zauwa¿amy, ¿e ró¿nice miêdzy nimi s¹ bardzo ma³e. Z tego powodu g³ównym aspektem wyboru by³a ocena jakoœciowa przebiegu.
 
 \begin{figure}[tb]
 	\centering
@@ -89,16 +89,17 @@ zauwa¿amy, ¿e ró¿nice miêdzy nimi s¹ bardzo ma³e. Z tego powodu g³ównym aspektem
 \end{figure}
 \FloatBarrier
 W kolejnym kroku zosta³ dobrany parametr $T_{d_1}$ regulatora $PID_1$.
-Z poœród zaprezentowanych wartoœci rys. \ref{strojeniePID} najlepszy przebieg o dobrym czasie regulacji, najni¿szym przeregulowaniu oraz zadawalaj¹cej p³ynnoœci regulacji uzyskaliœmy dla wartoœci $T_{d_1} = 0,5$.
+Z poœród zaprezentowanych wartoœci na rys. \ref{strojeniePID}, najlepszy przebieg, tj.. o dobrym czasie regulacji, najni¿szym przeregulowaniu oraz zadawalaj¹cej p³ynnoœci regulacji uzyskaliœmy dla wartoœci $T_{d_1} = 0,5$.
 Wartoœci b³êdów :
 \begin{itemize}
 	\item $T_d = 0,2$ = $6.39$,
 	\item $T_d = 0,5$ = $5.81$,
 	\item $T_d = 1$ = $5.43$,
 \end{itemize}
-Mimo, i¿ z oceny iloœciowej wynika najmniejsza wartoœæ b³êdu dla $T_{d_1} = 1$ postanowiliœmy pozostaæ przy wartoœci $T_{d_1} = 0,5$, gdy¿ niesie ze sob¹ wiêksze korzyœci.\\
+Mimo ¿e z oceny iloœciowej wynika najmniejsza wartoœæ b³êdu dla $T_{d_1} = 1$, postanowiliœmy pozostaæ przy wartoœci $T_{d_1} = 0,5$, gdy¿ ma zauwa¿alnie lepsze przebiegi.\\
 Nastawy pierwszego toru wyjœcia regulatora $PID_1$ :
-$$K = 2,175 , T_i = 12 , T_d = 0,5$$
+
+$$K = 2,175, T_i = 12, T_d = 0,5$$
 
 \begin{figure}[tb]
 	\centering
@@ -139,7 +140,7 @@ $$K = 2,175 , T_i = 12 , T_d = 0,5$$
 \end{figure}
 \FloatBarrier
 
-W tym etapie tor pierwszy zosta³ wy³¹czony, a przeszliœmy do strojenia drugiego toru wyjœcia. W tym celu wprowadziliœmy regulator $P_2$ w sta³e oscylacje dla $K_{k_2}=7,2$.
+Na tym etapie regulator pierwszy, który ma ju¿ dobrane nastawy, zosta³ wy³¹czony i przeszliœmy do strojenia drugiego regulatora. W tym celu wprowadziliœmy regulator $P_2$ w niegasn¹ce oscylacje (otrzymaliœmy je dla $K_{k_2}=7,2$).
 
 \begin{figure}[tb]
 	\centering
@@ -171,18 +172,18 @@ W tym etapie tor pierwszy zosta³ wy³¹czony, a przeszliœmy do strojenia drugiego 
 	\legend{$Y_2$,$Y_{2_{zad}}$}
 	\end{groupplot}
 	\end{tikzpicture}
-	\caption{Regulator $P_2$ ze sta³ymi oscylacjami}
+	\caption{Regulator $P_2$ z niegasn¹cymi oscylacjami}
 	\label{oscylacje2}
 \end{figure}
 \FloatBarrier
 
-W nastêpnym kroku przeprowadziliœmy dobranie parametrów regulatora $PI_2$ rys. \ref{strojeniePI2}. Przy wzmocnieniu $K_2 = 0,5K_{k_2}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych wartoœci wybraliœmy $T_{i_2} = 9$ jako najlepszy wynik. Mo¿na zauwa¿yæ, i¿ przebieg wyjœcia dla wspomnianego parametru charakteryzuje siê najlepszym czasem regulacji przy stosunkowo niskim przeregulowaniu. Bior¹c pod uwagê wartoœæ b³êdów :
+W nastêpnym kroku przeprowadziliœmy dobranie parametrów regulatora $PI_2$ (rys. \ref{strojeniePI2}). Przy wzmocnieniu $K_2 = 0,5K_{k_2}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych poni¿ej wartoœci wybraliœmy $T_{i_2} = 9$ jako najlepszy wynik. Mo¿na zauwa¿yæ, ¿e przebieg wyjœcia dla wspomnianego parametru charakteryzuje siê najlepszym czasem regulacji przy stosunkowo niskim przeregulowaniu. Bior¹c pod uwagê wartoœæ b³êdów :
 \begin{itemize}
 	\item $T_i = 5$ = $271.40$,
 	\item $T_i = 9$ = $263.90$,
 	\item $T_i = 12$ = $261.87$,
 \end{itemize}
-zauwa¿amy, ¿e najmniejszy wskaznik jakoœci uzyskaliœmy dla $T_{i_2} = 12$. Maj¹c na wzglêdzie kszta³t toru pozostaliœmy przy wartoœci $T_{i_2} = 9$. 
+zauwa¿amy, ¿e najmniejszy wskaznik jakoœci uzyskaliœmy dla $T_{i_2} = 12$. Maj¹c jednak na wzglêdzie kszta³t sygna³ów, pozostaliœmy przy wartoœci $T_{i_2} = 9$. 
 
 \begin{figure}[tb]
 	\centering
@@ -224,14 +225,14 @@ zauwa¿amy, ¿e najmniejszy wskaznik jakoœci uzyskaliœmy dla $T_{i_2} = 12$. Maj¹c
 
 \FloatBarrier
 W kolejnym kroku zosta³ dobrany parametr $T_{d_2}$ regulatora $PID_2$.
-Z poœród zaprezentowanych wartoœci rys. \ref{strojeniePID2} najlepszy przebieg o dobrym czasie regulacji, najni¿szym przeregulowaniu oraz zadawalaj¹cej p³ynnoœci regulacji uzyskaliœmy dla wartoœci $T_{d_2} = 0,5$.
+Spoœród zaprezentowanych wartoœci na rys. \ref{strojeniePID2}, najlepszy przebieg, tj.. charakteryzuj¹cy siê dobrym czasem regulacji, najni¿szym przeregulowaniem oraz zadowalaj¹c¹ p³ynnoœci¹ regulacji uzyskaliœmy dla wartoœci $T_{d_2} = 0,5$.
 Wartoœci b³êdów :
 \begin{itemize}
 	\item $T_d = 0,2$ = $4.95$,
 	\item $T_d = 0,5$ = $4.48$,
 	\item $T_d = 0,8$ = $4.35$,
 \end{itemize}
-Mimo, i¿ z oceny iloœciowej wynika najmniejsza wartoœæ b³êdu dla $T_{d_2} = 0,8$ postanowiliœmy pozostaæ przy wartoœci $T_{d_2} = 0,5$, gdy¿ niesie ze sob¹ wiêksze korzyœci.\\
+Mimo ¿e z oceny iloœciowej wynika najmniejsza wartoœæ b³êdu dla $T_{d_2} = 0,8$ postanowiliœmy pozostaæ przy wartoœci $T_{d_2} = 0,5$, gdy¿ ró¿nice w b³êdzie s¹ niewielkie, a przebiegi ró¿ni¹ siê diametralnie.\\
 Nastawy drugiego toru wyjœcia regulatora $PID_2$ :
 $$K = 3,6 , T_i = 9 , T_d = 0,5$$
 
@@ -274,7 +275,7 @@ $$K = 3,6 , T_i = 9 , T_d = 0,5$$
 \end{figure}
 \FloatBarrier
 
-Po uruchomieniu obu dostrojonych torów wyjœcia regulatora $PID$ zauwa¿amy sta³e oscylacje w okolicach wartoœci zadanych rys. \ref{oscylacje12}.
+Po jednoczesnym uruchomieniu obu dostrojonych regulatorów $PID$ zauwa¿amy sta³e oscylacje w okolicach wartoœci zadanych - rys. \ref{oscylacje12}.
 
 \begin{figure}[tb]
 	\centering
@@ -334,7 +335,7 @@ Po uruchomieniu obu dostrojonych torów wyjœcia regulatora $PID$ zauwa¿amy sta³e 
 \end{figure}
 \FloatBarrier
 
-Zgodnie z ide¹ metody in¿ynierskiej ponownie zmniejszyliœmy wzmocnienie obu regulatorów o po³owê. Uzyskane przebiegi zaprezentowane s¹ na rys. \ref{dobry1}. Widaæ, ¿e po dokonanych zmianach regulator pracuje prawid³owo. Obecne nastawy:
+Zgodnie z ide¹ metody in¿ynierskiej, ponownie zmniejszyliœmy wzmocnienie obu regulatorów o po³owê. Uzyskane przebiegi zaprezentowane s¹ na rys. \ref{dobry1}. Widaæ na nich, ¿e po dokonanych zmianach regulator pracuje prawid³owo. Wartoœæ wskaznika jakoœci wynosi: $34,0364$. Finalne nastawy:
 $$K_1 = 1,0875 , T_{i_1} = 12 , T_{d_1} = 0,5$$
 $$K_2 = 1,8 , T_{i_2} = 9 , T_{d_2} = 0,5$$
 
@@ -398,10 +399,11 @@ $$K_2 = 1,8 , T_{i_2} = 9 , T_{d_2} = 0,5$$
 \FloatBarrier
 \subsection{Wariant drugi}
 
-Drugi wariant obejmuje oddzia³ywanie uchybu pierwszego wyjœcia na drugi sygna³ steruj¹cy, drugiego wyjœcia na na pierwszy sygna³ steruj¹cy. \\
-Pierwszym krokiem strojenia regulatora jest wy³¹czenie drugiego wyjœcia obiektu, a nastêpnie dobranie parametrów regulatora wy³¹cznie dla pierwszego wyjœcia. Po uzyskaniu zadawalaj¹cych wyników analogicznie postêpuje z wyjœciem drugim. Po dostrojeniu obu torów uruchamiamy ca³y regulator i dokonujemy ewentualnych poprawek nastaw dla poprawy przebiegów. W trakcie strojenia obu wyjœæ zosta³a wykorzystana metoda in¿ynierska.\\
+Drugi wariant obejmuje oddzia³ywanie uchybu pierwszego wyjœcia na drugi sygna³ steruj¹cy oraz drugiego wyjœcia na pierwszy sygna³ steruj¹cy. \\
+
+Procedura strojenia jest identyczna jak opisana w wariancie pierwszym - ka¿dy z regulatorów ma nastawy dobierane oddzielnie.
 \\
-Rozpoczêcie strojenia toru pierwszego wyjœcia rozpoczêliœmy od wprowadzenia regulatora $P_1$ w nieskoñczone oscylacje rys. \ref{oscylacje21}. Efekt ten zosta³ uzyskany dla wzmocnienia o wartoœci $K_{k_1} = 6.54$.
+Regulacjê rozpoczêliœmy od wprowadzenia regulatora $P_1$ w niegasn¹ce oscylacje (rys. \ref{oscylacje21}). Efekt ten zosta³ uzyskany dla wzmocnienia o wartoœci $K_{k_1} = 6.54$.
 
 \begin{figure}[tb]
 	\centering
@@ -433,18 +435,18 @@ Rozpoczêcie strojenia toru pierwszego wyjœcia rozpoczêliœmy od wprowadzenia regu
 	\legend{$Y_2$,$Y_{2_{zad}}$}
 	\end{groupplot}
 	\end{tikzpicture}
-	\caption{Regulator $P_1$ ze sta³ymi oscylacjami}
+	\caption{Regulator $P_1$ z niegasn¹cymi oscylacjami}
 	\label{oscylacje21}
 \end{figure}
 
 \FloatBarrier
-W nastêpnym kroku przeprowadziliœmy dobranie parametrów regulatora $PI_1$ rys. \ref{strojeniePI3}. Przy wzmocnieniu $K_1 = 0,5K_{k_1}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych wartoœci wybraliœmy $T_{i_1} = 5$ jako najlepszy wynik. Bior¹c pod uwagê wartoœæ b³êdów :
+W nastêpnym kroku przeprowadziliœmy dobranie parametrów regulatora $PI_1$ (rys. \ref{strojeniePI3}). Przy wzmocnieniu $K_1 = 0,5K_{k_1}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych poni¿ej wartoœci wybraliœmy $T_{i_1} = 5$ jako najlepszy wynik. Bior¹c pod uwagê wartoœæ b³êdów :
 \begin{itemize}
 	\item $T_i = 10$ = $8,19$,
 	\item $T_i = 5$ = $8,44$,
 	\item $T_i = 4$ = $9,53$,
 \end{itemize}
-zauwa¿amy, ¿e najmniejszy b³¹d uzyskaliœmy dla $T_{i_1} = 10$, jednak¿e przebieg funkcji zachowuje siê doœæ niepokoj¹co (oscylacje pod wartoœci¹ zadan¹) zdecydowaliœmy siê zostaæ przy wartoœci $T_{i_1} = 5$.
+zauwa¿amy, ¿e najmniejszy b³¹d uzyskaliœmy dla $T_{i_1} = 10$, jednak¿e przebieg funkcji zachowuje siê doœæ niepokoj¹co (oscylacje pod wartoœci¹ zadan¹) i zdecydowaliœmy siê zostaæ przy wartoœci $T_{i_1} = 5$.
 
 \begin{figure}[tb]
 	\centering
@@ -493,7 +495,7 @@ Wartoœci b³êdów :
 	\item $T_d = 0,8$ = $6,64$,
 	\item $T_d = 0,5$ = $7,04$,
 \end{itemize}
-Mimo, i¿ z oceny iloœciowej wynika najmniejsza wartoœæ b³êdu dla $T_{d_1} = 1$ postanowiliœmy pozostaæ przy wartoœci $T_{d_1} = 0,8$, gdy¿ niesie ze sob¹ wiêksze korzyœci.\\
+Mimo ¿e z oceny iloœciowej wynika najmniejsza wartoœæ b³êdu dla $T_{d_1} = 1$ postanowiliœmy pozostaæ przy wartoœci $T_{d_1} = 0,8$, gdy¿ niesie ze sob¹ wiêksze korzyœci.\\
 Nastawy pierwszego toru wyjœcia regulatora $PID_1$ :
 $$K = 3,27 , T_i = 5 , T_d = 0,8$$
 
@@ -536,7 +538,7 @@ $$K = 3,27 , T_i = 5 , T_d = 0,8$$
 \end{figure}
 \FloatBarrier
 
-W tym etapie tor pierwszy zosta³ wy³¹czony, a przeszliœmy do strojenia drugiego toru wyjœcia. W tym celu wprowadziliœmy regulator $P_2$ w sta³e oscylacje dla $K_{k_2}=6,83$ rys. \ref{oscylacje22}.
+W tym momencie dostrojony regulator $PID_1$ zosta³ wy³¹czony i przyst¹piliœmy do regulacji $PID_2$. W tym celu wprowadziliœmy regulator $P_2$ w sta³e oscylacje (osi¹gniête dla wartoœci $K_{k_2}=6,83$ -  rys. \ref{oscylacje22}).
 
 \begin{figure}[tb]
 	\centering
@@ -568,11 +570,11 @@ W tym etapie tor pierwszy zosta³ wy³¹czony, a przeszliœmy do strojenia drugiego 
 	\legend{$Y_1$,$Y_{1_{zad}}$}
 	\end{groupplot}
 	\end{tikzpicture}
-	\caption{Regulator $P_2$ ze sta³ymi oscylacjami}
+	\caption{Regulator $P_2$ z niegasn¹cymi oscylacjami}
 	\label{oscylacje22}
 \end{figure}
 \FloatBarrier
-W nastêpnym kroku przeprowadziliœmy dobranie parametrów regulatora $PI_2$ rys. \ref{strojeniePI4}. Przy wzmocnieniu $K_2 = 0,5K_{k_2}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych wartoœci wybraliœmy $T_{i_2} = 4$ jako najlepszy wynik. Mo¿na zauwa¿yæ, i¿ przebieg wyjœcia dla wspomnianego parametru charakteryzuje siê najlepszym czasem regulacji przy stosunkowo niskim przeregulowaniu. Bior¹c pod uwagê wartoœæ b³êdów :
+W nastêpnym kroku przeprowadziliœmy dobranie parametrów regulatora $PI_2$ (rys. \ref{strojeniePI4}). Przy wzmocnieniu $K_2 = 0,5K_{k_2}$ przeprowadziliœmy szereg testów i z poœród zilustrowanych poni¿ej wartoœci wybraliœmy $T_{i_2} = 4$ jako najlepszy wynik. Mo¿na zauwa¿yæ, ¿e przebieg wyjœcia dla wspomnianego parametru charakteryzuje siê najlepszym czasem regulacji przy stosunkowo niskim przeregulowaniu. Bior¹c pod uwagê wartoœæ b³êdów :
 \begin{itemize}
 	\item $T_i = 2$ = $2,90$,
 	\item $T_i = 4$ = $2,39$,
@@ -620,7 +622,7 @@ zauwa¿amy, ¿e najmniejszy wskaznik jakoœci uzyskaliœmy tak¿e dla $T_{i_2} = 4$.
 
 \FloatBarrier
 W kolejnym kroku zosta³ dobrany parametr $T_{d_2}$ regulatora $PID_2$.
-Z poœród zaprezentowanych wartoœci rys. \ref{strojeniePID4} najlepszy przebieg o dobrym czasie regulacji, najni¿szym przeregulowaniu oraz zadawalaj¹cej p³ynnoœci regulacji uzyskaliœmy dla wartoœci $T_{d_2} = 0,2$.
+Z poœród zaprezentowanych wartoœci na rys. \ref{strojeniePID4}, najlepszy przebieg, tj. o dobrym czasie regulacji, najni¿szym przeregulowaniu oraz zadawalaj¹cej p³ynnoœci regulacji, uzyskaliœmy dla wartoœci $T_{d_2} = 0,2$.
 Przy wartoœci b³êdów:
 \begin{itemize}
 	\item $T_d = 0,3$ = $2,243$,
@@ -671,7 +673,7 @@ $$K = 3,415 , T_i = 4 , T_d = 0,2$$
 \end{figure}
 \FloatBarrier
 
-Po uruchomieniu obu torów regulatora okaza³o siê, ¿e obiekt jest niedzia³aj¹cy i po próbie dobrania lepszych nastaw rezultat nie uleg³ wiêkszym zmianom rys . \ref{chujowy1}.
+Po uruchomieniu obu torów regulatora okaza³o siê, ¿e obiekt nie dzia³a prawid³owo. Tak¿e po próbie dobrania lepszych nastaw rezultat nie uleg³ wiêkszym zmianom (rys . \ref{chujowy1}).
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -729,9 +731,9 @@ Po uruchomieniu obu torów regulatora okaza³o siê, ¿e obiekt jest niedzia³aj¹cy i
 	\label{chujowy1}
 \end{figure}
 \FloatBarrier
-W celu poprawy zaistnia³ej sytuacji pos³u¿yliœmy siê funkcj¹ $fmincon$ do znalezienia rozwi¹zania optymalnego. Ku naszemu zdziwieniu funkcja ta nie podo³a³a zadaniu i zwrócony wynik zosta³ zaprezentowany na rys. \ref{chujowy2}. \\
+W celu poprawy zaistnia³ej sytuacji pos³u¿yliœmy siê funkcj¹ $fmincon$ do znalezienia rozwi¹zania optymalnego. Ku naszemu zdziwieniu funkcja ta nie podo³a³a zadaniu i zachowanie regulatora z nastawami obliczonymi przez funkcjê optymalizacyjn¹ zosta³ zaprezentowany na rys. \ref{chujowy2}. \\
 Wniosek :\\
-Dla naszego obiektu wariant drugi jest nieskuteczny.
+Dla naszego obiektu wariant drugi jest nieskuteczny. Przy takim po³¹czeniu wejœci wyjœæ, nie mo¿na zapewniæ regulacji.
 
 \begin{figure}[tb]
 	\centering
@@ -794,7 +796,7 @@ Dla naszego obiektu wariant drugi jest nieskuteczny.
 Nastawy regulatora $DMC$ zosta³y dobrane eksperymentalnie.
 Regulator $DMC$ korzysta z odpowiedzi skokowej $s$ uzyskanej w punkcie 3.
 
-Obserwuj¹c obiekt bezpiecznie za³o¿yliœmy, ¿e jego horyzont dynamiki jest równy $D = 200$. Tak¹ równie¿ przyjêliœmy wartoœæ pocz¹tkow¹ $N$ oraz $N_u$, natomast pierwotn¹ wartoœci¹ $\lambda$ by³o $1$, tj: $N = 200, N_u = 200, \lambda = 1$ rys. \ref{dmc1}.
+Obserwuj¹c obiekt bezpiecznie za³o¿yliœmy, ¿e jego horyzont dynamiki jest równy $D = 200$. Tak¹ równie¿ przyjêliœmy wartoœæ pocz¹tkow¹ $N$ oraz $N_u$, natomast pierwotn¹ wartoœci¹ $\lambda$ by³o $1$, tj.: $N = 200, N_u = 200, \lambda = 1$ rys. \ref{dmc1}.
 
 \begin{figure}[tb]
 	\centering
@@ -854,7 +856,7 @@ Obserwuj¹c obiekt bezpiecznie za³o¿yliœmy, ¿e jego horyzont dynamiki jest równy 
 \end{figure}
 \FloatBarrier
 
-Nastêpnie próbowaliœmy, w celu zmniejszenia z³o¿onoœci obliczeniowej obni¿yæ parametr N: jak siê okaza³o, jego wp³yw dla wartoœci powy¿ej $70$ jest znikomy. Efekty eksperymentu dla ró¿nych wartoœci zosta³y przedstawione na poni¿szym wykresie:
+Nastêpnie próbowaliœmy, w celu zmniejszenia z³o¿onoœci obliczeniowej, obni¿yæ parametr N: jak siê okaza³o, jego wp³yw dla wartoœci powy¿ej $70$ jest znikomy. Efekty eksperymentu dla ró¿nych wartoœci zosta³y przedstawione na poni¿szym wykresie:
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -929,7 +931,7 @@ WskaŸnik regulacji $E$ dla tych nastaw :\\
 \end{itemize}\
 
 
-Zdecydowaliœmy wiêc ustawiæ $N$ na $70$ - b³¹d jest najmniejszy,przeregulowanie mniejsze. Eksperyment wykaza³, ¿e zmniejszanie $N$ prowadzi do pogorszenia przebiegu. Nastêpnym parametrem, na którego minimalizacji nam zale¿y jest $N_u$:
+Zdecydowaliœmy wiêc ustawiæ $N$ na $70$ - b³¹d jest najmniejszy , przeregulowanie równie¿ zauwa¿alnie mniejsze. Eksperyment wykaza³, ¿e dalsze zmniejszanie $N$ prowadzi do pogorszenia przebiegów. Nastêpnym parametrem, na którego minimalizacji nam zale¿y jest $N_u$:
 
 \begin{figure}[tb]
 	\centering
@@ -1088,7 +1090,7 @@ WskaŸnik regulacji $E$ dla tych nastaw :\\
 
 
 Zmniejszaj¹c $\lambda$, uzyskujemy drastyczn¹ poprawê wskaŸnika jakoœci regulacji, jednak¿e kosztem sterowania. Zbyt gwa³towne sterowanie nie jest po¿¹dane - mo¿e wp³ywaæ niekorzystnie na elementy wykonawcze uk³adu sterowania.
-Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e poni¿ej wartoœci $\lambda = 0,3$ zysk w jakoœci sterowania jest niewielki, a skok sterowania du¿o ostrzejszy,dodatkowo zbli¿aj¹c siê do 0 zauwa¿amy niepo¿¹dane zachwiania torów wyjœciowych co zaburza p³ynnoœæ przebiegów, postanowiliœmy zatrzymaæ tê wielkoœæ $\lambda = 0,3$.
+Bazuj¹c na tym wniosku, jak i na spostrze¿eniu, ¿e poni¿ej wartoœci $\lambda = 0,3$ zysk w jakoœci sterowania jest niewielki, a skok sterowania du¿o ostrzejszy, postanowiliœmy zatrzymaæ tê wielkoœæ $\lambda = 0,3$. Oprócz tego, dalsze obni¿anie $\lambda$ prowadzi do niepo¿¹danych ostrych zmian przebiegów wyjœciowych.
 
 
 Koñcowe wartoœci dobranego regulatora DMC:  $N = 70, N_u = 6, \lambda = 0,3$.

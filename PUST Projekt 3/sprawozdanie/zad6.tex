@@ -63,7 +63,7 @@ Jak widaæ na wykresie \ref{szum01}, dla amplitudy szumu o wartoœci $0,1$ jakoœæ 
 \FloatBarrier
 \subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,2}
 
-Efekt zaszumienia pomiaru wyjœcia obiektu szumem o rozk³adzie jednostajnym i amplitudzie 0,2 zosta³ zaprezentowany na wykresie \ref{szum02}, Jakoœæ regulacji jest akceptowalna, chocia¿ przebiegi s¹ dalekie od g³adkich. B³¹d niewiele wiêkszy ni¿ ten w poprzednim podpunkcie, wyniós³ $E = 39.2142$.
+Efekt zaszumienia pomiaru wyjœcia obiektu szumem o rozk³adzie jednostajnym i amplitudzie 0,2 zosta³ zaprezentowany na wykresie \ref{szum02}. Jakoœæ regulacji jest akceptowalna, chocia¿ przebiegi s¹ dalekie od g³adkich. B³¹d niewiele wiêkszy ni¿ ten w poprzednim podpunkcie, wyniós³ $E = 39.2142$.
 
 \begin{figure}[tb]
 	\centering
@@ -123,7 +123,7 @@ Efekt zaszumienia pomiaru wyjœcia obiektu szumem o rozk³adzie jednostajnym i amp
 \end{figure}
 \FloatBarrier
 \subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,5}
-Gdy b³êdu pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$, algorytm staje siê nieskuteczny. B³¹d wynosi a¿ $E = 57.8277$, a oscylacje sygna³u wyjœciowego przyjmuj¹ wartoœci a¿ +/- 0,4. Sygna³ steruj¹cy zmienia siê z tak¹ szybkoœci¹ i ma tak du¿¹ amplitudê, ¿e z trudnoœci¹ mo¿na dostrzec chwile $k$ zmiany wartoœci zadanych. Wykres \ref{szum05}. 
+Gdy b³êdu pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$, algorytm staje siê nieskuteczny. B³¹d wynosi a¿ $E = 57.8277$, a oscylacje sygna³u wyjœciowego przyjmuj¹ wartoœci a¿ +/- 0,4 wartoœci zadanej. Sygna³ steruj¹cy zmienia siê z tak¹ szybkoœci¹ i ma tak du¿¹ amplitudê, ¿e z trudnoœci¹ mo¿na dostrzec chwile $k$ zmiany wartoœci zadanych. Wykres \ref{szum05}. 
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -182,12 +182,12 @@ Gdy b³êdu pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$
 \end{figure}
 \FloatBarrier
 \subsection{Wnioski}
-Regulatory wykazuj¹ siê zadowalaj¹c¹ odpornoœci¹ na szumy pomiarowe w sygnale wyjœciowym. Zarówno dla amplitudy $0,1$ jak i $0,2$ sygna³ wyjœciowy jak i steruj¹cy maj¹ zadowalaj¹ce przebiegi. Dla amplitudy $0,5$ regulatory nie pracuj¹ prawid³owo. Oprócz tego warto zauwa¿yæ, ¿e regulator nr 1 jest wra¿liwszy na szumy - amplitudy s¹ wiêksze na jego przebiegach. 
+Regulatory wykazuj¹ siê zadowalaj¹c¹ odpornoœci¹ na szumy pomiarowe w sygnale wyjœciowym. Zarówno dla amplitudy $0,1$ jak i $0,2$, sygna³ wyjœciowy jak i steruj¹cy maj¹ zadowalaj¹ce przebiegi. Dla amplitudy $0,5$ regulatory nie pracuj¹ ju¿ prawid³owo. Oprócz tego warto zauwa¿yæ, ¿e regulator nr 1 jest wra¿liwszy na szumy - amplitudy s¹ wiêksze na jego przebiegach. 
 
 \section{DMC}
 \subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,1}
 
-Jak widaæ na wykresie \ref{szum011}, dla amplitudy szumu o wartoœci $0,1$ jakoœæ sterowania jest bardzo dobra. Algorytm DMC lepiej sobie radzi od PID. B³¹d wyniós³ $E = 23,2815 $.
+Jak widaæ na wykresie \ref{szum011}, dla amplitudy szumu o wartoœci $0,1$ jakoœæ sterowania jest bardzo dobra. Algorytm DMC radzi sobie lepiej od algorytmu PID. B³¹d wyniós³ $E = 23,2815 $.
 
 \begin{figure}[tb]
 	\centering
@@ -247,7 +247,7 @@ Jak widaæ na wykresie \ref{szum011}, dla amplitudy szumu o wartoœci $0,1$ jakoœæ
 \end{figure}
 \FloatBarrier
 \subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,2}
-Efekt zaszumienia pomiaru wyjœcia obiektu szumem o rozk³adzie jednostajnym i amplitudzie $0,2$ zosta³ zaprezentowany na wykresie \ref{szum022}, Jakoœæ regulacji jest wci¹¿ dobra, chocia¿ przebiegi staj¹ coraz mocniej odstawaæ od wartoœci zadanej. B³¹d niewiele wiêkszy ni¿ ten w poprzednim podpunkcie, wyniós³ $E = 25,6682$.
+Wp³yw szumu o rozk³adzie jednostajnym i amplitudzie $0,2$ na pomiar wyjœcia obiektu zosta³ zaprezentowany na wykresie \ref{szum022}. Jakoœæ regulacji jest wci¹¿ dobra, chocia¿ przebiegi zaczynaj¹ coraz mocniej odbiegaæ od wartoœci zadanej. B³¹d niewiele wiêkszy ni¿ ten w poprzednim podpunkcie, wyniós³ $E = 25,6682$.
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -306,7 +306,7 @@ Efekt zaszumienia pomiaru wyjœcia obiektu szumem o rozk³adzie jednostajnym i amp
 \end{figure}
 \FloatBarrier
 \subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,5}
-Gdy b³êdu pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$, algorytm DMC radzi sobie podobnie do PIDa, ale dla szumu o wartoœci $0,2$. B³¹d wynosi $E = 37,6402$, a oscylacje sygna³u wyjœciowego przyjmuj¹ wartoœci a¿ +/- 0,25. Jest to ostatecznym dowodem na przewagê algorytmu DMC w reakcji na szum pomiarowy. Wykres \ref{szum34}. 
+Gdy b³êdy pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$, przebiegi wynikaj¹ce z pracy algorytmu wygl¹daj¹ podobnie do tych utworzonych przez algorytm PID dla szumu o wartoœci $0,2$. B³¹d wynosi $E = 37,6402$, a oscylacje sygna³u wyjœciowego przyjmuj¹ wartoœci +/- 0,25. Jest to kolejny dowód na przewagê algorytmu DMC podczas regulacji z wyjœciem obiektu obarczonym szumem pomiarowym. Wykres \ref{szum34}. 
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
@@ -365,4 +365,4 @@ Gdy b³êdu pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$
 \end{figure}
 \FloatBarrier
 \subsection{Wnioski}
-Regulatory wykazuj¹ siê zadowalaj¹c¹ odpornoœci¹ na szumy pomiarowe w sygnale wyjœciowym. Dla wszystkich wartoœci szumu DMC poradzi³ sobie lepiej od regulatora PID. 
+Oba regulatory wykazuj¹ siê zadowalaj¹c¹ odpornoœci¹ na szumy pomiarowe w sygnale wyjœciowym. Dla wszystkich wartoœci amplitudy sygna³u szumu algorytm DMC poradzi³ sobie lepiej od regulatora PID. 
