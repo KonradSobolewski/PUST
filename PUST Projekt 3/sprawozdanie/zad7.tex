@@ -1,1 +1,501 @@
-\chapter{Zadanie 7: Odpornoœæ algorytmu }
+\chapter{Zadanie 7: Odpornoœæ algorytmu na zak³ócenie skokowe }
+W punkcie tym nale¿a³o sprawdziæ odpornoœæ algorytmu przy skokowych niemierzalnych addytywnych zak³óceniach sygna³ów wyjœciowych. W celu wykonania polecenia stworzyliœmy sygna³y $yzak_1$ i $yzak_2$ o wygl¹dzie podobnym do sygna³ów wartoœci zadanej (zaczynaj¹ce siê od 0 i zawieraj¹ce skoki wartoœci o wybran¹ wielkoœæ). Nastêpnie w ka¿dym kroku obliczaliœmy aktualny stan wyjœæ obiektu sumuj¹c wyjœcia obliczone z plików symulacyjnych z zak³óceniami:
+\begin{equation}
+	y_i(k)=symulacja\_obiektu3yi(...)+yzak_i(k), \forall i \in <1,2>
+\end{equation}
+Poniewa¿ stany wyjœæ zale¿¹ od obydwu sterowañ mo¿na siê spodziewaæ, ¿e zak³ócenie na jednym wyjœciu spowoduje tak¿e zaburzenie przebiegu drugiego z nich.
+\section{PID}
+Dla algorytmu PID testujemy tylko przebiegi dla konfiguracji pierwszej (konfiguracja druga nie radzi sobie nawet bez zak³óceñ, wiêc nie ma sensu testowaæ jej odpornoœci). Wykonaliœmy zadanie dla trzech ró¿nych wielkoœci skoków zak³óceñ: 0,01 , 0,02 oraz 0,05. Dla ka¿dego wyjœcia wykonano po 2 skoki tej wielkoœci. Poni¿ej przedstawiono b³êdy otrzymane dla obydwu wyjœæ wszystkich przebiegów (tabela \ref{tabpid}) oraz same przebiegi (wykresy \ref{zakpid001}, \ref{zakpid002} i \ref{zakpid005}). Mimo, ¿e zak³ócenia nie s¹ du¿e, powoduj¹ one znaczne zaburzenia przebiegów wyjœcia i sterowania. Regulator radzi sobie z ich kompensacj¹, ale zajmuje mu to du¿o czasu (za ka¿dym skokiem ma na ni¹ 150 kroków i ledwo siê wyrabia) i przez to generowane s¹ przy tym du¿e b³êdy (E dla ostatniego przypadku wynosi ponad 150 razy wiêcej ni¿ dla braku zak³óceñ). B³êdy $E_1$ pierszego wyjœcia s¹ w przybli¿eniu 3 razy wiêksze ni¿ b³êdy wyjœcia drugiego $E_2$. Zaburzenia wartoœci $y_1$ s¹ takiej samej wielkoœci, niezale¿nie od tego na którym zak³óceniu wyst¹pi³ skok. Dla $y_2$ zaburzenia s¹ doœæ ma³e przy skoku $y_{zak1}$, a dla skoku $y_{zak2}$ podobne wartoœci¹ do zaburzeñ $y_1$, ale i tak nieco mniejsze. Koñcowa wartoœæ $u_1$ jest prawie identyczna do tej bez zak³óceñ, jego spadki przy skokach $y_{zak1}$ s¹ tylko niewiele wiêksze od wzrostów spowodowanych skokami $y_{zak2}$. Inaczej reaguje $u_2$, które przy skokach $y_{zak1}$ wzrosta zaledwie ociupinê, aby potem przy skokach $y_{zak2}$ gwa³townie spaœæ.
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Wielkoœci skoków & $E_1$ - b³¹d $y_1$ & $E_2$ - b³¹d $y_2$ & $E$ - suma b³êdów \\ \hline
+		0 (brak zak³óceñ) & 3,9124 & 5,7785 & 9,6909 \\ \hline
+		0,01 & 47,9819 & 18,6451 & 66,627 \\ \hline
+		0,02 & 180,1901 & 57,2448 & 237,4349 \\ \hline
+		0,05 & 1105,6468 & 327,4425 & 1433,0892 \\ \hline
+	\end{tabular}
+\caption{Porównanie wartoœci b³êdów na obu wyjœciach dla ró¿nych skoków zak³óceñ}
+\label{tabpid}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 6,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-2,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500,750},
+	ytick={-2,-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidu1_1_1.0875_12.0000_0.5000_47.9819_66.6270_1.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500,750},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[green,semithick] file {wykresy/7pid/z7pidy1_1_1.0875_12.0000_0.5000_66.6270_1.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7pid/z7pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak1}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7idyzak1_1_1.0875_12.0000_0.5000_66.6270_1.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-2,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500,750},
+	ytick={-2,-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidu2_1_1.8000_9.0000_0.5000_18.6451_66.6270_1.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500,750},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/7pid/z7pidy2_1_1.8000_9.0000_0.5000_66.6270_1.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7pid/z7pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak2}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidyzak2_1_1.8000_9.0000_0.5000_66.6270_1.000000e-02.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie regulatora PID dla zak³óceñ skokowych addytywnych o wielkoœci skoków $0.01$}
+	\label{zakpid001}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 6,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-5,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500,750},
+	ytick={-4,-2,0,2,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidu1_1_1.0875_12.0000_0.5000_180.1901_237.4349_2.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500,750},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[green,semithick] file {wykresy/7pid/z7pidy1_1_1.0875_12.0000_0.5000_237.4349_2.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7pid/z7pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak1}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7idyzak1_1_1.0875_12.0000_0.5000_237.4349_2.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-5,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500,750},
+	ytick={-4,-2,0,2,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidu2_1_1.8000_9.0000_0.5000_57.2448_237.4349_2.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500,750},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/7pid/z7pidy2_1_1.8000_9.0000_0.5000_237.4349_2.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7pid/z7pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak2}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidyzak2_1_1.8000_9.0000_0.5000_237.4349_2.000000e-02.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie regulatora PID dla zak³óceñ skokowych addytywnych o wielkoœci skoków $0.02$}
+	\label{zakpid002}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 6,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-13,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500,750},
+	ytick={-12,-10,-8,-6,-4,-2,0,2,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidu1_1_1.0875_12.0000_0.5000_1105.6468_1433.0892_5.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-3,ymax=4,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500,750},
+	ytick={-2,0,1,2,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[green,semithick] file {wykresy/7pid/z7pidy1_1_1.0875_12.0000_0.5000_1433.0892_5.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7pid/z7pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak1}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7idyzak1_1_1.0875_12.0000_0.5000_1433.0892_5.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-13,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500,750},
+	ytick={-12,-10,-8,-6,-4,-2,0,2,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidu2_1_1.8000_9.0000_0.5000_327.4425_1433.0892_5.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-3,ymax=4,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500,750},
+	ytick={-2,0,1,2,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/7pid/z7pidy2_1_1.8000_9.0000_0.5000_1433.0892_5.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7pid/z7pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak2}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7pid/z7pidyzak2_1_1.8000_9.0000_0.5000_1433.0892_5.000000e-02.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie regulatora PID dla zak³óceñ skokowych addytywnych o wielkoœci skoków $0.05$}
+	\label{zakpid005}
+\end{figure}
+
+\section{DMC}
+Dla algorytmu DMC wykonaliœmy zadanie dla takich samych wielkoœci skoków zak³óceñ co dla PID: 0,01 , 0,02 oraz 0,05. Dla ka¿dego wyjœcia wykonano po 2 skoki tej wielkoœci. Poni¿ej przedstawiono b³êdy otrzymane dla obydwu wyjœæ wszystkich przebiegów (tabela \ref{tabdmc}) oraz same przebiegi (wykresy \ref{zakdmc001}, \ref{zakdmc002} i \ref{zakdmc005}). Mimo, ¿e zak³ócenia nie s¹ du¿e, powoduj¹ one znaczne zaburzenia przebiegów wyjœcia i sterowania, choæ mniejsze ni¿ przy regulatorze PID. Regulator radzi sobie z ich kompensacj¹, ale zajmuje mu to du¿o czasu (za ka¿dym skokiem ma na ni¹ 150 kroków i ledwo siê wyrabia dla skoku 0,05) i przez to generowane s¹ du¿e b³êdy (E dla ostatniego przypadku wynosi ponad 100 razy wiêcej ni¿ dla braku zak³óceñ). Przebiegi wyjœæ i sterowañ dla DMC s¹ znacznie g³adsze ni¿ dla regulatora PID wiêc b³êdy E dla DMC s¹ mniejsze. Zmieni³ siê tak¿e rozk³ad b³êdów, poniewa¿ dla tego algorytmu wiêksze s¹ b³êdy $E_2$ (oko³o 2 razy wiêksze). Podobnie jak w PID zaburzenia wartoœci $y_1$ s¹ takiej samej wielkoœci, niezale¿nie od tego na którym zak³óceniu wyst¹pi³ skok. Dla $y_2$  przy skoku $y_{zak1}$ zaburzenia s¹ niewiele mniejsze od tych dla $y_1$, ale dla skoku $y_{zak2}$ s¹ prawie dwukrotnie wiêksze. Reakcja sterowañ w tym regulatorze jest podobna do tej dla PID. Koñcowa wartoœæ $u_1$ jest w du¿ym przybli¿eniu identyczna do wartoœci z przed zak³óceñ, jego spadki przy skokach $y_{zak1}$ s¹ trochê wiêksze od wzrostów spowodowanych skokami $y_{zak2}$. $u_2$ przy skokach $y_{zak1}$ wzrasta niewiele, by potem przy skokach $y_{zak2}$ gwa³townie spaœæ.
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Wielkoœci skoków & $E_1$ - b³¹d $y_1$ & $E_2$ - b³¹d $y_2$ & $E$ - suma b³êdów \\ \hline
+		0 (brak zak³óceñ) & 3,098 & 6,4286 & 9,5265 \\ \hline
+		0,01 & 16,5421 & 32,6825 & 49,2246 \\ \hline
+		0,02 & 56,8746 & 111,4443 & 168,3189 \\ \hline
+		0,05 & 339,2019 & 662,7771 & 1001,979 \\ \hline
+	\end{tabular}
+	\caption{Porównanie wartoœci b³êdów na obu wyjœciach dla ró¿nych skoków zak³óceñ}
+	\label{tabdmc}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 6,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-2,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500,750},
+	ytick={-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcu1_70_6_0.3000_16.5421_1.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500,750},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[green,semithick] file {wykresy/7dmc/z7dmcy1_70_6_0.3000_49.2246_1.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7dmc/z7dmcyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak1}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcyzak1_70_6_0.3000_49.2246_1.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-2,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500,750},
+	ytick={-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcu2_70_6_0.3000_32.6825_1.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500,750},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/7dmc/z7dmcy2_70_6_0.3000_49.2246_1.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7dmc/z7dmcyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak2}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcyzak2_70_6_0.3000_49.2246_1.000000e-02.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie regulatora DMC dla zak³óceñ skokowych addytywnych o wielkoœci skoków $0.01$}
+	\label{zakdmc001}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 6,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-5,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500,750},
+	ytick={-4,-2,0,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcu1_70_6_0.3000_56.8746_2.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-1,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500,750},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[green,semithick] file {wykresy/7dmc/z7dmcy1_70_6_0.3000_168.3189_2.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7dmc/z7dmcyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak1}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcyzak1_70_6_0.3000_168.3189_2.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-5,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500,750},
+	ytick={-4,-2,0,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcu2_70_6_0.3000_111.4443_2.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-1,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500,750},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/7dmc/z7dmcy2_70_6_0.3000_168.3189_2.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7dmc/z7dmcyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak2}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcyzak2_70_6_0.3000_168.3189_2.000000e-02.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie regulatora DMC dla zak³óceñ skokowych addytywnych o wielkoœci skoków $0.02$}
+	\label{zakdmc002}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 6,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-13,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500,750},
+	ytick={-12,-10,-8,-6,-4,-2,0,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcu1_70_6_0.3000_339.2019_5.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-1,ymax=4.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500,750},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[green,semithick] file {wykresy/7dmc/z7dmcy1_70_6_0.3000_1001.9790_5.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7dmc/z7dmcyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak1}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcyzak1_70_6_0.3000_1001.9790_5.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-13,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500,750},
+	ytick={-12,-10,-8,-6,-4,-2,0,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcu2_70_6_0.3000_662.7771_5.000000e-02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=-1,ymax=4.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500,750},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/7dmc/z7dmcy2_70_6_0.3000_1001.9790_5.000000e-02.txt};
+	\addplot[red,semithick] file {wykresy/7dmc/z7dmcyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=860,ymin=0,ymax=0.1,
+	xlabel={$k$},
+	ylabel={$Y_{zak2}$},
+	xtick={0,250,500,750},
+	ytick={0,0.1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/7dmc/z7dmcyzak2_70_6_0.3000_1001.9790_5.000000e-02.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie regulatora DMC dla zak³óceñ skokowych addytywnych o wielkoœci skoków $0.05$}
+	\label{zakdmc005}
+\end{figure}
