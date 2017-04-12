@@ -1,5 +1,4 @@
 function[] = zad2 ()
-%Badanie punktu pracy
 
  addpath ('F:\SerialCommunication'); % add a path
  initSerialControl COM3 % initialise com port
@@ -9,6 +8,8 @@ Ypp=[39 41.31];
 kk=310;
 U=diag(Upp)*ones(2,kk);
 Y = diag(Ypp)*ones(2,kk);
+
+%zapisane zmieniaj¹ce siê w trakcie zajêæ punkty pracy
 %dU=[41;41];  % 39 , 41.31
 %dU=[46 41];  % 39.25 , 41.56
  dU=[51 41];  % 39.62 . 42.06
@@ -17,6 +18,7 @@ Y = diag(Ypp)*ones(2,kk);
 % dU=[36 56];
 kstart=10;
 U(:,kstart:kk)=diag(dU)*ones(2,kk-kstart+1);
+%start symulacji
 figure
  for k=1:kk
  %% obtaining measurements
@@ -34,7 +36,9 @@ figure
  plot(Y(1,:))
  subplot(212)
  plot(Y(2,:))
+ %rysowanie
  drawnow
+ %zapis
  toPlotForLatex(sprintf('z2Y1%1.4f%1.4f',dU(1),dU(2)),1:kk,Y(1,:));
  toPlotForLatex(sprintf('z2Y2%1.4f%1.4f',dU(1),dU(2)),1:kk,Y(2,:));
  toPlotForLatex(sprintf('z2U1%1.4f%1.4f',dU(1),dU(2)),1:kk,U(1,:));

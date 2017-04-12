@@ -1,9 +1,11 @@
+%funkcja dla pida 2 - 2 
 function [ E1,E2,E ] = z4PID( K1,Ti1,Td1,K2,Ti2,Td2,latex )
  addpath ('F:\SerialCommunication'); % add a path
  initSerialControl COM3 % initialise com port
 Tp=1;
 % kk=910;
 kk=1810;
+%chwile kolejnych skoków wart zadanej
 startk1=10;
 startk2=310;
 startk3=610;
@@ -14,7 +16,8 @@ Upp=[36 41];
 Ypp=[ 39.62  42.06 ];
 Umin=[0 0];
 Umax=[100 100];
-
+%parametry regulatora - tylko jeden, bo oba bêd¹ takie same (identyczne
+%grza³ki)
 r0=[K1*(1+Tp/(2*Ti1)+Td1/Tp);K2*(1+Tp/(2*Ti2)+Td2/Tp)];
 r1=[K1*(Tp/(2*Ti1)-2*Td1/Tp-1);K2*(Tp/(2*Ti2)-2*Td2/Tp-1)];
 r2=[K1*Td1/Tp;K2*Td2/Tp];
@@ -22,6 +25,7 @@ U=diag(Upp)*ones(2,kk);
 Y = diag(Ypp)*ones(2,kk);
 e=zeros(2,kk);
 Yzad=Y;
+%kolejne skoki wart zadanej
 Yzad(1,startk1:kk)=Ypp(1)+3;
 Yzad(2,startk2:kk)=Ypp(2)+3;
 Yzad(1,startk3:kk)=Ypp(1)+1;
@@ -95,6 +99,7 @@ for k=startk1:kk; %glówna petla symulacyjna
 end;
 E1=0;
 E2=0;
+%oblicznie b³êdów
 for k=1:kk
     E1=E1+((Yzad(1,k)-Y(1,k))^2);
     E2=E2+((Yzad(2,k)-Y(2,k))^2);

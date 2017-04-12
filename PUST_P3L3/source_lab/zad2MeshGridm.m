@@ -1,3 +1,7 @@
+%skrypt s³u¿¹cy do utworzenia charakterystyk Y1(U1,U2) i Y1(U1,U2) na
+%podstawie odpowiedzi skokowych Y1(U1) i Y2(U2)
+%rysuje tak¿e odpowiedzi skokowe skroœne i nieskroœne w wersji otrzymanej w
+%laboratorium i przesuniête do wspólnego punktu pracy
 clc
 clear
 close all;
@@ -10,7 +14,7 @@ endk = 300;
 
 Y1pp = 39;
 Y2pp = 41.3;
-
+%³adowanie zebranych odp skokowych
 min1 = load('Wykresy/z2Y141.000041.0000.txt');
 medium1 = load('Wykresy/z2Y146.000041.0000.txt');
 max1 = load('Wykresy/z2Y151.000041.0000.txt');
@@ -20,6 +24,7 @@ medium2 = load('Wykresy/z2Y246.000041.0000.txt');
 max2 = load('Wykresy/z2Y251.000041.0000.txt');
 
 diff(1,1)=0 ;
+%obliczenie ró¿nic
 diff(1,2)= min1(endk,2) - Y1pp; %min1(startk,2) ;
 diff(1,3)= medium1(endk,2)-39.25; %medium1(startk,2) ;
 diff(1,4)= max1(endk,2) -39.62; %max1(startk,2) ;
@@ -39,7 +44,7 @@ for i=1:L
         Y2(i,j) = diff(1,i) + diff(2,j);
     end
 end
-
+%zapis w odpowiednim formacie
 if(latex)
     fileID=fopen('z2Y1U1U2.txt','w');
     fprintf(fileID,'%1.4f %1.4f %1.4f\r\n',[reshape(dU1,1,L*L);reshape(dU2,1,L*L);reshape(Y1,1,L*L)]);
@@ -49,6 +54,8 @@ if(latex)
     fprintf(fileID,'%1.4f %1.4f %1.4f\r\n',[reshape(dU1,1,L*L);reshape(dU2,1,L*L);reshape(Y2,1,L*L)]);
     fclose(fileID);
 end
+%narysowanie wykresów odpowiedzi skokoywch skroœnych i zwyk³ych, tak¿e
+%przesuniêtych do wspólnego punktu w celu ³atwiejszej analizy
 
 if(draw)
     figure

@@ -1,8 +1,10 @@
+%funkcja dla dmc 2 - 2 
 function [ E1,E2,E ] = z4DMC(N,Nu,lambda)%,latex)
 addpath ('F:\SerialCommunication'); % add a path
 initSerialControl COM5 % initialise com port
 N=round(N);
 Nu=round(Nu);
+%wczytanie odp skokowych
 load('aprskoky1u1.txt');
 load('aprskoky2u1.txt');
 s11=aprskoky1u1(:,2);
@@ -15,6 +17,7 @@ Umin=[0 0];
 Umax=[100 100];
 D=300;
 kk=1810;
+%chwile kolejnych skoków wart zadanej
 startk1=10;
 startk2=310;
 startk3=610;
@@ -26,6 +29,7 @@ nu=2;
 u=diag(Upp)*ones(nu,kk);
 y=diag(Ypp)*ones(ny,kk);
 yzad=y;
+%kolejne skoki wart zadanej
 yzad(1,startk1:kk)=Ypp(1)+3;
 yzad(2,startk2:kk)=Ypp(2)+3;
 yzad(1,startk3:kk)=Ypp(1)+1;
@@ -62,6 +66,7 @@ umin0=Umin-Upp;
 umax0=Umax-Upp;
 K=(cell2mat(M)'*cell2mat(M)+diag(ones(1,Nu*nu)*lambda))^(-1)*cell2mat(M)';
 ku=K(1:nu,:)*cell2mat(MP);
+%parametry ke dla ka¿dego toru
 ke1=sum(K(1,1:2:(N*ny)));
 ke2=sum(K(1,2:2:(N*ny)));
 ke3=sum(K(2,1:2:(N*ny)));
@@ -76,6 +81,7 @@ for k=10:kk
     end
     dUP(1)={du(:,k)};
     u0(:,k)=u0(:,k-1)+du(:,k);
+    %ograniczenia
     if u0(2,k)<umin0(2)
         u0(2,k)=umin0(2);
     elseif u0(2,k)>umax0(2)
@@ -122,18 +128,10 @@ end
 
 E1=0;
 E2=0;
+%oblicznie b³êdów
 for k=1:kk
     E1=E1+((yzad(1,k)-y(1,k))^2);
     E2=E2+((yzad(2,k)-y(2,k))^2);
 end
 E=E1+E2;
-
-% if(latex)
-%     toPlotForLatex(sprintf('z4dmcu1_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E1),1:kk,u(1,:))
-%     toPlotForLatex(sprintf('z4dmcu2_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E2),1:kk,u(2,:))
-%     toPlotForLatex(sprintf('z4dmcy1_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E),1:kk,y(1,:))
-%     toPlotForLatex(sprintf('z4dmcy2_%d_%d_%3.4f_%3.4f',N,Nu,lambda,E),1:kk,y(2,:))
-%     toPlotForLatex(sprintf('z4dmcyzad1_%3.4f',yzad(1,kk)),1:kk,yzad(1,:))
-%     toPlotForLatex(sprintf('z4dmcyzad2_%3.4f',yzad(2,kk)),1:kk,yzad(2,:))
-% end
 end
