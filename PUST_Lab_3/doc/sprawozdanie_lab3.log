@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  8 APR 2017 23:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  12 APR 2017 08:31
 entering extended mode
 **./sprawozdanie_lab3.tex
 (sprawozdanie_lab3.tex
@@ -1122,7 +1122,11 @@ Package: placeins 2005/04/18  v 2.2
 LaTeX Warning: Unused global option(s):
     [twosides].
 
-(sprawozdanie_lab3.aux)
+(sprawozdanie_lab3.aux
+
+LaTeX Warning: Label `ogr' multiply defined.
+
+)
 \openout1 = `sprawozdanie_lab3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
@@ -1343,14 +1347,15 @@ PGFPlots: reading {wykresy/z2Y251.000041.0000.txt}
 PGFPlots: reading {wykresy/z2presY141.000041.0000.txt}
 PGFPlots: reading {wykresy/z2presY146.000041.0000.txt}
 PGFPlots: reading {wykresy/z2presY151.000041.0000.txt}
- [5] [6]
+ [5]
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <12> on input line 73.
+(Font)              <12> on input line 76.
 PGFPlots: reading {wykresy/z2Y1U1U2.txt}
+ [6]
 PGFPlots: reading {wykresy/z2Y2U1U2.txt}
-) (zad3.tex [7
+ [7]) (zad3.tex [8
 
-] [8]
+]
 Rozdzia\PlPrIeC {\l } 4.
 PGFPlots: reading {wykresy/z3y1u1.txt}
 PGFPlots: reading {wykresy/aprskoky1u1.txt}
@@ -1366,7 +1371,7 @@ PGFPlots: reading {wykresy/aprskoky2u1.txt}
 Rozdzia\PlPrIeC {\l } 5.
 [14
 
-]) (zad5.tex [15] [16]
+] [15]) (zad5.tex [16]
 Rozdzia\PlPrIeC {\l } 6.
 PGFPlots: reading {wykresy/z4pidu1_4.0000_80.0000_3.0000.txt}
 PGFPlots: reading {wykresy/z4pidu2_0.0000_Inf_0.0000_6_60_1.txt}
@@ -1390,37 +1395,73 @@ PGFPlots: reading {wykresy/z4pidy1_6.0000_65.0000_1.0000.txt}
 PGFPlots: reading {wykresy/z4pidy2_6.0000_65.0000_1.0000.txt}
 PGFPlots: reading {wykresy/z4pidyzad1_41.6200.txt}
 PGFPlots: reading {wykresy/z4pidyzad2_44.0600.txt}
- [20]) [21] (sprawozdanie_lab3.aux) ) 
+ [20]) (zad5DMC.tex
+PGFPlots: reading {wykresy/z4dmcu1_300_300_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcu2_300_300_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcyzad1_41.6200.txt}
+PGFPlots: reading {wykresy/z4dmcyzad2_44.0600.txt}
+PGFPlots: reading {wykresy/z4dmcy1_300_300_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcy2_300_300_1.0000.txt}
+ [21] [22]
+PGFPlots: reading {wykresy/z4dmcu1_300_150_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcu2_300_150_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcyzad1_41.6200.txt}
+PGFPlots: reading {wykresy/z4dmcyzad2_44.0600.txt}
+PGFPlots: reading {wykresy/z4dmcy1_300_150_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcy2_300_150_1.0000.txt}
+ [23
+
+]
+PGFPlots: reading {wykresy/z4dmcu1_300_100_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcu2_300_100_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcyzad1_41.6200.txt}
+PGFPlots: reading {wykresy/z4dmcyzad2_44.0600.txt}
+PGFPlots: reading {wykresy/z4dmcy1_300_100_1.0000.txt}
+PGFPlots: reading {wykresy/z4dmcy2_300_100_1.0000.txt}
+ [24]
+PGFPlots: reading {wykresy/z4dmcu1_300_100_0.5000.txt}
+PGFPlots: reading {wykresy/z4dmcu2_300_100_0.5000.txt}
+PGFPlots: reading {wykresy/z4dmcyzad1_41.6200.txt}
+PGFPlots: reading {wykresy/z4dmcyzad2_44.0600.txt}
+PGFPlots: reading {wykresy/z4dmcy1_300_100_0.5000.txt}
+PGFPlots: reading {wykresy/z4dmcy2_300_100_0.5000.txt}
+ [25
+
+]) [26]
+(sprawozdanie_lab3.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 36787 strings out of 493333
- 883109 string characters out of 3139195
- 1871478 words of memory out of 3000000
- 39703 multiletter control sequences out of 15000+200000
+ 36860 strings out of 493333
+ 884477 string characters out of 3139195
+ 1883559 words of memory out of 3000000
+ 39755 multiletter control sequences out of 15000+200000
  28127 words of font info for 84 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,22n,100p,10400b,2381s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
-ps/pl/plme.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Pro
-gram Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/
-fonts/enc/dvips/pl/plrm.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/pli
-t.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/pl/plex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/pl/plmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi12.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi6.pfb><C:/Program Files/
-MiKTeX 2.9/fonts/type1/public/pl/plmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plm
-ib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr10.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/pl/plr12.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/pl/plr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/pl/plr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr8.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/pl/plsy10.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/pl/plsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/pl/plsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plti10.
-pfb>
-Output written on sprawozdanie_lab3.pdf (22 pages, 331231 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plme.enc}{C:/Program Files/Mi
+KTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
+ps/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Pro
+gram Files/MiKTeX 2.9/fonts/enc/dvips/pl/plit.enc}<C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/pl/plbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plex10.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/pl/plmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/pl/plmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/pl
+mi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi8.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/pl/plmib10.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/pl/plr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
+lic/pl/plr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr6.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr7.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy6.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/pl/plti10.pfb>
+Output written on sprawozdanie_lab3.pdf (27 pages, 630303 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
+ 170 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

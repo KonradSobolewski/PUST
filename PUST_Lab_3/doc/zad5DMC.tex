@@ -1,7 +1,7 @@
 \section{Regulator DMC}
 
 \subsection{Pocz¹tkowe nastawy}
-Nastawy regulatora DMC zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkowe przyjêliœmy nastawy $N = 300$, $Nu = 300$, $\lambda = 1$. Wartoœæ $300$ wynika z obserwacji obiektu - bezpiecznie za³o¿yliœmy, ¿e tyle wynosi jego hortyzont dynamiki. Obiekt ten nie jest wra¿liwy na nag³e zmiany sterowañ, ale wartoœæ $\lambda = 1$ równie¿ za³o¿yliœmy bezpiecznie dosyæ du¿¹. Na rys. \ref{DMC_begin} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Regulator dzia³a poprawnie, ale nie s¹ to nastawy optymalne; regulator powinien dzia³aæ szybciej i z mniejszym b³edem. B³¹d wyjœæ wyniós³: dla $Y_1$: $E_1 = 482,4677$, dla $Y_2$: $E_2 = 459,5991$. £¹czny: $E = 942,0668$.
+Nastawy regulatora DMC zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkowe przyjêliœmy nastawy $N = 300$, $Nu = 300$, $\lambda = 1$. Wartoœæ $300$ wynika z obserwacji obiektu - bezpiecznie za³o¿yliœmy, ¿e tyle wynosi jego horyzont dynamiki. Obiekt ten nie jest wra¿liwy na nag³e zmiany sterowañ, ale wartoœæ $\lambda = 1$ równie¿ za³o¿yliœmy bezpiecznie dosyæ du¿¹. Na rys. \ref{DMC_begin} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Regulator dzia³a poprawnie, ale nie s¹ to nastawy optymalne; regulator powinien dzia³aæ szybciej i z mniejszym b³edem. B³¹d wyjœæ wyniós³: dla $Y_1$: $E_1 = 482,4677$, dla $Y_2$: $E_2 = 459,5991$. £¹czny: $E = 942,0668$.
 
 \begin{figure}[tb]
 	\centering
@@ -43,7 +43,7 @@ Nastawy regulatora DMC zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkow
 \FloatBarrier
 
 \section{Korekta parametru Nu}
-Nastêpnie przyst¹piliœmy do zmian nastaw: parametr N pozostawiliœmy bez zmian, jako ¿e zarówno teoria jak i nasza praktyka wskazywa³y, ¿e jego zmniejszanie, jeœli w ogóle, to prowadzi³o do minimalnych zysków w jakoœci sterowania. Gdyby by³ to obiekt szybszy lub dzia³aj¹cy w wymagaj¹cym œrodowisku, mo¿naby rozwa¿yæ skrócenie tej wartoœci w celu zmniejszenia z³o¿onoœci obliczeniowej, jednak dla okresu próbkowania $Tp = 1$ nie jest to konieczne. 
+Nastêpnie przyst¹piliœmy do zmian nastaw: parametr N pozostawiliœmy bez zmian, jako ¿e zarówno teoria jak i nasza praktyka wskazywa³y, ¿e jego zmniejszanie, jeœli w ogóle, prowadzi³o do minimalnych zysków w jakoœci sterowania. Gdyby by³ to obiekt szybszy lub dzia³aj¹cy w wymagaj¹cym œrodowisku, mo¿na by rozwa¿yæ skrócenie tej wartoœci w celu zmniejszenia z³o¿onoœci obliczeniowej, jednak dla okresu próbkowania $Tp = 1$ nie jest to konieczne. 
 Wykonaliœmy dwukrotnie eksperyment kolejno dla wartoœci $Nu = 150$ (rys. \ref{DMC_p2}) oraz $Nu = 100$ (rys. \ref{DMC_p3}). 
 B³êdy w pierwszym eksperymencie osi¹gnê³y wartoœci: dla $Y_1$: $E_1 = 454,2170$, dla $Y_2$: $E_2 = 439,2227$. £¹czny: $E = 893,4397$.
 
@@ -173,5 +173,5 @@ Finalnie, b³êdy osi¹gnê³y wartoœci: dla $Y_1$: $E_1 = 311,0436$, dla $Y_2$: $E_2
 \FloatBarrier
 
 \section{Podsumowanie}
-Tak jak nale¿a³o siê spodziewaæ, regulator DMC w stosunku do regulatora PID zapewnia lepsz¹ regulacjê. Zarówno wskaŸnik jakoœci regulacji (dla DMC: $E = 718,6227$, dla PID: $E = 911,1790$) jak i wizualna ocena przebiegów wyjœæ i sterowania jednoznacznie wskazuj¹ algorytm DMC jako lepszy regulator obiektów o dwóch wejœciach i dwóch wyjœciach.
+Tak jak nale¿a³o siê spodziewaæ, regulator DMC w stosunku do regulatora PID zapewnia lepsz¹ regulacjê. Zarówno wskaŸnik jakoœci regulacji (dla DMC: $E = 718,6227$, dla PID: $E = 911,1790$) jak i wizualna ocena przebiegów wyjœæ i sterowania jednoznacznie wskazuj¹ algorytm DMC jako lepszy regulator obiektu grzewczego w laboratorium o dwóch wejœciach i dwóch wyjœciach.
 

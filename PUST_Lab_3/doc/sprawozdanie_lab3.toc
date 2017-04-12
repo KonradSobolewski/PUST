@@ -3,7 +3,7 @@
 \contentsline {chapter}{\numberline {3\relax .\kern .5em }Zadanie 2: Odpowiedzi skokowe}{4}
 \contentsline {section}{\numberline {3.1\relax .\kern .5em }Skro\'snie odpowiedzi skokowe}{4}
 \contentsline {section}{\numberline {3.2\relax .\kern .5em }W\IeC {\l }a\'sciwo\'sci statyczne obiektu}{5}
-\contentsline {section}{\numberline {3.3\relax .\kern .5em }W\IeC {\l }a\'sciwo\'sci statyczne procesu $T1(G1,G2)$, $T3(G1,G2)$}{7}
+\contentsline {section}{\numberline {3.3\relax .\kern .5em }Charakterystyki statyczne procesu $T1(G1,G2)$, $T3(G1,G2)$}{6}
 \contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 3: Znormalizowane odpowiedzi skokowe}{9}
 \contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 4: Algorytmy PID i DMC}{14}
 \contentsline {section}{\numberline {5.1\relax .\kern .5em }Cyfrowy algorytm PID}{14}
@@ -13,3 +13,8 @@
 \contentsline {subsection}{\numberline {6.1.1\relax .\kern .5em }Pocz\k atkowe nastawy}{17}
 \contentsline {subsection}{\numberline {6.1.2\relax .\kern .5em }Korygowanie nastaw}{19}
 \contentsline {subsection}{\numberline {6.1.3\relax .\kern .5em }Finalne nastawy}{20}
+\contentsline {section}{\numberline {6.2\relax .\kern .5em }Regulator DMC}{21}
+\contentsline {subsection}{\numberline {6.2.1\relax .\kern .5em }Pocz\k atkowe nastawy}{21}
+\contentsline {section}{\numberline {6.3\relax .\kern .5em }Korekta parametru Nu}{23}
+\contentsline {section}{\numberline {6.4\relax .\kern .5em }Korekta parametru $\lambda $}{25}
+\contentsline {section}{\numberline {6.5\relax .\kern .5em }Podsumowanie}{26}
