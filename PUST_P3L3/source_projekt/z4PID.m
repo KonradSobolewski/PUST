@@ -3,9 +3,11 @@ function [ E ] = z4PID( K1,Ti1,Td1,K2,Ti2,Td2,var,draw,latex )
 Tp=0.5;
 kk=510;
 startk=10;
+%sprawdzamy wariant
 if var~=1 && var~=2
     error('Wybierz wariant 1 lub 2.')
 end
+%inicjalizacja regulatora
 r0=[K1*(1+Tp/(2*Ti1)+Td1/Tp);K2*(1+Tp/(2*Ti2)+Td2/Tp)];
 r1=[K1*(Tp/(2*Ti1)-2*Td1/Tp-1);K2*(Tp/(2*Ti2)-2*Td2/Tp-1)];
 r2=[K1*Td1/Tp;K2*Td2/Tp];
@@ -21,7 +23,7 @@ for k=startk:kk; %glówna petla symulacyjna
     y(2,k)=symulacja_obiektu3y2(u(1,k-6),u(1,k-7),u(2,k-4),u(2,k-5),y(2,k-1),y(2,k-2));
     %uchyb regulacji
     e(:,k)=yzad(:,k)-y(:,k);
-    %sygnaá steruj¹cy regulatora PID
+    %sygna³ steruj¹cy regulatora PID
     if var==1
         u(1,k)=r2(1)*e(1,k-2)+r1(1)*e(1,k-1)+r0(1)*e(1,k)+u(1,k-1);
         u(2,k)=r2(2)*e(2,k-2)+r1(2)*e(2,k-1)+r0(2)*e(2,k)+u(2,k-1);
@@ -30,6 +32,7 @@ for k=startk:kk; %glówna petla symulacyjna
         u(2,k)=r2(2)*e(1,k-2)+r1(2)*e(1,k-1)+r0(2)*e(1,k)+u(2,k-1);
     end;
 end;
+%wskaŸnik jakoœci
 E1=0;
 E2=0;
 for k=1:kk
@@ -37,6 +40,7 @@ for k=1:kk
     E2=E2+((yzad(2,k)-y(2,k))^2);
 end
 E=E1+E2;
+%wyœwietlenie przebiegów
 if(draw)
     
     subplot(221)
@@ -71,7 +75,7 @@ if(draw)
     hold on;
     
 end
-
+% zapis do plików
 if(latex)
     toPlotForLatex(sprintf('z4pidu1_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f',var,K1,Ti1,Td1,E1,E),1:kk,u(1,:))
     toPlotForLatex(sprintf('z4pidu2_%d_%3.4f_%3.4f_%3.4f_%3.4f_%3.4f',var,K2,Ti2,Td2,E2,E),1:kk,u(2,:))

@@ -29,6 +29,7 @@ for i=1:L
         end
         Ys1(i,j)=Y1(kk);
         Ys2(i,j)=Y2(kk);
+        %wlasciwosci statyczne
         if U1(kk)==1 && U2(kk)==0
             toPlotForLatex('z2Y1U1',1:kk,Y1);
             figure
@@ -44,6 +45,7 @@ for i=1:L
             figure
             plot(Y2)
         end
+        %wlasciwosci dynamiczne
         if U1(kk)>0 && U2(kk)==0
             for k=startk:kk
                 if Y1(k)>0.9*Ys1(i,j) && Yd1u1(ceil(U1(kk)*10))==0

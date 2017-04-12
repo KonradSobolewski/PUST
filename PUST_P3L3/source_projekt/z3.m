@@ -1,3 +1,4 @@
+%normalizacja odpowiedzi skokowych
 clear all
 close all
 load('z2Y1U1.txt')

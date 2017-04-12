@@ -1,6 +1,8 @@
 function [ E ] = z7DMC(N,Nu,lambda,n,draw,latex)
+%zaokr¹glenie N i Nu do za³kowitych (przydatne jeœli robimy fmincon)
 N=round(N);
 Nu=round(Nu);
+%odpoweidzi skokowe
 load('z3Y1U1.txt');
 load('z3Y1U2.txt');
 load('z3Y2U1.txt');
@@ -14,10 +16,12 @@ kk=860;
 startk=10;
 ny=2;
 nu=2;
+%inicjalizacja wektorów i maceirzy
 y=zeros(ny,kk);
 yzad=y;
 yzad(1,startk:kk)=1;
 yzad(2,startk:kk)=1;
+%zak³ócenie
 yzak=y;
 yzak(1,260:kk)=n;
 yzak(2,410:kk)=n;
@@ -47,12 +51,14 @@ for i=1:N
       end;      
    end;
 end;
+%parametry reguatora
 K=(cell2mat(M)'*cell2mat(M)+diag(ones(1,Nu*nu)*lambda))^(-1)*cell2mat(M)';
 ku=K(1:nu,:)*cell2mat(MP);
 ke1=sum(K(1,1:2:(N*ny)));
 ke2=sum(K(1,2:2:(N*ny)));
 ke3=sum(K(2,1:2:(N*ny)));
 ke4=sum(K(2,2:2:(N*ny)));
+%symulacja
 for k=10:kk
     y(1,k)=symulacja_obiektu3y1(u(1,k-5),u(1,k-6),u(2,k-2),u(2,k-3),y(1,k-1),y(1,k-2))+yzak(1,k);
     y(2,k)=symulacja_obiektu3y2(u(1,k-6),u(1,k-7),u(2,k-4),u(2,k-5),y(2,k-1),y(2,k-2))+yzak(2,k);
@@ -63,7 +69,7 @@ for k=10:kk
    dUP(1)={du(:,k)};
    u(:,k)=u(:,k-1)+du(:,k);
 end
-
+%obliczanie b³êdów
 E1=0;
 E2=0;
 for k=1:kk
@@ -71,7 +77,7 @@ for k=1:kk
     E2=E2+((yzad(2,k)-y(2,k))^2);
 end
 E=E1+E2;
-
+%rysowanie wykresów
 if(draw)
     subplot(3,2,1)
     plot(u(1,:));
@@ -104,6 +110,7 @@ if(draw)
     subplot(326)
     plot(yzak(2,:))
 end
+%eksport wykresów dla latexa
 if(latex)
     toPlotForLatex(sprintf('z7dmcu1_%d_%d_%3.4f_%3.4f_%d',N,Nu,lambda,E1,n),1:kk,u(1,:))
     toPlotForLatex(sprintf('z7dmcu2_%d_%d_%3.4f_%3.4f_%d',N,Nu,lambda,E2,n),1:kk,u(2,:))

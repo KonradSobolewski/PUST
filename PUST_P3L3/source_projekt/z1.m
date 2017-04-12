@@ -1,3 +1,4 @@
+%Sprawdzenie punktu pracy
 kk=200;
 y1 = zeros(1,kk);
 y2 = zeros(1,kk);
