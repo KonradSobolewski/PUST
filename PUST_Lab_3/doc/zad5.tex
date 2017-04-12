@@ -1,12 +1,12 @@
 \chapter{Zadanie 5: Strojenie regulatora PID i DMC}
 Strojenie regulataora odby³o siê na podstawie oceny regulacji dla zaproponowaej trajektorii zmian sygna³ów zadanych sk³adaj¹cej siê z trzech skoków.
-Podczas strojenia, jeden z regulatorów jest zawsze wy³¹czony - ma wzmocnienie $K_p = 0$. Dobieramy dla niego odpowiednie nastawy, kieruj¹c siê zarówno ocen¹ jakoœciow¹ (charakter przebiegów sterowania i wyjœcia) jak i iloœciow¹ - wielkoœci¹ b³êdu $e$.
-Po dostrojeniu pierwszego regulatora, powinnien nast¹piæ proces doboru nastaw dla drugiego, jednak dla stanowiska grzewczego w laboratorium, sterowalne obiekty s¹ identyczne - ich regulatoary wiêc równie¿ powinny byæ takie same, nie wystêpuje zatem potrzeba ponownego strojenia. Gdy zostan¹ znalezione nastawy pierwszego regulatora, nale¿y uruchomiæ drugi z takimi samymi, i wtedy, jeœli zajdzie taka koniecznoœæ, ponownie skorygowaæ nastawy obu.
+Podczas strojenia, jeden z regulatorów jest zawsze wy³¹czony - ma wzmocnienie $K_p = 0$. Dobieramy dla drugiego niego odpowiednie nastawy, kieruj¹c siê zarówno ocen¹ jakoœciow¹ (charakter przebiegów sterowania i wyjœcia) jak i iloœciow¹ - wielkoœci¹ b³êdu $e$.
+Po dostrojeniu pierwszego regulatora, powinnien nast¹piæ proces doboru nastaw dla drugiego, jednak dla stanowiska grzewczego w laboratorium, sterowalne obiekty (grza³ki) s¹ identyczne - ich regulatoary wiêc równie¿ powinny byæ takie same, nie wystêpuje zatem potrzeba ponownego strojenia. Gdy zostan¹ znalezione nastawy pierwszego regulatora, nale¿y uruchomiæ drugi z takimi samymi, i wtedy, jeœli zajdzie taka koniecznoœæ, koñcowo skorygowaæ nastawy obu naraz.
 
 \section{Regulator PID}
 
 \subsection{Pocz¹tkowe nastawy}
-Nastawy regulatora PID zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkowe przyjêliœmy nastawy otrzymane na poprzednich laboratoriach na stanowisku grzewczym, tj: $K_p = 4, T_i = 80, T_d = 3$. Drugi refgulator, jak wspomnine zosta³o we wstêpie, zosta³ wy³¹czony. Na rys \ref{PID1} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Jak widaæ, nie s¹ to nastawy optymalne; regulator jest bardzo powolny oraz wystêpuje uchyb ustalony. B³¹d wyjœcia $Y_1$ wyniós³: $E = 582.3934$.
+Nastawy regulatora PID zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkowe przyjêliœmy nastawy otrzymane jako optymalne na poprzednich laboratoriach na stanowisku grzewczym, tj: $K_p = 4, T_i = 80, T_d = 3$. Drugi refgulator, jak wspomnine zosta³o we wstêpie, zosta³ wy³¹czony. Na rys. \ref{PID1} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Jak widaæ, nie s¹ to nastawy optymalne; regulator jest bardzo powolny oraz wystêpuje uchyb ustalony. B³¹d wyjœcia $Y_1$ wyniós³: $E = 582,3934$.
 
 
 
@@ -89,7 +89,7 @@ Aby wyeliminowaæ uchyb ustalony, zwiêkszyliœmy $K_p$ o $2$. Aby uk³ad szybciej o
 \end{figure}
 \FloatBarrier
 
-Otrzymany regulator zapewnia znacznie lepsz¹ jakoœæ regulacji - nie doœæ, ze regulator jest szybszy, to osi¹ga wartoœæ zadan¹ w zadawalaj¹cym czasie a sterowanie siê poprawi³o. Wartoœæ b³êdu równie¿ uleg³a znacznemu pomniejszeniu: b³¹d wyjœcia $Y_1$ wyniós³: $E = 426.5754$.
+Otrzymany regulator zapewnia znacznie lepsz¹ jakoœæ regulacji - nie doœæ, ze regulator jest szybszy, to osi¹ga wartoœæ zadan¹ w zadawalaj¹cym czasie a sterowanie siê poprawi³o. Wartoœæ b³êdu równie¿ uleg³a znacznemu pomniejszeniu: b³¹d wyjœcia $Y_1$ wyniós³: $E = 426,5754$.
 
 \subsection{Finalne nastawy}
 Z powodu presji czasu na laboratorium, nie byliœmy w stanie przeprowadziæ kolejnych eksperymentów, aby poprawiæ jakoœæ regulacji. Postanowiliœmy uruchomiæ oba regulatory z tymi nastawami, koryguj¹c delikatnie parametr $T_i$ w górê - odnieœlimy wra¿enie, ¿e przebiegi zaczynaj¹ mieæ oscylacyjny charakter spowodowany zbyt mocnym ca³kowaniem. Nowa wartoœæ: $T_i = 65$.
@@ -134,4 +134,4 @@ Na poni¿szych wykresach mo¿na zaobserwowaæ dzia³anie gotowego dwuwymiarowego reg
 \end{figure}
 \FloatBarrier
 
-Jakoœæ regulacji jest zadowalaj¹ca. Oba wyjœcia stosunkowo szybko osi¹gaj¹ wartoœæ zadan¹, a b³¹d nie jest du¿y - $e = $. Podczas pierwszego, najwiêkszego skoku wartoœci zadanej $Y_1^{zad}$ ($dY_2^{zad}= 3$ ) wyjœcie $Y_2$ zdaje siê wpadaæ w oscylacje. Trudno nam okreœliæ, czy nie s¹ to chwilowe zewnêtrzne zak³ócenia, gdy¿ dla nastêpnych skoków wartoœci zadanej taka sytuacja nie wystêpuje. Nale¿a³oby przeprowadziæ wiêcej eksperymentów i ewentualnie zmniejszyæ jeszcze wp³yw ca³kowania. B³êdy osi¹gnê³y wartoœci: b³¹d wyjœcia $Y_1$ wyniós³: $E_1 = 464.1920$, natomiast b³¹d wyjœcia $Y_2$ wyniós³: $E_2 = 446.9870$. B³¹d sumaryczny: $E = 911.1790$. Mimo, ¿e wartoœæ b³êdu na wyjœciu $Y_1$ zwiêkszy³a siê, nale¿y pamiêtaæ, ¿e wiêc zjawisko to jest oczekiwane, gdy¿ teraz dzia³aj¹ oba regulatory, które sobie wzajemnie przeszkadzaj¹. 
+Jakoœæ regulacji jest zadowalaj¹ca. Oba wyjœcia stosunkowo szybko osi¹gaj¹ wartoœæ zadan¹, a b³¹d nie jest du¿y. Podczas pierwszego, najwiêkszego skoku wartoœci zadanej $Y_1^{zad}$ ($dY_2^{zad}= 3$) wyjœcie $Y_2$ zdaje siê wpadaæ w oscylacje. Trudno nam okreœliæ, czy nie s¹ to chwilowe zewnêtrzne zak³ócenia, gdy¿ dla nastêpnych skoków wartoœci zadanej taka sytuacja nie wystêpuje. Nale¿a³oby przeprowadziæ wiêcej eksperymentów i ewentualnie zmniejszyæ jeszcze wp³yw ca³kowania. B³êdy osi¹gnê³y wartoœci: b³¹d wyjœcia $Y_1$ wyniós³: $E_1 = 464,1920$, natomiast b³¹d wyjœcia $Y_2$ wyniós³: $E_2 = 446,9870$. B³¹d sumaryczny: $E = 911,1790$. Mimo, ¿e wartoœæ b³êdu na wyjœciu $Y_1$ zwiêkszy³a siê, nale¿y pamiêtaæ, ¿e wiêc zjawisko to jest oczekiwane, gdy¿ teraz dzia³aj¹ oba regulatory, które mog¹ sobie wzajemnie przeszkadzaæ. 

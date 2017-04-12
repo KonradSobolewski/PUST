@@ -1,18 +1,17 @@
 \chapter{Zadanie 1: Punkt pracy}
-Pierwszym poleceniem by³o sprawdzenie mo¿liwoœci sterowania i pomiaru w komunikacji ze stanowiskiem oraz okreœlenie wartoœci wyjœæ obiektu $Y_{1pp}$ (pomiaru $T1$) oraz $Y_{2pp}$ (pomiaru $T3$) w punkcie pracy $U_{1pp} = 25 + nz$ oraz $U_{2pp} = 30 + nz$, gdzie dla naszego zespo³u $nz = 11$. Obiekt zachowywa³ siê prawid³owo - umo¿liwia³ sterowanie temperatur¹ i jej odczyt. Nastêpnie przeszliœmy do badania zachowania obiektu w punkcie pracy: Ustawiliœmy wartoœæ sterowania (moc grzania grza³ek $G1$ i $G3$) na $U_{1pp}$ i $U_{2pp}$ i odczekuj¹c znaczn¹ iloœæ czasu (powy¿ej 8 minut). Wyjœcia ustabilizowa³y siê w pobli¿u wartoœci $39$ oraz $41.31$  (czasami wystêpowa³y niewielkie skoki spowodowane prawdopodobnie zak³óceniami z otoczenia). Ostatecznie zdecydowaliœmy siê zachowaæ te wartoœci.
-
-
+Pierwszym poleceniem by³o sprawdzenie mo¿liwoœci sterowania i pomiaru w komunikacji ze stanowiskiem oraz okreœlenie wartoœci wyjœæ obiektu $Y_{1pp}$ (pomiaru $T1$) oraz $Y_{2pp}$ (pomiaru $T3$) w punkcie pracy $U_{1pp} = 25 + nz$ oraz $U_{2pp} = 30 + nz$, gdzie dla naszego zespo³u $nz = 11$. Obiekt zachowywa³ siê prawid³owo - umo¿liwia³ zarówno sterowanie temperatur¹ jak i jej odczyt. Nastêpnie przeszliœmy do badania zachowania obiektu w punkcie pracy: ustawiliœmy wartoœæ sterowania (moc grzania grza³ek $G1$ i $G3$) na $U_{1pp}$ i $U_{2pp}$ i odczekaliœmy znaczn¹ iloœæ czasu (powy¿ej 8 minut). Wyjœcia ustabilizowa³y siê w pobli¿u wartoœci $Y_{1pp}=39$ oraz $Y_{2pp} = 41.31$  (czasami wystêpowa³y niewielkie skoki spowodowane prawdopodobnie zak³óceniami z otoczenia). Ostatecznie zdecydowaliœmy siê zachowaæ te wartoœci.
 \begin{figure}[tb]
 	\centering
 	\begin{tikzpicture}
 	\begin{axis}[
 	width=0.9\textwidth,
-	xmin=0,xmax=410,ymin=37,ymax=42,
+	xmin=0,xmax=410,ymin=30,ymax=42,
 	xlabel={$k$},
-	ylabel={$Y_{pp}(k)$},
+	ylabel={$Y(k)$},
 	xtick={0,50,100,150,200,250,300,350,400},
-	ytick={37,38,39,40,41,42,44},
+	ytick={33,34,35,36,37,38,39,40,41,42,44},
 	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east
 	]
 	\addplot[blue,semithick] file {wykresy/z1Y1.txt};
 	\addplot[orange,semithick] file {wykresy/z1Y2.txt};
@@ -20,6 +19,6 @@ Pierwszym poleceniem by³o sprawdzenie mo¿liwoœci sterowania i pomiaru w komunika
 	\legend{$Y_{1pp}$,$Y_{2pp}$}
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Wykresy Y(k) dla dla punktów pracy Upp}
+	\caption{Wykresy Y(k) w punktach pracy Upp}
 	\label{skok}
 \end{figure}

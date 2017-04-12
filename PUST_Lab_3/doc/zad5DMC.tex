@@ -1,0 +1,177 @@
+\section{Regulator DMC}
+
+\subsection{Pocz¹tkowe nastawy}
+Nastawy regulatora DMC zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkowe przyjêliœmy nastawy $N = 300$, $Nu = 300$, $\lambda = 1$. Wartoœæ $300$ wynika z obserwacji obiektu - bezpiecznie za³o¿yliœmy, ¿e tyle wynosi jego hortyzont dynamiki. Obiekt ten nie jest wra¿liwy na nag³e zmiany sterowañ, ale wartoœæ $\lambda = 1$ równie¿ za³o¿yliœmy bezpiecznie dosyæ du¿¹. Na rys. \ref{DMC_begin} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Regulator dzia³a poprawnie, ale nie s¹ to nastawy optymalne; regulator powinien dzia³aæ szybciej i z mniejszym b³edem. B³¹d wyjœæ wyniós³: dla $Y_1$: $E_1 = 482,4677$, dla $Y_2$: $E_2 = 459,5991$. £¹czny: $E = 942,0668$.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4dmcu1_300_300_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/z4dmcu2_300_300_1.0000.txt};
+	\legend{$U_1$,$U_2$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=39,ymax=45.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={36,37,38,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44,44.5,45,45.5,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[red,semithick,densely dashed] file {wykresy/z4dmcyzad1_41.6200.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/z4dmcyzad2_44.0600.txt};
+	\addplot [blue,semithick] file{wykresy/z4dmcy1_300_300_1.0000.txt}; 
+	\addplot[green,semithick] file{wykresy/z4dmcy2_300_300_1.0000.txt};
+	\legend{$Y_1$,$Y_2$,$Y_1^{zad}$,$Y_2^{zad}$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie dwuwymiarowego regulatora DMC o nastawach $N = 300, Nu = 300, \lambda = 1$}
+	\label{DMC_begin}
+\end{figure}
+\FloatBarrier
+
+\section{Korekta parametru Nu}
+Nastêpnie przyst¹piliœmy do zmian nastaw: parametr N pozostawiliœmy bez zmian, jako ¿e zarówno teoria jak i nasza praktyka wskazywa³y, ¿e jego zmniejszanie, jeœli w ogóle, to prowadzi³o do minimalnych zysków w jakoœci sterowania. Gdyby by³ to obiekt szybszy lub dzia³aj¹cy w wymagaj¹cym œrodowisku, mo¿naby rozwa¿yæ skrócenie tej wartoœci w celu zmniejszenia z³o¿onoœci obliczeniowej, jednak dla okresu próbkowania $Tp = 1$ nie jest to konieczne. 
+Wykonaliœmy dwukrotnie eksperyment kolejno dla wartoœci $Nu = 150$ (rys. \ref{DMC_p2}) oraz $Nu = 100$ (rys. \ref{DMC_p3}). 
+B³êdy w pierwszym eksperymencie osi¹gnê³y wartoœci: dla $Y_1$: $E_1 = 454,2170$, dla $Y_2$: $E_2 = 439,2227$. £¹czny: $E = 893,4397$.
+
+Natomiast za drugim razem: dla $Y_1$: $E_1 = 375,6482$, dla $Y_2$: $E_2 = 431,5992$. £¹czny: $E = 807,2474$.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4dmcu1_300_150_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/z4dmcu2_300_150_1.0000.txt};
+	\legend{$U_1$,$U_2$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=39,ymax=45.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={36,37,38,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44,44.5,45,45.5,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[red,semithick,densely dashed] file {wykresy/z4dmcyzad1_41.6200.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/z4dmcyzad2_44.0600.txt};
+	\addplot [blue,semithick] file{wykresy/z4dmcy1_300_150_1.0000.txt}; 
+	\addplot[green,semithick] file{wykresy/z4dmcy2_300_150_1.0000.txt};
+	\legend{$Y_1$,$Y_2$,$Y_1^{zad}$,$Y_2^{zad}$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie dwuwymiarowego regulatora DMC o nastawach $N = 300, Nu = 150, \lambda = 1$}
+	\label{DMC_p2}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[tb]
+\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4dmcu1_300_100_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/z4dmcu2_300_100_1.0000.txt};
+	\legend{$U_1$,$U_2$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=39,ymax=45.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={36,37,38,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44,44.5,45,45.5,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[red,semithick,densely dashed] file {wykresy/z4dmcyzad1_41.6200.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/z4dmcyzad2_44.0600.txt};
+	\addplot [blue,semithick] file{wykresy/z4dmcy1_300_100_1.0000.txt}; 
+	\addplot[green,semithick] file{wykresy/z4dmcy2_300_100_1.0000.txt};
+	\legend{$Y_1$,$Y_2$,$Y_1^{zad}$,$Y_2^{zad}$,}
+	\end{groupplot}
+	\end{tikzpicture}
+\caption{Dzia³anie dwuwymiarowego regulatora DMC o nastawach $N = 300, Nu = 100, \lambda = 1$}
+\label{DMC_p3}
+\end{figure}
+\FloatBarrier
+
+\section{Korekta parametru $\lambda$}
+Jako ostatni zmieniony zosta³ parametr $\lambda$.
+W celu poprawy szybkoœci sterowania zmiejszyliœmy jego wartoœæ o po³owê (rys. \ref{DMC_lambda}). 
+Finalnie, b³êdy osi¹gnê³y wartoœci: dla $Y_1$: $E_1 = 311,0436$, dla $Y_2$: $E_2 = 407,5791$. £¹czny: $E = 718,6227$.
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=0,ymax=100,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z4dmcu1_300_100_0.5000.txt};
+	\addplot[green,semithick] file {wykresy/z4dmcu2_300_100_0.5000.txt};
+	\legend{$U_1$,$U_2$,}
+	\nextgroupplot
+	[
+	xmin=0,xmax=1810,ymin=39,ymax=45.5,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800},
+	ytick={36,37,38,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44,44.5,45,45.5,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[red,semithick,densely dashed] file {wykresy/z4dmcyzad1_41.6200.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/z4dmcyzad2_44.0600.txt};
+	\addplot [blue,semithick] file{wykresy/z4dmcy1_300_100_0.5000.txt}; 
+	\addplot[green,semithick] file{wykresy/z4dmcy2_300_100_0.5000.txt};
+	\legend{$Y_1$,$Y_2$,$Y_1^{zad}$,$Y_2^{zad}$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie dwuwymiarowego regulatora DMC o nastawach $N = 300, Nu = 100, \lambda = 0.5$}
+	\label{DMC_lambda}
+\end{figure}
+\FloatBarrier
+
+\section{Podsumowanie}
+Tak jak nale¿a³o siê spodziewaæ, regulator DMC w stosunku do regulatora PID zapewnia lepsz¹ regulacjê. Zarówno wskaŸnik jakoœci regulacji (dla DMC: $E = 718,6227$, dla PID: $E = 911,1790$) jak i wizualna ocena przebiegów wyjœæ i sterowania jednoznacznie wskazuj¹ algorytm DMC jako lepszy regulator obiektów o dwóch wejœciach i dwóch wyjœciach.
+
