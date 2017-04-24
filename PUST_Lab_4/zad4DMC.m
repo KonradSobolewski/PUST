@@ -1,13 +1,13 @@
 function [E]=zad4DMC(Nu,lambda)
 %algorytm DMC z opcjonalnym uwzglêdnieniem parametrów
 addpath ('F:\SerialCommunication'); % add a path
-initSerialControl COM13 % initialise com port
+initSerialControl COM5 % initialise com port
 load('aprskok.txt')
 D=300;
 N=300;
 s=aprskok(:,2);
 Upp=36;
-Ypp=37.68;
+Ypp=36.12;
 Umin=0;
 Umax=100;
 
@@ -48,13 +48,12 @@ Y(1:kk)=Ypp;
 
 e=zeros(1,kk);
 Yzad(1:startk)=Ypp; 
-Yzad(startk:210)=Ypp+?;
-Yzad(210:410)=Ypp+?;
-Yzad(410:610)=Ypp+?;
-Yzad(610:810)=Ypp+?;
-Yzad(810:1010)=Ypp+?;
-Yzad(1010:1210)=Ypp+?;
-
+Yzad(startk:210)=Ypp+4;
+Yzad(210:410)=Ypp+2;
+Yzad(410:610)=Ypp+9;
+Yzad(610:810)=Ypp+6;
+Yzad(810:1010)=Ypp+7;
+Yzad(1010:1210)=Ypp+1;
 u=U-Upp;
 y=U-Ypp;
 yzad = Yzad-Ypp;
@@ -87,13 +86,14 @@ for k=2:kk
    end
    U(k)=u(k)+Upp;
    
-    sendControls ([ 1, 2, 3, 4, 5, 6],[ 50, 0, 0, 0, U(k), 0]) ;
-    
+    sendNonlinearControls(U(k)) ;
+    disp(k)
+    disp(Y(k))
     plot(Y)
     drawnow
     %zapis do pliku
-    toPlotForLatex(sprintf('lab4dmcY_%d_%f3.4',Nu,lambda),1:kk,Y);
-    toPlotForLatex(sprintf('lab4dmcU_%d_%f3.4',Nu,lambda),1:kk,U);
+    toPlotForLatex(sprintf('lab4dmcY_%d_%3.4f',Nu,lambda),1:kk,Y);
+    toPlotForLatex(sprintf('lab4dmcU_%d_%3.4f',Nu,lambda),1:kk,U);
     toPlotForLatex('lab4Yzad',1:kk,Yzad);
    
     waitForNewIteration (); % wait for new iteration

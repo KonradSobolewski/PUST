@@ -1,11 +1,11 @@
 
 function[Y,U] = zad2()
  addpath ('F:\SerialCommunication'); % add a path
- initSerialControl COM14 % initialise com port
+ initSerialControl COM5 % initialise com port
 
 Upp=36;
-%Ypp=36.5;
-dU=0;
+Ypp=35.06;
+dU=25;%5-35.18%10-35.62%15-36%20-36.12%25-36.12
 kk=310;
 U = Upp*ones(kk,1);
 U(10:kk)=U(10:kk)+dU;
@@ -19,7 +19,7 @@ Y = zeros(kk,1);
  disp ( Y(k) ); % process measurements
 
  %% sending new values of control signals
- sendControls ([ 1, 2, 3, 4, 5, 6],[ 50, 0, 0, 0, U(k), 0]) ;
+ sendNonlinearControls(U(k)) ;
 
  %% synchronising with the control process
  plot(Y)
