@@ -2,10 +2,10 @@ function [E]=zad4DMC(Nu,lambda)
 %algorytm DMC z opcjonalnym uwzglêdnieniem parametrów
 addpath ('F:\SerialCommunication'); % add a path
 initSerialControl COM5 % initialise com port
-load('aprskok.txt')
+load('aprskok15.txt')
 D=300;
 N=300;
-s=aprskok(:,2);
+s=aprskok15(:,2);
 Upp=36;
 Ypp=36.12;
 Umin=0;

@@ -1,9 +1,9 @@
 clear all
 close all
 X=-10:0.1:10;
-d=5;
+d=3;
 c1=-2;
-c2=Inf;
+c2=2;
 
 % b=Inf;
 % d=2;
