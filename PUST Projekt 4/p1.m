@@ -1,0 +1,1 @@
+symulacja_obiektu3y(0,0,0,0)
