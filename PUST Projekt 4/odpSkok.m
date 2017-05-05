@@ -9,14 +9,14 @@ function s=odpSkok(U1,U2,itsY,latex)
                 Yskok(x)=symulacja_obiektu3y(Uskok(x-5),Uskok(x-6),Yskok(x-1),Yskok(x-2));
             end
             if abs(Yskok(210)-U1)<0.001
-                U1=dU(z);
+                tU1=dU(z);
             end
             if abs(Yskok(210)-U2)<0.001
-                U2=dU(z);
+                tU2=dU(z);
             end
         end
-        U1
-        U2
+        U1=tU1
+        U2=tU2
     end
     Uskok=zeros(1,410);
     Yskok=zeros(1,410);
@@ -25,7 +25,7 @@ function s=odpSkok(U1,U2,itsY,latex)
     for z=7:410
         Yskok(z)=symulacja_obiektu3y(Uskok(z-5),Uskok(z-6),Yskok(z-1),Yskok(z-2));
     end
-    s=(Yskok(211:310)-Yskok(210))./abs(U2-U1);
+    s=(Yskok(211:310)-Yskok(210))./(U2-U1);
     if latex==true
         toPlotForLatex(sprintf('skok_%3.3f_%3.3f',U1,U2),1:100,s)
     end
