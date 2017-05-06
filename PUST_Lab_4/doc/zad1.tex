@@ -1,0 +1,27 @@
+\chapter{Zadanie 1: Punkt pracy}
+Pierwszym poleceniem by³o okreœlenie wartoœci wyjœcia obiektu $Y_{pp}$ (pomiaru $T1$) w punkcie pracy $U_{pp} = 36$. Osi¹gnêliœmy j¹ ustawiaj¹c wartoœæ sterowania (moc grzania grza³ki $G1$) na $U_{pp}$ i odczekuj¹c znaczn¹ iloœæ czasu (powy¿ej 5 minut). Jak widaæ na wykresie \ref{pp}, wyjœcie ustabilizowa³o siê w okolicy 35 stopni Celcjusza. Jendak¿e, z powodu narastaj¹cej temperatury w ci¹gu zajêæ punkt pracy zmienia³ siê, nawet o stopieñ w górê do oko³o $36$ stopni, co bêdzie widoczne w nastêpnych zadaniach.
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	legend pos=south east,
+	width=0.9\textwidth,
+	xmin=0,xmax=300,ymin=25,ymax=37,
+	xlabel={$k$},
+	ylabel={$S(k)$},
+	xtick={0,50,100,150,200,250,300},
+	ytick={25,26,27,28,29,30,31,32,33,34,35,36,37},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/lab1U.txt};
+	\addplot[red,semithick] file {wykresy/lab1Y.txt};
+	
+	\legend{$U$,$Y$}
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Zachowanie obiektu w punkcie pracy, $U_{pp}=\num{36}$}
+	\label{pp}
+\end{figure}
+\FloatBarrier
