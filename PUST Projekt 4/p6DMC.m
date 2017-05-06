@@ -33,8 +33,25 @@ for m=1:n
         stemp=load('skok_-0.089_0.502.txt');
 %         s=stemp(:,2)./2000;
         s=stemp(:,2);
+    elseif m==2 && n==4
+%         stemp=load('skok_-0.089_0.293.txt');
+        stemp=load('skok_-0.089_0.377.txt');
+        s=stemp(:,2);
+    elseif m==3 && n==4
+%         stemp=load('skok_0.293_0.502.txt');
+        stemp=load('skok_0.377_0.502.txt');
+        s=stemp(:,2);
+    elseif m==2 && n==5
+        stemp=load('skok_-0.889_0.194.txt');
+        s=stemp(:,2);
+    elseif m==3 && n==5
+        stemp=load('skok_0.194_0.377.txt');
+        s=stemp(:,2);
+    elseif m==4 && n==5
+        stemp=load('skok_0.377_0.502.txt');
+        s=stemp(:,2);
     end
-    s=z2_y21(16:115,2);
+%     s=z2_y21(16:115,2);
     
     
     for i=1:N
@@ -100,17 +117,17 @@ for k=7:kk
         mi(1)=1-1/(1+exp(-d(1)*(Y(k)-c(1))));%-0.05
         mi(2)=1/(1+exp(-d(2)*(Y(k)-c(1))))-1/(1+exp(-d(2)*(Y(k)-c(2))));%1.4
         mi(3)=1/(1+exp(-d(3)*(Y(k)-c(2))));
-    elseif n==4
-        mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%-0.05
-        mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%0.5
-        mi(2)=1/(1+exp(-d*(Y(k)-c(2))))-1/(1+exp(-d*(Y(k)-c(3))));%1.4
-        mi(4)=1/(1+exp(-d*(Y(k)-c(3))));
-    elseif n==5
-        mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%-0.05
-        mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%0.25
-        mi(3)=1/(1+exp(-d*(Y(k)-c(2))))-1/(1+exp(-d*(Y(k)-c(3))));%0.5
-        mi(4)=1/(1+exp(-d*(Y(k)-c(3))))-1/(1+exp(-d*(Y(k)-c(4))));%1.4
-        mi(5)=1/(1+exp(-d*(Y(k)-c(4))));
+    elseif n==4 %100 10 30 50
+        mi(1)=1-1/(1+exp(-d(1)*(Y(k)-c(1))));%-0.05
+        mi(2)=1/(1+exp(-d(2)*(Y(k)-c(1))))-1/(1+exp(-d(2)*(Y(k)-c(2))));%0.5/0.8
+        mi(2)=1/(1+exp(-d(3)*(Y(k)-c(2))))-1/(1+exp(-d(3)*(Y(k)-c(3))));%1.4
+        mi(4)=1/(1+exp(-d(4)*(Y(k)-c(3))));
+    elseif n==5 %200 40 40 30 10
+        mi(1)=1-1/(1+exp(-d(1)*(Y(k)-c(1))));%-0.05
+        mi(2)=1/(1+exp(-d(2)*(Y(k)-c(1))))-1/(1+exp(-d(2)*(Y(k)-c(2))));%0.25
+        mi(3)=1/(1+exp(-d(3)*(Y(k)-c(2))))-1/(1+exp(-d(3)*(Y(k)-c(3))));%0.8
+        mi(4)=1/(1+exp(-d(4)*(Y(k)-c(3))))-1/(1+exp(-d(4)*(Y(k)-c(4))));%1.4
+        mi(5)=1/(1+exp(-d(5)*(Y(k)-c(4))));
     end
     
     U(k)=sum(Un*mi')/sum(mi);

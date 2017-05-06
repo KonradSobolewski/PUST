@@ -2,7 +2,7 @@ function s=odpSkok(U1,U2,itsY,latex)
     if itsY==false
         Uskok=zeros(1,210);
         Yskok=zeros(1,210);
-        dU=-1:0.001:1;
+        dU=-1:0.0001:1;
         for z=1:length(dU)
             Uskok(10:210)=dU(z);
             for x=7:210

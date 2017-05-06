@@ -1,7 +1,7 @@
 clear all
 close all
 X=-10:0.1:10;
-d=10;
+d=20;
 c1=0;
 c2=1.4;
 
