@@ -1,0 +1,98 @@
+\chapter{Zadanie 2: Odpowiedzi skokowe}
+\section{Odpowiedzi skokowe}
+
+W tej czêœci projektu nale¿a³o wyznaczyæ symulacyjnie odpowiedzi skokowe (rys. \ref{odpskok}). Eksperyment zak³ada³, i¿ obiekt bêdzie na pocz¹tku w punkcie pracy, a nastêpnie w chwili $k=15$ zostanie wykonany skok jednostkowy. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	height=0.3\textheight,
+	xmin=0,xmax=150,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,50,100,150},
+	ytick={-1,-0.5,0,0.5,1},
+	]
+	\addplot[blue,semithick] file {wykresy/zad2/z2_u1.txt};
+	\addplot[red,semithick] file {wykresy/zad2/z2_u4.txt};
+	\addplot[green,semithick] file {wykresy/zad2/z2_u7.txt};
+	\addplot[yellow,semithick] file {wykresy/zad2/z2_u10.txt};
+	\addplot[brown,semithick] file {wykresy/zad2/z2_u13.txt};
+	\addplot[orange,semithick] file {wykresy/zad2/z2_u16.txt};
+	\addplot[magenta,semithick] file {wykresy/zad2/z2_u19.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Sterowanie}
+	\label{uskok}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	height=0.3\textheight,
+	xmin=0,xmax=200,ymin=-0.5,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,50,100,150,200},
+	ytick={-0.5,0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6},
+	]
+	\addplot[blue,semithick] file {wykresy/zad2/z2_y1.txt};
+	\addplot[red,semithick] file {wykresy/zad2/z2_y4.txt};
+	\addplot[green,semithick] file {wykresy/zad2/z2_y7.txt};
+	\addplot[yellow,semithick] file {wykresy/zad2/z2_y10.txt};
+	\addplot[brown,semithick] file {wykresy/zad2/z2_y13.txt};
+	\addplot[orange,semithick] file {wykresy/zad2/z2_y16.txt};
+	\addplot[magenta,semithick] file {wykresy/zad2/z2_y19.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Wyjœcie}
+	\label{yskok}
+\end{figure}
+
+
+\section{Charakterystyka statyczna}
+Poni¿ej zosta³a zaprezentowana charakterystyka statyczna procesu $y(u)$ (rys. \ref{stat}).
+Na podstawie zawartego wykresu mo¿na wywnioskowaæ, ¿e w³aœciwoœci statyczne procesu s¹ nieliniowe. 
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	height=0.5\textheight,
+	xmin=-1,xmax=1,ymin=-0.5,ymax=6,
+	xlabel={$U$},
+	ylabel={$Y$},
+	xtick={-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1},
+	ytick={-0.5,0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6},
+	]
+	\addplot[blue,semithick] file {wykresy/zad2/z2_stat.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Charakterystyka statyczna}
+	\label{stat}
+\end{figure}
+
+\section{Charakterystyka dynamiczna}
+Charakterystyka dynamiczna zosta³a wyznaczona zale¿nie od wielkoœci skoku sterowania. Zmierzone zosta³o, po ilu krokach od momentu skoku ró¿nica wartoœci wyjœæ obiektu i punktu pracy $Y_{pp}$ wynosi³a powy¿ej $90\%$ ca³kowitego skoku wartoœci  wyjœæ obiektu $Y(k)$. Z otrzymanych danych wynika, ¿e charakterystyka dynamiczna jest nieliniowa (rys. \ref{dynamiczna}).
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	height=0.5\textheight,
+	xmin=-1,xmax=1,ymin=0,ymax=18,
+	xlabel={$U$},
+	ylabel={$Y$},
+	xtick={-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1},
+	ytick={0,2,4,6,8,10,12,14,16,18},
+	]
+	\addplot[blue,semithick] file {wykresy/zad2/z2_dyn.txt};
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Charakterystyka dynamiczna}
+	\label{dynamiczna}
+\end{figure}

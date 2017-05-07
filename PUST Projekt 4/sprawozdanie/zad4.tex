@@ -1,0 +1,208 @@
+\chapter{Zadanie 4: Strojenie regulatorów}
+Nastêpnym zadaniem by³o wyznaczenie optymalnych parametrów algorytmów PID i DMC odpowiednio za pomoc¹ metody in¿ynierskiej(PID) i eksperymentalnej(DMC). Jakoœæ regulacji oceniana by³a wizualnie - na podstawie wykresów - oraz obliczeniowo na podstawie wskaŸnika jakoœci regulacji. Wzór na ten wskaŸnik znajduje siê poni¿ej.
+\begin{equation}
+E=\sum_{k=1}^{k_{konc}}(Y^{zad}(k)-Y(k))^2
+\end{equation}
+\section{PID}
+\label{sec:pidanddmc}
+
+Do wyznaczenia nastaw regulatora $PID$ korzystamy z metody in¿ynierskiej. Na pocz¹tku w³¹czamy wy³¹cznie cz³on $P$ i szukamy wzmocnienia $K$ dla którego obiekt w wyniku skoku sterowania wpada w niegasn¹ce oscylacje. Wynikiem eksperymentu jest wartoœæ $K_{osc}=0.35$ $rys.$\ref{fig:oscylacje}. Pamiêtaj¹c, ¿e sterowany obiekt jest nieliniowy , doœwiadczamy oscylacji wy³¹cznie w jego górnych zakresach. Dalsze zwiêkszanie wzmocnienia powodowa³oby oscylacje dla górnych zakresów w regulatorze $PID$. Zgodnie z za³o¿eniem metody in¿ynierskiej w dalszych poszukiwaniach wykorzystywaæ bêdziemy $K=0,5K_{osc} = 0,175$ jako wzmocnienie. 
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4pidU_0.3500_Inf_0.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=5,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4pidY_0.3500_Inf_0.0000.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/zad4/p4Yzad.txt};
+	\legend{$Y$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Obiekt wprowadzony w oscylacje przy $K=0,35$}
+	\label{fig:oscylacje}
+\end{figure}
+\FloatBarrier
+
+Kolejnym krokiem by³o eksperymentalne dobranie parametru $T_i$ cz³onu ca³kuj¹cego I.
+Dla przetestowanych $T_i$ wartoœci wskaŸnika jakoœci regulacji wynosz¹ odpowiednio:
+\begin{itemize}
+	\item $T_i = 4 - E = 580,4906$
+	\item $T_i = 5 - E = 572,9324$
+	\item $T_i = 6 - E = 588,6638$
+\end{itemize}
+Dla $T_i=6$ wystêpuje najgorsza wartoœæ wskaŸnika jakoœci, a dla $T_i = 4$ najwiêksze oscylacje. Dla $T_i=5$ wskaŸnik jest ju¿ mniejszy, jednak¿e w dalszym ci¹gu nie uda³o siê zminimalizowaæ osylacji dla górnego przedzia³u. Do dalszych rozwa¿añ zosta³a przyjête wartoœæ $T_i=5$. Poszczególne próby przedstawiono na wykresie $rys.$\ref{fig:calka}.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4pidU_0.1750_4.0000_0.0000.txt};
+	\addplot[red,semithick] file {wykresy/zad4/p4pidU_0.1750_5.0000_0.0000.txt};
+	\addplot[green,semithick] file {wykresy/zad4/p4pidU_0.1750_6.0000_0.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4pidY_0.1750_4.0000_0.0000.txt};
+	\addplot[red,semithick] file {wykresy/zad4/p4pidY_0.1750_5.0000_0.0000.txt};
+	\addplot[green,semithick] file {wykresy/zad4/p4pidY_0.1750_6.0000_0.0000.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad4/p4Yzad.txt};
+	\legend{$T_i =4 $,$T_i =5 $,$T_i =6 $,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór $T_i$}
+	\label{fig:calka}
+\end{figure}
+\FloatBarrier
+
+Na koniec eksperymentalne dobraliœmy parametr $T_d$ $rys.$\ref{fig:pochodna}. Dla przetestowanych $T_d$ wartoœci wskaŸnika jakoœci regulacji wynosz¹ odpowiednio:
+\begin{itemize}
+	\item $T_d = 0,5 - E = 574,4522$
+	\item $T_d = 1 - E = 848,4233$
+	\item $T_d = 1,5 - E = 997.3817$
+\end{itemize}
+Dla $T_d = 0,5$ wystêpujê najlepszy wskaznik jakoœæ, ale najwiêksze oscylacje. Dla $T_d = 1,5 $ wystêpujê najgorszy wskaznik jakoœæ, ale najmniejsze oscylacje. Wystêpowanie tzw. "szpili" wp³ywa negatywnie na ocenê jakoœciow¹. Wartoœæ $T_d = 1 $ jest wartoœci¹ daj¹c¹ kompromis miêdzy jakoœci¹ regulacji, a jej przebiegiem. Niestety w dalszym ci¹gu nie otrzymaliœmy zadawalaj¹cych wyników regulacji z tego powodu stwierdzamy, ¿e regulacja nieliniowego obiektu linowym regulatorem jest nieskuteczna. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4pidU_0.1750_4.0000_0.5000.txt};
+	\addplot[red,semithick] file {wykresy/zad4/p4pidU_0.1750_4.0000_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/zad4/p4pidU_0.1750_4.0000_1.5000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4pidY_0.1750_4.0000_0.5000.txt};
+	\addplot[red,semithick] file {wykresy/zad4/p4pidY_0.1750_4.0000_1.0000.txt};
+	\addplot[green,semithick] file {wykresy/zad4/p4pidY_0.1750_4.0000_1.5000.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad4/p4Yzad.txt};
+	\legend{$T_d =0.5 $,$T_d =1 $,$T_d =1.5 $,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dobór $T_d$}
+	\label{fig:pochodna}
+\end{figure}
+\FloatBarrier
+
+
+\section{DMC}
+Parametry algorytmu $DMC$ dobraliœmy ca³kowicie eksperymentalnie poczynaj¹c od wartoœci $N=100, N_u=100, \lambda=10$ (przebieg dla pocz¹tkowych nastaw znajduje siê na wykresie rys.\ref{fig:DMC1}). Nastêpnie naszym celem by³o zmniejszenie parametrów regulatora przy jednoczesnym zachowaniu lub polepszeniu jakoœci sterowania.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4dmcU_100_100_10.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4/p4dmcY_100_100_10.0000.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad4/p4Yzad.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Podstawowy DMC}
+	\label{fig:DMC1}
+\end{figure}
+\FloatBarrier
+
+Zaczêliœmy od parametru $N$. Dla przetestowanych wartoœci otrzymaliœmy podane wartoœci wskaŸnika jakoœci:
+\begin{itemize}
+	\item $N = 8 - E = 1,8781e+03$
+	\item $N = 9 - E = 1,8708e+03$
+	\item $N = 10 - E = 1,8829e+03$
+\end{itemize}
+Nie ulega on znacznym zmianom, wiêc nie bêdzie mia³ na tym etapie kluczowej roli. Niestety zmiany zachodz¹ce na wykresach s¹ niezauwa¿alne z tego wzglêdu nie zosta³y one tutaj udokumentowane. Do dalszych obserwacji wykorzystujemy wartoœæ $N = 9$. \\
+
+
+Kolejnym krokiem by³o dobranie horyzontu $N_u$. Z w³aœciwoœci algorytmu $DMC$ na pierwszy rzut oka wynika, ¿e wartoœæ $N_u>N$ jest bez sensu. Z tego powodu zaczêliœmy dobieranie od wartoœci $N_u=N=9$. Dla wybranych punktów otrzymaliœmy wartoœci wskaŸnika jakoœci równe odpowiednio:
+\begin{itemize}
+	\item $N_u = 9 - E = 1,8708e+03$
+	\item $N_u = 4 - E = 1,8706e+03$
+	\item $N_u = 3 - E = 1,8673e+03$
+	\item $N_u = 2 - E = 1,8909e+03$
+\end{itemize}
+Niestety zmiany zachodz¹ce na wykresach s¹ tutaj tak¿e niezauwa¿alne z tego wzglêdu nie zosta³y one tutaj udokumentowane. Do dalszych obserwacji wykorzystujemy wartoœæ $N = 3$, gdy¿ posiada najmniejszy wskaznik jakoœci. \\
+
+
+
+Ostatnim parametrem wymagaj¹cym regulacji w algorytmie DMC by³a $\lambda$ .
+Ku naszemu zdziwieniu zarówno zwiêkszanie jak i zmniejszanie $\lambda$ nie przynios³o poprawy wyników regulacji. WskaŸnik jakoœci dla przetestowanych wartoœci wynosi³ odpowiednio:
+\begin{itemize}
+	\item $\lambda = 6 - E = 1,7815e+03$
+	\item $\lambda = 5 - E = 1,7515e+03$
+	\item $\lambda = 4 - E = 1,7915e+03$
+\end{itemize}
+Z powodu wysokiej b³êdu regulacji oraz minimalnej ró¿nicy miêdzy nimi, w tym wypadku wykresy ponownie siê pokry³y. Odczyt z nich jakichkolwiek zmian przy podstawowej skali by³by niemo¿liwy, dlatego nie zosta³y one zamieszczone. Od pocz¹tku do koñca testów obowi¹zuje nas wykres rys.\ref{fig:DMC1}.
+
+
+W œwietle otrzymanych wyników stwierdzamy, ¿e liniowy algorytm DMC, tak¿e jest nieskuteczny przy nielinowym obiekcie. 

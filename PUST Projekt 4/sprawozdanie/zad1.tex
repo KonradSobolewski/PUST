@@ -1,0 +1,23 @@
+\chapter{Zadanie 1: Punkt pracy}
+Pierwszym poleceniem by³o zweryfikowanie poprawnoœci punktu pracy obiektu. Uda³o siê to osi¹gn¹æ za pomoc¹ prostego sprawdzenia, przy jakiej wartoœci wyjœcia stabilizuje siê obiekt przy sta³ym sterowaniu, równym jego wartoœci w punkcie pracy ($U_{pp}=0$). Eksperyment potwierdzi³ wczeœniej podan¹ wartoœæ wyjœcia ($Y_{pp}=0$), a jego przebieg obrazuje wykres \ref{fig:punktpracy}.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=200,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,50,100,150,200},
+	ytick={-1,-0.5,0,0.5,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z1Y.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Zachowanie obiektu w punkcie pracy}
+	\label{fig:punktpracy}
+\end{figure}

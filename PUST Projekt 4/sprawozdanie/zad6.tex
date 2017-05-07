@@ -1,0 +1,368 @@
+\chapter{Zadanie 6: Algorytmy przy zaszumionym pomiarze wyjœæ}
+
+\section{PID}
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,1}
+
+Jak widaæ na wykresie \ref{szum01}, dla amplitudy szumu o wartoœci $0,1$ jakoœæ sterowania jest wci¹¿ dosyæ dobra. B³¹d wyniós³ $E = 34.6689$.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.28\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu1_1_1.0875_12.0000_0.5000_26.0560_34.6689_1.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_34.6689_1.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu2_1_1.8000_9.0000_0.5000_8.6129_34.6689_1.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy2_1_1.8000_9.0000_0.5000_34.6689_1.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,1$}
+	\label{szum01}
+\end{figure}
+\FloatBarrier
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,2}
+
+Efekt zaszumienia pomiaru wyjœcia obiektu szumem o rozk³adzie jednostajnym i amplitudzie 0,2 zosta³ zaprezentowany na wykresie \ref{szum02}. Jakoœæ regulacji jest akceptowalna, chocia¿ przebiegi s¹ dalekie od g³adkich. B³¹d niewiele wiêkszy ni¿ ten w poprzednim podpunkcie, wyniós³ $E = 39.2142$.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1.5,ymax=3.5,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu1_1_1.0875_12.0000_0.5000_30.1289_39.2142_2.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_39.2142_2.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1.5,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu2_1_1.8000_9.0000_0.5000_9.0854_39.2142_2.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy2_1_1.8000_9.0000_0.5000_39.2142_2.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,2$}
+	\label{szum02}
+\end{figure}
+\FloatBarrier
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,5}
+Gdy b³êdu pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$, algorytm staje siê nieskuteczny. B³¹d wynosi a¿ $E = 57.8277$, a oscylacje sygna³u wyjœciowego przyjmuj¹ wartoœci a¿ +/- 0,4 wartoœci zadanej. Sygna³ steruj¹cy zmienia siê z tak¹ szybkoœci¹ i ma tak du¿¹ amplitudê, ¿e z trudnoœci¹ mo¿na dostrzec chwile $k$ zmiany wartoœci zadanych. Wykres \ref{szum05}. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-2,ymax=3,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-2,-1,0,1,2,3},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu1_1_1.0875_12.0000_0.5000_49.8202_64.4973_5.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy1_1_1.0875_12.0000_0.5000_64.4973_5.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-3,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-3,-2,-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6pid/z6pidu2_1_1.8000_9.0000_0.5000_14.6770_64.4973_5.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6pid/z6pidy2_1_1.8000_9.0000_0.5000_64.4973_5.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6pid/z6pidyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory PID dla szumu o rozk³adzie jednostajnym i amplitudzie $0,5$}
+	\label{szum05}
+\end{figure}
+\FloatBarrier
+\subsection{Wnioski}
+Regulatory wykazuj¹ siê zadowalaj¹c¹ odpornoœci¹ na szumy pomiarowe w sygnale wyjœciowym. Zarówno dla amplitudy $0,1$ jak i $0,2$, sygna³ wyjœciowy jak i steruj¹cy maj¹ zadowalaj¹ce przebiegi. Dla amplitudy $0,5$ regulatory nie pracuj¹ ju¿ prawid³owo. Oprócz tego warto zauwa¿yæ, ¿e regulator nr 1 jest wra¿liwszy na szumy - amplitudy s¹ wiêksze na jego przebiegach. 
+
+\section{DMC}
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,1}
+
+Jak widaæ na wykresie \ref{szum011}, dla amplitudy szumu o wartoœci $0,1$ jakoœæ sterowania jest bardzo dobra. Algorytm DMC radzi sobie lepiej od algorytmu PID. B³¹d wyniós³ $E = 23,2815 $.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6DMC/z6dmcu1_70_6_0.3000_9.1982_1.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6DMC/z6dmcy1_70_6_0.3000_23.2815_1.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6DMC/z6dmcyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6DMC/z6dmcu2_70_6_0.3000_14.0832_1.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6DMC/z6dmcy2_70_6_0.3000_23.2815_1.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6DMC/z6dmcyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory DMC dla szumu o rozk³adzie jednostajnym i amplitudzie $0,1$}
+	\label{szum011}
+\end{figure}
+\FloatBarrier
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,2}
+Wp³yw szumu o rozk³adzie jednostajnym i amplitudzie $0,2$ na pomiar wyjœcia obiektu zosta³ zaprezentowany na wykresie \ref{szum022}. Jakoœæ regulacji jest wci¹¿ dobra, chocia¿ przebiegi zaczynaj¹ coraz mocniej odbiegaæ od wartoœci zadanej. B³¹d niewiele wiêkszy ni¿ ten w poprzednim podpunkcie, wyniós³ $E = 25,6682$.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6DMC/z6dmcu1_70_6_0.3000_11.0099_2.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6DMC/z6dmcy1_70_6_0.3000_25.6682_2.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6DMC/z6dmcyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6DMC/z6dmcu2_70_6_0.3000_14.6583_2.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6DMC/z6dmcy2_70_6_0.3000_25.6682_2.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6DMC/z6dmcyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory DMC dla szumu o rozk³adzie jednostajnym i amplitudzie $0,2$}
+	\label{szum022}
+\end{figure}
+\FloatBarrier
+\subsection{Szum o rozk³adzie jednostajnym i amplitudzie 0,5}
+Gdy b³êdy pomiarów sygna³ów wyjœciowych s¹ modelowane szumem o amplitudzie $0,5$, przebiegi wynikaj¹ce z pracy algorytmu wygl¹daj¹ podobnie do tych utworzonych przez algorytm PID dla szumu o wartoœci $0,2$. B³¹d wynosi $E = 37,6402$, a oscylacje sygna³u wyjœciowego przyjmuj¹ wartoœci +/- 0,25. Jest to kolejny dowód na przewagê algorytmu DMC podczas regulacji z wyjœciem obiektu obarczonym szumem pomiarowym. Wykres \ref{szum34}. 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.3\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$U_1$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6DMC/z6dmcu1_70_6_0.3000_17.0202_5.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=2.5,
+	xlabel={$k$},
+	ylabel={$Y_1$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6DMC/z6dmcy1_70_6_0.3000_37.6402_5.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6DMC/z6dmcyzad1_1.0000.txt};
+	\legend{$Y_1$,$Y_{1_{zad}}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-1,ymax=4,
+	xlabel={$k$},
+	ylabel={$U_2$},
+	xtick={0,250,500},
+	ytick={-1,0,1,2,3,4},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/6DMC/z6dmcu2_70_6_0.3000_20.6200_5.000000e-01.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=510,ymin=-0.5,ymax=1.5,
+	xlabel={$k$},
+	ylabel={$Y_2$},
+	xtick={0,250,500},
+	ytick={-0.5,0,0.5,1,1.5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[green,semithick] file {wykresy/6DMC/z6dmcy2_70_6_0.3000_37.6402_5.000000e-01.txt};
+	\addplot[red,semithick] file {wykresy/6DMC/z6dmcyzad2_1.0000.txt};
+	\legend{$Y_2$,$Y_{2_{zad}}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Oba regulatory DMC dla szumu o rozk³adzie jednostajnym i amplitudzie $0,5$}
+	\label{szum34}
+\end{figure}
+\FloatBarrier
+\subsection{Wnioski}
+Oba regulatory wykazuj¹ siê zadowalaj¹c¹ odpornoœci¹ na szumy pomiarowe w sygnale wyjœciowym. Dla wszystkich wartoœci amplitudy sygna³u szumu algorytm DMC poradzi³ sobie lepiej od regulatora PID. 
