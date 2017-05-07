@@ -46,21 +46,25 @@ for k=7:kk
    if n==2
        mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%0.5
        mi(2)=1/(1+exp(-d*(Y(k)-c(1))));
+       %p5PID([0.1 0.11],[1 3],[0.4 0.8],2,10,0.5,false)
    elseif n==3
        mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%-0.05
        mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%1.4
        mi(3)=1/(1+exp(-d*(Y(k)-c(2))));
+       %p5PID([0.21 0.08 0.11],[1 2 3],[0.01 0.5 0.7],3,10,[-0.05 1.4],false)
    elseif n==4
        mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%-0.05
        mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%0.5
        mi(2)=1/(1+exp(-d*(Y(k)-c(2))))-1/(1+exp(-d*(Y(k)-c(3))));%1.4
        mi(4)=1/(1+exp(-d*(Y(k)-c(3))));
+       %p5PID([0.12 0.14 0.13 0.1],[1 3 5 3],[0.24 2.1 0.9 0.9],4,10,[-0.05 0.5 1.4],false)
    elseif n==5
        mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%-0.05
        mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%0.25
        mi(3)=1/(1+exp(-d*(Y(k)-c(2))))-1/(1+exp(-d*(Y(k)-c(3))));%0.5
        mi(4)=1/(1+exp(-d*(Y(k)-c(3))))-1/(1+exp(-d*(Y(k)-c(4))));%1.4
        mi(5)=1/(1+exp(-d*(Y(k)-c(4))));
+       %p5PID([0.34 0.01 0.42 0.18 0.1],[1 1 5 2 3],[0.01 1.1 0.9 2.5 0.9],5,10,[-0.05 0.25 0.5 1.4],false)
    end
    
    U(k)=sum(Un*mi')/sum(mi);
@@ -82,8 +86,8 @@ plot(Yzad,'r-')
 % plot(U)
 % title('u')
 if latex==true
-    toPlotForLatex('p5pidY0',1:kk,Y);
-    toPlotForLatex('p5pidU0',1:kk,U);
+    toPlotForLatex('p5pidY05',1:kk,Y);
+    toPlotForLatex('p5pidU05',1:kk,U);
     toPlotForLatex('p5Yzad',1:kk,Yzad);
 end
 

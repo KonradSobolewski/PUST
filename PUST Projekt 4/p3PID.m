@@ -43,7 +43,6 @@ for k=7:kk
         U(k)=Umin;
    end
     
-    %zapis do pliku
 end
 figure
 plot(Y)
