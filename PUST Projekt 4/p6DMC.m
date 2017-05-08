@@ -1,7 +1,7 @@
 function [E]=p6DMC(N,Nu,lambda,n,d,c,latex)
 
 %aktualnie najlepsze: 
-%p6DMC(12,1,[800 0.5 0.1 110],4,0.25,[-0.05 0.5 1.4],false)
+%p6DMC(12,1,[800 0.01 1 110],4,0.4,[-0.05 0.5 1.4],false)
 %p6DMC(100,100,[510 25],2,0.2,[0.5],false)
 
 
