@@ -48,7 +48,7 @@ for m=1:n
         stemp=load('skok_0.377_0.502.txt');
         s=stemp(:,2);
     elseif m==2 && n==5
-        stemp=load('skok_-0.889_0.194.txt');
+        stemp=load('skok_-0.089_0.194.txt');
         s=stemp(:,2);
     elseif m==3 && n==5
         stemp=load('skok_0.194_0.377.txt');
@@ -159,8 +159,8 @@ plot(Yzad,'r-')
 % plot(U)
 % title('u')
 if latex==true
-    toPlotForLatex('p6dmcY',1:kk,Y);
-    toPlotForLatex('p6dmcU',1:kk,U);
+    toPlotForLatex('p6dmcY74',1:kk,Y);
+    toPlotForLatex('p6dmcU74',1:kk,U);
     toPlotForLatex('lab6Yzad',1:kk,Yzad);
 end
 
