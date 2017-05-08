@@ -1,12 +1,16 @@
-function [E]=zad6DMC(N,Nu,lambda,n,d,c)
+function [E]=zad6DMC(Nu,lambda,n,d,c)
+
+%zad6DMC(Nu,lambda,n,d,c)
+%zad6DMC(150,[5 2],2,[10 10], 50)
+
 %algorytm DMC z opcjonalnym uwzglêdnieniem parametrów
 addpath ('F:\SerialCommunication'); % add a path
 initSerialControl COM5 % initialise com port
-N=round(N);
+N=300;
 Nu=round(Nu);
 s1=load('aprskok5.txt');
-sn=load('skok_0.900_1.000.txt');
-D=100;
+sn=load('aprskok60.txt');
+D=300;
 Upp=36;
 Ypp=36.12;
 Umin=0;
@@ -102,7 +106,7 @@ deltaup=zeros(1,D-1);
 Un=zeros(1,n);
 mi=Un;
 
-for k=7:kk
+for k=3:kk
     %symulacja obiektu
    Y(k)= readMeasurements(1);
    y(k) = Y(k) - Ypp;
@@ -111,8 +115,8 @@ for k=7:kk
     
     for m=1:n
         % Prawo regulacji
-        deltauk=ke(m)*e(k)-ku(m,:)*deltaup';
-        Un(m)=U(k-1)+deltauk;
+        Un(m)=ke(m)*e(k)-ku(m,:)*deltaup';
+%         Un(m)=u(k-1)+deltauk;
     end
     if n==2
         mi(1)=1-1/(1+exp(-d(1)*(Y(k)-c(1))));%0.5
@@ -124,7 +128,7 @@ for k=7:kk
     elseif n==4 %100 10 30 50
         mi(1)=1-1/(1+exp(-d(1)*(Y(k)-c(1))));%-0.05
         mi(2)=1/(1+exp(-d(2)*(Y(k)-c(1))))-1/(1+exp(-d(2)*(Y(k)-c(2))));%0.5/0.8
-        mi(2)=1/(1+exp(-d(3)*(Y(k)-c(2))))-1/(1+exp(-d(3)*(Y(k)-c(3))));%1.4
+        mi(3)=1/(1+exp(-d(3)*(Y(k)-c(2))))-1/(1+exp(-d(3)*(Y(k)-c(3))));%1.4
         mi(4)=1/(1+exp(-d(4)*(Y(k)-c(3))));
     elseif n==5 %200 40 40 30 10
         mi(1)=1-1/(1+exp(-d(1)*(Y(k)-c(1))));%-0.05
@@ -134,11 +138,12 @@ for k=7:kk
         mi(5)=1/(1+exp(-d(5)*(Y(k)-c(4))));
     end
     
-    u(k)=sum(Un*mi')/sum(mi);
+    deltauk=sum(Un*mi')/sum(mi);
     for i=D-1:-1:2
         deltaup(i)=deltaup(i-1);
     end
-    deltaup(1)=u(k)-u(k-1);
+    deltaup(1)=deltauk;
+    u(k)=u(k-1)+deltauk;
     
     if u(k)>umax
       	u(k)=umax;
@@ -153,8 +158,8 @@ for k=7:kk
     plot(Y)
     drawnow
     %zapis do pliku
-    toPlotForLatex('lab6dmcYx',1:kk,Y);
-    toPlotForLatex('lab6dmcUx',1:kk,U);
+    toPlotForLatex('lab6dmcY3',1:kk,Y);
+    toPlotForLatex('lab6dmcU3',1:kk,U);
     toPlotForLatex('lab6Yzad',1:kk,Yzad);
    
     waitForNewIteration (); % wait for new iteration

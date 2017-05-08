@@ -100,5 +100,5 @@ for k=2:kk
 end
 
 %obliczenie b³êdu
-E=sum(e);
+E=sum(e.^2);
 end

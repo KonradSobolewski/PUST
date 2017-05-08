@@ -1,4 +1,5 @@
-function [E]=zad5PID( K,Ti,Td,n,d,c)
+function [E]=zad5PID( K,Ti,Td,n,d,c)%zad5PID( [5 7],[65 45],[1 1],2,10,50)
+                                    %zad5PID( [3 6],[75 45],[1 1],2,10,50)
 %algorytm DMC z opcjonalnym uwzglêdnieniem parametrów
 addpath ('F:\SerialCommunication'); % add a path
 initSerialControl COM5 % initialise com port
@@ -9,6 +10,7 @@ Umin=0;
 Umax=100;
 Tp=1;
 
+c = c - Ypp;
 
 %inicjalizacja sta³ych
 kk=1210;
@@ -43,14 +45,14 @@ for i=1:n
     r2(i)=K(i)*Td(i)/Tp;
 end
 
-for k=7:kk
+for k=3:kk
    %symulacja obiektu
    Y(k)= readMeasurements(1);
    y(k) = Y(k) - Ypp;
    %uchyb regulacji
    e(k)=yzad(k) - y(k);
    
-   for i=1:n
+   for i =1:n
         Un(i)=r2(i)*e(k-2)+r1(i)*e(k-1)+r0(i)*e(k)+u(k-1);
    end
    if n==2
@@ -91,8 +93,8 @@ for k=7:kk
     plot(Y)
     drawnow
     %zapis do pliku
-    toPlotForLatex('lab6pidYx',1:kk,Y);
-    toPlotForLatex('lab6pidUx',1:kk,U);
+    toPlotForLatex('lab6pidY2',1:kk,Y);
+    toPlotForLatex('lab6pidU2',1:kk,U);
     toPlotForLatex('lab6Yzad',1:kk,Yzad);
     disp(k)
     disp(Y(k))

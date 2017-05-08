@@ -1,13 +1,13 @@
 %wczytanie odpowiedzi skokowej z pliku .txt
-load('lab2Y_15.txt')
-skok=(lab2Y_15(11:310,2)-36)/15;
+load('wykresy_lab2/lab11Y_60.txt')
+skok=(lab11Y_60(11:310,2)-42.87)/5;
 for K=1:length(skok)
     if skok(K)<0
     skok(K)=0;
     end
 end
 
-toPlotForLatex('lab3_15',1:300,skok')
+toPlotForLatex('lab3_60',1:300,skok')
 
 %przygotowanie parametrów optymalizacji
 x0 = [11, 10, 1, 10];
