@@ -33,19 +33,15 @@ for m=1:n
     if m==1
         s=s1(:,2);
     elseif m==n
-%         s=sn(:,2)./10000;
         s=sn(:,2);
     elseif m==2 && n==3
         stemp=load('skok_-0.089_0.502.txt');
-%         s=stemp(:,2)./2000;
         s=stemp(:,2);
     elseif m==2 && n==4
-%         stemp=load('skok_-0.089_0.293.txt');
-        stemp=load('skok_-0.089_0.377.txt');
+        stemp=load('skok_-0.089_0.293.txt');
         s=stemp(:,2);
     elseif m==3 && n==4
-%         stemp=load('skok_0.293_0.502.txt');
-        stemp=load('skok_0.377_0.502.txt');
+        stemp=load('skok_0.293_0.502.txt');
         s=stemp(:,2);
     elseif m==2 && n==5
         stemp=load('skok_-0.089_0.194.txt');
@@ -126,13 +122,13 @@ for k=7:kk
     elseif n==4 %200 10 2 0.1
         %p6DMC(100,100,[3 4 5 30],4,[200 10 2 0.1],[-0.05 0.8 1.4],false)
         mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%-0.05
-        mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%0.5/0.8
+        mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%0.5
         mi(3)=1/(1+exp(-d*(Y(k)-c(2))))-1/(1+exp(-d*(Y(k)-c(3))));%1.4
         mi(4)=1/(1+exp(-d*(Y(k)-c(3))));
     elseif n==5 %200 40 40 30 10
         mi(1)=1-1/(1+exp(-d*(Y(k)-c(1))));%-0.05
         mi(2)=1/(1+exp(-d*(Y(k)-c(1))))-1/(1+exp(-d*(Y(k)-c(2))));%0.25
-        mi(3)=1/(1+exp(-d*(Y(k)-c(2))))-1/(1+exp(-d*(Y(k)-c(3))));%0.8
+        mi(3)=1/(1+exp(-d*(Y(k)-c(2))))-1/(1+exp(-d*(Y(k)-c(3))));%0.5
         mi(4)=1/(1+exp(-d*(Y(k)-c(3))))-1/(1+exp(-d*(Y(k)-c(4))));%1.4
         mi(5)=1/(1+exp(-d*(Y(k)-c(4))));
     end

@@ -1,5 +1,5 @@
 function s=odpSkok(U1,U2,itsY,latex)
-    if itsY==false
+    if itsY==true
         Uskok=zeros(1,210);
         Yskok=zeros(1,210);
         dU=-1:0.0001:1;
