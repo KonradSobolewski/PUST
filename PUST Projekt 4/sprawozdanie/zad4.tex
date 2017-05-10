@@ -31,7 +31,7 @@ Do wyznaczenia nastaw regulatora $PID$ korzystamy z metody in¿ynierskiej. Na poc
 	xtick={0,250,500,750,1000,1250,1500},
 	ytick={-1,0,1,2,3,4,5},
 	y tick label style={/pgf/number format/1000 sep=},
-	legend pos=south east,
+	legend pos=north east,
 	]
 	\addplot[blue,semithick] file {wykresy/zad4/p4pidY_0.3500_Inf_0.0000.txt};
 	\addplot[red,semithick,densely dashed] file {wykresy/zad4/p4Yzad.txt};
@@ -77,7 +77,7 @@ Dla $T_i=6$ wystêpuje najgorsza wartoœæ wskaŸnika jakoœci, a dla $T_i = 4$ najwi
 	xtick={0,250,500,750,1000,1250,1500},
 	ytick={-1,0,1,2,3,4,5,6},
 	y tick label style={/pgf/number format/1000 sep=},
-	legend pos=south east,
+	legend pos=north east,
 	]
 	\addplot[blue,semithick] file {wykresy/zad4/p4pidY_0.1750_4.0000_0.0000.txt};
 	\addplot[red,semithick] file {wykresy/zad4/p4pidY_0.1750_5.0000_0.0000.txt};
@@ -123,7 +123,7 @@ Dla $T_d = 0,5$ wystêpujê najlepszy wskaznik jakoœæ, ale najwiêksze oscylacje. D
 	xtick={0,250,500,750,1000,1250,1500},
 	ytick={-1,0,1,2,3,4,5,6},
 	y tick label style={/pgf/number format/1000 sep=},
-	legend pos=south east,
+	legend pos=north east,
 	]
 	\addplot[blue,semithick] file {wykresy/zad4/p4pidY_0.1750_4.0000_0.5000.txt};
 	\addplot[red,semithick] file {wykresy/zad4/p4pidY_0.1750_4.0000_1.0000.txt};
@@ -164,10 +164,11 @@ Parametry algorytmu $DMC$ dobraliœmy ca³kowicie eksperymentalnie poczynaj¹c od w
 	xtick={0,250,500,750,1000,1250,1500},
 	ytick={-1,0,1,2,3,4,5,6},
 	y tick label style={/pgf/number format/1000 sep=},
-	legend pos=south east,
+	legend pos=north east,
 	]
 	\addplot[blue,semithick] file {wykresy/zad4/p4dmcY_100_100_10.0000.txt};
 	\addplot[orange,semithick,densely dashed] file {wykresy/zad4/p4Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
 	\end{groupplot}
 	\end{tikzpicture}
 	\caption{Podstawowy DMC}
