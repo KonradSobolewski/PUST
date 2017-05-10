@@ -1,0 +1,170 @@
+\chapter{Laboratorium: Zadanie 6: Rozmyty regulator PID}
+
+\section{Teoria}
+Rozmyty regulator PID do obliczenia sterowania w ka¿dej iteracji korzysta ze sterowañ obliczonych w regulatorach lokalnych oraz wartoœci funkcji przynale¿noœci, które decyduj¹ o wp³ywiue poszczególnych regulatorów lokalnych na obliczone sterowanie.
+\subsection{Regulatory lokalne}
+Iloœæ regulatorów lokalnych zale¿y od kszta³tu charakterystyki statycznej. W przypadku naszego obiektu wyraŸnie widaæ, ¿e s¹ dwa liniowe odcinki. Tak wiêc bêd¹ dwa lokalne regulatory PID. W ka¿dej iteracji rozmytego algorytmu, obliczane s¹, u¿ywaj¹c standardowych wzorów na regulator PID, wyjœcia ka¿dego z regulatorów lokalnych $u^1(k), u^2(k), ... ,u^n(k)$.
+\subsection{Funkcja przynale¿noœci}
+W celu przeprowadzenia regulacji rozmytej musimy okreœliæ funkcje przynale¿noœci. Okreœlaj¹ one obszary aktywacji poszczególnych regulatorów lokalnych (a zarazem sposób ich wzajemnego oddzia³ywania). Zdecydowaliœmy siê na funkcjê sigmoidaln¹, wyra¿on¹ wzorami w postaci:
+\begin{itemize}
+	\item dla dolnego zakresu temperatur:
+	\begin{equation}
+	\mu_{y_1}(y(k))=1-\frac{1}{1+\exp(-d(y(k)-c))}
+	\end{equation}
+	\item dla górnego zakresu temperatur:
+	\begin{equation}
+	\mu_{y_2}(y(k))=\frac{1}{1+\exp(-d(y(k)-c))}
+	\end{equation}
+\end{itemize}
+gdzie:
+\begin{itemize}
+	\item $d$ to wspó³czynnik okreœlaj¹cy nachylenie funkcji przynale¿noœci;
+	\item $c$ to wartoœæ dla której funkcja przynale¿noœci osi¹ga wartoœæ $0,5$.
+	\\
+\end{itemize}
+Dla regulacji algorytmem PID dla obu funkcji przynale¿noœci przyjêliœmy $d = 10$. Dodatkowo oba regulatory lokalne osi¹gaj¹ wartoœæ funkcji przynale¿noœci $0,5$ w tym samym punkcie, bêd¹cym punktem przegiêcia charakterystyki statycznej - $c = 50$. 
+\subsection{Prawo regulacji}
+Sterowanie w regulacji rozmytej oblicza siê natomiast za pomoc¹ œredniej wa¿onej wykorzystuj¹cej wartoœci przynale¿noœci i sterowañ dla poszczególnych przedzia³ów:
+\begin{equation}
+u(k)=\frac{\mu_{y_1}(y(k))*u^1(k) + \mu_{y_2}(y(k))*u^2(k)}{\mu_{y_1}(y(k))+\mu_{y_2}(y(k))}
+\end{equation}
+\section{Dobór regulatorów lokalnych}
+\subsection{Pocz¹tkowe nastawy}
+Jako pocz¹tkowe nastawy przyjêliœmy:
+dla dolnego regulatora:
+$K_p^1 = 5, T_i^1 = 65, T_d^1 = 1$
+oraz dla górneo regulatora:
+$K_p^2 = 7, T_i^2 = 45, T_d^2 = 1$
+ 
+Nastawy regulatora dolnego s¹ nastawami otrzymanymi w pi¹tym zadaniu - regulator tamten sprawdza³ siê w dolnym zakresie temperatur, jednak¿e w górnej czêœci potrzebna by³a agresywniejsza regulacja, st¹d silniejsze wzmocnienie i ca³ka dla górnego regulatora. Wynik regulacji takiego regulatora rozmytego prezentowany jest na wykresie \ref{rozmyty1}. 
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab6pidU1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=46,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab6pidY1.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie rozmytego regulatora z dwoma lokalnymi regulatorami PID o  nastawach  $K_p^1 = 5, T_i^1 = 75, T_d^1 = 1.25$,  $K_p^2 = 7, T_i^2 = 45, T_d^2 = 1$} 
+	\label{rozmyty1}
+\end{figure}
+\FloatBarrier
+B³¹d dla takiego regulatora wyniós³ $E = 4344,8492$ i jest nieznacznie gorszy od tego uzyskanego przy u¿yciu zwyk³ej regulacji PID. ($E = 4243,6125$).
+\subsection{Korekta nastaw}
+
+Nastêpnie skorygowaliœmy nastawy zgodnie z poni¿sz¹ logik¹:
+W ni¿szych partiach widaæ mocne przeregulowanie - doszliœmy do wniosku, ¿e zjawisko to spowodowane jest faktem, ¿e silniejszy regulator wy¿szego zakresu temperatur równie¿ wp³ywa w znacz¹cy sposób na sterowania w dolnym zakresie. Mo¿na to by³o rozwi¹zaæ na dwa sposoby - zmniejszyæ paramter d, aby zniwelowaæ zmniejszyæ obszar, w którym strefy obu regulatorów nachodz¹ na siebie lub te¿ zmniejszyæ wzmocnienia obu regulatorów. Poniewa¿ w górnym zakresie równie¿ wystêpuje lekkie przeregulowanie, zdecydowaliœmy siê na tê drug¹ opcjê i obni¿yliœmy obydwóm regulatorom wzmocnienia - na kolejno  $K_p^1 = 3$ oraz  $K_p^2 = 6$. Oprócz tego zmniejszyliœmy wp³yw cz³onu ca³kuj¹cego w regulatorze PID dolengo zakresu - zmiana wpsó³czynnika $T_i^1$ z $65$ na $75$.
+Nastawy:
+
+dla dolnego regulatora:
+$K_p^1 = 3, T_i^1 = 75, T_d^1 = 1$
+oraz dla górneo regulatora:
+$K_p^2 = 6, T_i^2 = 45, T_d^2 = 1$
+
+Efekt dzia³ania na wykresie \ref{rozmyty2}.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab6pidU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=46,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab6pidY2.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu PID przy pocz¹tkowych nastawach  $K_p^1 = 3, T_i^1 = 75, T_d^1 = 1$ oraz $K_p^2 = 6, T_i^2 = 45, T_d^2 = 1$ } 
+	\label{rozmyty2}
+\end{figure}
+\FloatBarrier
+
+Dziêki naszym zmianom jakoœæ regulacji poprawi³a siê znacz¹co i w konsekwencji b³¹d dla takiego regulatora wyniós³ $E = 4163,4297$, czyli mniej, ni¿ dla regulatora klasycznego.
+Z powodu presji czasu na laboratorium nie byliœmy w stanie przeprowadziæ dodatkowych eksperymentów, ale osi¹gniêty wynik z pewnoœci¹ mo¿na jeszcze poprawiæ. Zapewne dalsze zmniejszenie $K_p^x$ oraz zwiêkszenie $T_i^1$ przynios³oby pozytywne rezultaty (jeszcze wiêksze zmniejszewia przeregulaowania), jednak w takiej postaci regulator zapewnia ju¿ lepsze rezultaty od regulatora klasycznego.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab6pidU2_fail.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=46,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab6pidY2_fail.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu PID przy pocz¹tkowych nastawach  $K_p = 5, T_i = 75, T_d = 1.25$} 
+	\label{rozmyty_fail}
+\end{figure}
+\FloatBarrier
+
+Z wygl¹du charakterystyki statycznej wyraŸnie widaæ, ¿e regulowana przez nas funkcja ma 2 skrajne przedzia³y liniowe i nieliniowy fragment ³¹cz¹cy je. Wobec tego 2 regulatory lokalne powinny wystarczyæ. Przyjêliœmy c=0,5. Po wielokrotnych testach otrzymaliœmy nastêpuj¹ce nastawy regulatorów:
+\begin{enumerate}
+	\item K=0,1		Ti=1	Td=0,4
+	\item K=0,11	Ti=3	Td=0,8
+\end{enumerate}
+Obliczony b³¹d regulacji wynosi³: 462,2845. Przebieg regulacji przedstawiliœmy poni¿ej na rysunku \ref{REG2}. Jak widaæ zarówno przebieg jak i wartoœæ wskaŸnika jakoœci w tym przypadku s¹ znacznie lepsze ni¿ dla regulatora pojedynczego. Sygna³ wyjœciowy osi¹ga ka¿d¹ z wartoœci zadanych, a b³¹d jest prawie o po³owê mniejszy. Choæ jakoœæ regulacji jest tu zadowalaj¹ca i mo¿na by na tym poprzestaæ dalej przedstawimy tak¿e wyniki dla wiêkszej liczby regulatorów lokalnych.

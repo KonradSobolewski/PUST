@@ -1,0 +1,158 @@
+\chapter{Laboratorium: Zadanie 7: Rozmyty regulator DMC}
+\section{Teoria}
+
+Sposób wyznaczania sterowania nie ró¿ni siê od tego opisanego w poprzednim podpunkcie; wci¹¿ w ka¿dej iteracji rozmytego regulatora obliczane jest sterowanie dla ka¿dego regulatora z przyjêtych przedzia³ów i obliczane jest koñcowe sterowanie bior¹c pod uwagê stopieñ przynale¿noœci aktualnego Y(k) do funkcji opisuj¹cych ka¿dy z tych przedzia³ów.
+
+Wci¹¿ jest to ten sam obiekt, którego charakterystyka sk³ada siê z dwóch liniowych regulatorów, nie ma wiêc potrzeby implementowania wiêkszej iloœci regulatorów lokalnych ani zmiany postaci funkcji przynale¿noœci.
+
+\subsection{Odpowiedzi skokowe}
+Obydwa regulatory lokalne powinny korzystaæ z odpowiadaj¹cych im odpowiedzi skokowych. Aby odpowiedzi te popranie reprezentowa³y charakter przedzia³u, w którym pracuje dany regulator lokalny, ich punkty pocz¹tkowe i koñcowe musz¹ siê zawieraæ w tych przedzia³ach. 
+Do algorytmu regulatora dolnego zosta³a wykorzystana znormalizowana odpowiedŸ skokowa z $U = 36$ o $dU = 5$, natomiast dla górnego przedzia³u znormalizowana odpowiedŸ dla takiego samego skoku ale z $U = 55$. 
+
+\section{Dobór regulatorów lokalnych}
+\subsection{Pocz¹tkowe nastawy}
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab6dmcU1_fail.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=47,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab6dmcY1_fail.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie rozmytego regulatora z dwoma lokalnymi regulatorami PID o  nastawach  $K_p^1 = 5, T_i^1 = 75, T_d^1 = 1.25$,  $K_p^2 = 7, T_i^2 = 45, T_d^2 = 1$} 
+	\label{rozmytydmc1_fail}
+\end{figure}
+\FloatBarrier	
+	
+	\begin{figure}[tb]
+		\centering
+		\begin{tikzpicture}
+		\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+		width=0.9\textwidth,height=0.5\textwidth]
+		\nextgroupplot
+		[
+		xmin=0,xmax=1210,ymin=-5,ymax=105,
+		xlabel={$k$},
+		ylabel={$U(k)$},
+		xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+		ytick={0,10,20,30,40,50,60,70,80,90,100},
+		y tick label style={/pgf/number format/1000 sep=},
+		legend pos=south east,
+		]
+		\addplot[blue,semithick] file {wykresy/lab6dmcU1_fail2.txt};
+		\nextgroupplot
+		[
+		xmin=0,xmax=1210,ymin=36,ymax=47,
+		xlabel={$k$},
+		ylabel={$Y(k)$},
+		xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+		ytick={36,37,38,39,40,41,42,43,44,45,46},
+		y tick label style={/pgf/number format/1000 sep=},
+		legend pos=north east,
+		]
+		\addplot[red,semithick] file{wykresy/lab6dmcY1_fail2.txt}; 
+		\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+		\legend{$Y$,$Y^{zad}$,$Y_2$,}
+		\end{groupplot}
+		\end{tikzpicture}
+		\caption{Dzia³anie rozmytego regulatora z dwoma lokalnymi regulatorami PID o  nastawach  $K_p^1 = 5, T_i^1 = 75, T_d^1 = 1.25$,  $K_p^2 = 7, T_i^2 = 45, T_d^2 = 1$} 
+		\label{rozmytydmc1_fail2}
+	
+\end{figure}
+\FloatBarrier
+	\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab6dmcU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=47,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab6dmcY2.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie rozmytego regulatora z dwoma lokalnymi regulatorami PID o  nastawach  $K_p^1 = 5, T_i^1 = 75, T_d^1 = 1.25$,  $K_p^2 = 7, T_i^2 = 45, T_d^2 = 1$} 
+	\label{rozmytydmc2}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=1210,ymin=-5,ymax=105,
+xlabel={$k$},
+ylabel={$U(k)$},
+xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+ytick={0,10,20,30,40,50,60,70,80,90,100},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/lab6dmcU3.txt};
+\nextgroupplot
+[
+xmin=0,xmax=1210,ymin=36,ymax=47,
+xlabel={$k$},
+ylabel={$Y(k)$},
+xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+ytick={36,37,38,39,40,41,42,43,44,45,46},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=north east,
+]
+\addplot[red,semithick] file{wykresy/lab6dmcY3.txt}; 
+\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+\legend{$Y$,$Y^{zad}$,$Y_2$,}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie rozmytego regulatora z dwoma lokalnymi regulatorami PID o  nastawach  $K_p^1 = 5, T_i^1 = 75, T_d^1 = 1.25$,  $K_p^2 = 7, T_i^2 = 45, T_d^2 = 1$} 
+\label{rozmytydmc3}
+\end{figure}
+\FloatBarrier

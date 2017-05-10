@@ -2,7 +2,7 @@
 Kolejnym zadaniem by³o zmierzenie piêciu odpowiedzi skokowych obiektu dla skoków rozpoczynaj¹cych siê z punktu pracy - skoki o $dU$ kolejno z wartoœci¹ $5,10,15,20,25$.  Dla przedstawionych odpowiedzi skok sterowania nastêpowa³ w chwili $k=10$, co oznacza, ¿e dopiero od $k=11$ wykresy przedstawiaj¹ w³aœciwe odpowiedzi skokowe. Odpowiedzi skokowe dla toru sterowanie-wyjœcie znajduj¹ siê na rysunku \ref{skoku}.
 
 Trudnoœci w stwierdzeniu liniowych w³aœciwoœci stanowiska grzewczego powodowane s¹ faktem zmieniaj¹cego siê punktu pracy. Jednak dla odpowiedzi skokowych istotna jest tylko ró¿nica miêdzy wartoœci¹ pocz¹tkow¹ i koñcow¹, nie sam punkt startowy - mo¿emy wiêc dla wygodniejszej wizualizacji przesun¹æ odpowiedzi do wspólnego punktu pracy. Efekt takiej operacji znajduje siê na wykresie \ref{skoku_Przes}.
-Widaæ na nim wyraŸnie, ¿e obiekt nie jest liniowy - ró¿nica w koñcowej wartoœci wyjœcia dla skoków o wy¿szej wartoœci jest zdecydowanie wiêksza ni¿ dla mniejszych skoków sterowania. 
+Widaæ na nim wyraŸnie, ¿e obiekt nie jest liniowy - ró¿nica miêdzy koñcow¹ a pocz¹tkow¹ wartoœci¹ wyjœcia dla skoków o wiêkszej wartoœci jest stosunkowo mniejsza ni¿ dla mniejszych skoków sterowania. 
 
 
 \begin{figure}[tb]
@@ -27,12 +27,42 @@ Widaæ na nim wyraŸnie, ¿e obiekt nie jest liniowy - ró¿nica w koñcowej wartoœci 
 	\legend{$dU=\num{5}$,$dU=\num{10}$,$dU=\num{15}$,$dU=\num{20}$,$dU=\num{25}$}
 	\end{axis}
 	\end{tikzpicture}
-	\caption{Wykresy S(k) dla ró¿nych skoków sterowania z $U_{pp}=\num{36}$ o dU}
+	\caption{Wykresy S(k) dla ró¿nych skoków sterowania z $U_{pp}=\num{36}$}
 	\label{skoku}
 \end{figure}
 \FloatBarrier
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	legend pos=south east,
+	width=0.9\textwidth,
+	xmin=0,xmax=300,ymin=34,ymax=45,
+	xlabel={$k$},
+	ylabel={$S(k)$},
+	xtick={0,50,100,150,200,250,300,350},
+	ytick={34,35,36,37,38,39,40,41,42,43,44,45},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/lab2Y_przes_5.txt};
+	\addplot[green,semithick] file {wykresy/lab2Y_przes_10.txt};
+	\addplot[magenta,semithick] file {wykresy/lab2Y_przes_15.txt};
+	\addplot[orange,semithick] file {wykresy/lab2Y_przes_20.txt};
+	\addplot[purple,semithick] file {wykresy/lab2Y_przes_25.txt};
+	
+	\legend{$dU=\num{5}$,$dU=\num{10}$,$dU=\num{15}$,$dU=\num{20}$,$dU=\num{25}$}
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Wykresy S(k) dla ró¿nych skoków sterowania z $U_{pp}=\num{36}$, przesuniête do wspólnego punktu startowego}
+	\label{skoku_Przes}
+\end{figure}
+\FloatBarrier
+
+
+
 \section{Charakterystyka statyczna}
-Rysuj¹c na wykresie dla kolejnych wartoœci skoków sterowania ($5,10,15,20,25$) odpowiadaj¹ce im koñcowe wartoœci przesuniêtych do wspólnego punktu startowego przebiegów wyjœcia otrzymujemy charakterystykê statyczn¹ obiektu (wykres \ref{char_stat}). Charakterystykê statyczn¹ mo¿na przybli¿yæ dwiema prostymi, z punktem przegiêcia dla $dU = 15$. Wnioskujemy st¹d, ¿e zasadne bêdzie u¿ycie regulacji rozmytej do sterowania tym obiektem; zostan¹ u¿yte dwa regulatory: dla dolnego przedzia³u, w którym obiekt silniej reaguje na zmiany sterowania oraz do przedzia³u górnego, w zmiany U maj¹ mniejszy wp³yw na wyjœcie i  w zwi¹zku z tym potrzebny bêdzie 'gwa³towniejszy' regulator.
+Rysuj¹c na wykresie dla kolejnych wartoœci skoków sterowania ($5,10,15,20,25$) odpowiadaj¹ce im koñcowe wartoœci przesuniêtych do wspólnego punktu startowego przebiegów wyjœcia otrzymujemy charakterystykê statyczn¹ obiektu (wykres \ref{char_stat}). Charakterystyka statyczna nie jest linowa, ale mo¿na przybli¿yæ dwiema prostymi, z punktem przegiêcia dla $dU = 15$. Wnioskujemy st¹d, ¿e zasadne bêdzie u¿ycie regulacji rozmytej do sterowania tym obiektem; zostan¹ u¿yte dwa regulatory: dla dolnego przedzia³u, w którym obiekt silniej reaguje na zmiany sterowania oraz do przedzia³u górnego, w zmiany sterowania $U$ maj¹ mniejszy wp³yw na wyjœcie i w zwi¹zku z tym potrzebny bêdzie 'gwa³towniejszy' regulator.
 
 
 
@@ -41,10 +71,10 @@ Rysuj¹c na wykresie dla kolejnych wartoœci skoków sterowania ($5,10,15,20,25$) o
 	\begin{tikzpicture}
 	\begin{axis}[
 	width=0.9\textwidth,
-	xmin=5,xmax=25,ymin=37,ymax=44,
-	xlabel={$dU$},
+	xmin=41,xmax=61,ymin=37,ymax=44,
+	xlabel={$U$},
 	ylabel={$Y_k$},
-	xtick={5,10,15,20,25},
+	xtick={41,46,51,56,61},
 	ytick={34,35,36,37,38,39,40,41,42,43,44,45},
 	y tick label style={/pgf/number format/1000 sep=},
 	]
