@@ -1,0 +1,44 @@
+\chapter{Laboratorium: Zadanie 8: Dobór lambda dla rozmytego regulatora DMC}
+
+\section{Korekta nastaw}
+Wykres \ref{rozmytydmc2}, przedstawiajacy dzia³anie regulatora rozmytego ze wspó³czynnikeim $\lambda = 0.5$ nie pozostawia z³udzeñ - sterowanie jest zbyt gwa³towne i skutkuje oscylacyjnym charakterem wartoœci sterowanej. Aby wyeliminowaæ to zjawisko postanowiliœmy zwiêkszyæ lambdê. Przyjêliœmy wartoœci $\lambda = 5$ dla pierwszego regulatora, dzia³aj¹cego w dolnym zakresie temperatur oraz $\lambda = 2$ dla regulatora z górnego przedzia³u. Efekt widaæ na poni¿szym wykresie \ref{rozmytydmc3}:
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+width=0.9\textwidth,height=0.5\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=1210,ymin=-5,ymax=105,
+xlabel={$k$},
+ylabel={$U(k)$},
+xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+ytick={0,10,20,30,40,50,60,70,80,90,100},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=south east,
+]
+\addplot[blue,semithick] file {wykresy/lab6dmcU3.txt};
+\nextgroupplot
+[
+xmin=0,xmax=1210,ymin=36,ymax=47,
+xlabel={$k$},
+ylabel={$Y(k)$},
+xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+ytick={36,37,38,39,40,41,42,43,44,45,46},
+y tick label style={/pgf/number format/1000 sep=},
+legend pos=north east,
+]
+\addplot[red,semithick] file{wykresy/lab6dmcY3.txt}; 
+\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+\legend{$Y$,$Y^{zad}$,$Y_2$,}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Dzia³anie rozmytego regulatora DMC z dwoma lokalnymi regulatorami PID o nastawach: $D^1 = 300, Nu^1 = 150, \lambda^1 = 5$ oraz $D^2 = 300, Nu^2 = 150, \lambda^2 = 2$}
+\label{rozmytydmc3}
+\end{figure}
+\FloatBarrier
+
+\section{Wnioski}
+
+Jak widaæ, jakoœæ regulacji poprawi³a siê, chocia¿ wci¹¿ jest daleka od optymalnej. Niestety z powodu braku czasu nie byliœmy w stanie przetestowaæ innych nastaw. Jeœli pozwoli³by nam na to czas, przeprowadzilibyœmy kolejne eksperymenty z jeszcze wiêkszymi wskaŸnikami $\lambda$.
