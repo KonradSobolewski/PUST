@@ -28,27 +28,41 @@ data = zeros(2,2);
 figure(1);
 while(1)   
     if (t.BytesAvailable ~= 0)
-        temp = fscanf(t);
-        temp
+        temp = fscanf(t)
         eval(temp);
         data(1,iterator) = U1;
         data(2,iterator) = U2;
         data(3,iterator) = Y1;
         data(4,iterator) = Y2;
+        data(5,iterator) = Yzad1;
+        data(6,iterator) = Yzad2;
         fprintf('Fscanf zadzialal');
         iterator=iterator + 1
+        subplot(2,2,1)
         plot(1:length(data(1,:)), data(1,:),'b');
-        hold on;
         grid on;
+        subplot(2,2,2)
         plot(1:length(data(2,:)), data(2,:),'g');
+        grid on;
+        subplot(2,2,3)
         plot(1:length(data(3,:)), data(3,:),'r');
+        hold on;
+        plot(1:length(data(5,:)), data(5,:),'c');
+        grid on;
+        hold off;
+        subplot(2,2,4)
         plot(1:length(data(4,:)), data(4,:),'k');
+        hold on;
+        plot(1:length(data(6,:)), data(6,:),'c');
+        grid on;
         hold off;
         drawnow
-        toPlotForLatex('tempU1',1:length(data(1,:)), data(1,:));
-        toPlotForLatex('tempU2',1:length(data(2,:)), data(2,:));
-        toPlotForLatex('tempY1',1:length(data(3,:)), data(3,:));
-        toPlotForLatex('tempY2',1:length(data(4,:)), data(4,:));
+        toPlotForLatex('pidU1',1:length(data(1,:)), data(1,:));
+        toPlotForLatex('pidU2',1:length(data(2,:)), data(2,:));
+        toPlotForLatex('pidY1',1:length(data(3,:)), data(3,:));
+        toPlotForLatex('pidY2',1:length(data(4,:)), data(4,:));
+        toPlotForLatex('pidYzad1',1:length(data(5,:)), data(5,:));
+        toPlotForLatex('pidYzad2',1:length(data(6,:)), data(6,:));
     end
     pause(0.05);
 end
