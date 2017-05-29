@@ -41,7 +41,7 @@ ke4=sum(K(2,2:2:(N*ny)));
 fileID=fopen('ku.txt','w');
 for i=0:1
     for j=0:197
-        fprintf(fileID,'ku[%d].wiersz[%d]:=%1.4f;\n',i,j,ku(i+1,j+1));
+        fprintf(fileID,'ku[%d].wiersz_ku[%d]:=%1.4f;\n',i,j,ku(i+1,j+1));
     end
 end
 fclose(fileID);

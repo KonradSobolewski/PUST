@@ -57,12 +57,12 @@ while(1)
         grid on;
         hold off;
         drawnow
-        toPlotForLatex('pidU1',1:length(data(1,:)), data(1,:));
-        toPlotForLatex('pidU2',1:length(data(2,:)), data(2,:));
-        toPlotForLatex('pidY1',1:length(data(3,:)), data(3,:));
-        toPlotForLatex('pidY2',1:length(data(4,:)), data(4,:));
-        toPlotForLatex('pidYzad1',1:length(data(5,:)), data(5,:));
-        toPlotForLatex('pidYzad2',1:length(data(6,:)), data(6,:));
+        toPlotForLatex('dmcU1',1:length(data(1,:)), data(1,:));
+        toPlotForLatex('dmcU2',1:length(data(2,:)), data(2,:));
+        toPlotForLatex('dmcY1',1:length(data(3,:)), data(3,:));
+        toPlotForLatex('dmcY2',1:length(data(4,:)), data(4,:));
+        toPlotForLatex('dmcYzad1',1:length(data(5,:)), data(5,:));
+        toPlotForLatex('dmcYzad2',1:length(data(6,:)), data(6,:));
     end
     pause(0.05);
 end
