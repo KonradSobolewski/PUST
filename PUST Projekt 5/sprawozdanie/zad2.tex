@@ -1,0 +1,67 @@
+\chapter{Zadanie 2: Odpowiedzi skokowe}
+\section{Odpowiedzi skokowe}
+
+W tej czêœci projektu nale¿a³o wyznaczyæ symulacyjnie wszystkie odpowiedzi skokowe (rys. \ref{odpskok}). Eksperyment zak³ada³, i¿ obiekt bêdzie na pocz¹tku w punkcie pracy, a nastêpnie zostanie wykonany skok jednostkowy jednego z sygna³ów steruj¹cych. Poni¿ej przedstawiono odpowiedzi jednostkowe wszystkich wyjœæ dla skoków wszystkich sygna³ów steruj¹cych.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.28\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=200,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$y$},
+	xtick={0,50,100,150,200},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2/sU1Y1.txt};
+	\addplot[red,semithick] file {wykresy/z2/sU1Y2.txt};
+	\addplot[green,semithick] file {wykresy/z2/sU1Y3.txt};
+	\legend{$y1$,$y2$,$y3$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=200,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$y$},
+	xtick={0,50,100,150,200},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2/sU2Y1.txt};
+	\addplot[red,semithick] file {wykresy/z2/sU2Y2.txt};
+	\addplot[green,semithick] file {wykresy/z2/sU2Y3.txt};
+	\legend{$y1$,$y2$,$y3$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=200,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$y$},
+	xtick={0,50,100,150,200},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2/sU3Y1.txt};
+	\addplot[red,semithick] file {wykresy/z2/sU3Y2.txt};
+	\addplot[green,semithick] file {wykresy/z2/sU3Y3.txt};
+	\legend{$y1$,$y2$,$y3$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=200,ymin=0,ymax=2,
+	xlabel={$k$},
+	ylabel={$y$},
+	xtick={0,50,100,150,200},
+	ytick={0,0.5,1,1.5,2},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/z2/sU4Y1.txt};
+	\addplot[red,semithick] file {wykresy/z2/sU4Y2.txt};
+	\addplot[green,semithick] file {wykresy/z2/sU4Y3.txt};
+	\legend{$y1$,$y2$,$y3$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wyjœæ po skokach jednostkowych sterowañ kolejno: u1, u2, u3 i u4}
+	\label{odpskok}
+\end{figure}

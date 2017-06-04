@@ -1,0 +1,220 @@
+\chapter{Zadanie 6: Rozmyty regulator DMC}
+\section{Funkcja przynale¿noœci}
+Wartoœci wskaŸnika przynale¿noœci $\mu$ dla regulatora DMC liczyliœmy tak samo jak dla regulatora PID. Zmieni³ siê jednak sposób liczenia sterowania. Poniewa¿ w regulatorze DMC nowe sterowanie u(k) obliczane jest poprzez dodanie do poprzeniego sterowania u(k-1) wartoœci zmiany sterowania $\Delta$ u(k) obliczonej z DMC to logicznym wydaje siê uœrednianie $\Delta$ u(k) i dopiero obliczanie aktualnego sterowania. Dodatkowo zdecydowaliœmy siê na zmianê wartoœci parametrów d funkcji przynale¿noœci z d=10 na d=0,4. Zmiana ta wynika z tego, ¿e mimo wielokrotnych testów wyniki dla d=10 by³y bardzo niezadowalaj¹ce, sygna³ wyjœciowy wpada³ w oscylacje i odmawia³ d¹¿enia do wartoœci zadanej. Poni¿ej przedstawiliœmy wykresy pokazuj¹ce wy¿szoœæ nowej wartoœci d nad star¹ (\ref{D1} i \ref{D2}). Dla regulatora DMC potrzebne by³y tak¿e odpowiednie dla konkretnych przedzia³ów odpowiedzi skokowe. Dla najni¿szego przedzia³u u¿ywaliœmy odpowiedzi uzyskanej przy zmianie sterowania z -1 na -0,9, a dla najwy¿szego z 0,9 na 1. Dla reszty przedzia³ów u¿ywaliœmy odpowiedzi otrzymanych przy skokach z dolnego c do górnego c dla danego przedzia³u. Wszystkie u¿ywane odpowiedzi by³y oczywiœcie znormalizowane do postaci u¿ywanej w algorytmie DMC. Dla wszystkich regulatorów lokalnych u¿ywaliœmy jednakowych wartoœci N i $N_u$ wynosz¹cych odpowiednio 15 i 1. Wartoœci te ró¿ni¹ siê od tych dla pojedynczego DMC, poniewa¿ jego nastawy i tak nie dawa³y zadowalaj¹cych wyników, a po przeprowadzeniu licznych testów zauwa¿yliœmy, ¿e dzia³aj¹ one lepiej. Wartoœæ $\lambda$ ustaliliœmy neutralnie na 10 (jej wartoœæ i tak bêdziemy dobieraæ w zadaniu 7).
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcUd10.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcYd10.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad6/lab6Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{d = 10}
+	\label{D1}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcUd04.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcYd04.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad6/lab6Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{d = 0,4}
+	\label{D2}
+\end{figure}
+\FloatBarrier
+\section{Dwa regulatory lokalne}
+Z wygl¹du charakterystyki statycznej wyraŸnie widaæ, ¿e regulowana przez nas funkcja ma 2 skrajne przedzia³y liniowe i nieliniowy fragment ³¹cz¹cy je. Wobec tego 2 regulatory lokalne powinny wystarczyæ. Przyjêliœmy c=0,5. Otrzymany przebieg przedstawiliœmy na wykresie \ref{reg2dmc}. Obliczony b³¹d regulacji wynosi³: 568,1155. Jest to wynik o wiele lepszy ni¿ dla zwyk³ego DMC. Choæ regulatorowi nie uda³o siê w ka¿dym przypadku osi¹gn¹æ dok³adnie wartoœci zadanej (co widaæ przy czwartym skoku), to ogólny przebieg jest raczej zadowalaj¹cy.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcUdreg2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcYdreg2.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad6/lab6Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dwa regulatory lokalne}
+	\label{reg2dmc}
+\end{figure}
+\FloatBarrier
+\section{Trzy regulatory lokalne}
+Maj¹c trzy regulatory lokalne przyjêliœmy kolejno c=[-0,05 1,4]. Otrzymany przebieg przedstawiliœmy na wykresie \ref{reg3dmc}. Obliczony b³¹d regulacji wynosi³: 565,2050. Wartoœæ wskaŸnika jakoœci jest niewiele lepsza ni¿ w poprzednim podpunkcie. Nie widaæ tak¿e ¿adnej znacz¹cej zmiany w przebiegu regulacji.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcUdreg3.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcYdreg3.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad6/lab6Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Trzy regulatory lokalne}
+	\label{reg3dmc}
+\end{figure}
+\FloatBarrier
+\section{Cztery regulatory lokalne}
+Maj¹c trzy regulatory lokalne przyjêliœmy kolejno c=[-0,05 0,5 1,4]. Otrzymany przebieg przedstawiliœmy na wykresie \ref{reg4dmc}. Obliczony b³¹d regulacji wynosi³: 553,4929. Wartoœæ wskaŸnika jakoœci jest nieco lepsza ni¿ dla trzech i dwóch regulatorów lokalnych. Polepszenia w przebiegu sygna³u wyjœciowego s¹ niedu¿e, ale widocze go³ym okiem (szczególnie dla pierwszego i trzeciego skoku wartoœci zadanej).
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcUd04.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcYd04.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad6/lab6Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Cztery regulatory lokalne}
+	\label{reg4dmc}
+\end{figure}
+\FloatBarrier
+
+\section{Piêæ regulatorów lokalnych}
+Maj¹c trzy regulatory lokalne przyjêliœmy kolejno c=[-0,05 0,25 0,5 1,4]. Otrzymany przebieg przedstawiliœmy na wykresie \ref{reg5dmc}. Obliczony b³¹d regulacji wynosi³: 551,9820. Choæ wartoœæ wskaŸnika jakoœci jest nieco lepsza ni¿ dla innych konfiguracji, to w porównaniu do poprzedniego podpunktu nie widaæ ¿adnych znacz¹cych zmian w przebiegu regulacji.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcUdreg5.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad6/p6dmcYdreg5.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad6/lab6Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Piêæ regulatorów lokalnych}
+	\label{reg5dmc}
+\end{figure}
+\FloatBarrier
+\section{Podsumowanie DMC}
+Otrzymany rozmyty DMC dzia³a lepiej ni¿ zwyk³y. B³¹d regulacji jest kilkukrotnie mniejszy, a otrzymane przebiegi g³adsze. Najlepszy przebieg jak i najni¿sz¹ wartoœæ wskaŸnika jakoœci otrzymana zosta³a dla piêciu regulatorów loaklnych. Mimo wszystko dla naszego obiektu rozmyty algorytm DMC bez zmiany parametru $\lambda$ nie jest  tak dok³adny jak rozmyty PID.

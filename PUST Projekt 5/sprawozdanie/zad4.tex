@@ -1,0 +1,232 @@
+\chapter{Zadanie 4: Strojenie regulatorów}
+Nastêpnym zadaniem by³o wyznaczenie optymalnych parametrów algorytmów PID i DMC odpowiednio za pomoc¹ metody in¿ynierskiej(PID) i eksperymentalnej(DMC). Jakoœæ regulacji oceniana by³a wizualnie - na podstawie wykresów - oraz obliczeniowo na podstawie wskaŸnika jakoœci regulacji. Wzór na ten wskaŸnik znajduje siê poni¿ej.
+\begin{equation}
+E=\sum_{k=1}^{k_{konc}}(Y^{zad}(k)-Y(k))^2
+\end{equation}
+\section{PID}
+Nastawy PID dobieramy w³¹czaj¹c w tym samym czasie tylko jeden tor regulacji z istniej¹cych trzech i dobieraj¹c jego parametry. Na koñcu ³¹czymy 3 tory i korygujemy nastawy. Stroj¹c jeden tor nie bêdziemy siê przejmowaæ innymi, wiêc nie umieszczaliœmy ich wykresów, a pzredstawione wartoœci b³êdów bêd¹ sum¹ tylko z tego jednego toru.
+\subsection{Konfiguracja}
+Poniewa¿ posiadamy 4 wejœcia i 3 wyjœcia w celu napisania regulatora PID jedno z wejœæ bêdziemy musieli odrzuciæ. Pozostaje zdecydowaæ które. W tym celu tworzymy macierz wzmocnieñ KKK zawieraj¹c¹ wzmocnienia statyczne wszystkich torów procesów (wersy odzwierciedlaj¹ kolejne sterowania, a kolumny kolejne wyjœcia).
+
+\begin{equation}
+	KKK=\left[
+	\begin{array}
+	{ccc}
+	0,5 & 1,5 & 1,3\\
+	1,25 & 1,1 & 0,4\\
+	0,9 & 0,1 & 0,3\\
+	1,2 & 0,45 & 1,15
+	\end{array}
+	\right]
+\end{equation}
+
+Oczywiœcie ju¿ na jej podstawie moglibyœmy wybraæ niez³¹ konfiguracjê wyjœæ, jednak¿e my szukamy najlepszej. W tym celu dzielimy macierz KKK na cztery macierze KK$_i$ o wymiarach 3x3 usuwaj¹c za ka¿dym razem inny wiersz (numer i nowej macierzy to numer usuniêtego wiersza).
+
+\begin{equation}
+KK_1=\left[
+\begin{array}
+{ccc}
+1,25 & 1,1 & 0,4\\
+0,9 & 0,1 & 0,3\\
+1,2 & 0,45 & 1,15
+\end{array}
+\right]
+\end{equation}
+
+\begin{equation}
+KK_2=\left[
+\begin{array}
+{ccc}
+0,5 & 1,5 & 1,3\\
+0,9 & 0,1 & 0,3\\
+1,2 & 0,45 & 1,15
+\end{array}
+\right]
+\end{equation}
+
+\begin{equation}
+KK_3=\left[
+\begin{array}
+{ccc}
+0,5 & 1,5 & 1,3\\
+1,25 & 1,1 & 0,4\\
+1,2 & 0,45 & 1,15
+\end{array}
+\right]
+\end{equation}
+
+\begin{equation}
+KK_4=\left[
+\begin{array}
+{ccc}
+0,5 & 1,5 & 1,3\\
+1,25 & 1,1 & 0,4\\
+0,9 & 0,1 & 0,3
+\end{array}
+\right]
+\end{equation}
+
+Nastêpnie obliczamy w Matlabie wskaŸniki uwarunkowania tych macierzy, które wynosz¹ odpowiednio:
+ \begin{itemize}
+ 	\item cond(KK$_1$)=6,7173
+ 	\item cond(KK$_2$)=11,1599
+ 	\item cond(KK$_3$)=4,2242
+ 	\item cond(KK$_4$)=6,9254
+ \end{itemize}
+Nastêpnie wybieramy t¹, której wskaŸnik jest najmniejszy (w naszym przypadku KK$_3$) i obliczamy dla niej (w matlabie) macierz KK$_i$.*(KK$_i$\^(-1))'. Nastêpnie wybieramy z obliczonej macierzy 3 elementy, po jednym na ka¿dy wiersz i kolumnê, maj¹ce wartoœci jak najbli¿sze zera (wartoœci ujemne s¹ wykluczone). Po³o¿enie tych elementów okreœla które sterowanie powinno odpowiadaæ któremu wyjœciu. Poni¿ej przedstawiam wyniki tego równania dla wszystkich maicerzy KK$_i$.
+
+\begin{equation}
+Dla \quad KK_1 : \left[
+\begin{array}
+{ccc}
+0,0383 & 1,1362 & -0,1744\\
+1,4943 & -0,1465 & -0,3477\\
+-0,5325 & 0,0103 & 1,5222
+\end{array}
+\right]
+\end{equation}
+
+\begin{equation}
+Dla \quad KK_2 : \left[
+\begin{array}
+{ccc}
+    0,0153&    1,5529&   -0,5683\\
+1,5736&    0,1511&   -0,7247\\
+-0,5890&   -0,7040 &   2,2929
+\end{array}
+\right]
+\end{equation}
+
+\begin{equation}
+Dla \quad KK_3 : \left[
+\begin{array}
+{ccc}
+   -0,2888&    0,7646&    0,5242\\
+0,7586&    0,5768&   -0,3354\\
+0,5302&   -0,3414&    0,8112
+\end{array}
+\right]
+\end{equation}
+
+\begin{equation}
+Dla \quad KK_4 : \left[
+\begin{array}
+{ccc}
+   -0,1447  &  0,0225  &  1,1223\\
+0,3992   & 1,1198 &  -0,5190\\
+0,7455  & -0,1422&    0,3967
+\end{array}
+\right]
+\end{equation}
+
+Normalnie wybralibyœmy jedynie konfiguracjê uzyskan¹ z macierzy o najni¿szym wskaŸniku uwarunkowania (KK$_3$), jednak¿e zadanie nakazuje przetestowaæ ró¿ne konfiguracje regulatora PID. Z tego powodu zdecydowaliœmy siê wybraæ po jednej (najlepszej) konfiguracji z ka¿dej z macierzy. Bêd¹ to:
+\begin{itemize}
+	\item Dla KK1: y1-u3 y2-u2 y3-u4
+	\item Dla KK2: y1-u3 y2-u1 y3-u4
+	\item Dla KK3: y1-u2 y2-u1 y3-u4
+	\item Dla KK4: y1-u3 y2-u2 y3-u1
+\end{itemize}
+
+\subsection{PID - konfiguracja pierwsza}
+Pierwsza konfiguracja naszego PID'a zak³ada, ¿e wyjœcie pierwsze sterujemy wejœciem trzecim, wyjœcie drugie wejœciem drugim, a wyjœcie trzecie wejœciem czwartym.
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{y}$ & $\boldsymbol{u}$\\ \hline
+		$y_1$ & $u_3$ \\
+		$y_2$ & $u_2$ \\
+		$y_3$ & $u_4$ 
+		\label{k1}
+	\end{tabular}
+\caption{Pierwsza konfiguracja}
+\end{table}
+\subsubsection{Tor pierwszy}
+Nastawy PID wyznaczamy metod¹ in¿yniersk¹. Oznacza to, ¿e zaczynamy od wyznaczenia wzmocnienia K. Jego wartoœæ ustawiamy na po³owê wartoœci, dla której obiekt wpada w niekoñcz¹ce siê i nierosn¹ce oscylacje. Dla pierwszego toru $K_{osc}=13,3642$, co oznacza, ¿e jako wartoœæ K przyjmujemy $K=6,6821$. Oscylacje przedstawia poni¿szy wykres \ref{k1t1K}.
+
+Nastêpnie przyst¹piliœmy do wyznaczenia czasu zdwojenia $T_i$. Po wielu testach zdecydowaliœmy siê, ¿e najlepszy przebieg oraz najni¿sza wartoœæ b³êdu wystêpuje dla $T_i=3$. Choæ w przebiegu sterowania nie ma ona wiêkszej pzrewagi, to pzrebieg wyjœcia jest o wiele lepszy od konkurentów. Na wykresie wyjœcie dos³ownie stapia siê w jednen przebieg z wartoœci¹ zadan¹. Poni¿ej w tabeli \ref{k1t1TiE1} przedstawiono wartoœci b³êdów dla ró¿nych wartoœci $T_i$. Przebiegi dla tych wartoœci pokazano na wykresie \ref{k1t1Ti}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{T_i}$ & $\boldsymbol{E1}$ \\ \hline
+		1 & 15,7016 \\
+		3 & 14,0000 \\
+		10 & 15,6587 \\
+		100 & 34,8237 \\
+	\end{tabular}
+\caption{Wartoœci b³êdu dla ró¿nych wartoœci $T_i$}
+\label{k1t1TiE1}
+\end{table}
+
+ 
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/13.3642_0.0000_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/u3.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/13.3642_0.0000_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_4/13.3642_0.0000_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$y1$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia pierwszego i wejœcia trzeciego dla wzmocnienia oscylacyjnego $K_{osc}=13,3642$}
+	\label{k1t1K}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_1.0000_Inf_Inf_0.0000_0.0000_0.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_3.0000_Inf_Inf_0.0000_0.0000_0.0000/u3.txt};
+	\addplot[orange,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_10.0000_Inf_Inf_0.0000_0.0000_0.0000/u3.txt};
+	\addplot[brown,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_100.0000_Inf_Inf_0.0000_0.0000_0.0000/u3.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_1.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_3.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[orange,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_10.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[brown,semithick] file {wykresy/pid_3_2_4/6.6821_0.0000_0.0000_100.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_4/13.3642_0.0000_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$T_i=1$,$T_i=3$,$T_i=10$,$T_i=100$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia pierwszego i wejœcia trzeciego dla ró¿nych wartoœci $T_i$}
+	\label{k1t1Ti}
+\end{figure}

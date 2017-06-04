@@ -1,0 +1,202 @@
+\chapter{Zadanie 5: Rozmyty regulator PID}
+\section{Funkcja przynale¿noœci}
+W celu przeprowadzenia regulacji rozmytej musimy okreœliæ funkcjê przynle¿noœci. Zdecydowaliœmy siê na sigmoidaln¹ postaæ funkcji maj¹c¹ wzór:
+\begin{itemize}
+	\item dla najni¿szego przedzia³u:
+	\begin{equation}
+		\mu_{y_1}(y(k))=1-\frac{1}{1+\exp(-d_1(y(k)-c_1))}
+	\end{equation}
+	\item dla œrodkowych przedzia³ów:
+	\begin{equation}
+	\mu_{y_x}(y(k))=\frac{1}{1+\exp(-d_{x,1}(y(k)-c_{x,1}))}-\frac{1}{1+\exp(-d_{x,2}(y(k)-c_{x,2}))}
+	\end{equation}
+	\item dla najwy¿szego przedzia³u:
+	\begin{equation}
+	\mu_{y_n}(y(k))=\frac{1}{1+\exp(-d_n(y(k)-c_n))}
+	\end{equation}
+\end{itemize}
+gdzie:
+\begin{itemize}
+	\item $d_x$ to wspó³czynnik okreœlaj¹cy pochylenie funkcji przynale¿noœci
+	\item $c_x$ to wartoœæ dla której wspó³czynnik przynale¿noœci osi¹ga wartoœæ 0.5
+	\item $n$ to iloœæ regulatorów lokalnych w danej regulacji rozmytej
+\end{itemize}
+Dla regulacji algorytmem PID przyjêliœmy dla wszystkich zakresów $d_x=10$. Dodatkowo 2 s¹siaduj¹ce ze sob¹ regulatory lokalne osi¹gaj¹ wartoœæ przynale¿noœci 0,5 w tym samym miejscu (maj¹ wspólne c).
+Sterowanie w regulacji rozmytej oblicza siê natomiast za pomoc¹ œredniej wa¿onej wykorzystuj¹cej wartoœci przynale¿noœci i sterowañ dla poszczególnych przedzia³ów:
+\begin{equation}
+	u(k)=\frac{\sum_{x=1}^{n}\mu_{y_x}(y(k))*u^x(k)}{\sum_{x=1}^{n}\mu_{y_x}(y(k))}
+\end{equation}
+\section{Dwa regulatory lokalne}
+Z wygl¹du charakterystyki statycznej wyraŸnie widaæ, ¿e regulowana przez nas funkcja ma 2 skrajne przedzia³y liniowe i nieliniowy fragment ³¹cz¹cy je. Wobec tego 2 regulatory lokalne powinny wystarczyæ. Przyjêliœmy c=0,5. Po wielokrotnych testach otrzymaliœmy nastêpuj¹ce nastawy regulatorów:
+\begin{enumerate}
+	\item K=0,1		Ti=1	Td=0,4
+	\item K=0,11	Ti=3	Td=0,8
+\end{enumerate}
+Obliczony b³¹d regulacji wynosi³: 462,2845. Przebieg regulacji przedstawiliœmy poni¿ej na rysunku \ref{REG2}. Jak widaæ zarówno przebieg jak i wartoœæ wskaŸnika jakoœci w tym przypadku s¹ znacznie lepsze ni¿ dla regulatora pojedynczego. Sygna³ wyjœciowy osi¹ga ka¿d¹ z wartoœci zadanych, a b³¹d jest prawie o po³owê mniejszy. Choæ jakoœæ regulacji jest tu zadowalaj¹ca i mo¿na by na tym poprzestaæ dalej przedstawimy tak¿e wyniki dla wiêkszej liczby regulatorów lokalnych.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidU02.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidY02.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad5/p5Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dwa regulatory lokalne}
+	\label{REG2}
+\end{figure}
+\FloatBarrier
+
+\section{Trzy regulatory lokalne}
+Maj¹c trzy regulatory lokalne przyjêliœmy kolejno c=[-0,05 1,4] (wartoœci c wypisywane bêd¹ od tego momentu zawsze od najni¿szego do najwy¿szego regulatora). Otrzymane prez nas optymalne nastawy regulatorów to:
+\begin{enumerate}
+	\item K=0,21	Ti=1	Td=0,01
+	\item K=0,08	Ti=2	Td=0,5
+	\item K=0,11	Ti=3	Td=0,7
+\end{enumerate}
+Wartoœæ b³êdu œredniokwadratowego wynosi³a: 460,0519. B³¹d jest niemal¿e taki sam jak dla dwóch regulatorów. Nie zasz³¹ tak¿e ¿adna widoczna zmiana w przebiegu sygna³u wyjœciowego. Na tej podstawie mo¿emy powiedzieæ, ¿e zastosowanie trzech regulatorów nie ma tu sensu, poniewa¿ nie wnosi poprawy regulacji zwiêkszaj¹c przy tym z³o¿onoœæ obliczeniow¹. Wyniki dla tego regulatora przedstawiliœmy poni¿ej na wykresie \ref{REG3}.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidU03.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidY03.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad5/p5Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Trzy regulatory lokalne}
+	\label{REG3}
+\end{figure}
+\FloatBarrier
+\section{Cztery regulatory lokalne}
+Maj¹c trzy regulatory lokalne przyjêliœmy kolejno c=[-0,05 0,5 1,4]. Otrzymane prez nas optymalne nastawy regulatorów to:
+\begin{enumerate}
+	\item K=0,32	Ti=2	Td=0,1
+	\item K=0,02	Ti=1	Td=1,2
+	\item K=0,27	Ti=3	Td=1,3
+	\item K=0,1		Ti=3	Td=1
+\end{enumerate}
+Wartoœæ b³êdu œredniokwadratowego wynosi³a: 460,1370. Choæ b³¹d jest niemal¿e taki sam jak w poprzednich przypadkach, dodanie czwartego regulatora zmniejszy³o znacznie oscylacje sygna³u wyjœciowego przy skoku wartoœci zadanej. Na tej podstawie mo¿emy powiedzieæ, ¿e zastosowanie czterech regulatorów jest tutaj korzystniejsze. Wyniki dla tego regulatora przedstawiliœmy poni¿ej na wykresie \ref{REG4}.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidU04.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidY04.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad5/p5Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Cztery regulatory lokalne}
+	\label{REG4}
+\end{figure}
+\FloatBarrier
+\section{Piêæ regulatorów lokalnych}
+Maj¹c trzy regulatory lokalne przyjêliœmy kolejno c=[-0,05 0,25 0,5 1,4]. Otrzymane prez nas optymalne nastawy regulatorów to:
+\begin{enumerate}
+	\item K=0,34	Ti=2	Td=0,01
+	\item K=0,01	Ti=1	Td=1,1
+	\item K=0,42	Ti=5	Td=0,9
+	\item K=0,18	Ti=2	Td=2,5
+	\item K=0,1		Ti=3	Td=0,9
+\end{enumerate}
+Wartoœæ b³êdu œredniokwadratowego wynosi³a: 454,7003. B³¹d regulacji jest nieco ni¿szy ni¿ dla poprzednich przypadków. Przebieg wykresu tak¿e nieco siê poprawi³, zw³aszcza dla czwartego skoku wartoœci zadanej. Wyniki dla tego regulatora przedstawiliœmy poni¿ej na wykresie \ref{REG5}.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=1,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidU05.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1500,ymin=-1,ymax=6,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,250,500,750,1000,1250,1500},
+	ytick={-1,0,1,2,3,4,5,6},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad5/p5pidY05.txt};
+	\addplot[orange,semithick,densely dashed] file {wykresy/zad5/p5Yzad.txt};
+	\legend{$Y(k)$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Piêæ regulatorów lokalnych}
+	\label{REG5}
+\end{figure}
+\FloatBarrier
+\section{Podsumowanie rozmytego PID}
+Z u¿yciem rozmytego regulatora PID uda³o siê uzyskaæ znacznie lepsze wyniki regulacji ni¿ przy pojedyñczym PID'zie. Najlepszy przebieg i najmniejsz¹ wartoœæ wskaŸnika jakoœci otrzymaliœmy dla piêciu regulatorów lokalnych. Nale¿y jednak pamiêtaæ, ¿e im wiêcej regulatorów lokalnych tym wiêksza z³o¿onoœæ obliczeniowa algorytmu. Poniewa¿ posiadany obiekt to jedynie funkcja w Matlabie, to niezale¿nie od iloœci algorytmów regulacja wykonuje siê niemal¿e natychmiastowo. Gdybyœmy jednak mieli do czynienia z obiektem rzeczywistym, to w zale¿noœci od jego charakteru moglibyœmy stwierdziæ, ¿e lepiej wykorzystaæ tylko dwa regulatory lokalne w celu zaoszczêdzenia czasu obliczeñ.
