@@ -1,0 +1,165 @@
+Initial/Main2/Inicjalizacja
+
+//Inicjalizacja MODBUS
+Pomiar_MODBUS := 0;
+Zapis_MODBUS := 0;
+
+MOV(TRUE, K11, Slave_adres);
+MOV(TRUE, K4, Function_code); //4-pomiar, 3-sterowanie
+MOV(TRUE, K0, Modbus_adres); //zaczynamy liczyc od 0
+MOV(TRUE, K7, Device_count); //7 pomiarow, 6 sterowan
+
+//Ustawienie poczatkowe wyjsc procesu
+ZRST(TRUE, D110, D120);
+auto_send:=TRUE;
+upp1:=0;
+upp2:=0;
+ypp1:=0;
+ypp2:=0;
+yzad1:=ypp1;
+yzad2:=ypp2;
+SD414 := 2;      // okres sygnalu na SM414 wynosi 4 sekundy
+
+
+PID_INIT
+
+EN_PID:=FALSE;
+Kp1:=13.0;
+Ti1:=1.0;
+Td1:=1.0;
+Kp2:=2.0;
+Ti2:=100000.0;
+Td2:=1.0;
+Tpp:=0.1;
+//Wyliczenie parametrow PID
+R0_PID1 := Kp1*( 1.0+(Tpp/(2.0*Ti1))+Td1/Tpp );
+R1_PID1 := Kp1*( (Tpp/(2.0*Ti1))-(2.0*Td1/Tpp)-1.0 );
+R2_PID1 := Kp1*Td1/Tpp;
+R0_PID2 := Kp2*( 1.0+(Tpp/(2.0*Ti2))+Td2/Tpp );
+R1_PID2 := Kp2*( (Tpp/(2.0*Ti2))-(2.0*Td2/Tpp)-1.0 );
+R2_PID2 := Kp2*Td2/Tpp;
+
+TRasInit
+
+HIOEN(TRUE,0,3,0);
+DHCMOVP(TRUE,0,0,SD4500);
+DHCMOVP(TRUE,0,0,SD4530);
+EN_PWM1:=FALSE;
+Y_PWM1:=0;
+EN_PWM2:=FALSE;
+Y_PWM2:=0;
+EN_TRAS:=true;
+
+Scan/Main/PropgramBody
+//Generacja tesktu do wyslania przez socket communication
+tekst_temp := 'U1=';
+//tekst_temp := CONCAT(tekst_temp,REAL_TO_STRING(u_k));
+tekst_temp := CONCAT(tekst_temp,INT_TO_STRING(D114));
+tekst_temp := CONCAT(tekst_temp,';U2=');
+tekst_temp := CONCAT(tekst_temp,INT_TO_STRING(D115));
+tekst_temp := CONCAT(tekst_temp,';Y1=');
+tekst_temp := CONCAT(tekst_temp,INT_TO_STRING(D100));
+tekst_temp := CONCAT(tekst_temp,';Y2=');
+tekst_temp := CONCAT(tekst_temp,INT_TO_STRING(D102));
+tekst_temp := CONCAT(tekst_temp,';Yzad1=');
+tekst_temp := CONCAT(tekst_temp,INT_TO_STRING(yzad1));
+tekst_temp := CONCAT(tekst_temp,';Yzad2=');
+tekst_temp := CONCAT(tekst_temp,INT_TO_STRING(yzad2));
+//tekst_temp := CONCAT(tekst_temp,REAL_TO_STRING(y_k));
+tekst_temp := CONCAT(tekst_temp,';$L');
+
+send_string := tekst_temp;
+
+//Dlugosc tekstu
+dlugosc_tekstu := LEN(send_string);
+
+
+EI(TRUE);        // przerwania zalaczone
+
+
+TRAS
+
+PWM(EN_PWM1,Y_PWM1,K200,Y0);
+PWM(EN_PWM2,Y_PWM2,K200,Y1);
+
+
+
+Fixed scan/Main1/zad/ProgBod	
+IF EN_TRAS=TRUE THEN
+	INC(TRUE,iter);
+END_IF;
+IF (iter>=500) THEN
+	yzad1:=100;
+	yzad2:=-900;
+END_IF;
+IF (iter>=1000) THEN
+	yzad1:=-300;
+	yzad2:=-1800;
+END_IF;
+IF(iter>=1500)THEN
+	iter:=0;
+	yzad1:=ypp1;
+	yzad2:=ypp2;
+END_IF;
+
+TRAS_PID
+
+//Regulator PID na podstawie rownania roznicowego
+//Wyliczenie uchybu regulacji i przesuniecie historii
+IF EN_TRAS=TRUE THEN
+	E2_PID1 := E1_PID1;
+	E1_PID1 := E0_PID1;
+	E0_PID1 := (INT_TO_REAL(yzad1) - INT_TO_REAL(SD4500));
+	E2_PID2 := E1_PID2;
+	E1_PID2 := E0_PID2;
+	E0_PID2 := (INT_TO_REAL(yzad2) - INT_TO_REAL(SD4530));
+	//U_PID1:=INT_TO_REAL(Y_PWM1);
+	//U_PID2:=INT_TO_REAL(Y_PWM2);
+	//Obliczenie sterowania
+	U_PID1 := R2_PID1*E2_PID1 + R1_PID1*E1_PID1 + R0_PID1*E0_PID1 + U_PID1;
+	U_PID2 := R2_PID2*E2_PID2 + R1_PID2*E1_PID2 + R0_PID2*E0_PID2 + U_PID2;
+	IF (U_PID1)>0.0 THEN
+		Y_DIR_DOWN:=TRUE;
+	ELSE
+		Y_DIR_DOWN:=FALSE;
+	END_IF;
+	IF (U_PID2)>0.0 THEN
+		Y_DIR_LEFT:=FALSE;
+		ELSE
+		Y_DIR_LEFT:=TRUE;
+	END_IF;
+	
+	
+	//u = R2*E2 + R1*E1 + R0*E0 + u;
+	IF (U_PID1 < -200.0) THEN
+		U_PID1 := -200.0;
+	END_IF;
+	IF (U_PID1 > -1.0) THEN
+		EN_PWM1:=FALSE;
+	ELSE
+		EN_PWM1:=TRUE;
+	END_IF;
+	
+	IF (U_PID2 > 200.0) THEN
+		U_PID2 := 200.0;
+	END_IF;
+	IF (U_PID2 < -200.0) THEN
+		U_PID2 := -200.0;
+	END_IF;
+	IF (U_PID2 > 10.0) THEN
+			U_PID2 := 10.0;
+		END_IF;
+		IF (U_PID2 < -10.0) THEN
+			U_PID2 := -10.0;
+		END_IF;
+	
+	IF (U_PID2 < 1.0 AND U_PID2 > -1.0) THEN
+		EN_PWM2:=FALSE;
+	ELSE
+		EN_PWM2:=TRUE;
+	END_IF;
+
+	Y_PWM1:=REAL_TO_INT(ABS(U_PID1));
+	Y_PWM2:=REAL_TO_INT(ABS(U_PID2));
+
+END_IF;
