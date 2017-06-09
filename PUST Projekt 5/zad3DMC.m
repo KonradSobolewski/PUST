@@ -97,11 +97,6 @@ end
 PSI=cell2mat(PSI);
 K=(M'*PSI*M+LAMBDA)^(-1)*M'*PSI;
 K1=K(1:nu,:);
-% ku=K(1:nu,:)*cell2mat(MP);
-% ke1=sum(K(1,1:2:(N*ny)));
-% ke2=sum(K(1,2:2:(N*ny)));
-% ke3=sum(K(2,1:2:(N*ny)));
-% ke4=sum(K(2,2:2:(N*ny)));
 for k=10:kk
     [y(1,k),y(2,k),y(3,k)]=symulacja_obiektu3(u(1,k-1),u(1,k-2),u(1,k-3),u(1,k-4),...
         u(2,k-1),u(2,k-2),u(2,k-3),u(2,k-4),...
@@ -110,7 +105,6 @@ for k=10:kk
         y(1,k-1),y(1,k-2),y(1,k-3),y(1,k-4),...
         y(2,k-1),y(2,k-2),y(2,k-3),y(2,k-4),...
         y(3,k-1),y(3,k-2),y(3,k-3),y(3,k-4));
-%     du(:,k)=[ke1 ke2;ke3 ke4]*(yzad(:,k)-y(:,k))-ku*cell2mat(dUP);
     Y(1:3:(N*ny))=y(1,k);
     Y(2:3:(N*ny))=y(2,k);
     Y(3:3:(N*ny))=y(3,k);

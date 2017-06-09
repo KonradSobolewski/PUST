@@ -1,0 +1,529 @@
+\section{DMC}
+Podczas dobierania DMC dobieramy takie parametry jak:
+\begin{itemize}
+	\item D - horyzont dynamiki
+	\item N - horyzont predykcji
+	\item $N_u$ - horyzont sterowania
+	\item wspó³czynniki wagowe macierzy $\Psi$ w iloœci $n_y$=3
+	\item wspó³czynniki wagowe macierzy $\Lambda$ w iloœci $n_u$=4
+\end{itemize}
+W tym przypadku wszystkie horyzonty przyjmiemy jako sta³e przy czym przyjmujemy D=N=$N_u$=200, przy czym to liczba zebranych kroków odpowiedzi skokowych. Zmniejszanie horyzontów ¿adko poprawia jakoœæ regulacji, celem takich dzia³añ najczêœciej jest zmniejszenie z³o¿onoœci obliczeniowej i tym samym czasu obliczeñ. Dobieranie nastaw zaczêliœmy od dobrania kolejnych wspó³czynników wagowych $\psi$, a nastêpnie wspó³czynników $\lambda$. Poni¿ej zamieœciliœmy wykresy sterowañ i wyjœæ dla nastaw pocz¹tkowych (wszystkie wspó³czynniki równe 1) oraz tabelkê w wartoœciami b³êdów dla wszystkich wyjœæ.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		118,9959 & 30,7112 & 31,6862 & 56,5985 \\
+	\end{tabular}
+\caption{Wartoœci b³êdów dla nastaw pocz¹tkowych}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\nextgroupplot
+	[
+xmin=0,xmax=910,ymin=-10,ymax=10,
+xlabel={$k$},
+ylabel={$u2$},
+xtick={0,100,200,300,400,100,600,700,800,900},
+ytick={-10,-5,0,5,10},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\nextgroupplot
+	[
+xmin=0,xmax=910,ymin=-10,ymax=10,
+xlabel={$k$},
+ylabel={$u3$},
+xtick={0,100,200,300,400,100,600,700,800,900},
+ytick={-10,-5,0,5,10},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\nextgroupplot
+	[
+xmin=0,xmax=910,ymin=-10,ymax=10,
+xlabel={$k$},
+ylabel={$u4$},
+xtick={0,100,200,300,400,100,600,700,800,900},
+ytick={-10,-5,0,5,10},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wejœæ przy nastawach pocz¹tkowych DMC}
+	\label{DMCu0}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+xlabel={$k$},
+ylabel={$y2$},
+xtick={0,100,200,300,400,100,600,700,800,900},
+ytick={-5,-2.5,0,2.5,5},
+y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+xlabel={$k$},
+ylabel={$y3$},
+xtick={0,100,200,300,400,100,600,700,800,900},
+ytick={-5,-2.5,0,2.5,5},
+y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad3.txt};
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wyjœæ przy nastawach pocz¹tkowych DMC}
+	\label{DMCy0}
+\end{figure}
+
+\FloatBarrier
+\subsection{Pierwszy wspó³czynnik psi}
+Po kilku testach doszliœmy do wniosku, ¿e najlepsza wartoœæ $\psi_1$ to 2,7. Zmniejszaj¹c lub zwiekszaj¹c tê wartoœæ zwiêkszaj¹ siê b³êdy. Wartoœci b³êdów dla ró¿nych wartoœci $\psi_1$ znajduj¹ siê w tabeli \ref{psi1}. Przebiegi sygna³ów steruj¹cych i wyjœæ s¹ siê na wykresach \ref{DMCu1} oraz \ref{DMCy1}. Wiêkszoœæ wykresów nie ró¿ni siê tak bardzo. Najbardziej poprawi³ siê przebieg y1, co ma sens bior¹c pod uwagê, ¿e kolejne wspó³czynniki psi maj¹ najwiêkszy wp³yw na kolejne wyjœcia.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		$\boldsymbol{\psi_1}$ & $\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		1 & 118,9959 & 30,7112 & 31,6862 & 56,5985 \\
+		2,7 & 116,2096 & 20,3765 & 32,4374 & 63,3958 \\
+		5 & 116,5936 & 17,5255 & 32,7217 & 66,3464 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla ró¿nych wartoœci $\psi_1$}
+	\label{psi1}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/5.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\legend{$\psi_1=1$,$\psi_1=\num{2,7}$,$\psi_1=5$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/5.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\legend{$\psi_1=1$,$\psi_1=\num{2,7}$,$\psi_1=5$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/5.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\legend{$\psi_1=1$,$\psi_1=\num{2,7}$,$\psi_1=5$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/5.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\legend{$\psi_1=1$,$\psi_1=\num{2,7}$,$\psi_1=5$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wejœæ przy ró¿nych wartoœciach $\psi_1$}
+	\label{DMCu1}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/5.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad1.txt};
+	\legend{$\psi_1=1$,$\psi_1=\num{2,7}$,$\psi_1=5$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/5.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad2.txt};
+	\legend{$\psi_1=1$,$\psi_1=\num{2,7}$,$\psi_1=5$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/5.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad3.txt};
+	\legend{$\psi_1=1$,$\psi_1=\num{2,7}$,$\psi_1=5$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wyjœæ przy ró¿nych wartoœciach $\psi_1$}
+	\label{DMCy1}
+\end{figure}
+
+\subsection{Drugi wspó³czynnik psi}
+Najlepsza znaleziona przez nas podczas testowania wartoœæ $\psi_2$ (taka dla której b³¹d E jest najni¿szy) to 40. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{psi2}. Przebiegi znajduj¹ siê na wykresach \ref{DMCu2} i \ref{DMCy2}. Wartoœci wejœcia trzeciego nieco siê pogorszy³y, ale za to widaæ znaczn¹ poprawê w regulacji sygna³u y2.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		$\boldsymbol{\psi_2}$ & $\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		1 & 116,2096 & 20,4374 & 32,4374 & 63,3958 \\
+		40 & 110,5704 & 20,6878 & 14,9057 & 74,9769 \\
+		100 & 110,6651 & 20,7139 & 14,2842 & 75,6670 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla ró¿nych wartoœci $\psi_2$}
+	\label{psi2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_100.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\legend{$\psi_2=1$,$\psi_2=40$,$\psi_2=100$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_100.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\legend{$\psi_2=1$,$\psi_2=40$,$\psi_2=100$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_100.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\legend{$\psi_2=1$,$\psi_2=40$,$\psi_2=100$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_100.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\legend{$\psi_2=1$,$\psi_2=40$,$\psi_2=100$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wejœæ przy ró¿nych wartoœciach $\psi_2$}
+	\label{DMCu2}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_100.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad1.txt};
+	\legend{$\psi_2=1$,$\psi_2=40$,$\psi_2=100$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_100.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad2.txt};
+	\legend{$\psi_2=1$,$\psi_2=40$,$\psi_2=100$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_100.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad3.txt};
+	\legend{$\psi_2=1$,$\psi_2=40$,$\psi_2=100$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wyjœæ przy ró¿nych wartoœciach $\psi_2$}
+	\label{DMCy2}
+\end{figure}
+
+\subsection{Trzeci wspó³czynnik psi}
+Najlepsza znaleziona przez nas podczas testowania wartoœæ $\psi_3$ (taka dla której b³¹d E jest najni¿szy) to 7. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{psi3}. Przebiegi znajduj¹ siê na wykresach \ref{DMCu3} i \ref{DMCy3}. Dobranie tego parametru najbardziej wyrówna³o wartoœci b³êdów wszystkich torów. Przebiegi sterowañ widocznie siê pogorszy³y. Mimo wszystko osi¹gane przez nie wartoœci nie s¹ nieakceptowalne. Nieco gorzej wygl¹da równie¿ regulacja wartoœci y1, za to polepszy³ siê przebieg wyjœcia y3.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		$\boldsymbol{\psi_3}$ & $\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		1 & 110,5704 & 20,6878 & 14,9057 & 74,9769 \\
+		7 & 85,3216 & 35,4493 & 15,0596 & 34,8127 \\
+		15 & 90,5030 & 49,4658 & 15,2455 & 25,7917 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla ró¿nych wartoœci $\psi_3$}
+	\label{psi3}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_15.0000_1.0000_1.0000_1.0000_1.0000/u1.txt};
+	\legend{$\psi_3=1$,$\psi_3=7$,$\psi_3=15$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_15.0000_1.0000_1.0000_1.0000_1.0000/u2.txt};
+	\legend{$\psi_3=1$,$\psi_3=7$,$\psi_3=15$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_15.0000_1.0000_1.0000_1.0000_1.0000/u3.txt};
+	\legend{$\psi_3=1$,$\psi_3=7$,$\psi_3=15$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_15.0000_1.0000_1.0000_1.0000_1.0000/u4.txt};
+	\legend{$\psi_3=1$,$\psi_3=7$,$\psi_3=15$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wejœæ przy ró¿nych wartoœciach $\psi_3$}
+	\label{DMCu3}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_15.0000_1.0000_1.0000_1.0000_1.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad1.txt};
+	\legend{$\psi_3=1$,$\psi_3=7$,$\psi_3=15$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_15.0000_1.0000_1.0000_1.0000_1.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad2.txt};
+	\legend{$\psi_3=1$,$\psi_3=7$,$\psi_3=15$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_1.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[orange,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_15.0000_1.0000_1.0000_1.0000_1.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad3.txt};
+	\legend{$\psi_3=1$,$\psi_3=7$,$\psi_3=15$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Wartoœci wyjœæ przy ró¿nych wartoœciach $\psi_3$}
+	\label{DMCy3}
+\end{figure}

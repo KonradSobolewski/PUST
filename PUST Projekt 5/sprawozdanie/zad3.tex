@@ -162,6 +162,42 @@ S_{N+1}-S_{1} & S_{N+2}-S_{2} & \ldots &  S_{N+D-1}-S_{D-1}
 \end{equation}
 
 \begin{equation}
+\boldsymbol{\Psi}=\left[
+\begin{array}
+{cccccccccc}
+\psi_{1,1} & & & & & & & & & \\
+ & \ddots & & & & & & & & \\
+ & & \psi_{1,n_y} & & & & & & & \\
+ & & & \psi_{2,1} & & & & & & \\
+ & & & & \ddots & & & & & \\
+ & & & & & \psi_{2,n_y} & & & & \\
+ & & & & & & \ddots & & & \\
+ & & & & & & & \psi_{N,1} & & \\
+ & & & & & & & & \ddots & \\
+ & & & & & & & & & \psi_{N,n_y} \\
+\end{array}
+\right]_{(N*n_y)x(N*n_y)}
+\end{equation}
+
+\begin{equation}
+\boldsymbol{\Lambda}=\left[
+\begin{array}
+{cccccccccc}
+\lambda_{0,1} & & & & & & & & & \\
+& \ddots & & & & & & & & \\
+& & \lambda_{0,n_u} & & & & & & & \\
+& & & \lambda_{1,1} & & & & & & \\
+& & & & \ddots & & & & & \\
+& & & & & \lambda_{1,n_u} & & & & \\
+& & & & & & \ddots & & & \\
+& & & & & & & \lambda_{N_u-1,1} & & \\
+& & & & & & & & \ddots & \\
+& & & & & & & & & \lambda_{N_u-1,n_u} \\
+\end{array}
+\right]_{(N_u*n_u)x(N_u*n_u)}
+\end{equation}
+
+\begin{equation}
 Y^0(k)=Y(k)+M^P
 \triangle U^P(k)
 \label{Y0}
