@@ -164,7 +164,7 @@ Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê
 	\centering
 	\begin{tabular}{c|c}
 		$\boldsymbol{T_i}$ & $\boldsymbol{E1}$ \\ \hline
-		0 & 14 \\
+		0 & 14,0000 \\
 		0.01 & 14,0113 \\
 		0.1 & 15,5293 \\
 	\end{tabular}
@@ -284,14 +284,14 @@ Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê
 \subsubsection{Tor drugi}
 Oczywiœcie zaczynamy od dobrania wzmocnienia K. Dla wyjœcia drugiego sterowanego drugim wejœciem wartoœæ wzmocnienie dla którego wpada ono w oscylacje to $K_{osc}$=18,197. Oznacza to, ¿e dla regulatora przyjmiemy wzmocnienie równe K=9,0985. Wykres zawieraj¹cy przebiegi dla wzmocnienia oscylacyjnego umieœciliœmy pod numerem \ref{k1t2K}.
 
-Nastêpn¹ dobieran¹ wartoœci¹ by³o $T_i$. Po kilku próbach doszliœmy do wniosku, ¿e najlepsz¹ wartoœci¹ jest $T_i$=5. Dla tej wartoœci zarówno przebieg jak i wartoœæ b³êdu s¹ najmniejsze. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{k1t2TiE2}. Przebiegi zamieœciliœmy na wykresie \ref{k1t2Ti}.
+Nastêpn¹ dobieran¹ wartoœci¹ by³o $T_i$. Po kilku próbach doszliœmy do wniosku, ¿e najlepsz¹ wartoœci¹ jest $T_i$=5. Dla tej wartoœci zarówno przebieg jak i wartoœæ b³êdu s¹ najlepsze. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{k1t2TiE2}. Przebiegi zamieœciliœmy na wykresie \ref{k1t2Ti}.
 
 Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê, ¿e w³¹czenie cz³onu ró¿niczkowego powoduje bardziej pogorszenie przebiegu ni¿ jego polepszenie. Z tego powodu postanowiliœmy pozostaæ przy wartoœci $T_d=0$. Wartoœci b³êdów dla wybranych wartoœci przedstawione zosta³y w tabeli \ref{k1t2TdE2}, a przebiegi na wykresie \ref{k1t2Td}.
 
 \begin{table}
 	\centering
 	\begin{tabular}{c|c}
-		$\boldsymbol{T_i}$ & $\boldsymbol{E1}$ \\ \hline
+		$\boldsymbol{T_i}$ & $\boldsymbol{E2}$ \\ \hline
 		1 & 16,6367 \\
 		5 & 14,0000 \\
 		10 & 14,3245 \\
@@ -304,8 +304,8 @@ Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê
 \begin{table}
 	\centering
 	\begin{tabular}{c|c}
-		$\boldsymbol{T_i}$ & $\boldsymbol{E1}$ \\ \hline
-		0 & 14 \\
+		$\boldsymbol{T_i}$ & $\boldsymbol{E2}$ \\ \hline
+		0 & 14,0000 \\
 		0.01 & 14,0114 \\
 		0.1 & 15,5409 \\
 	\end{tabular}
@@ -447,7 +447,7 @@ Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê
 	\centering
 	\begin{tabular}{c|c}
 		$\boldsymbol{T_i}$ & $\boldsymbol{E3}$ \\ \hline
-		0 & 14 \\
+		0 & 14,0000 \\
 		0.01 & 14,0113 \\
 		0.1 & 15,5294 \\
 	\end{tabular}
@@ -565,14 +565,27 @@ Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê
 \end{figure}
 \FloatBarrier
 \subsubsection{Ca³oœæ}
-Poni¿ej na wykresach \ref{k1u1} oraz \ref{k1y1} znajduje siê przebieg dzia³ania ca³ego procesu (wszystkie tory aktywne, trzy sterowania w odpowiedniej kolejnoœci i trzy wyjœcia) dla nastaw wybranych w poprzednich podpunktach. Wartoœci b³êdów znajduj¹ siê w tabeli \ref{k1E1}. Jak mo¿na zauwa¿yæ przebiegi nie s¹ idealne, zw³aszcza dla toru pierwszego z którym wystêpuj¹ znaczne odchylenia. Fakt, ¿e nastawy nale¿y poprawiæ nie by³ dla nas zaskoczeniem, w koñcu ka¿de sterowanie ma wp³yw na ka¿de wyjœcie. Po wielu próbach doszli¿my do nastêpuj¹cych wniosków:
+Poni¿ej na wykresach \ref{k1u1} oraz \ref{k1y1} znajduje siê przebieg dzia³ania ca³ego procesu (wszystkie tory aktywne, trzy sterowania w odpowiedniej kolejnoœci i trzy wyjœcia) dla nastaw wybranych w poprzednich podpunktach. Wartoœci b³êdów znajduj¹ siê w tabeli \ref{k1E1}. Jak mo¿na zauwa¿yæ przebiegi nie s¹ idealne, zw³aszcza dla toru pierwszego z którym wystêpuj¹ znaczne odchylenia. Fakt, ¿e nastawy nale¿y poprawiæ nie by³ dla nas zaskoczeniem, w koñcu ka¿de sterowanie ma wp³yw na ka¿de wyjœcie. Po wielu próbach doszliœmy do nastêpuj¹cych wniosków:
 \begin{itemize}
 	\item w³¹czenie któregokolwiek cz³onu D pogarsza regulacjê
 	\item zmienianie czasu $T_I$ cz³onów ma bardzo ma³y wp³yw na poprawê regulacji i czêsto j¹ pogarsza
 	\item najlepszy wp³yw na regulacjê ma zmniejszanie wzmocnieñ cz³onów 
 \end{itemize} 
 
-Ostatecznie zdecydowaliœmy siê pozostawiæ wartoœci $T_i$ i $T_d$ cz³onów niezmienione oraz zmniejszyæ wzmocnienia toru drugiego i trzeciego (sterowania u2 i u4) trzykrotnie. Powód dla którego nie zmieniliœmy wzmocnienie pierwszego z torów wynika z tabeli wzmocnieñ znajduj¹cej siê na pocz¹tku sekcji PID. WyraŸnie widaæ w niej, ¿e u3 ma ma³y wp³yw na wyjœcia y2 oraz y3. Z drugiej strony u2 i u4 maj¹ bardzo du¿y wp³yw na y1. Wzmocnienia dla wszystkich torów po poprawkach przyjmuj¹ wartoœci $K_1=6,6821$, $K_2=4,4592$, $K_3=2,6147$. Poni¿ej w tabeli \ref{k1E2} znajduj¹ siê wyliczone nowe wartoœci b³êdów. Du¿¹ poprawê widaæ zw³aszcza dla toru pierwszego. B³¹d dla y2 nieco siê powiêkszy³, ale mimo to i tak jest najmniejszy ze wszystkich. Przebiegi sterowañ i wyjœæ dla poprawionych nastaw znajduj¹ siê na wykresach \ref{k1u2} oraz \ref{k1y2}. Tu tak¿e widaæ ogromn¹ poprawê przebiegu regulacji, zw³¹szcza dla wyjœcia pierwszego, ale nie tylko.
+Ostatecznie zdecydowaliœmy siê pozostawiæ wartoœci $T_i$ i $T_d$ cz³onów niezmienione oraz zmniejszyæ wzmocnienia toru drugiego i trzeciego (sterowania u2 i u4) dwukrotnie. Powód dla którego nie zmieniliœmy wzmocnienie pierwszego z torów wynika z tabeli wzmocnieñ znajduj¹cej siê na pocz¹tku sekcji PID. WyraŸnie widaæ w niej, ¿e u3 ma ma³y wp³yw na wyjœcia y2 oraz y3. Z drugiej strony u2 i u4 maj¹ bardzo du¿y wp³yw na y1. Wzmocnienia dla wszystkich torów po poprawkach przyjmuj¹ wartoœci $K_1=6,6821$, $K_2=4,4592$, $K_3=2,6147$. Poni¿ej w tabeli \ref{k1E2} znajduj¹ siê wyliczone nowe wartoœci b³êdów. Du¿¹ poprawê widaæ zw³aszcza dla toru pierwszego. B³¹d dla y2 nieco siê powiêkszy³, ale mimo to i tak jest najmniejszy ze wszystkich. Przebiegi sterowañ i wyjœæ dla poprawionych nastaw znajduj¹ siê na wykresach \ref{k1u2} oraz \ref{k1y2}. Tu tak¿e widaæ ogromn¹ poprawê przebiegu regulacji, zw³¹szcza dla wyjœcia pierwszego, ale nie tylko.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		 & $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 9,0985 & 5,2295 \\ \hline
+		$\boldsymbol{T_i}$ & 3 & 5 & 3 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nastawy oryginalne}
+	\label{k1o}
+\end{table}
 
 \begin{table}
 	\centering
@@ -582,6 +595,19 @@ Ostatecznie zdecydowaliœmy siê pozostawiæ wartoœci $T_i$ i $T_d$ cz³onów niezmie
 	\end{tabular}
 	\caption{Wartoœci b³êdów dla nastaw oryginalnych}
 	\label{k1E1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 4,4592 & 2,6147 \\ \hline
+		$\boldsymbol{T_i}$ & 3 & 5 & 3 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nastawy poprawione}
+	\label{k1p}
 \end{table}
 
 \begin{table}
@@ -666,7 +692,7 @@ Ostatecznie zdecydowaliœmy siê pozostawiæ wartoœci $T_i$ i $T_d$ cz³onów niezmie
 	]
 	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/y2.txt};
 	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/yzad2.txt};
-	\legend{$y1$,$y1_{zad}$}
+	\legend{$y2$,$y2_{zad}$}
 	\nextgroupplot
 	[
 	xmin=0,xmax=910,ymin=-10,ymax=10,
@@ -679,7 +705,7 @@ Ostatecznie zdecydowaliœmy siê pozostawiæ wartoœci $T_i$ i $T_d$ cz³onów niezmie
 	]
 	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/y3.txt};
 	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/yzad3.txt};
-	\legend{$y1$,$y1_{zad}$}
+	\legend{$y3$,$y3_{zad}$}
 	\end{groupplot}
 	\end{tikzpicture}
 	\caption{Przebiegi wyjœæ dla oryginalnych nastaw}
@@ -779,7 +805,7 @@ Ostatecznie zdecydowaliœmy siê pozostawiæ wartoœci $T_i$ i $T_d$ cz³onów niezmie
 \end{figure}
 \FloatBarrier
 \subsection{PID - konfiguracja druga}
-Pierwsza konfiguracja naszego PID'a zak³ada, ¿e wyjœcie pierwsze sterujemy wejœciem trzecim, wyjœcie drugie wejœciem pierwszym, a wyjœcie trzecie wejœciem czwartym.
+Druga konfiguracja naszego PID'a zak³ada, ¿e wyjœcie pierwsze sterujemy wejœciem trzecim, wyjœcie drugie wejœciem pierwszym, a wyjœcie trzecie wejœciem czwartym. Poniewa¿ nastawy dla toru pierwszego i drugiego wyliczy³em ju¿ w poprzedniej konfiguracji nie bêdê zamieszcza³ ponownie tych procesów.
 \begin{table}
 	\centering
 	\begin{tabular}{c|c}
@@ -791,3 +817,950 @@ Pierwsza konfiguracja naszego PID'a zak³ada, ¿e wyjœcie pierwsze sterujemy wejœc
 	\end{tabular}
 	\caption{Druga konfiguracja}
 \end{table}
+\subsubsection{Tor drugi}
+Jest to jedyny tor, który musimy obliczyæ w tej konfiguracji (reszta torów jest taka sama jak w pierwszej konfiguracji). Zaczynamy od wzmocnienia K. Po kilku próbach znaleŸliœmy do wartoœæ wzmocnienia oscylacyjnego $K_{osc}=5,3611$, co daje koñ?cow¹ wartoœæ wzmocnienia $K=2,6806$. Przebieg przedstawiliœimy na wykresie \ref{k2t2K}.
+
+Nastêpn¹ dobieran¹ wartoœci¹ by³o $T_i$. Po kilku próbach doszliœmy do wniosku, ¿e najlepsz¹ wartoœci¹ jest $T_i$=2. Dla tej wartoœci zarówno przebieg jak i wartoœæ b³êdu s¹ najlepsze. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{k2t2TiE2}. Przebiegi zamieœciliœmy na wykresie \ref{k2t2Ti}.
+
+Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê, ¿e w³¹czenie cz³onu ró¿niczkowego powoduje bardziej pogorszenie przebiegu ni¿ jego polepszenie. Z tego powodu postanowiliœmy pozostaæ przy wartoœci $T_d=0$. Wartoœci b³êdów dla wybranych wartoœci przedstawione zosta³y w tabeli \ref{k2t2TdE2}, a przebiegi na wykresie \ref{k2t2Td}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{T_i}$ & $\boldsymbol{E2}$ \\ \hline
+		1 & 14,8853 \\
+		2 & 14,0000 \\
+		10 & 18,5170 \\
+		100 & 53,6244 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdu dla ró¿nych wartoœci $T_i$}
+	\label{k2t2TiE2}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{T_i}$ & $\boldsymbol{E2}$ \\ \hline
+		0 & 14,0000 \\
+		0.01 & 14,0111 \\
+		0.1 & 15,5134 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdu dla ró¿nych wartoœci $T_d$}
+	\label{k2t2TdE2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/0.0000_5.3611_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/u1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/0.0000_5.3611_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/0.0000_5.3611_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/yzad2.txt};
+	\legend{$y1$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia drugiego i wejœcia pierwszego dla wzmocnienia oscylacyjnego $K_{osc}=5,3611$}
+	\label{k2t2K}
+\end{figure}
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+width=0.9\textwidth,height=0.75\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=910,ymin=-50,ymax=50,
+xlabel={$k$},
+ylabel={$u1$},
+xtick={0,100,200,300,400,500,600,700,800,900},
+ytick={-50,-25,0,25,50},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_1.0000_Inf_0.0000_0.0000_0.0000/u1.txt};
+\addplot[green,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0000_0.0000/u1.txt};
+\addplot[orange,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_10.0000_Inf_0.0000_0.0000_0.0000/u1.txt};
+\addplot[brown,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_100.0000_Inf_0.0000_0.0000_0.0000/u1.txt};
+\nextgroupplot
+[
+xmin=0,xmax=910,ymin=-3,ymax=5,
+xlabel={$k$},
+ylabel={$y2$},
+xtick={0,100,200,300,400,500,600,700,800,900},
+ytick={-3,-2,-1,0,1,2,3,4,5},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_1.0000_Inf_0.0000_0.0000_0.0000/y2.txt};
+\addplot[green,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0000_0.0000/y2.txt};
+\addplot[orange,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_10.0000_Inf_0.0000_0.0000_0.0000/y2.txt};
+\addplot[brown,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_100.0000_Inf_0.0000_0.0000_0.0000/y2.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0000_0.0000/yzad2.txt};
+\legend{$T_i=1$,$T_i=2$,$T_i=10$,$T_i=100$,$y_{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Przebieg wyjœcia drugiego i wejœcia pierwszego dla ró¿nych wartoœci $T_i$}
+\label{k2t2Ti}
+\end{figure}
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+width=0.9\textwidth,height=0.75\textwidth]
+\nextgroupplot
+[
+xmin=0,xmax=910,ymin=-50,ymax=50,
+xlabel={$k$},
+ylabel={$u1$},
+xtick={0,100,200,300,400,500,600,700,800,900},
+ytick={-50,-25,0,25,50},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.1000_0.0000/u1.txt};
+\addplot[green,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0100_0.0000/u1.txt};
+\addplot[orange,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0000_0.0000/u1.txt};
+\nextgroupplot
+[
+xmin=0,xmax=910,ymin=-3,ymax=5,
+xlabel={$k$},
+ylabel={$y2$},
+xtick={0,100,200,300,400,500,600,700,800,900},
+ytick={-3,-2,-1,0,1,2,3,4,5},
+y tick label style={/pgf/number format/1000 sep=},
+]
+\addplot[blue,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.1000_0.0000/y2.txt};
+\addplot[green,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0100_0.0000/y2.txt};
+\addplot[orange,semithick] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0000_0.0000/y2.txt};
+\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/0.0000_2.6806_0.0000_Inf_2.0000_Inf_0.0000_0.0000_0.0000/yzad2.txt};
+\legend{$T_d=\num{0,1}$,$T_d=\num{0,01}$,$T_d=0$,$y_{zad}$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{Przebieg wyjœcia drugiego i wejœcia pierwszego dla ró¿nych wartoœci $T_d$}
+\label{k2t2Td}
+\end{figure}
+\FloatBarrier
+\subsubsection{Ca³oœæ}
+Poni¿ej na wykresach \ref{k2u1} oraz \ref{k2y1} znajduje siê przebieg dzia³ania ca³ego procesu (wszystkie tory aktywne, trzy sterowania w odpowiedniej kolejnoœci i trzy wyjœcia) dla nastaw wybranych w poprzednich podpunktach. Wartoœci b³êdów znajduj¹ siê w tabeli \ref{k2E1}. Jak mo¿na zauwa¿yæ przebiegi nie s¹ idealne, zw³aszcza dla toru pierwszego z którym wystêpuj¹ znaczne odchylenia. Fakt, ¿e nastawy nale¿y poprawiæ nie by³ dla nas zaskoczeniem, w koñcu ka¿de sterowanie ma wp³yw na ka¿de wyjœcie. Po wykonaniu kilku testów zdecydowaliœmy siê zmniejszyæ wzmocnienie trzeciego toru trzykrotnie (u4), bo w przeciwieñstwie do toru drugiego (u1) ma on znaczny wp³yw na pierwsze wyjœcie. Spowodowa³o to jednak znaczne pogorszenie pzrebiegu wyjœcia trzeciego (pojawi³ siê uchyb ustalony) co wymusi³o na nas zmniejszenie czasu $T_i$ tego toru do wartoœci 1. Pozosta³e tory pozostawiliœmy bez zmian. Poni¿ej w tabeli \ref{k2E2} znajduj¹ siê wyliczone nowe wartoœci b³êdów. Du¿¹ poprawê widaæ zw³aszcza dla toru pierwszego. B³¹d dla y3 nieco siê powiêkszy³, ale przebieg nie pogorszy³ siê bardzo. Przebiegi sterowañ i wyjœæ dla poprawionych nastaw znajduj¹ siê na wykresach \ref{k2u2} oraz \ref{k2y2}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 2,6806 & 5,2295 \\ \hline
+		$\boldsymbol{T_i}$ & 3 & 2 & 3 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nastawy oryginalne}
+	\label{k2o}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		171,6336 & 139,8074 & 14,5997 & 17,2265 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla nastaw oryginalnych}
+	\label{k2E1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 2,6806 & 1,7432 \\ \hline
+		$\boldsymbol{T_i}$ & 3 & 2 & 1 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nastawy poprawione}
+	\label{k2p}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		84,5868 & 43,0385 & 14,1660 & 27,3823 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla nastaw poprawionych}
+	\label{k2E2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/u3.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/u1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/u4.txt};
+	
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi sterowañ dla oryginalnych nastaw}
+	\label{k2u1}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$y1$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/yzad2.txt};
+	\legend{$y2$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_5.2295_3.0000_2.0000_3.0000_0.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$y3$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi wyjœæ dla oryginalnych nastaw}
+	\label{k2y1}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/u3.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/u1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/u4.txt};
+	
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi sterowañ dla poprawionych nastaw}
+	\label{k2u2}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$y1$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/yzad2.txt};
+	\legend{$y2$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$y2$,$y2_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi wyjœæ dla poprawionych nastaw}
+	\label{k2y2}
+\end{figure}
+\FloatBarrier
+
+\subsection{PID - konfiguracja trzecia}
+Tzrecia konfiguracja naszego PID'a zak³ada, ¿e wyjœcie pierwsze sterujemy wejœciem drugim, wyjœcie drugie wejœciem pierwszym, a wyjœcie trzecie wejœciem czwartym. Poniewa¿ nastawy dla toru drugiego i trzeciego wyliczy³em ju¿ w poprzednich konfiguracjach nie bêdê zamieszcza³ ponownie tych procesów. Ta konfiguracja mia³a najni¿szy wskaŸnik uwarunkowania macierzy, wiêc potencjalnie powinna byæ najlepsza.
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{y}$ & $\boldsymbol{u}$\\ \hline
+		$y_1$ & $u_2$ \\
+		$y_2$ & $u_1$ \\
+		$y_3$ & $u_4$ 
+		\label{k3}
+	\end{tabular}
+	\caption{Trzecia konfiguracja}
+\end{table}
+\subsubsection{Tor pierwszy}
+Jest to jedyny tor, który musimy obliczyæ w tej konfiguracji (reszta torów jest taka sama jak w innych konfiguracjach). Zaczynamy od wzmocnienia K. Po kilku próbach znaleŸliœmy do wartoœæ wzmocnienia oscylacyjnego $K_{osc}=27,2078$, co daje koñcow¹ wartoœæ wzmocnienia $K=13,6039$. Przebieg przedstawiliœimy na wykresie \ref{k3t1K}.
+
+Nastêpn¹ dobieran¹ wartoœci¹ by³o $T_i$. Po kilku próbach doszliœmy do wniosku, ¿e najlepsz¹ wartoœci¹ jest $T_i$=2. Dla tej wartoœci zarówno przebieg jak i wartoœæ b³êdu s¹ najlepsze. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{k3t1TiE1}. Przebiegi zamieœciliœmy na wykresie \ref{k3t1Ti}.
+
+Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê, ¿e w³¹czenie cz³onu ró¿niczkowego powoduje bardziej pogorszenie przebiegu ni¿ jego polepszenie. Z tego powodu postanowiliœmy pozostaæ przy wartoœci $T_d=0$. Wartoœci b³êdów dla wybranych wartoœci przedstawione zosta³y w tabeli \ref{k3t1TdE1}, a przebiegi na wykresie \ref{k3t1Td}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{T_i}$ & $\boldsymbol{E1}$ \\ \hline
+		1 & 17,3693 \\
+		9 & 14,0013 \\
+		20 & 14,3052 \\
+		100 & 16,5877 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdu dla ró¿nych wartoœci $T_i$}
+	\label{k3t1TiE1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{T_i}$ & $\boldsymbol{E1}$ \\ \hline
+		0 & 14,0013 \\
+		0.01 & 14,0135 \\
+		0.1 & 15,5541 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdu dla ró¿nych wartoœci $T_d$}
+	\label{k3t1TdE1}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/27.2078_0.0000_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/u2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/27.2078_0.0000_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/27.2078_0.0000_0.0000_Inf_Inf_Inf_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$y1$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia pierwszego i wejœcia drugiego dla wzmocnienia oscylacyjnego $K_{osc}=27,2078$}
+	\label{k3t1K}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_1.0000_Inf_Inf_0.0000_0.0000_0.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0000_0.0000_0.0000/u2.txt};
+	\addplot[orange,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_20.0000_Inf_Inf_0.0000_0.0000_0.0000/u2.txt};
+	\addplot[brown,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_100.0000_Inf_Inf_0.0000_0.0000_0.0000/u2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_1.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[orange,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_20.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[brown,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_100.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$T_i=1$,$T_i=9$,$T_i=20$,$T_i=100$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia pierwszego i wejœcia drugiego dla ró¿nych wartoœci $T_i$}
+	\label{k3t1Ti}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.1000_0.0000_0.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0100_0.0000_0.0000/u2.txt};
+	\addplot[orange,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0000_0.0000_0.0000/u2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.1000_0.0000_0.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0100_0.0000_0.0000/y1.txt};
+	\addplot[orange,semithick] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/13.6039_0.0000_0.0000_9.0000_Inf_Inf_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$T_d=\num{0,1}$,$T_d=\num{0,01}$,$T_d=0$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia pierwszego i wejœcia drugiego dla ró¿nych wartoœci $T_d$}
+	\label{k3t1Td}
+\end{figure}
+\FloatBarrier
+\subsubsection{Ca³oœæ}
+Przy oryginalnych nastawach PID nie dzia³a w ogóle, dlatego nie zamieszcza³em ich wykresów. Wartoœci b³êdów d¹¿¹ do nieskoñczonoœci. Choæ ta kombinacja mia³a najmniejszy ze wszystkich wsk¹Ÿnik uwarunkowania okaza³o siê, ¿e nie jest ona a¿ taka dobra. Nastawy nale¿a³o ca³kowicie zmieniæ, aby osi¹gn¹c logicznie wygl¹daj¹cy pzrebieg. Wartoœci b³êdów s¹ o wiele wy¿sze ni¿ te znalezione dla poprzednich konfiguracji. Tylko b³¹d toru drugiego jest doœæ niski. Mo¿e byæ to spowodowane tym, ¿e ka¿de z u¿ywanych w konfiguracji sterowañ ma mocny wp³yw na przynajmniej 2 ró¿ne wyjœcia, co widaæ w macierzy wzmocnieñ. Przebiegi nie s¹ idealne, ale akceptowalne. Inn¹ mo¿liwoœci¹ jest to, ¿e po prostu nie uda³o nam siê znaleŸæ odpowiednich nastaw. Poni¿ej w tabeli \ref{k3E2} znajduj¹ siê wyliczone nowe wartoœci b³êdów. Przebiegi sterowañ i wyjœæ dla poprawionych nastaw znajduj¹ siê na wykresach \ref{k3u2} oraz \ref{k3y2}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 13,6039 & 2,6806 & 5,2295 \\ \hline
+		$\boldsymbol{T_i}$ & 9 & 2 & 3 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nastawy oryginalne}
+	\label{k3o}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 1,1337 & 2,6806 & 0,5811 \\ \hline
+		$\boldsymbol{T_i}$ & 6 & 1 & 4 \\ \hline
+		$\boldsymbol{T_d}$ & 2 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nastawy poprawione}
+	\label{k3p}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		295,9017 & 139,8721 & 21,7808 & 134,2488 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla nastaw poprawionych}
+	\label{k3E2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/u2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/u1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/u4.txt};
+	
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi sterowañ dla poprawionych nastaw}
+	\label{k3u2}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$y1$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/yzad2.txt};
+	\legend{$y2$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$y3$,$y3{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi wyjœæ dla poprawionych nastaw}
+	\label{k3y2}
+\end{figure}
+\FloatBarrier
+\subsection{PID - konfiguracja czwarta}
+Czwarta konfiguracja naszego PID'a zak³ada, ¿e wyjœcie pierwsze sterujemy wejœciem trzecim, wyjœcie drugie wejœciem drugim, a wyjœcie trzecie wejœciem pierwszym. Poniewa¿ nastawy dla toru pierwszego i drugiego wyliczy³em ju¿ w poprzednich konfiguracjach nie bêdê zamieszcza³ ponownie tych procesów. Ta konfiguracja mia³a najni¿szy wskaŸnik uwarunkowania macierzy, wiêc potencjalnie powinna byæ najlepsza.
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{y}$ & $\boldsymbol{u}$\\ \hline
+		$y_1$ & $u_3$ \\
+		$y_2$ & $u_2$ \\
+		$y_3$ & $u_1$ 
+		\label{k3}
+	\end{tabular}
+	\caption{Czwarta konfiguracja}
+\end{table}
+\subsubsection{Tor trzeci}
+Jest to jedyny tor, który musimy obliczyæ w tej konfiguracji (reszta torów jest taka sama jak w pierwszej konfiguracji). Zaczynamy od wzmocnienia K. Po kilku próbach znaleŸliœmy do wartoœæ wzmocnienia oscylacyjnego $K_{osc}=15,3974$, co daje koñcow¹ wartoœæ wzmocnienia $K=7,6987$.Przebieg przedstawiliœimy na wykresie \ref{k4t3K}.
+
+Nastêpn¹ dobieran¹ wartoœci¹ by³o $T_i$. Po kilku próbach doszliœmy do wniosku, ¿e najlepsz¹ wartoœci¹ jest $T_i$=5. Dla tej wartoœci zarówno przebieg jak i wartoœæ b³êdu s¹ najlepsze. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{k4t3TiE3}. Przebiegi zamieœciliœmy na wykresie \ref{k4t3Ti}.
+
+Ostatnim dobieranym parametrem by³ czas wyprzedzenia $T_d$. Niemniej okaza³o siê, ¿e w³¹czenie cz³onu ró¿niczkowego powoduje bardziej pogorszenie przebiegu ni¿ jego polepszenie. Z tego powodu postanowiliœmy pozostaæ przy wartoœci $T_d=0$. Wartoœci b³êdów dla wybranych wartoœci przedstawione zosta³y w tabeli \ref{k4t3TdE3}, a przebiegi na wykresie \ref{k4t3Td}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{T_i}$ & $\boldsymbol{E3}$ \\ \hline
+		1 & 16,6366 \\
+		5 & 14,0000 \\
+		10 & 14,3245 \\
+		100 & 19,9801 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdu dla ró¿nych wartoœci $T_i$}
+	\label{k4t3TiE3}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c}
+		$\boldsymbol{T_i}$ & $\boldsymbol{E3}$ \\ \hline
+		0 & 14,0000 \\
+		0.01 & 14,0114 \\
+		0.1 & 15,5408 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdu dla ró¿nych wartoœci $T_d$}
+	\label{k4t3TdE3}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_15.3974_Inf_Inf_Inf_0.0000_0.0000_0.0000/u1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_15.3974_Inf_Inf_Inf_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_1/0.0000_0.0000_15.3974_Inf_Inf_Inf_0.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$y3$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia trzeciego i wejœcia pierwszego dla wzmocnienia oscylacyjnego $K_{osc}=15,3974$}
+	\label{k4t3K}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_1.0000_0.0000_0.0000_0.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0000/u1.txt};
+	\addplot[orange,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_10.0000_0.0000_0.0000_0.0000/u1.txt};
+	\addplot[brown,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_100.0000_0.0000_0.0000_0.0000/u1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_1.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[orange,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_10.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[brown,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_100.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$T_i=1$,$T_i=5$,$T_i=10$,$T_i=100$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia trzeciego i wejœcia pierwszego dla ró¿nych wartoœci $T_i$}
+	\label{k4t3Ti}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.75\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.1000/u1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0100/u1.txt};
+	\addplot[orange,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0000/u1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-3,ymax=5,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-3,-2,-1,0,1,2,3,4,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.1000/y3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0100/y3.txt};
+	\addplot[orange,semithick] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_1/0.0000_0.0000_7.6987_Inf_Inf_5.0000_0.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$T_d=\num{0,1}$,$T_d=\num{0,01}$,$T_d=0$,$y_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebieg wyjœcia trzeciego i wejœcia pierwszego dla ró¿nych wartoœci $T_d$}
+	\label{k4t3Td}
+\end{figure}
+\FloatBarrier
+\subsubsection{Ca³oœæ}
+Przy oryginalnych nastawach PID nie dzia³a w ogóle (wartoœci d¹¿¹ do nieskoñczonoœci), dlatego nie zamieszcza³em ich wykresów. Wartoœci b³êdów tak¿e d¹¿¹ do nieskoñczonoœci. Nastawy nale¿a³o ca³kowicie zmieniæ, aby osi¹gn¹c logicznie wygl¹daj¹cy pzrebieg. Wartoœci b³êdów s¹ o wiele wy¿sze ni¿ te znalezione dla pierwszych dwóch konfiguracji, nie licz¹c toru pierwszego, którego b³¹d jest niski. Mo¿e byæ to spowodowane tym, ¿e nie uda³o nam siê znaleŸæ odpowiednich nastaw. Przebiegi nie s¹ idealne, ale akceptowalne. Poni¿ej w tabeli \ref{k4E2} znajduj¹ siê wyliczone nowe wartoœci b³êdów. Przebiegi sterowañ i wyjœæ dla poprawionych nastaw znajduj¹ siê na wykresach \ref{k4u2} oraz \ref{k4y2}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 9,0985 & 7,6987 \\ \hline
+		$\boldsymbol{T_i}$ & 3 & 5 & 5 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nastawy oryginalne}
+	\label{k4o}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 3,0328 & 0,7699 \\ \hline
+		$\boldsymbol{T_i}$ & 1 & 7 & 5 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 1 \\ \hline
+	\end{tabular}
+	\caption{Nastawy poprawione}
+	\label{k4p}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		279,8531 & 17,2126 & 84,6965 & 177,9440 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla nastaw poprawionych}
+	\label{k4E2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/u3.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/u2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/u1.txt};
+	
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi sterowañ dla poprawionych nastaw}
+	\label{k4u2}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/yzad1.txt};
+	\legend{$y1$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/yzad2.txt};
+	\legend{$y2$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/yzad3.txt};
+	\legend{$y3$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Przebiegi wyjœæ dla poprawionych nastaw}
+	\label{k4y2}
+\end{figure}
+\FloatBarrier
+\subsection{Wnioski}
+Regulacja PID nie w ka¿dej konfiguracji sprawuje siê dobrze. W pierwszych dwóch wypróbowywanych konfiguracjach zarówno obliczone wartoœci b³êdów jak i przebiegi by³y bardzo dobre. W pozosta³ych dwóch czêœæ wyjœæ by³a regulowana dobrze, jednak¿e dla wiêkszoœci jakoœæ regulacji nie by³a idealna, a b³êdy znaczne. Najdziwniejsz¹ rzecz¹ by³o jednak to, ¿e badany obiekt prawie nigdy nie wymaga³ od nas u¿ycia cz³onu ró¿niczkuj¹cego (cz³on zwiêksza³ b³¹d i psu³ przebiegi). Prawdopodobnie jest to spowodowane jak¹œ specyficzn¹ w³asnoœci¹ obiektu.

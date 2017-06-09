@@ -1,8 +1,8 @@
-K=[6.6821 9.0985/2 5.2295/2];
-Ti=[3 5 3];
+K=[0 0 0];
+Ti=[Inf Inf Inf];
 Td=[0 0 0];
-var=[3 2 4];
+var=[3 2 1];
 draw=true;
 latex=false;
-latex=true;
+% latex=true;
 zad3PID(K,Ti,Td,var,draw,latex)
