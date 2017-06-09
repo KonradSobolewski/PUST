@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  8 JUN 2017 23:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.3.6)  9 JUN 2017 13:43
 entering extended mode
 **./sprawozdanie.tex
 (sprawozdanie.tex
@@ -1399,33 +1399,121 @@ PGFPlots: reading {wykresy/pid_3_2_4/0.0000_9.0985_0.0000_Inf_5.0000_Inf_0.0000
 _0.0000_0.0000/yzad2.txt}
  [8
 
-] [9] [10] [11]) (sprawozdanie.aux) ) 
+] [9] [10] [11]
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_10.4590_Inf_Inf_Inf_0.0000_0
+.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_10.4590_Inf_Inf_Inf_0.0000_0
+.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_10.4590_Inf_Inf_Inf_0.0000_0
+.0000_0.0000/yzad3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_1.0000_0.0000
+_0.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_10.0000_0.000
+0_0.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_100.0000_0.00
+00_0.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_1.0000_0.0000
+_0.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_10.0000_0.000
+0_0.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_100.0000_0.00
+00_0.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_1.0000_0.0000
+_0.0000_0.0000/yzad3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.1000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.0100/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.1000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.0100/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/0.0000_0.0000_5.2295_Inf_Inf_3.0000_0.0000
+_0.0000_0.0000/yzad3.txt}
+ [12
+
+] [13] [14] [15]
+Overfull \hbox (1.17557pt too wide) in paragraph at lines 575--576
+[]\OT4/cmr/m/n/10.95 Ostatecznie zde-cy-do-wa-li-±my si¦ po-zo-sta-wi¢ war-to-±
+ci $\OML/plm/m/it/10.95 T[]$ \OT4/cmr/m/n/10.95 i $\OML/plm/m/it/10.95 T[]$ \OT
+4/cmr/m/n/10.95 czªo-nów nie-zmie-nio-ne oraz zmniej-
+ []
+
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/u3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/u2.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/y1.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/yzad1.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/y2.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/yzad2.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_9.0985_5.2295_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/yzad3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/u3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/u2.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/u4.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/y1.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/yzad1.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/y2.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/yzad2.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/y3.txt}
+PGFPlots: reading {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_
+0.0000_0.0000_0.0000/yzad3.txt}
+[16
+
+] [17] [18] [19] [20]) [21
+
+] (sprawozdanie.aux) ) 
 Here is how much of TeX's memory you used:
- 36585 strings out of 493329
- 880211 string characters out of 3139061
- 1728526 words of memory out of 3000000
- 39534 multiletter control sequences out of 15000+200000
+ 36672 strings out of 493329
+ 882208 string characters out of 3139061
+ 1762370 words of memory out of 3000000
+ 39609 multiletter control sequences out of 15000+200000
  25554 words of font info for 76 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,22n,100p,10395b,2425s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
-ps/pl/plmi.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Pro
-gram Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/
-fonts/enc/dvips/pl/plit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plm
-e.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/pl/plex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/pl/plmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi6.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi7.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/pl/plmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/pl
-r10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr7.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/pl/plsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plti10.pfb>
-Output written on sprawozdanie.pdf (12 pages, 232343 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plrm.enc}{C:/Program Files/MiKT
+eX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips
+/pl/plit.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plme.enc}<C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/pl/plbx10.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/pl/plbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
+blic/pl/plex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi10.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi6.pfb><C:/Program File
+s/MiKTeX 2.9/fonts/type1/public/pl/plmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/pl/plmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/p
+lmib10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plr10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/pl/plr7.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/pl/plr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/pl/plsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy8.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plti10.pfb>
+Output written on sprawozdanie.pdf (22 pages, 411464 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
+ 137 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
