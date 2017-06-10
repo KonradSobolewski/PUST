@@ -7,7 +7,7 @@ Podczas dobierania DMC dobieramy takie parametry jak:
 	\item wspó³czynniki wagowe macierzy $\Psi$ w iloœci $n_y$=3
 	\item wspó³czynniki wagowe macierzy $\Lambda$ w iloœci $n_u$=4
 \end{itemize}
-W tym przypadku wszystkie horyzonty przyjmiemy jako sta³e przy czym przyjmujemy D=N=$N_u$=200, przy czym to liczba zebranych kroków odpowiedzi skokowych. Zmniejszanie horyzontów ¿adko poprawia jakoœæ regulacji, celem takich dzia³añ najczêœciej jest zmniejszenie z³o¿onoœci obliczeniowej i tym samym czasu obliczeñ. Dobieranie nastaw zaczêliœmy od dobrania kolejnych wspó³czynników wagowych $\psi$, a nastêpnie wspó³czynników $\lambda$. Poni¿ej zamieœciliœmy wykresy sterowañ i wyjœæ dla nastaw pocz¹tkowych (wszystkie wspó³czynniki równe 1) oraz tabelkê w wartoœciami b³êdów dla wszystkich wyjœæ.
+W tym przypadku wszystkie horyzonty przyjmiemy jako sta³e przy czym przyjmujemy D=N=$N_u$=200, co jest równe liczbie zebranych kroków odpowiedzi skokowych. Zmniejszanie horyzontów ¿adko poprawia jakoœæ regulacji, celem takich dzia³añ najczêœciej jest zmniejszenie z³o¿onoœci obliczeniowej i tym samym czasu obliczeñ. Dobieranie nastaw zaczêliœmy od dobrania kolejnych wspó³czynników wagowych $\psi$, a nastêpnie wspó³czynników $\lambda$. Poni¿ej zamieœciliœmy wykresy sterowañ i wyjœæ dla nastaw pocz¹tkowych (wszystkie wspó³czynniki równe 1) oraz tabelkê w wartoœciami b³êdów dla wszystkich wyjœæ.
 
 \begin{table}
 	\centering
@@ -529,7 +529,7 @@ Najlepsza znaleziona przez nas podczas testowania wartoœæ $\psi_3$ (taka dla któ
 \end{figure}
 \FloatBarrier
 \subsection{Pierwszy wspó³czynnik lambda}
-Najlepsza znaleziona przez nas podczas testowania wartoœæ $\lambda_1$ (taka dla której b³¹d E jest najni¿szy) to 0.05. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{lambda1}. Przebiegi znajduj¹ siê na wykresach \ref{DMCu4} i \ref{DMCy4}. Obni¿enie $\lambda_1$ do 0.05 spowodowa³oby zminimalizowanie b³êdu. Z drugiej strony zwiêkszenie parametru do 10, a nawet 20 nie daje pogorszenia w przebiegu wyjœæ, ale za to znacznie poprawia wykresy sterowañ u1, u3 i u4. Mimo, ¿e pogorsza siê sterowanie drugie to ca³kowity zysk jest tego wart. Dlatego w³aœnie zdecydowaliœmy siê ostatecznie na podniesienie parametru $\lambda_1$ do 20.
+Najlepsza znaleziona przez nas podczas testowania wartoœæ $\lambda_1$ (taka dla której b³¹d E jest najni¿szy) to 0.05. B³êdy dla ró¿nych wartoœci znajduj¹ siê w tabeli \ref{lambda1}. Przebiegi znajduj¹ siê na wykresach \ref{DMCu4} i \ref{DMCy4}. Obni¿enie $\lambda_1$ do 0.05 spowodowa³oby zminimalizowanie b³êdu. Z drugiej strony zwiêkszenie parametru do 10, a nawet 20 nie daje pogorszenia w przebiegu wyjœæ, ale za to znacznie poprawia wykresy sterowañ u1, u3 i u4. Mimo, ¿e pogorszenia siê sterowania u2, zdecydowaliœmy siê ostatecznie na podniesienie parametru $\lambda_1$ do 20.
 
 \begin{table}
 \centering
@@ -820,7 +820,7 @@ Teoretycznie najlepsza znaleziona przez nas podczas testowania wartoœæ $\lambda_
 \end{figure}
 
 \subsection{Trzeci wspó³czynnik lambda}
-Najlepsz¹ mo¿liwoœci¹ jest wed³ug nas ustawienie parametru $\lambda_3$ na wartoœæ 0. Mimo ¿e powoduje to du¿e pogorszenie przebiegów sterowañ, umo¿liwia tak¿e zmniejszenie wszystkich b³êdów oraz poprawê wszystkich wyjœæ. Wartoœci b³êdów dla róŸnych wartoœci $\lambda_3$ znajduj¹ siê w tabeli \ref{lambda3}, a wykresy maj¹ numery \ref{DMCu6} i \ref{DMCy6}. 
+Najlepsz¹ mo¿liwoœci¹ jest wed³ug nas ustawienie parametru $\lambda_3$ na wartoœæ 0. Mimo ¿e powoduje to du¿e pogorszenie przebiegów sterowañ, umo¿liwia tak¿e zmniejszenie wszystkich b³êdów oraz poprawê przebiegów wszystkich wyjœæ. Wartoœci b³êdów dla róŸnych wartoœci $\lambda_3$ znajduj¹ siê w tabeli \ref{lambda3}, a wykresy maj¹ numery \ref{DMCu6} i \ref{DMCy6}. 
 
 \begin{table}
 	\centering

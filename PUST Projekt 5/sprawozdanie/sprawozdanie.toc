@@ -1,9 +1,33 @@
-\contentsline {section}{\numberline {0.1\relax .\kern .5em }DMC}{1}
-\contentsline {subsection}{\numberline {0.1.1\relax .\kern .5em }Pierwszy wsp\'o\IeC {\l }czynnik psi}{4}
-\contentsline {subsection}{\numberline {0.1.2\relax .\kern .5em }Drugi wsp\'o\IeC {\l }czynnik psi}{4}
-\contentsline {subsection}{\numberline {0.1.3\relax .\kern .5em }Trzeci wsp\'o\IeC {\l }czynnik psi}{4}
-\contentsline {subsection}{\numberline {0.1.4\relax .\kern .5em }Pierwszy wsp\'o\IeC {\l }czynnik lambda}{11}
-\contentsline {subsection}{\numberline {0.1.5\relax .\kern .5em }Drugi wsp\'o\IeC {\l }czynnik lambda}{11}
-\contentsline {subsection}{\numberline {0.1.6\relax .\kern .5em }Trzeci wsp\'o\IeC {\l }czynnik lambda}{11}
-\contentsline {subsection}{\numberline {0.1.7\relax .\kern .5em }Czwarty wsp\'o\IeC {\l }czynnik lambda}{18}
-\contentsline {subsection}{\numberline {0.1.8\relax .\kern .5em }Wnioski}{18}
+\contentsline {chapter}{\numberline {1\relax .\kern .5em }Opis obiektu}{2}
+\contentsline {chapter}{\numberline {2\relax .\kern .5em }Zadanie 1: Weryfikacja punktu pracy}{3}
+\contentsline {chapter}{\numberline {3\relax .\kern .5em }Zadanie 2: Odpowiedzi skokowe}{4}
+\contentsline {section}{\numberline {3.1\relax .\kern .5em }Odpowiedzi skokowe}{4}
+\contentsline {chapter}{\numberline {4\relax .\kern .5em }Zadanie 3: Algorytmy PID i DMC}{5}
+\contentsline {section}{\numberline {4.1\relax .\kern .5em }Cyfrowy algorytm PID}{5}
+\contentsline {section}{\numberline {4.2\relax .\kern .5em }Analityczny algorytm DMC}{5}
+\contentsline {chapter}{\numberline {5\relax .\kern .5em }Zadanie 4: Strojenie regulator\'ow}{9}
+\contentsline {section}{\numberline {5.1\relax .\kern .5em }PID}{9}
+\contentsline {subsection}{\numberline {5.1.1\relax .\kern .5em }Konfiguracja}{9}
+\contentsline {subsection}{\numberline {5.1.2\relax .\kern .5em }PID - konfiguracja pierwsza}{11}
+\contentsline {subsection}{\numberline {5.1.3\relax .\kern .5em }PID - konfiguracja druga}{28}
+\contentsline {subsection}{\numberline {5.1.4\relax .\kern .5em }PID - konfiguracja trzecia}{37}
+\contentsline {subsection}{\numberline {5.1.5\relax .\kern .5em }PID - konfiguracja czwarta}{44}
+\contentsline {subsection}{\numberline {5.1.6\relax .\kern .5em }Wnioski}{51}
+\contentsline {section}{\numberline {5.2\relax .\kern .5em }DMC}{51}
+\contentsline {subsection}{\numberline {5.2.1\relax .\kern .5em }Pierwszy wsp\'o\IeC {\l }czynnik psi}{54}
+\contentsline {subsection}{\numberline {5.2.2\relax .\kern .5em }Drugi wsp\'o\IeC {\l }czynnik psi}{54}
+\contentsline {subsection}{\numberline {5.2.3\relax .\kern .5em }Trzeci wsp\'o\IeC {\l }czynnik psi}{54}
+\contentsline {subsection}{\numberline {5.2.4\relax .\kern .5em }Pierwszy wsp\'o\IeC {\l }czynnik lambda}{61}
+\contentsline {subsection}{\numberline {5.2.5\relax .\kern .5em }Drugi wsp\'o\IeC {\l }czynnik lambda}{61}
+\contentsline {subsection}{\numberline {5.2.6\relax .\kern .5em }Trzeci wsp\'o\IeC {\l }czynnik lambda}{61}
+\contentsline {subsection}{\numberline {5.2.7\relax .\kern .5em }Czwarty wsp\'o\IeC {\l }czynnik lambda}{68}
+\contentsline {subsection}{\numberline {5.2.8\relax .\kern .5em }Wnioski}{68}
+\contentsline {chapter}{\numberline {6\relax .\kern .5em }Zadanie 5: Automatyczne dobieranie nastaw}{71}
+\contentsline {section}{\numberline {6.1\relax .\kern .5em }PID}{71}
+\contentsline {subsection}{\numberline {6.1.1\relax .\kern .5em }Konfiguracja pierwsza}{71}
+\contentsline {subsection}{\numberline {6.1.2\relax .\kern .5em }Konfiguracja druga}{74}
+\contentsline {subsection}{\numberline {6.1.3\relax .\kern .5em }Konfiguracja trzecia}{77}
+\contentsline {subsection}{\numberline {6.1.4\relax .\kern .5em }Konfiguracja czwarta}{80}
+\contentsline {section}{\numberline {6.2\relax .\kern .5em }DMC}{83}
+\contentsline {section}{\numberline {6.3\relax .\kern .5em }Wnioski}{86}
+\contentsline {chapter}{\numberline {7\relax .\kern .5em }Zadanie 6: Uproszczony obliczeniowo DMC}{87}

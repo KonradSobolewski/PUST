@@ -1,1 +1,754 @@
-\chapter{Zadanie 5: Rozmyty regulator PID}
+\chapter{Zadanie 5: Automatyczne dobieranie nastaw}
+W tym zadaniu naszym zadaniem by³o automatyczne dobranie nastaw regulatorów w wyniku optymalizacji wskaŸnika jakoœci. U¿yliœmy w tym celu wbudowanej w pakiet Matlab funkcji fmincon, podaj¹c jako pocz¹tkowe parametry wyliczone przez nas konfiguracje.
+\section{PID}
+\subsection{Konfiguracja pierwsza}
+Jak widzimy w tym przypadku wyliczone przez funkcjê parametry s¹ podobne do naszych, aczkolwiek daj¹ nieco lepsze rozwi¹zanie pod k¹tem wielkoœci wskaŸnika regulacji. Wizualnie przebiegi prawie siê nie ró¿ni¹.
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 4,4592 & 2,6147 \\ \hline
+		$\boldsymbol{T_i}$ & 3 & 5 & 3 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nasze nastawy}
+	\label{pid1n}
+
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		93,5137 & 47,3773 & 19,8595 & 26,2770 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla naszych nastaw}
+	\label{pid1e1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 7,8600 & 4,2845 & 1,6460 \\ \hline
+		$\boldsymbol{T_i}$ & 2,1371 & 4,3444 & 1,8913 \\ \hline
+		$\boldsymbol{T_d}$ & 9,0673e-9 & 0,0132 & 1,4253e-7 \\ \hline
+	\end{tabular}
+	\caption{Wyliczone nastawy}
+	\label{pid1n2}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		85,3434 & 30,8617 & 19,8453 & 34,6364 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla wyliczonych nastaw}
+	\label{pid1e2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/7.8600_4.2845_1.6460_2.1371_4.3444_1.8913_0.0000_0.0132_0.0000/u3.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/7.8600_4.2845_1.6460_2.1371_4.3444_1.8913_0.0000_0.0132_0.0000/u2.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/u4.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/7.8600_4.2845_1.6460_2.1371_4.3444_1.8913_0.0000_0.0132_0.0000/u4.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji pierwszej - sterowanie}
+	\label{pid1s}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/7.8600_4.2845_1.6460_2.1371_4.3444_1.8913_0.0000_0.0132_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$Nasze$,$Obliczone$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/7.8600_4.2845_1.6460_2.1371_4.3444_1.8913_0.0000_0.0132_0.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/yzad2.txt};
+	\legend{$Nasze$,$Obliczone$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_4/7.8600_4.2845_1.6460_2.1371_4.3444_1.8913_0.0000_0.0132_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_2_4/6.6821_4.5492_2.6147_3.0000_5.0000_3.0000_0.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$Nasze$,$Obliczone$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji pierwszej - wyjœcia}
+	\label{pid1w}
+\end{figure}
+\FloatBarrier
+\subsection{Konfiguracja druga}
+Parametry obliczone przez program nie s¹ bardzo oddalone od naszych, ale gwarantuj¹ mniejsz¹ wartoœæ b³êdu. Choæ przebiegi sterowañ s¹ prawie identyczne, na wykresach wyjœæ w definitywnie widaæ poprawê.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,6821 & 2,6806 & 1,7432 \\ \hline
+		$\boldsymbol{T_i}$ & 3 & 2 & 1 \\ \hline
+		$\boldsymbol{T_d}$ & 0 & 0 & 0 \\ \hline
+	\end{tabular}
+\caption{Nasze nastawy}
+	\label{pid2n1}
+
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		84,5872 & 43,0392 & 14,1660 & 27,3819 \\
+	\end{tabular}
+\caption{Wartoœci b³êdów dla naszych nastaw}
+	\label{pid2e1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 8,0752 & 2,3354 & 1,5439 \\ \hline
+		$\boldsymbol{T_i}$ & 1,8399 & 2,3517 & 1,4822 \\ \hline
+		$\boldsymbol{T_d}$ & 4,3152e-9 & 0,0086 & 8,0777e-7 \\ \hline
+	\end{tabular}
+	\caption{Wyliczone nastawy}
+	\label{pid2n2}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		74,8601 & 28,8221 & 14,6279 & 31,4101 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla wyliczonych nastaw}
+	\label{pid2e2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_1_4/8.0752_2.3354_1.5439_1.8399_2.3517_1.4822_0.0000_0.0086_0.0000/u3.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_1_4/8.0752_2.3354_1.5439_1.8399_2.3517_1.4822_0.0000_0.0086_0.0000/u1.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/u4.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_1_4/8.0752_2.3354_1.5439_1.8399_2.3517_1.4822_0.0000_0.0086_0.0000/u4.txt};
+	\legend{$Nasze$,$Obliczone$}
+	
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji drugiej - sterowanie}
+	\label{pid2s}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_1_4/8.0752_2.3354_1.5439_1.8399_2.3517_1.4822_0.0000_0.0086_0.0000/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/yzad1.txt};
+	\legend{$Nasze$,$Obliczone$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_1_4/8.0752_2.3354_1.5439_1.8399_2.3517_1.4822_0.0000_0.0086_0.0000/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/yzad2.txt};
+	\legend{$Nasze$,$Obliczone$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_1_4/8.0752_2.3354_1.5439_1.8399_2.3517_1.4822_0.0000_0.0086_0.0000/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_3_1_4/6.6821_2.6806_1.7432_3.0000_2.0000_1.0000_0.0000_0.0000_0.0000/yzad3.txt};
+	\legend{$Nasze$,$Obliczone$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji drugiej - wyjœcia}
+	\label{pid2w}
+\end{figure}
+\FloatBarrier
+\subsection{Konfiguracja trzecia}
+Przy nastawach wyliczonych za pomoc¹ optymalizacji poprawi³y siê zarówno b³êdy jak i przebiegi wykresów wyjœæ. Mimo wszystko wartoœci b³êdów wci¹¿ s¹ doœæ du¿e w porównaniu do dwóch pierwszych konfiguracji. Wzbuczi³o to w nas pewne zdumienie, bo to w³aœnie ta konfiguracja by³a wskazywana przez wskaŸnik uwarunkowania jako potentat do bycia najlepsz¹ ze wszystkich.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+$\boldsymbol{K}$ & 1,1337 & 2,6806 & 0,5811 \\ \hline
+$\boldsymbol{T_i}$ & 6 & 1 & 4 \\ \hline
+$\boldsymbol{T_d}$ & 2 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nasze nastawy}
+	\label{pid3n1}
+	
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		295,8916 & 139,8703 & 21,7816 & 134,2398 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla naszych nastaw}
+	\label{pid3e1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 5,0737 & 2,9191 & 0,7908 \\ \hline
+		$\boldsymbol{T_i}$ & 16,1926 & 0,5115 & 3,9598 \\ \hline
+		$\boldsymbol{T_d}$ & 3,8791e-6 & 6,1826e-6 & 0,4474 \\ \hline
+	\end{tabular}
+	\caption{Wyliczone nastawy}
+	\label{pid3n2}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		205,9376 & 63,2208 & 26,6137 & 116,1032 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla wyliczonych nastaw}
+	\label{pid3e2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/u2.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/u1.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/u4.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/u4.txt};
+	\legend{$Nasze$,$Obliczone$}
+	
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji trzeciej - sterowanie}
+	\label{pid3s}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/yzad1.txt};
+	\legend{$Nasze$,$Obliczone$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/yzad2.txt};
+	\legend{$Nasze$,$Obliczone$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_2_1_4/1.1337_2.6806_0.5811_6.0000_1.0000_4.0000_2.0000_0.0000_0.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/yzad3.txt};
+	\legend{$Nasze$,$Obliczone$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji trzeciej - wyjœcia}
+	\label{pid3w}
+\end{figure}
+\FloatBarrier
+\subsection{Konfiguracja czwarta}
+Wyliczenie nastaw za pomoc¹ optymalizacji nie da³o du¿ej poprawy zarówno w wartoœciach b³êdów jak i w wygl¹dzie przebiegów. NajwyraŸniej akurat ta konfiguracja nie jest najlepszym wyborem jeœli chodzi o sterowanie posiadanym obiektem.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+$\boldsymbol{K}$ & 6,6821 & 3,0328 & 0,7699 \\ \hline
+$\boldsymbol{T_i}$ & 1 & 7 & 5 \\ \hline
+$\boldsymbol{T_d}$ & 0 & 0 & 1 \\ \hline
+	\end{tabular}
+	\caption{Nasze nastawy}
+	\label{pid4n1}
+	
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+279,8519 & 17,2126 & 84,7003 & 177,9390 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla naszych nastaw}
+	\label{pid4e1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $\boldsymbol{y1}$ & $\boldsymbol{y2}$ & $\boldsymbol{y3}$ \\ \hline
+		$\boldsymbol{K}$ & 6,9911 & 5,2839 & 1,1192 \\ \hline
+		$\boldsymbol{T_i}$ & 1,0949 & 12,0669 & 0,5076 \\ \hline
+		$\boldsymbol{T_d}$ & 8,8144e-5 & 3,1067e-6 & 0,5076 \\ \hline
+	\end{tabular}
+	\caption{Wyliczone nastawy}
+	\label{pid4n2}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		259,3231 & 19,3182 & 65,3477 & 174,6572 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla wyliczonych nastaw}
+	\label{pid4e2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/6.9911_5.2839_1.1192_1.0949_12.0669_7.0111_0.0001_0.0000_0.5076/u3.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/6.9911_5.2839_1.1192_1.0949_12.0669_7.0111_0.0001_0.0000_0.5076/u2.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-50,ymax=50,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-50,-25,0,25,50},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/6.9911_5.2839_1.1192_1.0949_12.0669_7.0111_0.0001_0.0000_0.5076/u1.txt};
+	\legend{$Nasze$,$Obliczone$}
+	
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji czwartej - sterowanie}
+	\label{pid4s}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1.5 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/6.9911_5.2839_1.1192_1.0949_12.0669_7.0111_0.0001_0.0000_0.5076/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/yzad1.txt};
+	\legend{$Nasze$,$Obliczone$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/6.9911_5.2839_1.1192_1.0949_12.0669_7.0111_0.0001_0.0000_0.5076/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/yzad2.txt};
+	\legend{$Nasze$,$Obliczone$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,500,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/pid_3_2_1/6.6821_3.0328_0.7699_1.0000_7.0000_5.0000_0.0000_0.0000_1.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/pid_3_2_1/6.9911_5.2839_1.1192_1.0949_12.0669_7.0111_0.0001_0.0000_0.5076/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/pid_2_1_4/5.0737_2.9191_0.7908_16.1926_0.5115_3.9598_0.0000_0.0000_0.4474/yzad3.txt};
+	\legend{$Nasze$,$Obliczone$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla konfiguracji czwartej - wyjœcia}
+	\label{pid4w}
+\end{figure}
+\FloatBarrier
+\section{DMC}
+Ostatni¹ optymalizacj¹ jak¹ nale¿y przeprowadziæ jest optymalizacja DMC. Wiêkszoœæ nastaw obliczonych w wyniku optymalizacji jest podobna do wyliczonych przez nas. Mimo wszystko optymalizacja zmniejszy³a ju¿ ma³e b³êdy przebiegów i definitywnie poprawi³a wykresy wyjœæ.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		$\boldsymbol{\psi_1}$ & $\boldsymbol{\psi_2}$ & $\boldsymbol{\psi_3}$ & $\boldsymbol{\lambda_1}$ & $\boldsymbol{\lambda_2}$ & $\boldsymbol{\lambda_3}$ & $\boldsymbol{\lambda_4}$ \\ \hline
+2,7 & 40 & 7 & 20 & 1 & 0 & 0 \\ \hline
+	\end{tabular}
+	\caption{Nasze nastawy}
+	\label{dmcn1}
+	
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		49,5733 & 16,8105 & 18,6579 & 14,1050 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla naszych nastaw}
+	\label{dmce1}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+$\boldsymbol{\psi_1}$ & $\boldsymbol{\psi_2}$ & $\boldsymbol{\psi_3}$ & $\boldsymbol{\lambda_1}$ & $\boldsymbol{\lambda_2}$ & $\boldsymbol{\lambda_3}$ & $\boldsymbol{\lambda_4}$ \\ \hline
+6,7137 & 40,1488 & 7,3852 & 20,0812 & 0,0007 & 2,1222e-5 & 6,7126e-5 \\ \hline
+	\end{tabular}
+	\caption{Wyliczone nastawy}
+	\label{dmcn2}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c}
+		$\boldsymbol{E}$ & $\boldsymbol{E1}$ & $\boldsymbol{E2}$ & $\boldsymbol{E3}$ \\ \hline
+		42,0328 & 14,0032 & 14,0061 & 14,0235 \\
+	\end{tabular}
+	\caption{Wartoœci b³êdów dla wyliczonych nastaw}
+	\label{dmce2}
+\end{table}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_20.0000_1.0000_0.0000_0.0000/u1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/6.7137_40.1488_7.3852_20.0812_0.0007_0.0000_0.0001/u1.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_20.0000_1.0000_0.0000_0.0000/u2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/6.7137_40.1488_7.3852_20.0812_0.0007_0.0000_0.0001/u2.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_20.0000_1.0000_0.0000_0.0000/u3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/6.7137_40.1488_7.3852_20.0812_0.0007_0.0000_0.0001/u3.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-10,ymax=10,
+	xlabel={$k$},
+	ylabel={$u4$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-10,-5,0,5,10},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_20.0000_1.0000_0.0000_0.0000/u4.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/6.7137_40.1488_7.3852_20.0812_0.0007_0.0000_0.0001/u4.txt};
+	\legend{$Nasze$,$Obliczone$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla DMC - sterowanie}
+	\label{DMCs}
+\end{figure}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 3,vertical sep={1 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y1$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_20.0000_1.0000_0.0000_0.0000/y1.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/6.7137_40.1488_7.3852_20.0812_0.0007_0.0000_0.0001/y1.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad1.txt};
+	\legend{$Nasze$,$Obliczone$,$y1_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y2$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	] 
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_20.0000_1.0000_0.0000_0.0000/y2.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/6.7137_40.1488_7.3852_20.0812_0.0007_0.0000_0.0001/y2.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad2.txt};
+	\legend{$Nasze$,$Obliczone$,$y2_{zad}$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=910,ymin=-5,ymax=5,
+	xlabel={$k$},
+	ylabel={$y3$},
+	xtick={0,100,200,300,400,100,600,700,800,900},
+	ytick={-5,-2.5,0,2.5,5},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	] 
+	\addplot[blue,semithick] file {wykresy/dmc_200_200_200/2.7000_40.0000_7.0000_20.0000_1.0000_0.0000_0.0000/y3.txt};
+	\addplot[green,semithick] file {wykresy/dmc_200_200_200/6.7137_40.1488_7.3852_20.0812_0.0007_0.0000_0.0001/y3.txt};
+	\addplot[red,semithick,densely dashed] file {wykresy/dmc_200_200_200/1.0000_1.0000_1.0000_1.0000_1.0000_1.0000_1.0000/yzad3.txt};
+	\legend{$Nasze$,$Obliczone$,$y3_{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Porównanie wyliczonych i optymalnych nastaw dla DMC - wyjœcia}
+	\label{DMCw}
+\end{figure}
+\FloatBarrier
+\section{Wnioski}
+Optymalizacja wskaŸnika jakoœci poprawi³a przebiegi wszystkich regulatorów. Regulacja uzyskana z u¿yciem regulatora DMC uzyska³a definitywnie lepsze wyniki ni¿ którykolwiek PID, jeœli chodzi o b³¹d regulacji i wygl¹d przebiegów wyjœæ. Mimo to tak gwa³towny regulator móg³by byæ niemo¿liwy do wykorzystania w realnym ¿yciu ze wzglêdu na du¿e wachania sterowañ.
