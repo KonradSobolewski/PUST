@@ -1,0 +1,42 @@
+\chapter{Zadanie 2: Mechanizm zabezpieczaj¹cy}
+
+Nastêpnym zadaniem do wykonanie by³a implementacja mechanizmu zabezpieczaj¹cego przed uszkodzeniem grza³ek. Polega to na implementacji mechanizmu symuluj¹cego przekroczenie temperatury 150 stopni celsjusza.
+Z powodu braku mo¿liwoœci otworzenia wspomnianego pliku poza laboratorium, implementacja jest zawarta wy³¹cznie w pliku o nastêpuj¹cej œcie¿ce:
+$$stanowiskogrzewcze.gx3 > FIXED SCAN > PID $$
+Na rys . \ref{overheat} znajduj¹ce siê wykresy zebrane przez œrodowisko $Matlab$ przedstawiaj¹ce poprawnoœæ implementacji naszego zabezpieczenia. 
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.4\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=35,ymin=-20,ymax=450,
+	xlabel={$k$},
+	ylabel={$U$},
+	xtick={0,5,10,15,20,25,30,35},
+	ytick={0,50,100,150,200,250,300,350,400,450},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad2/temp1U1.txt};
+	\addplot[green,semithick] file {wykresy/zad2/temp1U2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=35,ymin=0,ymax=35000,
+	xlabel={$k$},
+	ylabel={$Y$},
+	xtick={0,5,10,15,20,25,30,35},
+	ytick={0,5000,10000,15000,20000,25000,30000,35000},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad2/temp1Y1.txt};
+	\addplot[green,semithick] file {wykresy/zad2/temp1Y2.txt};
+	\legend{$Y1(k)$,$Y2(k)$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Mechanizm zabezpieczaj¹cy}
+	\label{overheat}
+\end{figure}
+\FloatBarrier 

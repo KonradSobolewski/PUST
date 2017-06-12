@@ -1,0 +1,13 @@
+\chapter{Zaadanie 10: Dostosowanie implementacji regulatora PID do obiektu Inteco}
+
+Pe³en kod regulatora PID o dwóch wejœciach i dwóch wyjœciach do stanowiska TRAS dostêpny jest w projekcie o nazwie tras.gx3, pod œcie¿k¹ Program $>$ Fixed Scan $>$ TRAS PID.
+
+Jest to zaadoptowany algorytm PID stanowiska grzewczego. Zmiany wynikaj¹ z koniecznoœci uwzglêdnienia kierunku ruchu - gdy zmienia siê znak uchybu, równie¿ kierunek ruchu w danej osi powinien siê zmieniæ (ustawianie flag $Y\_DIR\_DOWN$ i $Y\_DIR\_LEFT$, podpiêtych pod wejœcia obiektu steruj¹ce kierunkami obrotu wirników).
+
+\section{Strojenie regulatorów}
+Nastawy obu regulatorów by³y dobierane eksperymetnalnie, przy czym najpierw by³ dobierany regulator osi pionowej, przy wy³¹czonym regulatorze osi poziomej, potem na odwrót.
+Nastawy zosta³y otrzymane w trakcie standardowej procedury - poprzez wy³¹czenie cz³onów ca³kuj¹cych i ró¿niczkuj¹cych, i, nastêpnie, zmiany kolejno parametrów K, Ti i Td. 
+
+Jak zosta³o wspomniane w poprzednim rozdziale, programowe PWMy zosta³y pod³¹czone pod sygna³y hamuj¹ce obiektu. Jednak¿e regulator osi pionowej potrafi³ wysterowaæ z zadowalaj¹c¹ jakoœci¹ - mia³ tylko nieznaczne oscylacje wokó³ wartoœci zadanej. W celu poprawy jakoœci sterowania w osi pionowej (nale¿y uwzglêdniæ grawitacjê, jako dodatkow¹ si³ê dzia³aj¹ca tylko w dó³) wprowadziliœmy modyfikacjê do naszego algorytmu PID - wy³¹czamy regualtor, gdy obiekt jest powy¿ej wartoœci zadanej - grawitacja sama spowoduje jego spadek.
+
+Niestety, nie posiadamy wykresów obrazuj¹cych regulacjê TRASa. Mieliœmy zamiar wykonaæ je gdy dobierzemy zadowalaj¹ce nastawy drugiegio regulatora, co, jak siê okaza³o, nie by³o mo¿liwe. Obiekt w osi poziomej, sterowany za pomoc¹ hamulca reagowa³ na zmiany sterowania, ale robi³ to w sposób gwa³towny i niekontrolowany. Nieœwiadomi swojej pomy³ki w konfiguracji, przez ca³ pozosta³y czas laboratorium poszukiwaliœmy przyczyny nieprzewidywywalnego zachowania obiektu w z³ych nastawach, marnuj¹c cenny czas, co zaskutkowa³o niemo¿noœci¹ utworzenia wykresów i zrealizowania du¿ej czêœci pozosta³ych podpunktów. Jednak¿e Prowadz¹cy zajêcia widzia³ i mo¿e potwierdziæ regulacjê TRASa w osi pionowej.

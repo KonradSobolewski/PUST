@@ -1,0 +1,33 @@
+\chapter{Zadanie 5: Panel operatora}
+Do stworzenia wizualizacji zosta³ u¿yty program GT Designer. 
+Dzia³aj¹cy panel operatora zosta³ zaakceptowany przez Prowadz¹cego.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=160mm]{panel_oper/panel.jpg}
+	\caption{Panel operatora stanowiska grzewczego\label{overflow}}
+\end{figure}
+
+\section{Prezentowane wartoœci}
+Zdecydowaliœmy siê na prezentacjê nastêpuj¹cych wartoœci:
+
+\begin{enumerate}
+	\item Aktualne wartoœci obu wyjœæ procesu ($T1$ i $T3$);
+	\item Aktualne wartoœci zadane obu wyjœæ procesu ($T1z$ i $T3z$);
+	\item Aktualne wartoœci sterowañ dla obu wyjœæ  ($G1$ i $G2$);
+	\item Historiê poprzednich sterowañ dla obu procesów.
+	\item Historiê poprzednich wyjœæ dla obu procesów.
+\end{enumerate}
+
+\section{Sposób prezentacji danych}
+
+Dane prezentowane s¹ w najprostszej formie graficznej, aby u¿ytkownik panelu operatora móg³ oceniæ stan, w jakim znajduje siê obiekt w jak najmniejszym czasie.
+\subsection{Wartoœci aktualne}
+Wartoœci aktualne prezentowane s¹ w formie tekstowej - obok symbolicznych nazw wypisana jest liczba skojarzona z wielkoœci¹ reprezentowan¹ przez tê nazwê. Najwa¿niejsze prezentowane wartoœci maj¹ przypisane indywidualne kolory: $T1$ - czerwony, $T3$ - zielony, $G1$ - ¿ó³ty, $G2$ - niebieski.
+
+\subsection{Wartoœci przesz³e}
+Aby uzyskaæ dok³adniejsze dane dotycz¹ce aktualnego stanu procesu, zostaje udostêpniony równie¿ wykres wartoœci historycznych sterowania i wyjœæ obiektu.
+
+Wykres ten zosta³ stworzony poprzez element 'Historical Trend Graph' programu GT Designer. Prezentowana jest na nim historia czterech wartoœci ($T1$, $T3$, $G1$ i $G2$) poprzez linie w kolorze odpowiadaj¹cym poszczególnym wielkoœciom.
+
+Trudnoœci sprawi³a nam prezentacja danych na jednym wykresie, gdy¿ wyjœcia i wejœcia maj¹ ró¿ne rzêdy wielkoœci i zakresy. Uby umo¿liwiæ wizualizajê, zastosowaliœmy dwie ró¿ne skale na wykresie - skala po lewej stronie wykresu odnosi siê do temperaury (zakres od $30$ do $50$ stopni), natomiast skala po prawej stronie pozwala okreœliæ wielkoœæ sterowania (wysterowanie grza³ki od $0$ do $100$).

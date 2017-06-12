@@ -1,0 +1,51 @@
+\chapter{Laboratorium: Zadanie 7: Rozmyty regulator DMC}
+\section{Teoria}
+
+Sposób wyznaczania sterowania nie ró¿ni siê znacz¹co od tego opisanego w poprzednim podpunkcie; wci¹¿ w ka¿dej iteracji rozmytego regulatora obliczane jest sterowanie dla ka¿dego regulatora z przyjêtych przedzia³ów i obliczane jest koñcowe sterowanie bior¹c pod uwagê stopieñ przynale¿noœci aktualnego Y(k) do funkcji opisuj¹cych ka¿dy z tych przedzia³ów. Jedyn¹ ró¿nic¹ jest uœrednianie zmian sterowania, a nie samego sterowania.
+
+Wci¹¿ jest to ten sam obiekt, którego charakterystyka sk³ada siê z dwóch liniowych regulatorów, nie ma wiêc potrzeby implementowania wiêkszej iloœci regulatorów lokalnych ani zmiany postaci funkcji przynale¿noœci.
+
+\subsection{Odpowiedzi skokowe}
+Obydwa regulatory lokalne powinny korzystaæ z odpowiadaj¹cych im odpowiedzi skokowych. Aby odpowiedzi te poprawnie reprezentowa³y charakter przedzia³u, w którym pracuje dany regulator lokalny, ich punkty pocz¹tkowe i koñcowe musz¹ siê zawieraæ w tych przedzia³ach. 
+Do algorytmu regulatora dolnego zosta³a wykorzystana znormalizowana odpowiedŸ skokowa z $U = 36$ o $dU = 5$, natomiast dla górnego przedzia³u znormalizowana odpowiedŸ dla takiego samego skoku z punktu pocz¹tkowego $U = 55 $. 
+
+\section{Dobór pocz¹tkowych parametrów}
+
+Dzia³anie regulatora rozmytego, dzia³aj¹ce w oparciu o dwa regulatory lokalne DMC, które jako modeli u¿ywaj¹ odpowiedzi skokowych opisanych w poprzednim podpunkcie widaæ na wykresie \ref{rozmytydmc2}.
+Korzystaj¹c z nastaw z podpunktu 4., przyjêliœmy parametry obu regulatorów jako: $D = 300, Nu = 150, \lambda = 0.5$.
+	\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab6dmcU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=47,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab6dmcY2.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab6Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie rozmytego regulatora DMC z dwoma lokalnymi regulatorami PID o nastawach obu $D = 300, Nu = 150, \lambda = 0.5$} 
+	\label{rozmytydmc2}
+\end{figure}
+\FloatBarrier
+Jak widaæ, regulator rozmyty nie pracuje prawid³owo. Ma olbrzymie oscylacje zarówno sterowania jak i wyjœcia. W obliczu ma³ej iloœci czasu podczas laboratorium zdecydowaliœmy siê przerwaæ eksperyment w po³owie, po wykonaniu trzech skoków, aby przyst¹piæ do poszukiwania lepszych nastaw tego regulatora. W chwili $k = 600$ b³¹d tego regulatora wyniós³ $E = 3926,2250$.

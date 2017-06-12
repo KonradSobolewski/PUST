@@ -1,0 +1,52 @@
+\chapter{Zadanie 7: Konfiguracja sterownika}
+Aby uruchomiæ obiekt laboratoryjny TRAS konieczna jest konfiguracja sterownika i jego po³¹czenia z programem Matlab. W tym celu wykonane zosta³y poni¿sze dzia³ania:
+
+Konfiguracja wstêpna, konieczna tak¿e przy pracy ze stanowiskiem grzewczym:
+
+\begin{enumerate}
+	\item Ustawiono IP sterownika PLC na 192.168.127.250;
+	\item Dodano element Unpassive TCP z portem 4000, aby umo¿liwiæ komunikacjê z Matlabem
+	\item Zdefiniowano konieczne bloki programowe: Init, Fixed Scan oraz konieczne labele.
+\end{enumerate}
+
+Konfiguracja ze stanowiskiem TRAS:
+
+\section{Wejœcia regulatora}
+W pierwszej kolejnoœci, aby umo¿liwiæ regulacjê, potrzebne s¹ sygna³y wyjœciowe obiektu. W naszym przypadku s¹ to dwa enkodery, z których odczytujemy po³o¿enie obiektu w poziomie i pionie.
+
+Aby umo¿liwiæ odczyt z endkoderów konieczny jest kod:
+
+\begin{lstlisting}
+HIOEN(TRUE,0,3,0);
+DHCMOVP(TRUE,0,0,SD4500);
+DHCMOVP(TRUE,0,0,SD4530);
+\end{lstlisting} 
+
+Fragment
+
+\begin{lstlisting}
+HIOEN(TRUE,0,3,0);
+\end{lstlisting} 
+
+aktywuje szybkie liczniki, natomiast fragment:
+
+\begin{lstlisting}
+DHCMOVP(TRUE,0,0,SD4500);
+DHCMOVP(TRUE,0,0,SD4530);
+\end{lstlisting} 
+
+pozwala na odczyt wartoœci z enkoderów podpiêtych pod podane adresy.
+
+\section{Wyjœcia regulatora}
+
+Aby skonfigurowaæ wyjœcia regulatora nale¿y zacz¹æ od konfiguracji PWM. Ustawiliœmy odpowiednie czêstotliwoœci w sekcji $CPU Parameter$ posi³kuj¹c siê instrukcj¹ oraz pomoc¹ Prowadz¹cego laboratorium.
+
+Nastêpnie skonfigurowaliœmy wyjœcia PWM:
+
+\begin{lstlisting}
+PWM(EN_PWM1,Y_PWM1,K200,Y2);
+PWM(EN_PWM2,Y_PWM2,K200,Y4);
+\end{lstlisting} 
+
+Niestety, w tym miejscu pope³niliœmy b³¹d. Z powodu presji czasu i niemo¿noœci otworzenia pliku .xls zawieraj¹cego opis wejœæ/wyjœæ obiektu TRAS (brak zainstalowanego w systemie oprogramowania otwieraj¹cego ten format), podczas wyboru sygna³ów steruj¹cych silnikami kierowaliœmy siê doœwiadczeniami przeprowadzonymi na panelu operatora. Sprawdziliœmy, które sygna³y uruchamiaj¹ obiekt i zmieniaj¹ kieruneki jego obrotu w odpowiednich osiach. Sygna³y zmiany kierunków, $Y3$ i $Y5$, zosta³y dobrane prawid³owo. Jendak¿e, wiedz¹c, ¿e pozosta³e cztery sygna³y to s¹ dwa sygna³y steruj¹cyme PWM oraz dwa sygna³y hamulca oraz kieruj¹c siê intuicj¹, ¿e sygna³y hamulca to te, które bêd¹c aktywne zatrzymuj¹ obiekt (s¹dziliœmy, ¿e dzia³aj¹ binarnie), b³êdnie za³o¿yliœmy, ¿e sygna³ami steruj¹cymi s¹ sygna³y $Y2$, $Y4$. Niestety, s¹ to sygna³y hamuj¹ce dzia³aj¹ce w odwrotnej logice ('negative logic') i dodatkowo mo¿na z mo¿liwoœci¹ sterownia nimi za pomoc¹ PWM.  
+Wynikiem takiej pomy³ki by³ pozornie dzia³aj¹cy system regulacji, sterownik nie zg³asza³ b³êdów. Obiekt reagowa³ na zmiany sterowania - mniejsza wartoœæ wype³nienia sygna³u PWM powodowa³a wolniejszy ruch, co nas tylko upewni³o, ¿e wejœcia i wyjœcia obieku s¹ poprawnie skonfigurowane. Pomy³ka ta jednak mia³a katastrofalne skutki dla pozosta³ej czêsci naszego laboratorium.

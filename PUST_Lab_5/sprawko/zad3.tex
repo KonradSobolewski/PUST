@@ -1,0 +1,239 @@
+\chapter{Zadanie 3: PID}
+
+Na tym etapie przyst¹piliœmy do implementacji algorytmu $PID$ z ograniczeniami, bez u¿ycia wbudowanych funkcji na stanowisku grzej¹co - ch³odz¹cym. Z powodu braku mo¿liwoœci otworzenia wspomnianego pliku poza laboratorium, implementacja jest zawarta wy³¹cznie w pliku o nastêpuj¹cej œcie¿ce:
+$$stanowiskogrzewcze.gx3 > FIXED SCAN > PID $$
+
+W trakcie trwania laboratorium uda³o siê nam zebraæ 4 przebiegi wyjœæ obiektu.
+Rys . \ref{pid1} przedstawia nasze pocz¹tkowe nastawy od których rozpoczêliœmy dobieranie kolejnych. Widaæ, ¿e nastawy te s¹ niedoskona³e z powodu widocznych oscylacji.
+Najlepsze nastawy, które uda³o siê nam uzyskaæ s¹ przedstawione na rys . \ref{pid3} i maj¹ one nastêpuj¹ce wartoœci : $K=6$ , $T_i = 100$ , $T_d = 1.2$. Mo¿na na nich zauwa¿yæ, ¿e przeregulowanie , oscylacje oraz czas regulacji uleg³y poprawie. Przebiegi na wykresie rys. \ref{pid4} s¹ niekompletne z powodu zakoñczenia laboratorium, dlatego ciê¿ko nam oszacowaæ czy uzyskaliœmy poprawê dla tej próby.
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U1$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad31/pidU1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U2$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad31/pidU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4600,
+	xlabel={$k$},
+	ylabel={$Y1$},
+	xtick={0,224},
+	ytick={3800,4600},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad31/pidY1.txt};
+	\addplot[green,semithick] file {wykresy/zad31/pidYzad1.txt};
+	\legend{$Y1(k)$,$Yzad1(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4700,
+	xlabel={$k$},
+	ylabel={$Y2$},
+	xtick={0,224},
+	ytick={3800,4700},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad31/pidY2.txt};
+	\addplot[green,semithick] file {wykresy/zad31/pidYzad2.txt};
+	\legend{$Y2(k)$,$Yzad2(k)$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{PID $K=6$ , $T_i = 65$ , $T_d = 1$}
+	\label{pid1}
+\end{figure}
+\FloatBarrier 
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U1$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad32/pidU1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U2$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad32/pidU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4600,
+	xlabel={$k$},
+	ylabel={$Y1$},
+	xtick={0,224},
+	ytick={3800,4600},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad32/pidY1.txt};
+	\addplot[green,semithick] file {wykresy/zad32/pidYzad1.txt};
+	\legend{$Y1(k)$,$Yzad1(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4700,
+	xlabel={$k$},
+	ylabel={$Y2$},
+	xtick={0,224},
+	ytick={3800,4700},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad32/pidY2.txt};
+	\addplot[green,semithick] file {wykresy/zad32/pidYzad2.txt};
+	\legend{$Y2(k)$,$Yzad2(k)$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{PID $K=6$ , $T_i = 85$ , $T_d = 1.2$}
+	\label{pid2}
+\end{figure}
+\FloatBarrier 
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U1$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad33/pidU1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U2$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad33/pidU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4600,
+	xlabel={$k$},
+	ylabel={$Y1$},
+	xtick={0,224},
+	ytick={3800,4600},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad33/pidY1.txt};
+	\addplot[green,semithick] file {wykresy/zad33/pidYzad1.txt};
+	\legend{$Y1(k)$,$Yzad1(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4700,
+	xlabel={$k$},
+	ylabel={$Y2$},
+	xtick={0,224},
+	ytick={3800,4700},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad33/pidY2.txt};
+	\addplot[green,semithick] file {wykresy/zad33/pidYzad2.txt};
+	\legend{$Y2(k)$,$Yzad2(k)$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{PID $K=6$ , $T_i = 100$ , $T_d = 1.2$}
+	\label{pid3}
+\end{figure}
+\FloatBarrier 
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=109,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U1$},
+	xtick={0,109},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad34/pidU1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=109,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U2$},
+	xtick={0,109},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad34/pidU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=109,ymin=3800,ymax=4600,
+	xlabel={$k$},
+	ylabel={$Y1$},
+	xtick={0,109},
+	ytick={3800,4600},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad34/pidY1.txt};
+	\addplot[green,semithick] file {wykresy/zad34/pidYzad1.txt};
+	\legend{$Y1(k)$,$Yzad1(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=109,ymin=3800,ymax=4700,
+	xlabel={$k$},
+	ylabel={$Y2$},
+	xtick={0,109},
+	ytick={3800,4700},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad34/pidY2.txt};
+	\addplot[green,semithick] file {wykresy/zad34/pidYzad2.txt};
+	\legend{$Y2(k)$,$Yzad2(k)$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{PID $K=6$ , $T_i = 110$ , $T_d = 1.5$}
+	\label{pid4}
+\end{figure}
+\FloatBarrier 

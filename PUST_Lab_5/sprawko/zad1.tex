@@ -1,0 +1,26 @@
+\chapter{Zadanie 1: Punkt pracy}
+Pierwszym poleceniem by³o okreœlenie wartoœci wyjœæ obiektu $Y_{pp}$ (pomiaru $T1$ oraz $T3$) w punkcie pracy $U_{pp_1} = 36$ $U_{pp_2} = 41$. Osi¹gnêliœmy j¹ ustawiaj¹c wartoœæ sterowania (moc grzania grza³ek $G1$,$G2$) na $U_{pp_1}$ $U_{pp_2}$ i odczekuj¹c znaczn¹ iloœæ czasu (powy¿ej 6 minut). Jak widaæ na wykresie \ref{skok}, wyjœcia ustabilizowa³y siê w okolicy $Y_{pp_1} = 39$ oraz $Y_{pp_1} = 41$ stopni Celcjusza. 
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	width=0.9\textwidth,
+	xmin=5,xmax=90,ymin=3500,ymax=4200,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={5,15,25,35,45,55,65,75,85,90},
+	ytick={3500,3600,3700,3800,3900,4000,4100,4200,4300},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east
+	]
+	\addplot[blue,semithick] file {wykresy/zad1/tempY1.txt};
+	\addplot[orange,semithick] file {wykresy/zad1/tempY2.txt};
+	
+	\legend{$Y_{1pp}$,$Y_{2pp}$}
+	\end{axis}
+	\end{tikzpicture}
+	\caption{Wykresy Y(k) w punktach pracy $U_{pp}$}
+	\label{skok}
+\end{figure}

@@ -1,0 +1,130 @@
+\chapter{Zadanie 4: DMC}
+
+Na tym etapie przyst¹piliœmy do implementacji algorytmu $DMC$ z ograniczeniami na stanowisku grzej¹co - ch³odz¹cym. Z powodu braku mo¿liwoœci otworzenia wspomnianego pliku poza laboratorium, implementacja jest zawarta wy³¹cznie w pliku o nastêpuj¹cej œcie¿ce:
+$$stanowiskogrzewcze.gx3 > FIXED SCAN > DMC $$
+
+\section{Odpowiedzi skokowe}
+
+Pamiêtaj¹c, ¿e obiekt jest symetryczny postanowiliœmy zebraæ odpowiedzi skokowe wy³¹cznie dla zmiany sterowania pierwszej grza³ki. Zebrane oraz zaproksymowane wyniki przedstawione s¹ na rys. \ref{odp}
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=3800,ymax=4300,
+	xlabel={$k$},
+	ylabel={$Y1(U1)$},
+	xtick={0,100},
+	ytick={3800,4300},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4skok/skokU1Y1.txt};
+	\legend{$Y1(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=3800,ymax=4300,
+	xlabel={$k$},
+	ylabel={$Y2(U1)$},
+	xtick={0,100},
+	ytick={3800,4300},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4skok/skokU1Y2.txt};
+	\legend{$Y2(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=0.28,
+	xlabel={$k$},
+	ylabel={$Y1(U1)$},
+	xtick={0,100},
+	ytick={0,0.28},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4skok/aprskoky1.txt};
+	\legend{$aproksymacja_Y1$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=100,ymin=0,ymax=0.28,
+	xlabel={$k$},
+	ylabel={$Y2(U1)$},
+	xtick={0,100},
+	ytick={0,0.28},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]                                                           
+	\addplot[blue,semithick] file {wykresy/zad4skok/aprskoky2.txt};
+	\legend{$aproksymacja_Y2$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Odpowiedzi skokowe oraz ich normalizacja}
+	\label{odp}
+\end{figure}
+\FloatBarrier
+
+\section{DMC}
+
+Na rys. \ref{DMC} zosta³y zaprezentowane wyniki dla torów sterowania oraz wyjœcia regulatora $DMC$. W trakcie trwania laboratorium uda³o siê nam zebraæ przebiegi dla nastaw $N=100,N_u=100,\lambda=1$. Prowadz¹cy laboratoria oceni³ nasz wygl¹d regulacji na zadawalaj¹cy oraz zasugerowa³ nam porzucenie dalszych badañ i skupienie siê na nastêpnych punktach laboratorium.
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 4,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.25\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U1$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad4DMC/dmcU1.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=200,ymax=700,
+	xlabel={$k$},
+	ylabel={$U2$},
+	xtick={0,224},
+	ytick={200,700},
+	y tick label style={/pgf/number format/1000 sep=},
+	]
+	\addplot[blue,semithick] file {wykresy/zad4DMC/dmcU2.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4600,
+	xlabel={$k$},
+	ylabel={$Y1$},
+	xtick={0,224},
+	ytick={3800,4600},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4DMC/dmcY1.txt};
+	\addplot[green,semithick] file {wykresy/zad4DMC/dmcYzad1.txt};
+	\legend{$Y1(k)$,$Yzad1(k)$}
+	\nextgroupplot
+	[
+	xmin=0,xmax=224,ymin=3800,ymax=4700,
+	xlabel={$k$},
+	ylabel={$Y2$},
+	xtick={0,224},
+	ytick={3800,4700},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/zad4DMC/dmcY2.txt};
+	\addplot[green,semithick] file {wykresy/zad4DMC/dmcYzad2.txt};
+	\legend{$Y2(k)$,$Yzad2(k)$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{DMC $N=100,N_u=100,\lambda=1$}
+	\label{DMC}
+\end{figure}
+\FloatBarrier  

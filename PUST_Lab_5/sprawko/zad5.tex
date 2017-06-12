@@ -1,0 +1,180 @@
+\chapter{Laboratorium: Zadanie 5: Strojenie regulatora PID i DMC}
+Strojenie regulataora odby³o siê na podstawie oceny regulacji dla zaproponowaej trajektorii zmian sygna³ów zadanych sk³adaj¹cej siê z szeœciu skoków. Wartoœci zadane zosta³y tak dobrane, aby za ka¿dym razem by³a inna wartoœæ skoku. Pod uwagê brany by³ b³¹d regulacji jak i kszta³t sterowania i wyjœcia.
+
+\section{Regulator PID}
+
+\subsection{Pocz¹tkowe nastawy}
+Nastawy regulatora PID zosta³y dobrane eksperymentalnie. Sugeruj¹c siê nastawami otrzymanymi na poprzednich laboratoriach, jako wartoœci pocz¹tkowe przyjêliœmy nastawy: $K_p = 5, T_i = 75, T_d = 1,25$. Na rys. \ref{PID1} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Jak widaæ, nie s¹ to nastawy optymalne; regulator jest nieskuteczny. Dla dolnego przedzia³u dzia³a lepiej, w górnym jest zdecydowanie zbyt s³aby. B³¹d wyjœcia $Y$ wyniós³: $E = 5042,6750$.
+
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.5\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab4pidU_5.0000_75.0000_1.2500.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=46,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab4pidY_5.0000_75.0000_1.2500.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab4Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu PID przy pocz¹tkowych nastawach  $K_p = 5, T_i = 75, T_d = 1.25$} 
+	\label{PID1}
+\end{figure}
+\FloatBarrier
+
+\subsection{Korygowanie  nastaw}
+Aby poprawiæ osi¹gi regualtora w przedziale wy¿szych wartoœci temperatury, a tak¿e poprawiæ zbyt wolna regulacjê temperatury widoczn¹ w pobli¿u $k = 1100$, postanowiliœmy zwiêkszyæ wp³yw cz³onu ca³kuj¹cego, obni¿aj¹c $T_i$ do wartoœci $T_i = 65$ oraz zmniejszyæ wp³yw cz³onu ró¿niczkuj¹cego - nowe  $T_d = 1$. Wzmocnienie nie by³o zmieniane, gdy¿ obawialiœmy siê pogorszenia regulacji w dolnym przedziale temperatur. Tak wiêc nowe nastawy to: $K_p = 5, T_i = 65, T_d = 1$. Dla takich nastaw osi¹gnêliœmy przebiegi jak na \ref{PID2}. 
+
+
+\begin{figure}[tb]
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.6\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab4pidU_5.0000_65.0000_1.0000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=46,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file{wykresy/lab4pidY_5.0000_65.0000_1.0000.txt}; 
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab4Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$,$Y_2$,}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu PID przy zmodyfikowanych nastawach  $K_p = 5, T_i = 65, T_d = 1$} 
+	\label{PID2}
+\end{figure}
+\FloatBarrier
+
+Otrzymany regulator zapewnia lepsz¹ jakoœæ regulacji - b³¹d wyjœcia $Y$ siê zmniejszy³ i wyniós³: $E = 4243,6125$. Chocia¿ wy¿sza ca³ka pogorszy³a regulacjê w dolnym zakresie regulacji, to regulator osi¹ga teraz szybciej wartoœæ zadan¹ tak¿e w wy¿szym zakresie. Obserwujemy jednak uchyb ustalony przy ostatnim skoku. Trudno stwierdziæ, czy przy d³u¿szym czasie regulacji regulator pozwoli³by osi¹gn¹æ wartoœæ zadan¹.
+
+\section{Laboratorium: Regulator DMC}
+
+Nastêpnie próbowaliœmy zastosowaæ do nieliniowego obiektu, jakim by³o stanowisko grzewcze, regulacjê DMC. Do u¿ycia w modelu wybraliœmy znormalizowan¹ odpowiedŸ skokow¹ dla $dU = 15$. Analizuj¹c wygl¹d charakterystyki statycznej nale¿y zak³adaæ, ¿e przy u¿yciu tej odpowiedzi, standardowy regulator DMC zapewni prawid³ow¹ regulacjê w dolnej po³owie zakresu temperatur. 
+
+\subsection{Pocz¹tkowe nastawy}
+Nastawy regulatora DMC zosta³y dobrane eksperymentalnie. Jako wartoœci pocz¹tkowe przyjêliœmy nastawy $N = 300$, $Nu = 300$, $\lambda = 0.5$. Wartoœæ $300$ wynika z obserwacji obiektu - bezpiecznie za³o¿yliœmy, ¿e tyle wynosi jego horyzont dynamiki. Obiekt ten nie jest wra¿liwy na nag³e zmiany sterowañ a tak¿e na poprzednich laboratoriach lambda przyjmowa³a ma³e wartoœci - dlatego zdecydowaliœmy na pocz¹tek przyj¹æ $\lambda = 0.5$. Na rys. \ref{DMC_begin} mo¿na obserwowaæ pracê regulatora z takimi nastawami. Regulator dzia³a poprawnie, z pewnoœci¹ lepiej ni¿ regulator PID; zarówno przebiegi wyjœcia s¹ bli¿sze wartoœci zadanej jak i sterowania s¹ ³agodniejsze. Nie s¹ to jednak nastawy optymalne; regulator powienien dzia³aæ szybciej w wy¿szym zakresie temperatur. B³¹d wyjœcia, znacz¹co mniejszy ni¿ dla regulatoara PID, wyniós³ $E = 3513,38$.
+	\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.6\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab4dmcU_300_0.5000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=46,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file {wykresy/lab4dmcY_300_0.5000.txt};
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab4Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu DMC przy pocz¹tkowych nastawach  $N = 300$, $Nu = 300,$ $\lambda = 0.5$} 
+	\label{DMC_begin}
+	\end{figure}
+	\FloatBarrier
+	
+\section{Korekta nastaw}
+
+Nastêpnie przyst¹piliœmy do zmian nastaw: parametr N pozostawiliœmy bez zmian, jako ¿e zarówno teoria jak i nasza praktyka wskazywa³y, ¿e jego zmniejszanie, jeœli w ogóle, prowadzi³o do minimalnych zysków w jakoœci sterowania. Gdyby by³ to obiekt szybszy lub dzia³aj¹cy w wymagaj¹cym œrodowisku, mo¿na by rozwa¿yæ skrócenie tej wartoœci w celu zmniejszenia z³o¿onoœci obliczeniowej, jednak dla okresu próbkowania $Tp = 1$ nie jest to konieczne. 
+Parametr $Nu$ zmniejszyliœmy dwukrotnie, kieruj¹c siê doœwiadczeniem nabytym na poprzednich laboratoriach, które wskazywa³o, ¿e taki zabieg zapewnia nieznacz¹ poprawê jakoœci regulacji. Aby regulator szybciej osi¹ga³ wartoœæ zadan¹, tak¿e w wy¿szych partiach zakresu sterowalnych temperatur, postanowiliœmy zmniejszyæ parametr $\lambda$ p $0.3$, do wartoœci $\lambda = 0.5$, aby zapewniæ bardziej gwa³towne sterowanie. Efekt takiego zabiegu widaæ na wykresie \ref{DMC_koryg}.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\begin{groupplot}[group style={group size=1 by 2,vertical sep={2 cm}},
+	width=0.9\textwidth,height=0.6\textwidth]
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=-5,ymax=105,
+	xlabel={$k$},
+	ylabel={$U(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={0,10,20,30,40,50,60,70,80,90,100},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=south east,
+	]
+	\addplot[blue,semithick] file {wykresy/lab4dmcU_150_0.2000.txt};
+	\nextgroupplot
+	[
+	xmin=0,xmax=1210,ymin=36,ymax=46,
+	xlabel={$k$},
+	ylabel={$Y(k)$},
+	xtick={0,100,200,300,400,500,600,700,800,900,1000,1100,1200},
+	ytick={36,37,38,39,40,41,42,43,44,45,46},
+	y tick label style={/pgf/number format/1000 sep=},
+	legend pos=north east,
+	]
+	\addplot[red,semithick] file {wykresy/lab4dmcY_150_0.2000.txt};
+	\addplot[orange,semithick,densely dashed] file{wykresy/lab4Yzad.txt}; 
+	\legend{$Y$,$Y^{zad}$}
+	\end{groupplot}
+	\end{tikzpicture}
+	\caption{Dzia³anie algorytmu DMC przy pocz¹tkowych nastawach  $N = 300$, $Nu = 300, \lambda = 0.5$} 
+	\label{DMC_koryg}
+\end{figure}
+\FloatBarrier
+
+B³¹d wyniós³ $E = 3922,9696$, a wiêc powiêkszy³ siê w stosunku do poprzedniego przebiegu. Wizualnie oceniaj¹c przebieg $Y(k)$, równie¿ mo¿na zauwa¿yæ pogorszenie. Przyczyny takiego stanu rzeczy mo¿na doszukiwaæ siê na wykresie sterowania \ref{DMC_koryg}. Zgodnie z naszymi intencjami, dziêki mniejszemu parametrowi $\lambda$, zmiany sterowania w stosunku do analogicznych zmian zebranych podczas poprzedniego eksperymentu DMC ($N = 300$, $Nu = 300,$ $\lambda = 0.5$), s¹ gwa³towniejsze. Wartoœci sterowania osi¹gaj¹ maksimum podczas skoku wartoœci zadanej do najwy¿szej wartoœci ($45$ stopni). Jednak tak¿e w poprzednim eksperymencie dla tego skoku sterowanie osi¹gnê³o maksimum. Szybkoœæ osi¹gania temperatury $45$ stopni nie mog³a wiêc ulec poprawie. Jednak¿e, z powodu mniejszej lambdy, sterowanie szybciej opad³o w stosunku do poprzedniego przebiegu, pogarszaj¹c jedynie sterowanie (temperatura, bêd¹c poni¿ej zadanej, jeszcze wolniej do niej d¹¿y³a), st¹d gorszy rezultat wskaŸnika jakoœci regulacji. Analogiczna sytuacja ma miejsce podczas ostaniego skoku wartoœci zadanej. 
+
+Lepiej siê wiêc sprawdzi³ regulator DMC z pocz¹tkowymi nastawami.
+
+
+
+\section{Podsumowanie}
+Tak jak nale¿a³o siê spodziewaæ, regulator DMC w stosunku do regulatora PID zapewnia lepsz¹ regulacjê. Zarówno wskaŸnik jakoœci regulacji (dla DMC: $E = 3513,38$, dla PID: $E = 4243,6125$) jak i wizualna ocena przebiegów wyjœæ i sterowania jednoznacznie wskazuj¹ algorytm DMC jako lepszy liniowy regulator nieliniowego obiektu grzewczego.
+
